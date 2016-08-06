@@ -17,7 +17,7 @@ p,div {
   font-size: $text-size;
 }
 
-button,input[type=submit] {
+button,input[type=submit],.link-button {
   font-size: $button-text-size;
   width: 225px;
   border: 1px solid $button-background;
