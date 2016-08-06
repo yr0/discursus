@@ -16,5 +16,5 @@ section.dsc-books-list.container-fluid
   .row
     = render 'books/list'
 .text-center
-  = button_to t('load_more'), '#', class: 'large-margin load-more-books', remote: true, method: :get,
-              form: { 'data-with-ajax-spinner' => true }
+  = button_to t('load_more'), books_path, class: 'large-margin', remote: true, method: :get,
+              form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }

@@ -2,11 +2,18 @@
   position: absolute;
   left: 0;
   right: 0;
-  margin: 0 auto 20px;
-  display: none;
-//  width: 200px;
-  border: 1px solid red;
+  margin: auto;
+  transform: scale(0);
+  width: 70px;
+  height: 70px;
+  text-align: left;
+  i {
+    color: $color-lighter;
+  }
   .dsc-left-cog {
+    position: absolute;
+    right:12px;
+    bottom: 10px;
     animation: fa-spin 2s infinite linear;
     font-size: 24px;
   }
@@ -15,6 +22,9 @@
     font-size: 54px;
   }
   .dsc-right-cog {
+    position: absolute;
+    right: 0;
+    top: 0;
     animation: fa-spin 3s infinite linear;
     font-size: 36px;
   }
@@ -27,5 +37,5 @@
 
 .dsc-appearing {
   transition: transform 0.4s ease-out;
-  transform: scale(1);
+  transform: scale(1) !important;
 }
