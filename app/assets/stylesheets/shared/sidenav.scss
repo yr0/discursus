@@ -1,0 +1,41 @@
+$sidenav-width: 30vw;
+$sidenav-width-without-shadow: 28vw;
+$shadow-width: 8px;
+
+.dsc-sidenav-outer-container {
+  height: 60px;
+}
+
+.dsc-sidenav-container {
+  position: absolute;
+  left: 10px;
+  color: $white;
+  top: 10px;
+}
+
+.dsc-sidenav-panel {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  background-color: $color-darker;
+  left: -$sidenav-width;
+  width: $sidenav-width-without-shadow;
+  box-shadow: $shadow-width 0 6px -6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease-out;
+}
+
+.dsc-sidenav-toggler {
+  cursor: pointer;
+
+  .fa {
+    font-size: 40px;
+  }
+}
+
+.dsc-sidenav-checkbox {
+  &:checked {
+    ~ .dsc-sidenav-panel {
+      transform: translateX($sidenav-width);
+    }
+  }
+}

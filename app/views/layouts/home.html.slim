@@ -1,16 +1,15 @@
 doctype html
 html
   head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     title Discursus Home
     = csrf_meta_tags
     = stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   body
-    header.dsc-home-header
-      .dsc-home-logo-inner.text-center
-        = image_tag 'logo.png', class: 'dsc-home-logo', 'data-svg-url': image_url('logo.svg')
-      nav.dsc-home-nav.text-center
-        = home_navigation
+    = render 'shared/home_header'
     == yield
     = render 'shared/footer'
     - if content_for?(:uses_spinner?)

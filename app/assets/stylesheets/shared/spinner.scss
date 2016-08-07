@@ -47,12 +47,7 @@
 }
 
 .dsc-spinner-controlled-invisible {
-  // a set of rules to remove element from page but save it for later use
-  opacity: 0;
-  height: 0.1px;
-  width: 0.1px;
-  position: absolute;
-  z-index: -1;
+  @extend .existing-yet-invisible;
 }
 
 .dsc-spinner-controlled-visible {

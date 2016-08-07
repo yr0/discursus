@@ -71,7 +71,7 @@ $book-card-height: 280px;
   background-color: $black;
   color: $white;
   // we need the action buttons to display above other elements of card
-  z-index: 10;
+  z-index: 1;
 
   &:hover {
     color: $color-lighter;
