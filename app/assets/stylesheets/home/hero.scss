@@ -1,22 +1,32 @@
 .dsc-home-hero-container {
   width: 100%;
-  max-height: 750px;
-  min-height: 400px;
+//  fallback for browsers that don't support vh/vw
+  height: 600px;
+  //  desired height
+  height: 60vh;
+  max-height: 600px;
   overflow: hidden;
-  background: no-repeat center /100% auto image-url('mockups/home_book');
+  background: repeat-x center /auto 100%;
   color: $white;
+  display: flex;
+  align-items: center;
 }
 
 .dsc-home-hero-overlay {
-  margin: 50px;
+  //  fallback for browsers that don't support vh/vw
+  margin: auto 50px;
+  height: 500px;
+  // desired margin and height
+  margin: auto 5vh;
+  height: 50vh;
+  max-height: 500px;
   border: 1px solid $color-lighter;
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
-  min-height: 300px;
 }
 
 .dsc-home-hero-overlay-inner {
-  min-height: 300px;
+  height: 100%;
   width: 50%;
   margin: auto;
   display: flex;
