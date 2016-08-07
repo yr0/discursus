@@ -1,2 +1,3 @@
-| console.log('Works!');
-| $('.load-more-books').trigger('ajax:templateLoaded');
+| var nextRow = $('#{ render 'list' }').addClass('dsc-spinner-controlled-invisible');
+| $('.dsc-books-list').append(nextRow);
+| $('.load-more-books').trigger('ajax:templateLoaded', { templateContainer: '.dsc-books-list' });

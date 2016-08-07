@@ -7,6 +7,7 @@
   width: 70px;
   height: 70px;
   text-align: left;
+  background-color: rgba(255, 255, 255, 0.9);
   i {
     color: $color-lighter;
   }
@@ -38,4 +39,17 @@
 .dsc-appearing {
   transition: transform 0.4s ease-out;
   transform: scale(1) !important;
+}
+
+.dsc-spinner-controlled-invisible {
+  opacity: 0;
+  height: 0.1px;
+  width: 0.1px;
+  position: absolute;
+  z-index: -1;
+}
+
+.dsc-spinner-controlled-visible {
+  transition: opacity 1s linear;
+  opacity: 1;
 }

@@ -4,32 +4,36 @@
     $(D).on('turbolinks:load', function() {
         $('body').on('ajax:before', '[data-with-ajax-spinner]', function() {
             displaySpinner.apply(this);
-        }).on('ajax:templateLoaded', '[data-with-ajax-spinner]', function() {
-            hideSpinner.apply(this);
+        }).on('ajax:templateLoaded', '[data-with-ajax-spinner]', function(_event, data) {
+            hideSpinner.call(this, data.templateContainer);
         });
     });
 
     function displaySpinner() {
-        hide($(this));
         var $spinner = $(this).siblings('.dsc-spinner:first'),
-            spinnerStarted = Date.now();
+            spinnerStarted = Date.now(),
+            elementTopPosition = $(this).position().top;
+        hide($(this));
         if (!$spinner.length) {
             $spinner = $('#dscSpinnerTemplate').clone().insertBefore($(this));
             //apply the scale property so that initial animation is fired
             W.getComputedStyle($spinner.get(0)).getPropertyValue('transform');
         }
         // save start spinner time in order to hide it at least after spinnerDisplayMinTime milliseconds
-        $spinner.attr('id', 'spinner' + spinnerStarted);
+        // set spinner position
+        $spinner.attr('id', 'spinner' + spinnerStarted).css({ position: 'absolute', top: elementTopPosition });
         $(this).data('spinner-started', spinnerStarted);
         show($spinner);
     }
 
-    function hideSpinner() {
+    function hideSpinner(templateContainer) {
         var initialElement = $(this),
             spinnerStarted = initialElement.data('spinner-started');
         setTimeout(function(){
             hide($('#spinner' + spinnerStarted));
-            show(initialElement);
+            show(initialElement); // unless some data flag says it should not be shown
+            $(templateContainer + ' .dsc-spinner-controlled-invisible').addClass('dsc-spinner-controlled-visible')
+                .removeClass('dsc-spinner-controlled-invisible');
         }, getSpinnerDelay(spinnerStarted));
         $spinner.data('spinner-started')
     }

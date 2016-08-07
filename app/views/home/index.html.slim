@@ -13,8 +13,7 @@ section.dsc-home-hero-container.text-center
 .dsc-section-header
   h2 = t('home.new_books')
 section.dsc-books-list.container-fluid
-  .row
-    = render 'books/list'
+  = render 'books/list'
 .text-center
   = button_to t('load_more'), books_path, class: 'large-margin', remote: true, method: :get,
               form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
