@@ -6,28 +6,12 @@ html
     = stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   body
-    header
+    header.dsc-home-header
       .dsc-home-logo-inner.text-center
-        = image_tag 'logo.png', 'data-svg-url': image_url('logo.svg')
-      nav.text-center
+        = image_tag 'logo.png', class: 'dsc-home-logo', 'data-svg-url': image_url('logo.svg')
+      nav.dsc-home-nav.text-center
         = home_navigation
     == yield
-    footer
-      .dsc-footer-big
-        .dsc-section-header
-          h2 = t('nav.contacts')
-        .dsc-contacts-phone-email
-          = fa_icon 'phone', class: 'dsc-contacts-phone-icon'
-          h2.dsc-contacts-phone-number
-            | (095) 821 50 27
-          = fa_icon('envelope 3x')
-          h4 ladiscursus@gmail.com
-        .dsc-contacts-social-media
-          = link_to fa_icon('facebook 3x'), 'https://facebook.com'
-          = link_to fa_icon('twitter 3x'), 'https://twitter.com'
-          = link_to fa_icon('google-plus 3x'), 'https://google.com'
-      .dsc-footer-small
-        | &copy; #{years_active}&nbsp;|&nbsp;#{t('footer.publishing_house')} &laquo;Discursus&raquo;&nbsp;|&nbsp;
-        | #{t('footer.developed_at')}
+    = render 'shared/footer'
     - if content_for?(:uses_spinner?)
       = render 'shared/spinner'

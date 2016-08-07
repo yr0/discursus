@@ -7,6 +7,10 @@
 @import 'fonts';
 @import 'variables';
 
-@import 'general';
-@import 'home-main-page';
+@import 'shared/**/*';
+@import 'home/**/*';
 @import 'books_list';
+
+// media queries
+//@import 'media_queries/home-main-page';
+@import 'media_queries/books_list';

@@ -1,18 +1,17 @@
-@import 'shared/tags';
-@import 'shared/footer';
-@import 'shared/spinner';
-
 .dsc-section-header {
   background-color: $color-darker;
   text-align: center;
   margin: 20px 0;
   padding: 10px 0;
-  h2 {
+
+  .dsc-section-header-text {
     margin: 0;
     font-size: $main-caption-size;
     text-transform: uppercase;
     color: $white;
-    &:before,&:after {
+
+    &:before,
+    &:after {
       padding: 0 2px;
       content: '\2022';
       font-size: 25px;

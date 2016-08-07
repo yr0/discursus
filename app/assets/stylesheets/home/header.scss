@@ -1,0 +1,25 @@
+.dsc-home-header {
+  position: relative;
+  width: 100%;
+
+  .dsc-home-logo-inner {
+    width: 50%;
+    margin: 0 auto;
+    background-color: white;
+
+    .dsc-home-logo {
+      height: 210px;
+    }
+  }
+
+  &:before {
+    // we need the violet line to be displayed behind the logo, which is static
+    z-index: -1;
+    position: absolute;
+    content: '';
+    height: 90px;
+    width: 100%;
+    top: 90px;
+    background-color: $color-darker;
+  }
+}

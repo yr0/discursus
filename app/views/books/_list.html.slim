@@ -1,73 +1,37 @@
 .row.dsc-books-list-row
   .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/bandera.png')
-      figcaption
-        h4 Коли один скаже "Слава Україні!"
-        .author Степан Бандера
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
+    figure.dsc-book-card
+      = image_tag 'mockups/books/bandera.png', class: 'dsc-book-card-image'
+      figcaption.dsc-book-card-body
+        h4.dsc-book-card-book-title Коли один скаже "Слава Україні!"
+        .dsc-book-card-book-authors Степан Бандера
+        article.dsc-book-card-book-text Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+      = link_to fa_icon('eye 2x'), '#', class: 'dsc-book-card-view-book dsc-book-card-actions'
+      = link_to fa_icon('shopping-basket 2x'), '#', class: 'dsc-book-card-buy-book dsc-book-card-actions'
   .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/ato.png')
-      figcaption
-        h4 АТО: Історії зі Сходу на Захід
-        .author Маргарита Сурженко
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
+    figure.dsc-book-card
+      = image_tag 'mockups/books/ato.png', class: 'dsc-book-card-image'
+      figcaption.dsc-book-card-body
+        h4.dsc-book-card-book-title Коли один скаже "Слава Україні!"
+        .dsc-book-card-book-authors Степан Бандера
+        article.dsc-book-card-book-text Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+      = link_to fa_icon('eye 2x'), '#', class: 'dsc-book-card-view-book dsc-book-card-actions'
+      = link_to fa_icon('shopping-basket 2x'), '#', class: 'dsc-book-card-buy-book dsc-book-card-actions'
   .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/maydan.png')
-      figcaption
-        h4 Євромайдан. Хроніка відчуттів
-        .author Юрій Андрухович, Тарас Прохасько, Сергій Жадан, Ще Хтось
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
+    figure.dsc-book-card
+      = image_tag 'mockups/books/maydan.png', class: 'dsc-book-card-image'
+      figcaption.dsc-book-card-body
+        h4.dsc-book-card-book-title Коли один скаже "Слава Україні!"
+        .dsc-book-card-book-authors Степан Бандера
+        article.dsc-book-card-book-text Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+      = link_to fa_icon('eye 2x'), '#', class: 'dsc-book-card-view-book dsc-book-card-actions'
+      = link_to fa_icon('shopping-basket 2x'), '#', class: 'dsc-book-card-buy-book dsc-book-card-actions'
   .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/otaman.png')
-      figcaption
-        h4 Отаман Холодного яру
-        .author Сергій Зінченко
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
-  .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/bandera.png')
-      figcaption
-        h4 Коли один скаже "Слава Україні!"
-        .author Степан Бандера
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
-  .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/ato.png')
-      figcaption
-        h4 АТО: Історії зі Сходу на Захід
-        .author Маргарита Сурженко
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
-  .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/maydan.png')
-      figcaption
-        h4 Євромайдан. Хроніка відчуттів
-        .author Юрій Андрухович, Тарас Прохасько, Сергій Жадан, Ще Хтось
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
-  .col-md-3.col-sm-6.col-xs-12
-    figure
-      = image_tag('mockups/books/otaman.png')
-      figcaption
-        h4 Отаман Холодного яру
-        .author Сергій Зінченко
-        article Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-      = link_to fa_icon('eye 2x'), '#'
-      = link_to fa_icon('shopping-basket 2x'), '#'
+    figure.dsc-book-card
+      = image_tag 'mockups/books/otaman.png', class: 'dsc-book-card-image'
+      figcaption.dsc-book-card-body
+        h4.dsc-book-card-book-title Коли один скаже "Слава Україні!"
+        .dsc-book-card-book-authors Степан Бандера
+        article.dsc-book-card-book-text Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+      = link_to fa_icon('eye 2x'), '#', class: 'dsc-book-card-view-book dsc-book-card-actions'
+      = link_to fa_icon('shopping-basket 2x'), '#', class: 'dsc-book-card-buy-book dsc-book-card-actions'

@@ -3,17 +3,17 @@
 section.dsc-home-hero-container.text-center
   .dsc-home-hero-overlay
     section.dsc-home-hero-overlay-inner
-      h1 Non est vivunt qui spirit, sed qui est discursus.
-      article Lorem ipsum lorem ipsum lorem ipsum
+      h1.dsc-home-hero-title Non est vivunt qui spirit, sed qui est discursus.
+      article.dsc-home-hero-text Lorem ipsum lorem ipsum lorem ipsum
         |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum
         |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum
         |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum |Lorem ipsum lorem ipsum lorem ipsum
-      = button_to t('more'), '#', class: 'transparent'
+      = button_to t('more'), '#', class: 'dsc-button transparent dsc-home-hero-action'
 
 .dsc-section-header
-  h2 = t('home.new_books')
+  h2.dsc-section-header-text = t('home.new_books')
 section.dsc-books-list.container-fluid
   = render 'books/list'
 .text-center
-  = button_to t('load_more'), books_path, class: 'large-margin', remote: true, method: :get,
+  = button_to t('load_more'), books_path, class: 'dsc-button large-margin', remote: true, method: :get,
               form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }

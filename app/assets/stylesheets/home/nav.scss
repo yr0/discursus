@@ -1,0 +1,38 @@
+.dsc-home-nav {
+  font-family: 'Roboto Slab';
+  width: 100%;
+  margin: 50px 0;
+}
+
+.dsc-home-nav-items {
+  padding: 0;
+}
+
+.dsc-home-nav-item {
+  display: inline;
+  text-transform: uppercase;
+
+  &:before {
+    padding: 0 10px;
+    content: '\2022';
+    font-size: 19px;
+  }
+
+  &:first-of-type:before {
+    content: '';
+  }
+}
+
+.dsc-home-nav-link {
+  color: $black;
+  font-size: 19px;
+
+  &:hover {
+    text-decoration: none;
+    color: $color-darker;
+  }
+
+  &.active {
+    color: $color-darker;
+  }
+}

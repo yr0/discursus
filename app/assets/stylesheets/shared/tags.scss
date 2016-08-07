@@ -16,27 +16,3 @@ h1,h2,h3,h4,h5,h6 {
 p,div {
   font-size: $text-size;
 }
-
-button,input[type=submit],.link-button {
-  font-size: $button-text-size;
-  width: 225px;
-  border: 1px solid $button-background;
-  background: $button-background;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 10px 0;
-  color: $white;
-  &.large-margin {
-    margin: 40px 0 50px;
-  }
-  &:hover {
-    border: 1px solid $button-hover-background;
-    background: $button-hover-background;
-  }
-  &.transparent {
-    background: transparent;
-    &:hover {
-      background: rgba(0, 0, 0, 0.4);
-    }
-  }
-}

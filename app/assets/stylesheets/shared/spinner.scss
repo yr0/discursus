@@ -8,9 +8,11 @@
   height: 70px;
   text-align: left;
   background-color: rgba(255, 255, 255, 0.9);
-  i {
+
+  .fa {
     color: $color-lighter;
   }
+
   .dsc-left-cog {
     position: absolute;
     right:12px;
@@ -18,10 +20,12 @@
     animation: fa-spin 2s infinite linear;
     font-size: 24px;
   }
+
   .dsc-central-cog {
     animation: fa-spin 4s infinite linear reverse;
     font-size: 54px;
   }
+
   .dsc-right-cog {
     position: absolute;
     right: 0;
@@ -38,10 +42,12 @@
 
 .dsc-appearing {
   transition: transform 0.4s ease-out;
+  //  we use important here because it should override the spinner's default scale which is 0
   transform: scale(1) !important;
 }
 
 .dsc-spinner-controlled-invisible {
+  // a set of rules to remove element from page but save it for later use
   opacity: 0;
   height: 0.1px;
   width: 0.1px;

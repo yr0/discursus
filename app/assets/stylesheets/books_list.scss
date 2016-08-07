@@ -1,77 +1,87 @@
 $book-card-height: 280px;
+
 .dsc-books-list {
   margin: 0 5%;
-  figure {
-    margin: 15px 0;
-    position: relative;
-    border: 1px solid $color-darker;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    height: $book-card-height;
-    img {
-      height: 90%;
-      margin: auto;
-    }
-    figcaption {
-      width: 100%;
-      transition: transform 0.35s;
-      position: absolute;
-      top: -$book-card-height;
-      left: 0;
-      height: $book-card-height;
-      background-color: $colored-background;
-      padding: 20px;
-      color: $white;
-      h4 {
-        font-size: $block-caption-size;
-        text-transform: uppercase;
-      }
-      div.author {
-        text-align: right;
-        font-style: italic;
-      }
-      article {
-        margin-top: 20px;
-        height: 30%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    a {
-      transition: transform 0.35s;
-      position: absolute;
-      width: 45%;
-      top: $book-card-height - 70px;
-      text-align: center;
-      padding: 10px 0;
-      background-color: $black;
-      color: $white;
-      z-index: 10;
-    }
-    a:first-of-type {
-      left: -45%;
-    }
-    a:last-of-type {
-      right: -45%;
+}
+
+.dsc-book-card {
+  margin: 15px 0;
+  position: relative;
+  border: 1px solid $color-darker;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: $book-card-height;
+  &:hover {
+    .dsc-book-card-body {
+      transform: translateY($book-card-height);
     }
 
-    &:hover {
-      figcaption {
-        transform: translateY($book-card-height);
-      }
-      a:first-of-type {
-        transform: translateX(100%);
-      }
-      a:last-of-type {
-        transform: translateX(-100%);
-      }
+    .dsc-book-card-actions:first-of-type {
+      transform: translateX(100%);
+    }
+
+    .dsc-book-card-actions:last-of-type {
+      transform: translateX(-100%);
     }
   }
 }
 
-@media (min-width: 1600px) {
-  .dsc-books-list {
-    margin: 0 15%;
+.dsc-book-card-image {
+  height: 90%;
+  margin: auto;
+}
+
+.dsc-book-card-body {
+  width: 100%;
+  transition: transform 0.35s;
+  position: absolute;
+  top: -$book-card-height;
+  left: 0;
+  height: $book-card-height;
+  background-color: $colored-background;
+  padding: 20px;
+  color: $white;
+
+  .dsc-book-card-book-title {
+    font-size: $block-caption-size;
+    text-transform: uppercase;
+  }
+
+  .dsc-book-card-book-authors {
+    text-align: right;
+    font-style: italic;
+  }
+
+  .dsc-book-card-book-text {
+    margin-top: 20px;
+    height: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.dsc-book-card-actions {
+  transition: transform 0.35s;
+  position: absolute;
+  width: 45%;
+  top: $book-card-height - 70px;
+  text-align: center;
+  padding: 10px 0;
+  background-color: $black;
+  color: $white;
+  // we need the action buttons to display above other elements of card
+  z-index: 10;
+
+  &:hover {
+    color: $color-lighter;
+  }
+
+  &:first-of-type {
+    left: -45%;
+  }
+
+  &:last-of-type {
+    right: -45%;
   }
 }

@@ -1,0 +1,17 @@
+footer.dsc-footer-container
+  .dsc-footer-big
+    .dsc-section-header
+      h2.dsc-section-header-text = t('nav.contacts')
+    .dsc-footer-phone-email
+      = fa_icon 'phone', class: 'dsc-footer-phone-icon'
+      h2.dsc-footer-phone-number
+        | (095) 821 50 27
+      = fa_icon('envelope 3x')
+      h4 ladiscursus@gmail.com
+    .dsc-footer-social-media
+      = link_to fa_icon('facebook 3x'), 'https://facebook.com', class: 'dsc-footer-social-media-link'
+      = link_to fa_icon('twitter 3x'), 'https://twitter.com', class: 'dsc-footer-social-media-link'
+      = link_to fa_icon('google-plus 3x'), 'https://google.com', class: 'dsc-footer-social-media-link'
+  .dsc-footer-small
+    | &copy; #{years_active}&nbsp;|&nbsp;#{t('footer.publishing_house')} &laquo;Discursus&raquo;&nbsp;|&nbsp;
+    | #{t('footer.developed_at')}
