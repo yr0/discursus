@@ -5,7 +5,8 @@ html {
 }
 
 body {
-//  for footer
+  font-family: Roboto;
+  //  for footer
   margin: 0 0 650px;
   z-index: 0;
 }
@@ -16,14 +17,4 @@ h1,h2,h3,h4,h5,h6 {
 
 p,div {
   font-size: $text-size;
-}
-
-.existing-yet-invisible {
-  // a set of rules to remove element from page but save it for later use
-  opacity: 0;
-  height: 0.1px;
-  width: 0.1px;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
 }

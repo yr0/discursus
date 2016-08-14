@@ -1,15 +1,7 @@
 header
   .hidden-xs.dsc-home-header
     .dsc-home-logo-inner.text-center
-      = image_tag 'logo.png', class: 'dsc-home-logo', 'data-svg-url': image_url('logo.svg')
+      = image_tag 'logo.png', class: 'dsc-home-logo', 'data-svg-url' => image_url('logo.svg')
     nav.dsc-home-nav.text-center
-      = home_navigation
-  .visible-xs-block.dsc-sidenav-outer-container
-    .dsc-header.dsc-sidenav-header
-      h2.dsc-header-text Discursus
-      .dsc-sidenav-container
-        / we add checkbox here in order to react to its 'checked' state
-        input.dsc-sidenav-checkbox.existing-yet-invisible#sidenavCheckbox type='checkbox'
-        label.dsc-sidenav-toggler for='sidenavCheckbox' = fa_icon('bars')
-        .dsc-sidenav-panel
-          label for='sidenavCheckbox' &times;
+      = site_navigation(:home)
+  .visible-xs-block = render('shared/sidenav')
