@@ -1,0 +1,36 @@
+uk:
+  attributes:
+    title: Назва
+    slug: Читабельний URL
+    tags: Теги
+    description: Опис
+    price: Ціна
+    image: Картинка
+    body: Текст
+    created_at: Дата створення
+    password: Пароль
+    password_confirmation: Підтвердження пароля
+    file: Файл
+    remember_me: "Запам'ятати"
+  activerecord:
+    errors:
+      attributes:
+        slug:
+          invalid: "може містити лише малі літери латинського алфавіту, цифри, дефіс и нижнє підкреслення; має починатися літерою та закінчуватися літерою або цифрою"
+        reset_password_token:
+          blank: 'неправильний код відновлення'
+          invalid: 'неправильний код відновлення'
+        password_confirmation:
+          confirmation: 'не сходиться'
+      messages:
+        blank: "не може бути порожнім"
+        too_short: "містить замало символів (мінімум - %{count})"
+        too_long: "містить забагато символів (максимум - %{count})"
+        not_found: "не знайдено"
+        taken: "вже використовується"
+        inclusion: "не входить в дозволений перелік"
+        is_invalid: "не відповідає потрібному формату"
+        invalid: "не відповідає потрібному формату"
+  errors:
+    messages:
+      extension_white_list_error: "имеет недопустимое разрешение"

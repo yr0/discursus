@@ -1,0 +1,18 @@
+.dsc-single-block-centered
+  h2.text-center = t('log_in')
+  - if flash[:alert].present?
+    .dsc-form-errors = flash[:alert]
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group
+      = f.input :email, input_html: { autofocus: true, class: 'form-control' }
+    .form-group
+      = f.input :password, input_html: { autocomplete: 'off', class: 'form-control' }
+    - if devise_mapping.rememberable?
+      .checkbox
+        label
+          = f.check_box :remember_me
+          = t('attributes.remember_me')
+
+    .form-actions
+      = f.submit t('log_in'), class: 'dsc-button'
+  = render 'devise/shared/links'

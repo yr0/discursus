@@ -6,8 +6,8 @@ html {
 
 body {
   font-family: Roboto;
-  //  for footer
-  margin: 0 0 650px;
+  //  for footer. footer is 570px high, we add 20 additional px for proper margin
+  margin: 0 0 590px;
   z-index: 0;
 }
 

@@ -10,7 +10,8 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   body
     = render 'shared/home_header'
-    == yield
+    section.dsc-main-content
+      == yield
     = render 'shared/footer'
     - if content_for?(:uses_spinner?)
       = render 'shared/spinner'
