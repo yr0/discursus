@@ -10,8 +10,6 @@ html
     = javascript_include_tag 'admin_panel/application', 'data-turbolinks-track' => 'reload'
   body.sidebar-mini.skin-green
     .wrapper
-      header.main-header
-        a.logo
-          span.logo-lg Discursus
+      = render 'admin_panel/shared/header'
       .content-wrapper
         == yield

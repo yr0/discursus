@@ -63,6 +63,7 @@ uk:
 
   # app specific locales
   log_in: Увійти
+  log_out: Вийти
   register: Зареєструватися
   forgot_password: Забули пароль?
   did_not_receive_confirmation: "Не отримали інструкцій шрдо підтвердження email?"

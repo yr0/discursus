@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     authenticated do
       namespace :admin_panel do
         get '/', to: 'dashboard#index'
+        resources :books
       end
     end
   end

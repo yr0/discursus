@@ -41,6 +41,8 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
 gem 'simple_form'
+# pagination
+gem 'kaminari'
 
 # auth
 gem 'devise'
