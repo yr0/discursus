@@ -8,8 +8,15 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'admin_panel/application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'admin_panel/application', 'data-turbolinks-track' => 'reload'
+    javascript:
+      window.i18n = #{I18n.backend.send(:translations)[I18n.locale].with_indifferent_access.to_json.html_safe};
+      window.i18n_locale = "#{I18n.locale}";
   body.sidebar-mini.skin-green
     .wrapper
       = render 'admin_panel/shared/header'
       .content-wrapper
-        == yield
+        section.content-header
+          h1 = yield :title
+        section.content
+          == yield
+  = gflash

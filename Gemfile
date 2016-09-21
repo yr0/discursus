@@ -43,6 +43,12 @@ gem 'autoprefixer-rails'
 gem 'simple_form'
 # pagination
 gem 'kaminari'
+# ajax flash notifications
+gem 'gritter'
+# uploads
+gem 'carrierwave'
+# rich text editor
+gem 'ckeditor'
 
 # auth
 gem 'devise'

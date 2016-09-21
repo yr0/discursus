@@ -1,0 +1,8 @@
+uk:
+  admin_panel:
+    books:
+      no_books: Ви ще не додали жодної книги
+      new_book: Нова книга
+      saved: Книга успішно збережена
+      destroyed: Книгу видалено
+      not_destroyed: "Не вдалося видалити книгу: %{errors}"

@@ -12,6 +12,8 @@ uk:
     password_confirmation: Підтвердження пароля
     file: Файл
     remember_me: "Запам'ятати"
+    authors: Автори
+    pages_amount: Кількість сторінок
   activerecord:
     errors:
       attributes:
@@ -31,6 +33,10 @@ uk:
         inclusion: "не входить в дозволений перелік"
         is_invalid: "не відповідає потрібному формату"
         invalid: "не відповідає потрібному формату"
+        greater_than: "мусить бути більше, ніж %{count}"
+        less_than: "мусить бути менше, ніж %{count}"
+        greater_than_or_equal: "мусить бути більше, ніж %{count}"
+        less_than_or_equal: "мусить бути менше, ніж %{count}"
   errors:
     messages:
       extension_white_list_error: "имеет недопустимое разрешение"

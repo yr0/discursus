@@ -1,0 +1,7 @@
+.box.box-success
+  .box-header.with-border
+    h2 = t('admin_panel.books.new_book')
+  .box-body
+    .row
+      = simple_form_for [:admin_panel, @book], html: { class: 'form' } do |f|
+        = render('form', f: f)

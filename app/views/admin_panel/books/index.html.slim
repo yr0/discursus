@@ -1,0 +1,32 @@
+.box
+  .box-header
+    h2 = t('nav.books')
+    .text-center
+      = link_to new_admin_panel_book_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @books.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.title')
+            th = t('attributes.authors')
+            th = t('attributes.price')
+            th width='10%'
+        tbody
+          - @books.each do |book|
+            tr
+              td = book.title
+              td = 'Authors'
+              td = readable_price(book.price)
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, book], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, book], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.books.no_books')

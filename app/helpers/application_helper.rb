@@ -1,7 +1,7 @@
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
-    main: '/', books: '#', news: '#', bookstores: '#', authors: '#', about_us: '#', contacts: '#'
+      main: '/', books: '#', news: '#', bookstores: '#', authors: '#', about_us: '#', contacts: '#'
   }.freeze
 
   def years_active
@@ -17,5 +17,10 @@ module ApplicationHelper
                                         class: link_class), class: "dsc-#{css_class_infix}-nav-item")
       end
     end
+  end
+
+  def readable_price(price, show_fractions = true)
+    fractions = show_fractions ? 2 : 0
+    sprintf("₴%.0#{fractions}f", price)
   end
 end
