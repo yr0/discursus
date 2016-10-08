@@ -1,0 +1,25 @@
+- if f.object.errors.any?
+  col-md-12
+    .alert.alert-danger
+      h4
+        = fa_icon :warning
+        | &nbsp;
+        = t('changes_not_saved')
+      = t('correct_errors')
+.col-sm-12.col-md-6
+  = f.input :name
+.col-sm-12.col-md-6
+  = image_tag f.object.image.url(:medium) if f.object.image?
+  = f.input :image
+  = f.input :image_cache, as: :hidden
+.col-sm-12.col-md-6
+  = f.input :role
+.col-sm-12.col-md-6
+  = f.input :motto, as: :text
+.col-sm-12.col-md-6
+  = f.input :position
+.col-md-12
+  p
+    = f.submit t('save'), class: 'btn btn-primary margin'
+    = link_to t('cancel'), [:admin_panel, :team_members], class: 'btn btn-warning margin'
+

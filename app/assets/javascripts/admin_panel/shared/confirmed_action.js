@@ -12,10 +12,10 @@
             confirmButtonText: i18n.yes_button,
             cancelButtonText: i18n.no_button
         }).then(function () {
-            $link.data('confirm', null).trigger('click');
+            $link.data('confirm', null).trigger('click').data('confirm', true);
         }, function (dismiss) {});
 
-        // returning false prevents the link being clicked
+        // returning false prevents the link from being clicked
         return false;
     };
-})(window, document, jQuery);
+}(window, document, jQuery));

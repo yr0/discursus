@@ -8,15 +8,15 @@
       = t('correct_errors')
 .col-sm-12.col-md-6
   = f.input :title
+.col-sm-12.col-md-6
+  = image_tag f.object.image.url(:medium) if f.object.image?
+  = f.input :image
+  = f.input :image_cache, as: :hidden
 .col-sm-12
-  = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
+  = f.input :body, as: :ckeditor, input_html: { class: 'input-ckeditor',
           ckeditor: { height: 300, locale: I18n.locale } }
-.col-sm-12.col-md-3
-  = f.input :price
-.col-sm-12.col-md-3
-  = f.input :pages_amount
 .col-md-12
   p
     = f.submit t('save'), class: 'btn btn-primary margin'
-    = link_to t('cancel'), [:admin_panel, :books], class: 'btn btn-warning margin'
+    = link_to t('cancel'), [:admin_panel, :articles], class: 'btn btn-warning margin'
 

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       namespace :admin_panel do
         get '/', to: 'dashboard#index'
         resources :books
+        resources :articles
+        resources :team_members
       end
     end
   end

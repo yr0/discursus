@@ -1,0 +1,34 @@
+.box
+  .box-header
+    h2 = t('nav.articles')
+    .text-center
+      = link_to new_admin_panel_article_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @articles.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.image')
+            th = t('attributes.title')
+            th = t('attributes.body')
+            th width='10%'
+        tbody
+          - @articles.each do |article|
+            tr
+              td = article.image? ? image_tag(article.image.url(:thumb)) : '-'
+              td = article.title
+              td = truncate(strip_tags(article.body), length: 200, separator: ' ')
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, article], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, article], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+      div
+        = paginate @articles
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.articles.no_articles')

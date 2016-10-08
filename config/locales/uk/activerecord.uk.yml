@@ -14,6 +14,10 @@ uk:
     remember_me: "Запам'ятати"
     authors: Автори
     pages_amount: Кількість сторінок
+    name: "Ім'я"
+    role: Роль
+    motto: Гасло
+    position: Порядок
   activerecord:
     errors:
       attributes:

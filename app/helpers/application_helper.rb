@@ -23,4 +23,9 @@ module ApplicationHelper
     fractions = show_fractions ? 2 : 0
     sprintf("₴%.0#{fractions}f", price)
   end
+
+  # used for injecting current locale translations into page for JS
+  def raw_locale_hash(*exclude_keys)
+    I18n.backend.send(:translations)[I18n.locale].with_indifferent_access.except(exclude_keys).to_json.html_safe
+  end
 end

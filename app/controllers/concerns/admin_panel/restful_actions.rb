@@ -7,8 +7,20 @@ module AdminPanel
     extend ActiveSupport::Concern
 
     included do
-      load_and_authorize_resource
+      load_and_authorize_resource find_by: cancan_find_by_field
       skip_load_resource only: :create
+    end
+
+    module ClassMethods
+      # by what field to find record
+      def cancan_find_by_field
+        model = controller_name.demodulize.singularize.camelize.constantize
+        if model.included_modules.include?(FriendlyId::Model)
+          :slug
+        else
+          :id
+        end
+      end
     end
 
     def index

@@ -1,0 +1,36 @@
+.box
+  .box-header
+    h2 = t('admin_panel.team_members.title')
+    .text-center
+      = link_to new_admin_panel_team_member_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @team_members.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.image')
+            th = t('attributes.name')
+            th = t('attributes.role')
+            th = t('attributes.motto')
+            th width='10%'
+        tbody
+          - @team_members.each do |team_member|
+            tr
+              td = team_member.image? ? image_tag(team_member.image.url(:thumb)) : '-'
+              td = team_member.name
+              td = team_member.role
+              td = team_member.motto
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, team_member], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, team_member], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+      div
+        = paginate @team_members
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.team_members.no_team_members')

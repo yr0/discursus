@@ -1,6 +1,7 @@
 uk:
   admin_panel:
     books:
+      title: Книги
       no_books: Ви ще не додали жодної книги
       new_book: Нова книга
       saved: Книга успішно збережена

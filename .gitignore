@@ -21,3 +21,5 @@
 .byebug_history
 .idea/
 .env
+
+/public/uploads

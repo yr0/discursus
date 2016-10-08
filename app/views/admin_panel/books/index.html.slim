@@ -25,6 +25,8 @@
                 | &nbsp;
                 = link_to fa_icon(:times), [:admin_panel, book], method: :delete, class: 'btn btn-danger',
                         'data-confirm' => true
+      div
+        = paginate @books
   - else
     .box-body
       .row

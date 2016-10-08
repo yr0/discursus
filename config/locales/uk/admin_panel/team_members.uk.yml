@@ -1,0 +1,9 @@
+uk:
+  admin_panel:
+    team_members:
+      title: Учасники команди
+      no_team_members: Ви ще не додали жодного учасника команди
+      new_article: Новий учасник команди
+      saved: Учасника успішно збережено
+      destroyed: Учасника видалено
+      not_destroyed: "Не вдалося видалити учасника: %{errors}"

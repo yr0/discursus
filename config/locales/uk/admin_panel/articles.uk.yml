@@ -1,0 +1,9 @@
+uk:
+  admin_panel:
+    articles:
+      title: Новини
+      no_articles: Ви ще не додали жодної новини
+      new_article: Нова стаття
+      saved: Новина успішно збережена
+      destroyed: Новину видалено
+      not_destroyed: "Не вдалося видалити новину: %{errors}"

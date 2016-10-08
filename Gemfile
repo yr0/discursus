@@ -3,22 +3,19 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # use postgres as DB
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 gem 'rails', '~> 5.0.0'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', '~> 4.1'
+gem 'jquery-ui-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -26,34 +23,42 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop'
+  # gem 'capistrano-rails', group: :development
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'slim-rails'
-gem 'bootstrap-sass'
-gem 'font-awesome-rails'
-gem 'autoprefixer-rails'
-gem 'simple_form'
+gem 'slim-rails', '~> 3.1'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'font-awesome-rails', '~> 4.6'
+gem 'autoprefixer-rails', '~> 6.4'
+gem 'simple_form', '~> 3.2'
 # pagination
-gem 'kaminari'
+gem 'kaminari', '~> 0.17'
 # ajax flash notifications
-gem 'gritter'
+gem 'gritter', '~> 1.2'
 # uploads
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.11'
+gem 'mini_magick', '~> 4.5'
 # rich text editor
-gem 'ckeditor'
+gem 'ckeditor', '~> 4.2'
+# ordering records
+gem 'acts_as_list', '~> 0.8'
+
+# friendly urls
+gem 'friendly_id', '~> 5.1'
+gem 'babosa', '~> 1.0'
+gem 'unicode', '~> 0.4'
 
 # auth
-gem 'devise'
-gem 'cancancan'
+gem 'devise', '~> 4.2'
+gem 'cancancan', '~> 1.15'
 
 # env load
-gem 'dotenv'
-gem 'dotenv-rails'
+gem 'dotenv', '~> 2.1'
+gem 'dotenv-rails', '~> 2.1'
