@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         resources :articles
         resources :team_members
         resources :bookstores
+        resources :authors
       end
     end
   end

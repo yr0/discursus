@@ -1,0 +1,11 @@
+#newAuthorModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="authorModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4 class="modal-title" = t('admin_panel.authors.new_author')
+      .modal-body
+        .row
+          = simple_form_for [:admin_panel, Author.new], remote: true, html: {class: 'form'} do |f|
+            = render('admin_panel/authors/form', f: f, hide_cancel_button: true)

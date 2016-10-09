@@ -14,4 +14,14 @@
             actualFunction(W, D, $);
         });
     };
+
+    // performs action only after constantName has been loaded - useful for async scripts
+    W.afterConstantLoaded = function(constantName, action) {
+      var checkInterval = W.setInterval(function(){
+          if(typeof W[constantName] !== 'undefined') {
+              W.clearInterval(checkInterval);
+              action();
+          }
+      }, 500);
+    };
 }(window, document, jQuery));

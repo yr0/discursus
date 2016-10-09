@@ -24,7 +24,7 @@ module AdminPanel
     end
 
     def index
-      set_records_query! { |records| records.page(params[:page]) }
+      set_records_query! { |records| records.includes(eager_load_associations).page(params[:page]) }
     end
 
     def create
@@ -56,6 +56,11 @@ module AdminPanel
     # update permitted params are the same as create by default
     def record_update_params; record_params; end
 
+    # what associations to add during loading of index action
+    def eager_load_associations
+      nil
+    end
+
     # ActiveRecord model inferred from controller name
     def model
       record_name.camelize.constantize
@@ -77,11 +82,16 @@ module AdminPanel
     end
 
     def render_save(result, back_template)
-      if result
-        gflash success: I18n.t("admin_panel.#{records_name}.saved")
-        redirect_to action: :index
-      else
-        render back_template
+      respond_to do |format|
+        format.html do
+          if result
+            gflash success: I18n.t("admin_panel.#{records_name}.saved")
+            redirect_to action: :index
+          else
+            render back_template
+          end
+        end
+        format.js
       end
     end
 

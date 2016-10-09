@@ -1,0 +1,10 @@
+uk:
+  admin_panel:
+    authors:
+      title: Автори
+      no_authors: Ви ще не додали жодного автора
+      new_author: Новий автор
+      saved: Автора успішно збережено
+      destroyed: Автора видалено
+      select_placeholder: "Почніть вводити ім'я автора або виберіть зі списку"
+      not_destroyed: "Не вдалося видалити автора: %{errors}"

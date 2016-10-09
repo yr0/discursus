@@ -1,9 +1,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/tooltip
+//= require bootstrap-sprockets
 //= require adminlte/adminlte.min
 //= require ckeditor/init
 //= require gritter
+//= require selectize.min
 //= require sweetalert2.min
 //= require underscore.min
 //= require gmaps4rails.min

@@ -1,0 +1,34 @@
+.box
+  .box-header
+    h2 = t('nav.authors')
+    .text-center
+      = link_to new_admin_panel_author_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @authors.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.image')
+            th = t('attributes.name')
+            th = t('attributes.short_description')
+            th width='10%'
+        tbody
+          - @authors.each do |author|
+            tr
+              td = author.image? ? image_tag(author.image.url(:thumb)) : '-'
+              td = author.name
+              td = truncate(author.short_description, length: 200, separator: ' ')
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, author], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, author], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+      div
+        = paginate @authors
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.authors.no_authors')

@@ -4,6 +4,7 @@ uk:
     slug: Читабельний URL
     tags: Теги
     description: Опис
+    short_description: Короткий опис
     price: Ціна
     image: Зображення
     body: Текст

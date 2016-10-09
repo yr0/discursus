@@ -1,0 +1,11 @@
+- if @author.errors.any?
+  = add_gritter(@author.errors.full_messages.join(';'), image: :error, title: t('gflash.titles.error'),
+          time: 8000, nodom_wrap: true)
+- else
+  = add_gritter(t('admin_panel.authors.saved'), image: :success, title: t('gflash.titles.success'),
+          time: 2000, nodom_wrap: true)
+  | $('#newAuthorModal').modal('hide');
+    // add author to select list of authors
+    var selectize = $('#bookAuthors')[0].selectize;
+    selectize.addOption({id: #{@author.id}, name: "#{j @author.name}"});
+    selectize.addItem(#{@author.id});

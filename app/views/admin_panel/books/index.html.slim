@@ -18,7 +18,7 @@
           - @books.each do |book|
             tr
               td = book.title
-              td = 'Authors'
+              td = book.author_names
               td = readable_price(book.price)
               td.text-right
                 = link_to fa_icon(:pencil), [:edit, :admin_panel, book], class: 'btn btn-info'

@@ -11,6 +11,13 @@
 .col-sm-12
   = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
           ckeditor: { height: 300, locale: I18n.locale } }
+.col-sm-12.col-md-6
+  / author modal gets rendered after the form to prevent double form submission
+  button.btn.btn-success type="button" data-toggle="modal" data-target="#newAuthorModal" +
+  | &emsp;
+  = f.label :authors
+  = f.association :authors, multiple: true, label: false, selected: f.object.author_ids,
+          input_html: { id: 'bookAuthors' }
 .col-sm-12.col-md-3
   = f.input :price
 .col-sm-12.col-md-3
@@ -19,4 +26,3 @@
   p
     = f.submit t('save'), class: 'btn btn-primary margin'
     = link_to t('cancel'), [:admin_panel, :books], class: 'btn btn-warning margin'
-

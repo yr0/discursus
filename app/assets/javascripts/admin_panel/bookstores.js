@@ -31,6 +31,8 @@ withinControllerScope('bookstores', ['new', 'create', 'edit', 'update'], functio
         });
     };
 
-    // load the map
-    setTimeout(function() { W.initMap(); }, 500);
+    // Load the map after google script gets loaded. Doing it with Google API callback does not work
+    // when script invocation is placed in <head>. When script is placed in <body>, because of turbolinks it gets
+    // loaded multiple times.
+    afterConstantLoaded('google', W.initMap.bind(this));
 });
