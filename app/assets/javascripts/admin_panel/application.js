@@ -5,11 +5,18 @@
 //= require ckeditor/init
 //= require gritter
 //= require sweetalert2.min
-//= require 'admin_panel/shared/confirmed_action'
+//= require underscore.min
+//= require gmaps4rails.min
+//= require markerclusterer
 //= require turbolinks
 
+//= require 'shared/general_functions'
+//= require_tree .
 
 (function(W, D, $){
+    // constants
+    W.ukraineCenter = { lat: 49.224772722794825, lng: 31.44287109375 };
+
     // actions concerning external libraries in context of turbolinks
     D.addEventListener('turbolinks:load', function(){
         // adminLTE
@@ -30,4 +37,4 @@
         // Reinitialize sweet alert
         swal.init();
     });
-})(window, document, jQuery);
+}(window, document, jQuery));

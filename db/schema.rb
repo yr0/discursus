@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008211606) do
+ActiveRecord::Schema.define(version: 20161009073947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 20161008211606) do
     t.decimal  "price",             precision: 8, scale: 2
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+  end
+
+  create_table "bookstores", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.text     "location_name"
+    t.decimal  "location_lat",  precision: 15, scale: 10
+    t.decimal  "location_lng",  precision: 15, scale: 10
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "ckeditor_assets", force: :cascade do |t|

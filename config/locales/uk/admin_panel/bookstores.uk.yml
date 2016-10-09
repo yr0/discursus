@@ -1,0 +1,10 @@
+uk:
+  admin_panel:
+    bookstores:
+      title: Книгарні
+      no_bookstores: Ви ще не додали жодної книгарні
+      new_bookstore: Нова книгарня
+      saved: Книгарня успішно збережена
+      destroyed: Книгарню видалено
+      choose_location: "Будь ласка, оберіть розташування книгарні на карті."
+      not_destroyed: "Не вдалося видалити книгарню: %{errors}"

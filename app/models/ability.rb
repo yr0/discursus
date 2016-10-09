@@ -11,10 +11,10 @@ class Ability
 
   def admin_abilities
     can :index, AdminPanel::DashboardController
-    can :manage, [Book, Article, TeamMember]
+    can :manage, [Book, Article, TeamMember, Bookstore]
   end
 
   def user_abilities
-    can :read, [Book, Article, TeamMember]
+    can :read, [Book, Article, TeamMember, Bookstore]
   end
 end

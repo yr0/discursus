@@ -1,0 +1,34 @@
+.box
+  .box-header
+    h2 = t('nav.bookstores')
+    .text-center
+      = link_to new_admin_panel_bookstore_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @bookstores.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.image')
+            th = t('attributes.title')
+            th = t('attributes.body')
+            th width='10%'
+        tbody
+          - @bookstores.each do |bookstore|
+            tr
+              td = bookstore.image? ? image_tag(bookstore.image.url(:thumb)) : '-'
+              td = bookstore.title
+              td = truncate(strip_tags(bookstore.description), length: 200, separator: ' ')
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, bookstore], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, bookstore], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+      div
+        = paginate @bookstores
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.bookstores.no_bookstores')

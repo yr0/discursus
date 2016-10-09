@@ -1,0 +1,7 @@
+.box.box-success
+  .box-header.with-border
+    h2 = @bookstore.title
+  .box-body
+    .row
+      = simple_form_for [:admin_panel, @bookstore], html: { class: 'form' } do |f|
+        = render('form', f: f)

@@ -1,0 +1,34 @@
+= content_for :uses_gmaps?, true
+
+- if f.object.errors.any?
+  .col-md-12
+    .alert.alert-danger
+      h4
+        = fa_icon :warning
+        | &nbsp;
+        = t('changes_not_saved')
+      = t('correct_errors')
+      - if (%i(location_lat location_lng) & f.object.errors.keys).any?
+        p
+          strong = t('admin_panel.bookstores.choose_location')
+.col-sm-12.col-md-6
+  = f.input :title, input_html: { id: 'bookstoreTitle' }
+.col-sm-12.col-md-6
+  = image_tag f.object.image.url(:medium) if f.object.image?
+  = f.input :image
+  = f.input :image_cache, as: :hidden
+.col-sm-12
+  = f.input :location_name
+  = f.input :location_lat, as: :hidden, input_html: { id: 'bookstoreLat' }
+  = f.input :location_lng, as: :hidden, input_html: { id: 'bookstoreLng' }
+  div style='width: 800px;'
+    h4 = t('admin_panel.bookstores.choose_location')
+    #bookstoreMap style='width: 800px; height: 500px;'
+.col-sm-12
+  = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
+          ckeditor: { height: 300, locale: I18n.locale } }
+.col-md-12
+  p
+    = f.submit t('save'), class: 'btn btn-primary margin'
+    = link_to t('cancel'), [:admin_panel, :bookstores], class: 'btn btn-warning margin'
+

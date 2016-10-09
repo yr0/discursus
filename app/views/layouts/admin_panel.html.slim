@@ -8,8 +8,11 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'admin_panel/application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'admin_panel/application', 'data-turbolinks-track' => 'reload'
+    - if content_for(:uses_gmaps?)
+      script [src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.secrets.gmaps_key}"
+        async defer data-turbolinks-track='reload']
 
-  body.sidebar-mini.skin-green
+  body.sidebar-mini.skin-green data-scope="#{controller_name}.#{action_name}"
     .wrapper
       = render 'admin_panel/shared/header'
       .content-wrapper

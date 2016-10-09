@@ -1,6 +1,6 @@
 module AdminPanel
   module AdminPanelHelper
-    NAVIGATION = %w(books articles team_members)
+    NAVIGATION = %w(books articles team_members bookstores)
 
     def admin_navigation
       content_tag :ul, class: 'sidebar-menu' do
