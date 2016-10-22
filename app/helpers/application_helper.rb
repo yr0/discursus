@@ -20,6 +20,7 @@ module ApplicationHelper
   end
 
   def readable_price(price, show_fractions = true)
+    price ||= 0
     fractions = show_fractions ? 2 : 0
     sprintf("₴%.0#{fractions}f", price)
   end

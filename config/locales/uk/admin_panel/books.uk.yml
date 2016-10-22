@@ -4,6 +4,10 @@ uk:
       title: Книги
       no_books: Ви ще не додали жодної книги
       new_book: Нова книга
+      general_info: Основна інформація
+      variants: Варіанти книги
+      is_variant_available: Варіант доступний?
+      media: Матеріали до книги
       saved: Книга успішно збережена
       destroyed: Книгу видалено
       not_destroyed: "Не вдалося видалити книгу: %{errors}"

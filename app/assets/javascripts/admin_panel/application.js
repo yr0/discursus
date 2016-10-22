@@ -31,8 +31,12 @@
 
         // reload CKEditor windows
         $('.input-ckeditor').each(function() {
+            var ckeditorId =  $(this).attr('id');
+            if (CKEDITOR.instances[ckeditorId]) {
+                CKEDITOR.remove(CKEDITOR.instances[ckeditorId]);
+            }
             if($(this).css('visibility') != 'hidden') {
-                CKEDITOR.replace($(this).attr('id'));
+                CKEDITOR.replace(ckeditorId);
             }
         });
 

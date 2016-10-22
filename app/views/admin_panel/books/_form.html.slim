@@ -1,28 +1,77 @@
-- if f.object.errors.any?
-  .col-md-12
-    .alert.alert-danger
+= simple_form_for [:admin_panel, @book], html: {class: 'form'} do |f|
+  - if f.object.errors.any?
+    .callout.callout-danger
       h4
         = fa_icon :warning
         | &nbsp;
         = t('changes_not_saved')
+      ul
+        - f.object.errors.messages[:base].each do |message|
+          li = message
       = t('correct_errors')
-.col-sm-12.col-md-6
-  = f.input :title
-.col-sm-12
-  = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
-          ckeditor: { height: 300, locale: I18n.locale } }
-.col-sm-12.col-md-6
-  / author modal gets rendered after the form to prevent double form submission
-  button.btn.btn-success type="button" data-toggle="modal" data-target="#newAuthorModal" +
-  | &emsp;
-  = f.label :authors
-  = f.association :authors, multiple: true, label: false, selected: f.object.author_ids,
-          input_html: { id: 'bookAuthors' }
-.col-sm-12.col-md-3
-  = f.input :price
-.col-sm-12.col-md-3
-  = f.input :pages_amount
-.col-md-12
-  p
-    = f.submit t('save'), class: 'btn btn-primary margin'
-    = link_to t('cancel'), [:admin_panel, :books], class: 'btn btn-warning margin'
+  .box
+    .box-header
+      .box-tools.pull-right
+        button.btn.btn-box-tool type="button" data-widget="collapse"
+          i.fa.fa-minus
+      h3 = t('admin_panel.books.general_info')
+    .box-body
+      .row
+        .col-sm-12.col-md-6
+          = f.input :title
+        .col-sm-12
+          = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
+                  ckeditor: { height: 300, locale: I18n.locale } }
+        .col-sm-12.col-md-6
+          / author modal gets rendered after the form to prevent double form submission
+          button.btn.btn-success type="button" data-toggle="modal" data-target="#newAuthorModal" +
+          | &emsp;
+          = f.label :authors
+          = f.association :authors, multiple: true, label: false, selected: f.object.author_ids,
+                  input_html: { id: 'bookAuthors' }
+        .col-sm-12.col-md-3
+          = f.input :pages_amount
+
+  .box
+    .box-header
+      .box-tools.pull-right
+        button.btn.btn-box-tool type="button" data-widget="collapse"
+          i.fa.fa-minus
+      h3 = t('admin_panel.books.variants')
+    .box-body
+      .row
+        - Book::VARIANT_TYPES.each do |variant_type|
+          - available_price = f.object.available_variants.to_h[variant_type.to_s]
+          .col-sm-12.col-md-6
+            .box.box-solid
+              .box-header
+                h4 = t("books.variants.#{variant_type}")
+              .box-body
+                .row.form
+                  .col-xs-12.col-sm-6.form-group
+                    .checkbox
+                      label for="book_variants_#{variant_type}_is_available"
+                        = check_box("book[variants][#{variant_type}]", :is_available, checked: available_price.present?)
+                        = "&ensp;#{t('admin_panel.books.is_variant_available')}".html_safe
+                  .col-xs-12.col-sm-6.form-group
+                      label for="book_variants_#{variant_type}_price" = t('attributes.price')
+                      = number_field("book[variants][#{variant_type}]", :price, value: available_price,
+                              class: 'form-control')
+
+  .box
+    .box-header
+      .box-tools.pull-right
+        button.btn.btn-box-tool type="button" data-widget="collapse"
+          i.fa.fa-minus
+      h3 = t('admin_panel.books.media')
+    .box-body
+
+
+  .box
+    .box-body
+      .row
+        .col-md-12.text-right
+          = f.submit t('save'), class: 'btn btn-primary margin'
+          = link_to t('cancel'), [:admin_panel, :books], class: 'btn btn-warning margin'
+
+= render 'new_author_modal'

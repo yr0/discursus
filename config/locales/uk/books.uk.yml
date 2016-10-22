@@ -1,0 +1,7 @@
+uk:
+  books:
+    variants:
+      paperback: М'яка обкладинка
+      hardcover: Тверда обкладинка
+      ebook: Електронна книга
+      audio: Аудіокнига

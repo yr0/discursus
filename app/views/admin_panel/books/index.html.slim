@@ -19,7 +19,7 @@
             tr
               td = book.title
               td = book.author_names
-              td = readable_price(book.price)
+              td = readable_price(book.main_price)
               td.text-right
                 = link_to fa_icon(:pencil), [:edit, :admin_panel, book], class: 'btn btn-info'
                 | &nbsp;
