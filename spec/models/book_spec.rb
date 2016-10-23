@@ -30,10 +30,16 @@ describe Book, type: :model do
       expect(book._has_base_error?(:variants_price_invalid)).to be
     end
 
-    it 'saves book with ok variants and sets the book main price to first available type price' do
-      expect(book.main_price).not_to be
+    %w(audio ebook).each do |variant|
+      it "does not save book when #{variant} variant is provided without file" do
+        book.update(available_variants: variants.merge(variant => 2))
+        expect(book.valid?).to eq false
+        expect(book._has_base_error?(:variants_files_invalid)).to be
+      end
+    end
+
+    it 'saves book with ok variants' do
       expect(book.update(available_variants: variants)).to eq true
-      expect(book.main_price).to eq expected_price.to_d
     end
 
     context '#update_price_from_variants' do

@@ -6,7 +6,7 @@
         | &nbsp;
         = t('changes_not_saved')
       ul
-        - f.object.errors.messages[:base].each do |message|
+        - f.object.errors.full_messages.each do |message|
           li = message
       = t('correct_errors')
   .box
@@ -57,6 +57,9 @@
                       label for="book_variants_#{variant_type}_price" = t('attributes.price')
                       = number_field("book[variants][#{variant_type}]", :price, value: available_price,
                               class: 'form-control')
+                  - if %w(ebook audio).include?(variant_type)
+                    .col-xs-12.col-sm-6.form-group
+                      = f.input "#{variant_type}_file", as: :file
 
   .box
     .box-header

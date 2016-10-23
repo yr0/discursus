@@ -18,7 +18,12 @@ class Book < ApplicationRecord
   has_many :authors_books
   has_many :authors, through: :authors_books
 
+  mount_uploader :ebook_file, PdfUploader
+  mount_uploader :audio_file, AudioUploader
+
   default_scope { order(created_at: :desc) }
+
+  acts_as_taggable_on :categories
 
   def author_names
     authors.pluck(:name).join(', ')
@@ -44,6 +49,12 @@ class Book < ApplicationRecord
     # validate prices
     if available_variants.values.any? { |price| price < 0 || price > 10_000 }
       errors.add(:base, :variants_price_invalid)
+    end
+
+    # validate files presence if available variants include ebook and audio
+    if available_variants.keys.include?('ebook') && !ebook_file.present? ||
+        available_variants.keys.include?('audio') && !audio_file.present?
+      errors.add(:base, :variants_files_invalid)
     end
   end
 

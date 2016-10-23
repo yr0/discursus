@@ -9,7 +9,8 @@ module AdminPanel
     end
 
     def record_params
-      params.require(:book).permit(:title, :description, :price, :pages_amount, author_ids: [],
+      params.require(:book).permit(:title, :description, :price, :pages_amount, :ebook_file, :audio_file,
+                                   author_ids: [],
                                    variants: Book::VARIANT_TYPES.map { |v| [v, %i(is_available price)] }.to_h)
     end
   end

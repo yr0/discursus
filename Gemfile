@@ -58,6 +58,8 @@ gem 'mini_magick', '~> 4.5'
 gem 'ckeditor', '~> 4.2'
 # ordering records
 gem 'acts_as_list', '~> 0.8'
+# tagging
+gem 'acts-as-taggable-on', '~> 4.0'
 
 # friendly urls
 gem 'friendly_id', '~> 5.1'

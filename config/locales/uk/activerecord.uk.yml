@@ -20,6 +20,8 @@ uk:
     motto: Гасло
     position: Порядок
     location_name: Розташування
+    audio_file: Файл аудіокниги
+    ebook_file: Файл електронної книги
   activerecord:
     errors:
       attributes:
@@ -43,12 +45,14 @@ uk:
         less_than: "мусить бути менше, ніж %{count}"
         greater_than_or_equal: "мусить бути більше, ніж %{count}"
         less_than_or_equal: "мусить бути менше, ніж %{count}"
+        not_a_number: має бути числом
       models:
         book:
           attributes:
             base:
               variants_invalid: Такого типу варіанту книги не існує
               variants_price_invalid: Ціна варіанту книги не може бути меншою 0 чи більшою 10000
+              variants_files_invalid: Додайте файли електронної та аудіокниги, якщо робите ці варіанти доступними
   errors:
     messages:
       extension_white_list_error: "имеет недопустимое разрешение"
