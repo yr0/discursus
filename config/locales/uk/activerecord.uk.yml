@@ -22,6 +22,7 @@ uk:
     location_name: Розташування
     audio_file: Файл аудіокниги
     ebook_file: Файл електронної книги
+    categories: Категорії
   activerecord:
     errors:
       attributes:

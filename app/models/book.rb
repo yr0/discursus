@@ -25,6 +25,10 @@ class Book < ApplicationRecord
 
   acts_as_taggable_on :categories
 
+  def self.all_categories
+    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
+  end
+
   def author_names
     authors.pluck(:name).join(', ')
   end

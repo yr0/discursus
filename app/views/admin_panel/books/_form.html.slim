@@ -24,11 +24,15 @@
                   ckeditor: { height: 300, locale: I18n.locale } }
         .col-sm-12.col-md-6
           / author modal gets rendered after the form to prevent double form submission
-          button.btn.btn-success type="button" data-toggle="modal" data-target="#newAuthorModal" +
-          | &emsp;
+          a href="#" data-toggle="modal" data-target="#newAuthorModal" title="#{t('admin_panel.authors.new_author')}"
+            = fa_stacked_icon 'plus', base: 'square-o'
+          | &ensp;
           = f.label :authors
-          = f.association :authors, multiple: true, label: false, selected: f.object.author_ids,
+          = f.association :authors, label: false, multiple: true, selected: f.object.author_ids,
                   input_html: { id: 'bookAuthors' }
+        .col-sm-12.col-md-6
+          = f.input :category_list, input_html: { id: 'bookCategories', value: f.object.category_list.join(','),
+                  'data-categories': book_categories_for_select }
         .col-sm-12.col-md-3
           = f.input :pages_amount
 

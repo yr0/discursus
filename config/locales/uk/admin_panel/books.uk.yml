@@ -11,3 +11,4 @@ uk:
       saved: Книга успішно збережена
       destroyed: Книгу видалено
       not_destroyed: "Не вдалося видалити книгу: %{errors}"
+      select_categories_placeholder: Уведіть категорії книги
