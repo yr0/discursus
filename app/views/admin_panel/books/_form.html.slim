@@ -44,7 +44,7 @@
       h3 = t('admin_panel.books.variants')
     .box-body
       .row
-        - Book::VARIANT_TYPES.each do |variant_type|
+        - Book.variant_types.each do |variant_type|
           - available_price = f.object.available_variants.to_h[variant_type.to_s]
           .col-sm-12.col-md-6
             .box.box-solid
@@ -64,6 +64,7 @@
                   - if %w(ebook audio).include?(variant_type)
                     .col-xs-12.col-sm-6.form-group
                       = f.input "#{variant_type}_file", as: :file
+                      = f.input "#{variant_type}_file_cache", as: :hidden
 
   .box
     .box-header
@@ -72,7 +73,13 @@
           i.fa.fa-minus
       h3 = t('admin_panel.books.media')
     .box-body
-
+      .row
+        .col-sm-12.col-md-6
+          h4 = t('admin_panel.books.main_image')
+          - if f.object.image.present?
+            = image_tag f.object.image.url(:thumb)
+          = f.input :image, error: false, input_html: { class: 'input-invisible' }
+          = f.input :image_cache, as: :hidden
 
   .box
     .box-body

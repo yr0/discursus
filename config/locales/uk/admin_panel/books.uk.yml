@@ -8,6 +8,8 @@ uk:
       variants: Варіанти книги
       is_variant_available: Варіант доступний?
       media: Матеріали до книги
+      main_image: Основне зображення
+      extra_images: Додаткові зображення
       saved: Книга успішно збережена
       destroyed: Книгу видалено
       not_destroyed: "Не вдалося видалити книгу: %{errors}"
