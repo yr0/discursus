@@ -47,6 +47,8 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-rails', '~> 4.6'
 gem 'autoprefixer-rails', '~> 6.4'
 gem 'simple_form', '~> 3.2'
+# nested model forms
+gem 'cocoon', '~> 1.2'
 # pagination
 gem 'kaminari', '~> 0.17'
 # ajax flash notifications

@@ -10,5 +10,5 @@ class TeamMember < ApplicationRecord
   end
 
   validates :motto, allow_blank: true, length: { minimum: 2, maximum: 250 }
-  mount_uploader :image, MainImageUploader
+  mount_uploader :image, ImageUploader
 end

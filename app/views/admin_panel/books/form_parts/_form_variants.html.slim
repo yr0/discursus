@@ -1,0 +1,29 @@
+.box
+  .box-header
+    .box-tools.pull-right
+      button.btn.btn-box-tool type="button" data-widget="collapse"
+        i.fa.fa-minus
+    h3 = t('admin_panel.books.variants')
+  .box-body
+    .row
+      - Book.variant_types.each do |variant_type|
+        - available_price = f.object.available_variants.to_h[variant_type.to_s]
+        .col-sm-12.col-md-6
+          .box.box-solid
+            .box-header
+              h4 = t("books.variants.#{variant_type}")
+            .box-body
+              .row.form
+                .col-xs-12.col-sm-6.form-group
+                  .checkbox
+                    label for="book_variants_#{variant_type}_is_available"
+                      = check_box("book[variants][#{variant_type}]", :is_available, checked: available_price.present?)
+                      = "&ensp;#{t('admin_panel.books.is_variant_available')}".html_safe
+                .col-xs-12.col-sm-6.form-group
+                  label for="book_variants_#{variant_type}_price" = t('attributes.price')
+                  = number_field("book[variants][#{variant_type}]", :price, value: available_price,
+                          class: 'form-control')
+                - if %w(ebook audio).include?(variant_type)
+                  .col-xs-12.col-sm-6.form-group
+                    = f.input "#{variant_type}_file", as: :file
+                    = f.input "#{variant_type}_file_cache", as: :hidden

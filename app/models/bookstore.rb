@@ -8,5 +8,5 @@ class Bookstore < ApplicationRecord
 
   validates :description, allow_blank: true, length: { minimum: 5, maximum: 10_000 }
 
-  mount_uploader :image, MainImageUploader
+  mount_uploader :image, ImageUploader
 end

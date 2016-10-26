@@ -10,6 +10,7 @@
 //= require underscore.min
 //= require gmaps4rails.min
 //= require markerclusterer
+//= require cocoon
 //= require turbolinks
 
 //= require 'shared/general_functions'

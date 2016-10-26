@@ -1,0 +1,21 @@
+.box
+  .box-header
+    .box-tools.pull-right
+      button.btn.btn-box-tool type="button" data-widget="collapse"
+        i.fa.fa-minus
+    h3 = t('admin_panel.books.media')
+  .box-body
+    .row
+      .col-sm-12.col-md-6
+        h4 = t('admin_panel.books.main_image')
+        - if f.object.image.present?
+          = image_tag f.object.image.url(:small)
+        = f.input :image, error: false, input_html: { class: 'input-invisible' }
+        = f.input :image_cache, as: :hidden
+    h4 = t('admin_panel.books.extra_images')
+    .row
+      = f.simple_fields_for :extra_images do |extra_image|
+        = render('admin_panel/books/form_parts/extra_image_fields', f: extra_image)
+      .col-sm-6.col-sm-offset-3.links.text-center
+        = link_to_add_association f, :extra_images, partial: 'admin_panel/books/form_parts/extra_image_fields' do
+          button.btn.btn-block.bg-olive = t('admin_panel.books.add_extra_image')

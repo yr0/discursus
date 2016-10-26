@@ -82,6 +82,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    cocoon (1.2.9)
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.3)
     devise (4.2.0)
@@ -273,6 +274,7 @@ DEPENDENCIES
   capistrano-rails
   carrierwave (~> 0.11)
   ckeditor (~> 4.2)
+  cocoon (~> 1.2)
   database_cleaner
   devise (~> 4.2)
   dotenv (~> 2.1)

@@ -12,5 +12,5 @@ class Author < ApplicationRecord
   friendly_id :name, use: :slugged
   include Sluggable
 
-  mount_uploader :image, MainImageUploader
+  mount_uploader :image, ImageUploader
 end

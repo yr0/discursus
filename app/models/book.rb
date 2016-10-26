@@ -10,8 +10,11 @@ class Book < ApplicationRecord
 
   has_many :authors_books
   has_many :authors, through: :authors_books
+  has_many :extra_images, class_name: 'BookExtraImage'
+  accepts_nested_attributes_for :extra_images, reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },
+                                allow_destroy: true
 
-  mount_uploader :image, MainImageUploader
+  mount_uploader :image, ImageUploader
   mount_uploader :ebook_file, PdfUploader
   mount_uploader :audio_file, AudioUploader
 
@@ -28,6 +31,6 @@ class Book < ApplicationRecord
   end
 
   def author_names
-    authors.pluck(:name).join(', ')
+    authors.map(&:name).join(', ')
   end
 end

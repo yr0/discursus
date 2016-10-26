@@ -8,5 +8,5 @@ class Article < ApplicationRecord
   friendly_id :title, use: :slugged
   include Sluggable
 
-  mount_uploader :image, MainImageUploader
+  mount_uploader :image, ImageUploader
 end
