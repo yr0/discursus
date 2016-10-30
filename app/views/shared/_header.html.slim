@@ -1,2 +1,7 @@
 header
-  = render('shared/sidenav')
+  .hidden-sm.hidden-xs
+    .dsc-general-nav-container
+      = link_to root_path do
+        h2.dsc-nav-header-text Discursus
+      = render('shared/nav/nav_links')
+  .visible-sm-block.visible-xs-block = render('shared/nav/sidenav')

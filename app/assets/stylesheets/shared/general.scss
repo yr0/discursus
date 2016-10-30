@@ -1,11 +1,5 @@
 .dsc-existing-yet-invisible {
-  // a set of rules to remove element from page but save it for later use
-  opacity: 0;
-  height: 0.1px;
-  width: 0.1px;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+  @include existing-yet-invisible;
 }
 
 .dsc-main-content {

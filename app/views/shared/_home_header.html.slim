@@ -2,6 +2,6 @@ header
   .hidden-xs.dsc-home-header
     .dsc-home-logo-inner.text-center
       = image_tag 'logo.png', class: 'dsc-home-logo', 'data-svg-url' => image_url('logo.svg')
-    nav.dsc-home-nav.text-center
-      = site_navigation(:home)
-  .visible-xs-block = render('shared/sidenav')
+    .dsc-home-nav-container
+      = render('shared/nav/nav_links')
+  .visible-xs-block = render('shared/nav/sidenav')

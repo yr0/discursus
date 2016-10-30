@@ -1,0 +1,5 @@
+nav.dsc-main-nav
+  = site_navigation(:main)
+.dsc-main-nav-icons-container
+  input#searchFlagMain.dsc-existing-yet-invisible.dsc-search-flag-main type="checkbox"
+  = render('shared/nav/icons_nav', search_flag_id: 'searchFlagMain')

@@ -1,6 +1,9 @@
 .dsc-sidenav-outer-container
   .dsc-header.dsc-sidenav-header
-    h2.dsc-header-text Discursus
+    /h2.dsc-header-text Discursus
+    .dsc-sidenav-icons-container
+      input#searchFlagSidenav.dsc-existing-yet-invisible.dsc-search-flag-sidenav type="checkbox"
+      = render('shared/nav/icons_nav', search_flag_id: 'searchFlagSidenav')
     .dsc-sidenav-container
       / we add checkbox here in order to react to its 'checked' state
       input.dsc-sidenav-checkbox.dsc-existing-yet-invisible#sidenavCheckbox type='checkbox'

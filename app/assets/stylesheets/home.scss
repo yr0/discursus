@@ -6,6 +6,7 @@
 // local
 @import 'fonts';
 @import 'variables';
+@import 'mixins/**/*';
 
 @import 'shared/**/*';
 @import 'home/**/*';
@@ -14,3 +15,4 @@
 // media queries
 @import 'home_mq';
 @import 'media_queries/books_list';
+@import 'media_queries/sidenav';
