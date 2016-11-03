@@ -2,6 +2,10 @@ $book-card-height: 280px;
 
 .dsc-books-list {
   margin: 0 5%;
+
+  @media (min-width: 1600px) {
+    margin: 0 15%;
+  }
 }
 
 .dsc-book-card {
@@ -30,6 +34,11 @@ $book-card-height: 280px;
 .dsc-book-card-image {
   height: 90%;
   margin: auto;
+
+  @media (min-width: 992px) and (max-width: 1250px) {
+    height: auto;
+    width: 100%;
+  }
 }
 
 .dsc-book-card-body {

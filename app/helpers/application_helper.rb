@@ -1,7 +1,7 @@
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
-      main: '/', books: '#', news: '#', bookstores: '#', authors: '#', about_us: '#', contacts: '#'
+      main: '/', books: '#', news: 'articles', bookstores: '#', authors: '#', about_us: '#', contacts: '#'
   }.freeze
 
   def years_active

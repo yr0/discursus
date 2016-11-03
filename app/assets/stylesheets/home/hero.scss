@@ -1,6 +1,6 @@
 .dsc-home-hero-container {
   width: 100%;
-//  fallback for browsers that don't support vh/vw
+  //  fallback for browsers that don't support vh/vw
   height: 600px;
   //  desired height
   height: 60vh;
@@ -10,6 +10,11 @@
   color: $white;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+
+  @media (min-width: 1200px) {
+    background: no-repeat center / 100% auto;
+  }
 }
 
 .dsc-home-hero-overlay {

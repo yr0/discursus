@@ -1,0 +1,16 @@
+.dsc-header.dsc-section-header
+  h2.dsc-header-text = t('nav.articles')
+// display main blocks if page is 1 or nil
+// transform articles to array to avoid extra db queries
+.container
+  .row.dsc-articles-list
+    - @articles.each.with_index do |article, i|
+      - weight = column_weight_from_index(i)
+      .dsc-col-no-padding.dsc-article-card class="col-md-#{weight}"
+        = link_to root_path, class: 'dsc-article-link' do
+          .dsc-article-container style="#{background_style_for_article(article, weight)}"
+            .dsc-article
+              .dsc-article-title
+                = article.title
+              - if weight == 5
+                p = truncate(strip_tags(article.body), length: 200, separator: ' ')

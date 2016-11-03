@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :read, [Book, Article, TeamMember, Bookstore, Author]
     return unless user # user is a guest
     user_abilities
     admin_abilities if user.is_a?(Admin)

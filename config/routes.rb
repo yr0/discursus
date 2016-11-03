@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   root 'home#index'
   resources :books, only: %i(index show)
+  resources :articles, only: %i(index show)
+
+  devise_for :users
 
   devise_for :admins
   devise_scope :admin do
