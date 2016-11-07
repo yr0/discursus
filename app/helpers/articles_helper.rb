@@ -11,8 +11,8 @@ module ArticlesHelper
   end
 
   # sets background image for article card if image is present, otherwise returns nothing
-  def background_style_for_article(article, weight)
+  def background_style_for_article(article)
     return unless article.image.present?
-    "background-image: url(#{article.image.url(weight == 5 ? :large : :medium)})"
+    "background-image: url(#{article.image.url(:large)})"
   end
 end

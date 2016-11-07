@@ -15,12 +15,14 @@
     content: '\2022';
     font-size: 25px;
   }
-
-  // do not display header on screens less than 400px
-  @media (max-width: 400px) {
-    @include existing-yet-invisible;
-  }
 }
+
+// do not display main header on screens less than 400px
+//@media (max-width: 400px) {
+//  &.dsc-main-header {
+//    @include existing-yet-invisible;
+//  }
+//}
 
 .dsc-section-header {
   background-color: $color-darker;

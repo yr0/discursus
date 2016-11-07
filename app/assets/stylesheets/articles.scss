@@ -1,6 +1,6 @@
 .dsc-articles-list {
   .dsc-article-link:hover {
-      text-decoration: none;
+    text-decoration: none;
   }
 
   .dsc-col-no-padding {
@@ -30,62 +30,110 @@
     }
   }
 
-  .dsc-article-card:nth-of-type(2),
-  .dsc-article-card:nth-of-type(4),
-  .dsc-article-card:nth-of-type(6),
-  .dsc-article-card:nth-of-type(3n+6) {
-    .dsc-article-container {
-      background-color: $article-bg-gray;
+
+  @media(max-width: 991px) {
+    .dsc-article-card:nth-of-type(2),
+    .dsc-article-card:nth-of-type(3),
+    .dsc-article-card:nth-of-type(6),
+    .dsc-article-card:nth-of-type(3n+6) {
+      .dsc-article-container {
+        background-color: $article-bg-gray;
+      }
+
+      .dsc-article-container:before {
+        border-bottom: 250px solid $article-bg-gray;
+      }
+    }
+
+    .dsc-article-card {
+      .dsc-article-container:before {
+        width: 220px;
+        border-right: 100px solid transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        border-bottom: 250px solid $color-darker;
+        z-index: -1;
+      }
 
       .dsc-article {
-        background-color: rgba($article-bg-gray, 0.8);
+        width: 150px;
+        background-color: transparent;
       }
     }
   }
 
-  .dsc-article-card:nth-of-type(1),
-  .dsc-article-card:nth-of-type(3),
-  .dsc-article-card:nth-of-type(4),
-  .dsc-article-card:nth-of-type(5) {
-    .dsc-article-container:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      border-bottom: 250px solid $color-darker;
-      z-index: -1;
+  @media(min-width: 610px) and (max-width: 767px) {
+    .dsc-article-card {
+      .dsc-article-container:before {
+        width: 350px;
+      }
+
+      .dsc-article {
+        width: 250px;
+      }
     }
   }
 
-  .dsc-article-card:nth-of-type(1),
-  .dsc-article-card:nth-of-type(5) {
-    .dsc-article-container:before {
-      width: 300px;
-      border-right: 80px solid transparent;
+  @media(min-width: 992px) {
+    .dsc-article-card:nth-of-type(1),
+    .dsc-article-card:nth-of-type(3),
+    .dsc-article-card:nth-of-type(4),
+    .dsc-article-card:nth-of-type(5) {
+      .dsc-article-container:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        border-bottom: 250px solid $color-darker;
+        z-index: -1;
+      }
     }
 
-    .dsc-article {
-      width: 250px;
-      background-color: transparent;
-    }
-  }
+    .dsc-article-card:nth-of-type(2),
+    .dsc-article-card:nth-of-type(4),
+    .dsc-article-card:nth-of-type(6),
+    .dsc-article-card:nth-of-type(3n+6) {
+      .dsc-article-container {
+        background-color: $article-bg-gray;
 
-  .dsc-article-card:nth-of-type(3),
-  .dsc-article-card:nth-of-type(4) {
-    .dsc-article-container:before {
-      width: 220px;
-      border-right: 100px solid transparent;
+        .dsc-article {
+          background-color: rgba($article-bg-gray, 0.8);
+        }
+      }
     }
 
-    .dsc-article {
-      width: 150px;
-      background-color: transparent;
+    .dsc-article-card:nth-of-type(4) {
+      .dsc-article-container:before {
+        border-bottom-color: $article-bg-gray;
+      }
     }
-  }
 
-  .dsc-article-card:nth-of-type(4) {
-    .dsc-article-container:before {
-      border-bottom-color: $article-bg-gray;
+    .dsc-article-card:nth-of-type(1),
+    .dsc-article-card:nth-of-type(5) {
+      .dsc-article-container:before {
+        width: 300px;
+        border-right: 80px solid transparent;
+      }
+
+      .dsc-article {
+        width: 250px;
+        background-color: transparent;
+      }
+    }
+
+    .dsc-article-card:nth-of-type(3),
+    .dsc-article-card:nth-of-type(4) {
+      .dsc-article-container:before {
+        width: 220px;
+        border-right: 100px solid transparent;
+      }
+
+      .dsc-article {
+        width: 150px;
+        background-color: transparent;
+      }
     }
   }
 }

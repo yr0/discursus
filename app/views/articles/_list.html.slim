@@ -1,0 +1,10 @@
+- articles.each.with_index do |article, i|
+  - weight = articles.first_page? ? column_weight_from_index(i) : 3
+  .col-xs-12.col-sm-6.dsc-col-no-padding.dsc-article-card class="col-md-#{weight}"
+    = link_to article_path(article), class: 'dsc-article-link' do
+      .dsc-article-container style="#{background_style_for_article(article)}"
+        .dsc-article
+          .dsc-article-title
+            = article.title
+          - if weight == 5
+            p = truncate(strip_tags(article.body), length: 200, separator: ' ')

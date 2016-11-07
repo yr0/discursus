@@ -27,11 +27,12 @@
     }
 
     function hideSpinner(templateContainer) {
-        var initialElement = $(this),
-            spinnerStarted = initialElement.data('spinner-started');
+        var $initialElement = $(this),
+            spinnerStarted = $initialElement.data('spinner-started');
         setTimeout(function(){
             hide($('#spinner' + spinnerStarted));
-            show(initialElement); // unless some data flag says it should not be shown
+            // show button 'load more' unless it has data attribute 'hide'
+            if (!$initialElement.data('hide')) show($initialElement);
             $(templateContainer + ' .dsc-spinner-controlled-invisible').addClass('dsc-spinner-controlled-visible')
                 .removeClass('dsc-spinner-controlled-invisible');
         }, getSpinnerDelay(spinnerStarted));
