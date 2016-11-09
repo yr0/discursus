@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require tooltipster.bundle.min
 //= require turbolinks
 //= require ajax_spinner
+//= require has_tooltipster

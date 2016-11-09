@@ -3,6 +3,9 @@ module ApplicationHelper
   NAVIGATION = {
       main: '/', books: '#', news: 'articles', bookstores: '#', authors: '#', about_us: '#', contacts: '#'
   }.freeze
+  VARIANTS_ICONS = {
+      paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
+  }
 
   def years_active
     [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe
@@ -23,6 +26,19 @@ module ApplicationHelper
     price ||= 0
     fractions = show_fractions ? 2 : 0
     sprintf("₴%.0#{fractions}f", price)
+  end
+
+  def book_card_price(price)
+    sprintf('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe
+  end
+
+  def book_card_variants(available_variants)
+    return t('sold') if available_variants.blank?
+    available_variants.keys.map do |variant|
+      content_tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),
+                  class: 'dsc-book-card-variant-item has-tooltipster', title: t("books.available.#{variant}"),
+                  'data-tooltipster-side': 'bottom')
+    end.uniq.join.html_safe
   end
 
   # used for injecting current locale translations into page for JS
