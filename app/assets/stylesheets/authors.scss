@@ -1,0 +1,40 @@
+.dsc-author-card-body {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px;
+  border: 1px solid $light-gray;
+  padding: 10px;
+
+  .dsc-author-card-title {
+    font-size: $block-caption-size;
+    margin: 0;
+  }
+}
+
+.dsc-author-card-image {
+  min-height: $image-container-height;
+  min-width: 100%;
+  filter: grayscale(1);
+}
+
+// show
+.dsc-author-description {
+  margin: 10px;
+  padding: 10px 20px;
+  //text-align: justify;
+  border: 1px solid $light-gray;
+  columns: 3 150px;
+  column-gap: 40px;
+
+  //@media (min-width: 768px) and (max-width:991px), (max-width: 650px) {
+  //  columns: 2;
+  //}
+  //
+  //@media (max-width: 500px) {
+  //  columns: 1;
+  //}
+}

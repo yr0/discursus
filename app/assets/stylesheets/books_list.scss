@@ -1,104 +1,8 @@
-$book-card-height: 340px;
-$image-container-height: $book-card-height - 100px;
-
 .dsc-books-list {
   margin: 0 5%;
 
   @media (min-width: 1600px) {
     margin: 0 15%;
-  }
-}
-
-.dsc-book-card {
-  text-align: center;
-  margin: 10px 0;
-  position: relative;
-  width: 250px;
-
-  @media (max-width: 992px) {
-    width: 100%;
-  }
-
-  @media (min-width: 500px) and (max-width: 767px) {
-    padding: 0 20%;
-  }
-}
-
-.dsc-book-card-image-container {
-  width: 100%;
-  border: 1px solid $light-gray;
-  border-bottom: none;
-  overflow: hidden;
-  position: relative;
-
-  &:after {
-    z-index: 2;
-    transition: transform 0.35s;
-    width: 100%;
-    height: $image-container-height;
-    position: absolute;
-    top: $image-container-height;
-    left: 0;
-    content: '';
-    background-color: rgba($color-darker, 0.5);
-  }
-}
-
-.dsc-book-card-actions {
-  z-index: 3; //highest element in Z stack
-  position: absolute;
-  height: $image-container-height;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .dsc-book-card-action {
-    margin: 0 5px;
-    color: $white;
-    background-color: $color-darker;
-    height: 50px;
-    width: 50px;
-    border-radius: 50px;
-    padding-top: 13px;
-    text-align: center;
-    transition-delay: 0ms;
-    transform: scale(0.000001, 0.000001);
-
-    &:hover {
-      background-color: $color-lighter;
-    }
-  }
-}
-
-.dsc-book-card:hover {
-  .dsc-book-card-image-container {
-    border-color: rgba($color-darker, 0.5);
-
-    &:after {
-      transform: translateY(-$image-container-height);
-    }
-  }
-
-  .dsc-book-card-action {
-    transition: transform 0.25s;
-    transform: scale(1, 1);
-    @for $i from 1 to 4 {
-      &:nth-of-type(#{$i}) {
-        transition-delay: $i * 150ms;
-      }
-    }
-  }
-}
-
-
-.dsc-book-card-image {
-  height: $image-container-height;
-  padding: 10px 0;
-
-  @media (min-width: 992px) and (max-width: 1250px) {
-    height: auto;
-    width: 100%;
   }
 }
 
@@ -138,4 +42,14 @@ $image-container-height: $book-card-height - 100px;
       cursor: pointer;
     }
   }
+}
+
+.dsc-book-card-image {
+  height: $image-container-height;
+  padding: 10px 0;
+
+  //@media (min-width: 992px) and (max-width: 1250px) {
+  //  height: auto;
+  //  width: 100%;
+  //}
 }

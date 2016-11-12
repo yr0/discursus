@@ -1,0 +1,7 @@
+| var nextRow = $('#{ render 'list', authors: @authors }').addClass('dsc-spinner-controlled-invisible');
+| $('.dsc-authors-list').append(nextRow);
+- if @authors.last_page?
+  | $('.load-more-authors').data('hide', 1);
+- else
+  | $('.load-more-authors').prop('action', '#{authors_path(page: @authors.next_page)}');
+| $('.load-more-authors').trigger('ajax:templateLoaded', { templateContainer: '.dsc-authors-list' });

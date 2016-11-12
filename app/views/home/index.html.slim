@@ -13,7 +13,9 @@ section.dsc-home-hero-container.text-center style='background-image: url(#{image
 .dsc-header.dsc-section-header
   h2.dsc-header-text = t('home.new_books')
 section.dsc-books-list.container-fluid
-  = render 'books/list'
-.text-center
-  = button_to t('load_more'), books_path, class: 'dsc-button large-margin', remote: true, method: :get,
-              form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
+  .row.dsc-books-list-row
+    = render 'books/list', books: @books
+- unless @books.last_page?
+  .text-center
+    = button_to t('load_more'), books_path(page: @books.next_page), class: 'dsc-button large-margin',
+            remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }

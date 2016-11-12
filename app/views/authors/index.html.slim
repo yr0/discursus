@@ -1,0 +1,11 @@
+- content_for :uses_spinner?, true
+
+.dsc-header.dsc-section-header
+  h2.dsc-header-text = t('nav.authors')
+.container
+  .row.dsc-authors-list
+    = render('list', authors: @authors)
+  - unless @authors.last_page?
+    .text-center
+      = button_to t('load_more'), authors_path(page: @authors.next_page), class: 'dsc-button large-margin',
+              remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-authors' }

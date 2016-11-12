@@ -1,3 +1,7 @@
-| var nextRow = $('#{ render 'list' }').addClass('dsc-spinner-controlled-invisible');
-| $('.dsc-books-list').append(nextRow);
-| $('.load-more-books').trigger('ajax:templateLoaded', { templateContainer: '.dsc-books-list' });
+| var nextRow = $('#{ render 'list', books: @books }').addClass('dsc-spinner-controlled-invisible');
+| $('.dsc-books-list-row').append(nextRow);
+- if @books.last_page?
+  | $('.load-more-books').data('hide', 1);
+- else
+  | $('.load-more-books').prop('action', '#{books_path(page: @books.next_page)}');
+| $('.load-more-books').trigger('ajax:templateLoaded', { templateContainer: '.dsc-books-list-row' });

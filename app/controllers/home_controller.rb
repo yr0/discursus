@@ -2,6 +2,6 @@ class HomeController < ApplicationController
   layout 'home'
 
   def index
-    # @books = Book.limit(8)
+    @books = Book.page(1).per(8)
   end
 end

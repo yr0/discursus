@@ -13,4 +13,11 @@ class Author < ApplicationRecord
   include Sluggable
 
   mount_uploader :image, ImageUploader
+
+  # returns a string containing first 3 books of the author
+  def books_list
+    # we use #[] and #map, because #limit and #pluck would use the additional sql query per author,
+    # which we avoid using Author.includes(:books)
+    books[0..3].map(&:title).join(', ')
+  end
 end

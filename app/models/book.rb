@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { minimum: 1, maximum: 250 }
   validates :pages_amount, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { maximum: 10_000 }
-  validate :variants_must_contain_valid_data
+  # validate :variants_must_contain_valid_data
 
   has_many :authors_books
   has_many :authors, through: :authors_books
@@ -31,6 +31,8 @@ class Book < ApplicationRecord
   end
 
   def author_names
+    # we use #map, because #pluck would use the additional sql query per book,
+    # which we avoid using Book.includes(:authors)
     authors.map(&:name).join(', ')
   end
 end

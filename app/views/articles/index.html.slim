@@ -2,8 +2,6 @@
 
 .dsc-header.dsc-section-header
   h2.dsc-header-text = t('nav.articles')
-// display main blocks if page is 1 or nil
-// transform articles to array to avoid extra db queries
 .container
   .row.dsc-articles-list
     = render('list', articles: @articles)
