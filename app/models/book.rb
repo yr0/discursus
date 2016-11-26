@@ -27,7 +27,7 @@ class Book < ApplicationRecord
   include Sluggable
 
   def self.all_categories
-    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
+    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' }).distinct
   end
 
   def author_names

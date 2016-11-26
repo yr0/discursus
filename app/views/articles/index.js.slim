@@ -3,5 +3,5 @@
 - if @articles.last_page?
   | $('.load-more-articles').data('hide', 1);
 - else
-  | $('.load-more-articles').prop('action', '#{articles_path(page: @articles.next_page)}');
+  | $('.load-more-articles').prop('action', '#{articles_path(params_with_search(@articles))}');
 | $('.load-more-articles').trigger('ajax:templateLoaded', { templateContainer: '.dsc-articles-list' });

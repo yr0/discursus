@@ -12,6 +12,7 @@
           tr
             th = t('attributes.image')
             th = t('attributes.title')
+            th = t('attributes.created_at')
             th = t('attributes.body')
             th width='10%'
         tbody
@@ -19,6 +20,7 @@
             tr
               td = article.image? ? image_tag(article.image.url(:thumb)) : '-'
               td = article.title
+              td = readable_date(article.created_at, true)
               td = truncate(strip_tags(article.body), length: 200, separator: ' ')
               td.text-right
                 = link_to fa_icon(:pencil), [:edit, :admin_panel, article], class: 'btn btn-info'

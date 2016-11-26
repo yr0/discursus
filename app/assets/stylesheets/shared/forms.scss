@@ -2,3 +2,80 @@
   color: $red;
   margin: 10px 0;
 }
+
+.dsc-input-checkable {
+  @extend .dsc-existing-yet-invisible;
+
+  & + .dsc-label-checkable {
+    margin-left: 20px;
+    position: relative;
+    cursor: pointer;
+    font-weight: normal;
+
+    &:before {
+      position: absolute;
+      left: -25px;
+      top: 2px;
+      width: 15px;
+      height: 15px;
+      border: 1px solid $color-darker;
+      border-radius: 2px;
+      content: '';
+    }
+  }
+
+  & + .dsc-checkable-radio:before {
+    border-radius: 20px;
+  }
+
+  &:checked + .dsc-checkable-checkbox:after {
+    content: '\f00c';
+    z-index: 3;
+    position: absolute;
+    left: -25px;
+    top: -1px;
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: $color-darker;
+  }
+
+  &:checked + .dsc-checkable-radio:before {
+    background-color: $color-darker;
+  }
+
+  & ~ .dsc-label-order-desc {
+    visibility: hidden;
+  }
+
+  &:checked ~ .dsc-label-order-desc {
+    visibility: visible;
+  }
+}
+
+.dsc-label-order-desc {
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: normal;
+}
+
+.dsc-input-order-desc {
+  @extend .dsc-existing-yet-invisible;
+
+  & + .dsc-label-order-desc:before {
+    font-family: "FontAwesome";
+    content: '\f160';
+    font-size: 12px;
+  }
+
+  &:checked + .dsc-label-order-desc:before {
+    content: '\f161';
+  }
+
+  & + .dsc-order-alpha:before {
+    content: '\f15d';
+  }
+
+  &:checked + .dsc-order-alpha:before {
+    content: '\f15e';
+  }
+}

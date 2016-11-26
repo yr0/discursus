@@ -12,7 +12,5 @@
 @import 'articles';
 @import 'books_list';
 @import 'authors';
-
-.bordered {
-  border: 1px solid red;
-}
+@import 'books';
+@import 'books_search';

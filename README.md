@@ -1,24 +1,23 @@
-# README
+# Discursus
+Source code for the website.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+1. Install rvm and ruby 2.3.1
+0. Install PostgreSQL 9.5
+0. Install Solr 6.3 (latest at the time of writing), create core collection, and specify path to it 
+    in *config/solr.yml*. Copy sunspot config files *schema.xml* and *solrconfig.xml* from 
+    [Sunspot github page](https://github.com/sunspot/sunspot/tree/master/sunspot_solr/solr/solr/configsets/sunspot/conf) 
+    and place them in /var/solr/data/<collection_name>/conf. Restart the solr service afterwards. 
+0. `cd` into app directory and run `bundle` to install the dependencies
+0. Create *.env* file in directory root and populate it with the following data:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+        DB_USER=<database_user>
+        DB_PASS=<database_password>
+        DEFAULT_ADMIN_EMAIL=<email for auto-generated administrator>
+        DEFAULT_ADMIN_PASS=<password for auto-generated admininstrator>
+        GMAPS_API_KEY=<API key for Gmaps within application>
+    
+0. After configuring database access in *config/database.yml*, run `rails db:create db:schema:load db:seed`. This will
+    create database, set up the existing schema in it, and seed the administrator user with any other required data.
+0. To run tests, use `rspec`
+0. To start the server, run `rails s`

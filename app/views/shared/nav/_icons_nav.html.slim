@@ -1,9 +1,12 @@
 nav.dsc-icons-nav
-  input.dsc-icons-nav-search-appearing type="text"
+  = form_tag search_url_from_controller, method: :get, class: 'dsc-form-enter-submitted' do
+    input.dsc-icons-nav-search-appearing.dsc-form-text.has-tooltipster [type="text" name="query" maxlength="30"
+      title="#{t('search_hint')}"]
   ul.dsc-icons-nav-items.text-left
     li.dsc-nav-icon.dsc-icons-nav-search-label-container
-      label.dsc-icons-nav-search-label for="#{search_flag_id}"
-        = fa_icon(:search)
+      - unless view_within_controller?('books')
+        label.dsc-icons-nav-search-label for="#{search_flag_id}"
+          = fa_icon(:search)
     li.dsc-nav-icon
       a [href] = fa_icon('shopping-basket')
     li.dsc-nav-icon

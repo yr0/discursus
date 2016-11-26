@@ -1,8 +1,7 @@
 module AdminPanel
-
-##
-# A concern that can be used for any REST resources (in admin panel). Defines actions #index, #show, #new, #create,
-# #edit, #update, #destroy, that can be overridden in controller.
+  ##
+  # A concern that can be used for any REST resources (in admin panel). Defines actions #index, #show, #new, #create,
+  # #edit, #update, #destroy, that can be overridden in controller.
   module RestfulActions
     extend ActiveSupport::Concern
 
@@ -54,7 +53,9 @@ module AdminPanel
     end
 
     # update permitted params are the same as create by default
-    def record_update_params; record_params; end
+    def record_update_params
+      record_params
+    end
 
     # what associations to add during loading of index action
     def eager_load_associations

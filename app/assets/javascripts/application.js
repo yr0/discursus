@@ -16,3 +16,5 @@
 //= require turbolinks
 //= require ajax_spinner
 //= require has_tooltipster
+//= require form_enter_submitted
+//= require checkbox_main_among

@@ -18,8 +18,9 @@ module VariantsFunctionality
   # Transforms hash received from form into expected format, removing variants that are not defined and those
   # that have empty or zero price
   def variants=(variants_hash)
-    self.available_variants = variants_hash.select {|k, v| v['is_available'].to_i != 0 && VARIANT_TYPES.include?(k) }
-                                  .map {|k, v| [k, v['price'].to_i] }.to_h
+    self.available_variants = variants_hash.select do |k, v|
+      v['is_available'].to_i.nonzero? && VARIANT_TYPES.include?(k)
+    end.map { |k, v| [k, v['price'].to_i] }.to_h
   end
 
   private
@@ -39,7 +40,7 @@ module VariantsFunctionality
 
     # validate files presence if available variants include ebook and audio
     if available_variants.keys.include?('ebook') && !ebook_file.present? ||
-        available_variants.keys.include?('audio') && !audio_file.present?
+       available_variants.keys.include?('audio') && !audio_file.present?
       errors.add(:base, :variants_files_invalid)
     end
   end

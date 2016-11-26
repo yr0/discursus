@@ -1,7 +1,7 @@
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
-      main: '/', books: '#', news: '/articles', bookstores: '#', authors: '/authors', about_us: '#', contacts: '#'
+      main: '/', books: '/books', news: '/articles', bookstores: '#', authors: '/authors', about_us: '#', contacts: '#'
   }.freeze
   VARIANTS_ICONS = {
       paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
@@ -28,6 +28,11 @@ module ApplicationHelper
     sprintf("₴%.0#{fractions}f", price)
   end
 
+  def readable_date(date, show_time = false)
+    return unless date.present?
+    date.strftime("#{'%H:%M ' if show_time}%d.%m.%Y")
+  end
+
   def book_card_price(price)
     sprintf('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe
   end
@@ -44,5 +49,22 @@ module ApplicationHelper
   # used for injecting current locale translations into page for JS
   def raw_locale_hash(*exclude_keys)
     I18n.backend.send(:translations)[I18n.locale].with_indifferent_access.except(exclude_keys).to_json.html_safe
+  end
+
+  def params_with_search(records)
+    result = { page: records.next_page }
+    result.merge!(query: @search.query.to_params[:q]) if @search.present?
+    result
+  end
+
+  def view_within_controller?(*names)
+    names.map(&:to_s).include?(controller_name)
+  end
+
+  def search_url_from_controller
+    # returns books_path unless controller search path with key controller_name is provided in the hash
+    {
+        'articles' => articles_path
+    }[controller_name] || books_path
   end
 end

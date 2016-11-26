@@ -9,4 +9,9 @@ class Article < ApplicationRecord
   include Sluggable
 
   mount_uploader :image, ImageUploader
+
+  searchable do
+    text :title, boost: 5.0
+    text :body
+  end
 end

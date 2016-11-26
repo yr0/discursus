@@ -62,6 +62,8 @@ gem 'ckeditor', '~> 4.2'
 gem 'acts_as_list', '~> 0.8'
 # tagging
 gem 'acts-as-taggable-on', '~> 4.0'
+# full text search with apache solr
+gem 'sunspot_rails'
 
 # friendly urls
 gem 'friendly_id', '~> 5.1'
@@ -72,6 +74,7 @@ gem 'unicode', '~> 0.4'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'
 
-# env load
+# env load and process control
 gem 'dotenv', '~> 2.1'
 gem 'dotenv-rails', '~> 2.1'
+gem 'foreman'

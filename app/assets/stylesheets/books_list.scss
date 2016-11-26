@@ -19,6 +19,8 @@
   .dsc-book-card-title {
     font-size: $block-caption-size;
     margin: 0;
+    height: 57px;
+    overflow: hidden;
   }
 
   .dsc-book-card-price {

@@ -1,0 +1,32 @@
+.dsc-books-filter-section {
+  margin-top: 10px;
+}
+
+.dsc-books-filter-section-title {
+  padding-bottom: 3px;
+  width: 100%;
+  font-size: $block-caption-size;
+  border-bottom: 1px solid $color-darker;
+}
+
+.dsc-books-filter-section-body {
+  padding: 10px;
+}
+
+.dsc-books-filter-text {
+  width: 100%;
+  border: 1px solid $color-darker;
+}
+
+.dsc-books-filter-options {
+  padding-left: 10px;
+  line-height: 20px;
+}
+
+.dsc-books-filter-subtitle {
+  margin: 20px 0 5px;
+
+  &:first-of-type {
+    margin: 0 0 5px;
+  }
+}
