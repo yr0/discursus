@@ -15,12 +15,23 @@
 
 .dsc-books-filter-text {
   width: 100%;
+  padding: 0 5px;
   border: 1px solid $color-darker;
 }
 
 .dsc-books-filter-options {
   padding-left: 10px;
   line-height: 20px;
+
+  .selectize-dropdown, .selectize-input {
+    width: 100%;
+    border-radius: 1px;
+  }
+
+  .selectize-control.multi .selectize-input > div.active {
+    background: #efefef;
+    color: #333333;
+  }
 }
 
 .dsc-books-filter-subtitle {
@@ -29,4 +40,14 @@
   &:first-of-type {
     margin: 0 0 5px;
   }
+}
+
+.dsc-books-filter-actions {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dsc-book-filter-action {
+  width: 48%;
 }

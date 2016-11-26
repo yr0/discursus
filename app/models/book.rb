@@ -26,6 +26,16 @@ class Book < ApplicationRecord
   friendly_id :title, use: :slugged
   include Sluggable
 
+  searchable do
+    text :title, boost: 5.0
+    string(:order_title) { title.downcase }
+    text :description
+    time :created_at
+    double :main_price
+    integer :category_ids, multiple: true
+    integer :author_ids, multiple: true
+  end
+
   def self.all_categories
     ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' }).distinct
   end

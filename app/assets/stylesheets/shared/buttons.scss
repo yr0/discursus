@@ -15,6 +15,7 @@
   &:hover {
     border: 1px solid $button-hover-background;
     background: $button-hover-background;
+    text-decoration: none;
   }
 
   &.transparent {
@@ -27,6 +28,10 @@
 
   &.full-width {
     width: 100%;
-    margin: 20px 10px;
+  }
+
+  &.clear {
+    color: $color-darker;
+    background-color: transparent;
   }
 }

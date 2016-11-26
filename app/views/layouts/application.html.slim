@@ -8,10 +8,13 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
-  body
+  body data-scope="#{controller_name}.#{action_name}"
     = render 'shared/header'
     section.dsc-main-content
       == yield
     = render 'shared/footer'
     - if content_for?(:uses_spinner?)
       = render 'shared/spinner'
+    javascript:
+      window.i18n = #{raw_locale_hash(:admin_panel)};
+      window.i18n_locale = "#{I18n.locale}";

@@ -8,12 +8,14 @@
             notMainAmongSelector = 'input[type=checkbox]:not([data-main-among])';
 
         $(mainAmongSelector).each(function(){
-            var containerSelector = $(this).data('main-among');
+            var containerSelector = $(this).data('main-among'),
+                containerMainAmongSelector = containerSelector + ' ' + mainAmongSelector,
+                containerNotMainAmongSelector = containerSelector + ' ' + notMainAmongSelector;
 
-            $('body').on('click', containerSelector + ' ' + mainAmongSelector, function(){
-               $(notMainAmongSelector).prop('checked', false);
-            }).on('click', containerSelector + ' ' + notMainAmongSelector, function(){
-                $(mainAmongSelector).prop('checked', false);
+            $('body').on('click', containerMainAmongSelector, function(){
+               $(containerNotMainAmongSelector).prop('checked', false);
+            }).on('click', containerNotMainAmongSelector, function(){
+                $(containerMainAmongSelector).prop('checked', false);
             });
         });
     });

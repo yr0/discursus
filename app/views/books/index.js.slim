@@ -3,5 +3,5 @@
 - if @books.last_page?
   | $('.load-more-books').data('hide', 1);
 - else
-  | $('.load-more-books').prop('action', '#{books_path(page: @books.next_page)}');
+  | $('.load-more-books').prop('action', '#{books_path(params_with_search(@books))}');
 | $('.load-more-books').trigger('ajax:templateLoaded', { templateContainer: '.dsc-books-list-row' });

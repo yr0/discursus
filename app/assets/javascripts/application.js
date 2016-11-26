@@ -13,8 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require tooltipster.bundle.min
+//= require selectize.min
 //= require turbolinks
+//= require shared/general_functions
 //= require ajax_spinner
 //= require has_tooltipster
 //= require form_enter_submitted
 //= require checkbox_main_among
+//= require books

@@ -3,43 +3,52 @@
 .dsc-header.dsc-section-header
   h2.dsc-header-text = t('nav.books')
 .container-fluid.dsc-books-index-container
-  - if @books.any?
-    .row
-      .col-md-2
-        // filter/sort/search form
-        = form_for @search_query, url: books_path, method: :get do |f|
-          section.dsc-books-filter-section
-            .dsc-books-filter-section-title = t('books.sort')
-            .dsc-books-filter-section-body
+  .row
+    .col-md-2
+      // filter/sort/search form
+      = form_for @search_query, url: books_path, method: :get do |f|
+        section.dsc-books-filter-section
+          .dsc-books-filter-section-title = t('books.sort')
+          .dsc-books-filter-section-body
+            .dsc-books-filter-options
+              - %i(order_title main_price created_at).each do |field|
+                = render('sort_filter_option', field: field, f: f)
+        section.dsc-books-filter-section
+          .dsc-books-filter-section-title = t('books.filter')
+          .dsc-books-filter-section-body
+            .dsc-books-filter-subtitle = t('books.filter_by.title')
+            .dsc-books-filter-options
+              = f.text_field :text_query, class: 'dsc-books-filter-text'
+
+            - if @categories.any?
+              .dsc-books-filter-subtitle = t('books.filter_by.categories')
+              .dsc-books-filter-options#dscFilterCategories
+                .dsc-books-filter-option
+                  = f.check_box :search_all_categories, class: 'dsc-input-checkable',
+                          'data-main-among' => '#dscFilterCategories'
+                  = f.label :search_all_categories, t('books.all_categories'),
+                          class: 'dsc-label-checkable dsc-checkable-checkbox'
+                = f.collection_check_boxes(:category_ids, @categories, :id, :name) do |cb|
+                  = content_tag :div, class: 'dsc-books-filter-option' do
+                    = cb.check_box(class: 'dsc-input-checkable')
+                    = cb.label(class: 'dsc-label-checkable dsc-checkable-checkbox') { cb.text }
+
+            - if @authors.any?
+              .dsc-books-filter-subtitle = t('books.filter_by.authors')
               .dsc-books-filter-options
-                - %i(title price date).each do |field|
-                  = render('sort_filter_option', field: field, f: f)
-          section.dsc-books-filter-section
-            .dsc-books-filter-section-title = t('books.filter')
-            .dsc-books-filter-section-body
-              .dsc-books-filter-subtitle = t('books.filter_by.title')
-              .dsc-books-filter-options
-                = f.text_field :text_query, class: 'dsc-books-filter-text'
-              - if @categories.any?
-                .dsc-books-filter-subtitle = t('books.filter_by.categories')
-                .dsc-books-filter-options#dscFilterCategories
-                  .dsc-books-filter-option
-                    = f.check_box :search_all_categories, class: 'dsc-input-checkable',
-                            'data-main-among' => '#dscFilterCategories'
-                    = f.label :search_all_categories, t('books.all_categories'),
-                            class: 'dsc-label-checkable dsc-checkable-checkbox'
-                  = f.collection_check_boxes(:category_ids, @categories, :id, :name) do |cb|
-                    = content_tag :div, class: 'dsc-books-filter-option' do
-                      = cb.check_box(class: 'dsc-input-checkable')
-                      = cb.label(class: 'dsc-label-checkable dsc-checkable-checkbox') { cb.text }
+                = f.select :author_ids, @authors.map { |a| [a.name, a.id] }, { include_blank: true },
+                        id: 'filteredAuthors', multiple: true, class: 'dsc-filter-authors-select'
+
+        .dsc-books-filter-actions
+            = submit_tag t('apply'), class: 'dsc-button dsc-book-filter-action'
+            = link_to t('clear'), books_path, class: 'dsc-button clear  dsc-book-filter-action'
+    .col-md-10.container
+      - if @books.any?
+        .row.dsc-books-list-row
+          = render('list', books: @books)
+        - unless @books.last_page?
           .text-center
-            = submit_tag t('apply'), class: 'dsc-button full-width'
-      .col-md-10.container
-          .row
-            = render('list', books: @books)
-          - unless @books.last_page?
-            .text-center
-              = button_to t('load_more'), books_path(params_with_search(@books)), class: 'dsc-button large-margin',
-                      remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
-  - else
-    h4.text-center = t("books.no_books#{ '_found' if @search.present? }")
+            = button_to t('load_more'), books_path(params_with_search(@books)), class: 'dsc-button large-margin',
+                    remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
+      - else
+        h4.text-center = t("books.no_books#{ '_found' if @search.present? }")

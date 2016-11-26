@@ -15,10 +15,12 @@ uk:
     sort: Сортування
     filter: Фільтри
     sort_by:
-      title: За назвою
-      price: За ціною
-      date: За датою виходу
+      order_title: За назвою
+      main_price: За ціною
+      created_at: За датою виходу
     filter_by:
       title: За фрагментом назви чи опису
       categories: За категоріями
+      authors: За авторами
     all_categories: Усі категорії
+    authors_filter_placeholder: "Виберіть зі списку"
