@@ -1,16 +1,23 @@
-.dsc-card {
+.dsc-card-container {
   text-align: center;
   margin: 10px 0;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dsc-card {
   position: relative;
   width: 250px;
 
-  @media (max-width: 992px) {
-    width: 100%;
-  }
+  //@media (max-width: 992px) {
+  //  width: 100%;
+  //}
 
-  @media (min-width: 500px) and (max-width: 767px) {
-    padding: 0 20%;
-  }
+  //@media (min-width: 500px) and (max-width: 767px) {
+  //  padding: 0 20%;
+  //}
 }
 
 .dsc-card-image-container {

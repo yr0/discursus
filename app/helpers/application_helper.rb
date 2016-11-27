@@ -1,7 +1,8 @@
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
-      main: '/', books: '/books', news: '/articles', bookstores: '#', authors: '/authors', about_us: '#', contacts: '#'
+      home: '/', books: '/books', articles: '/articles', bookstores: '#', authors: '/authors', about_us: '/about_us',
+      contacts: '#'
   }.freeze
   VARIANTS_ICONS = {
       paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
@@ -11,11 +12,11 @@ module ApplicationHelper
     [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe
   end
 
-  def site_navigation(css_class_infix, active_li = :main)
+  def site_navigation(css_class_infix)
     content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
       NAVIGATION.each do |item_name, route|
         link_class = "dsc-#{css_class_infix}-nav-link"
-        link_class += ' active' if item_name == active_li
+        link_class += ' active' if item_name == controller_name
         concat content_tag(:li, link_to(I18n.t("nav.#{item_name}").gsub(' ', '&nbsp;').html_safe, url_for(route),
                                         class: link_class), class: "dsc-#{css_class_infix}-nav-item")
       end
@@ -54,7 +55,6 @@ module ApplicationHelper
   def params_with_search(records)
     result = { page: records.next_page }
     result.merge!(@search_query.to_param) if @search_query.try(:nonempty?)
-    # p result
     result
   end
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :books, only: %i(index show)
   resources :authors, only: %i(index show)
   resources :articles, only: %i(index show)
+  get 'about_us', to: 'about_us#index'
 
   devise_for :users
 

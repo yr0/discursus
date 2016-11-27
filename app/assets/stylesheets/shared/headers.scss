@@ -16,6 +16,17 @@
   }
 }
 
+.dsc-header-secondary {
+  border-bottom: 1px solid $gray;
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+
+  .dsc-header-text {
+    color: $black;
+  }
+}
+
 // do not display main header on screens less than 400px
 //@media (max-width: 400px) {
 //  &.dsc-main-header {
