@@ -14,9 +14,12 @@ uk:
   uah: грн
   sold: Продано
   see: Глянути
-  favorite: Додати до улюблених
+  add_to_favorites: Додати до улюблених
   buy: Придбати
   apply: Застосувати
   clear: Очистити
   search_hint: "Уведіть хоча б 3 літери та натисніть Enter, щоб почати пошук"
   click_to_change_order: "Натисніть для зміни порядку"
+  uah: грн
+  share: Поділитися
+  see_also: Дивіться також

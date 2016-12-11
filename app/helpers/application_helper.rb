@@ -6,7 +6,7 @@ module ApplicationHelper
   }.freeze
   VARIANTS_ICONS = {
       paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
-  }
+  } # '\f02d' - book, '\f10a' - tablet, '\f025' - headphones
 
   def years_active
     [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe
@@ -26,7 +26,7 @@ module ApplicationHelper
   def readable_price(price, show_fractions = true)
     price ||= 0
     fractions = show_fractions ? 2 : 0
-    sprintf("₴%.0#{fractions}f", price)
+    sprintf("%.0#{fractions}f грн", price)
   end
 
   def readable_date(date, show_time = false)

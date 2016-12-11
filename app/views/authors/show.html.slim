@@ -10,5 +10,5 @@
     .row
       .col-xs-12.dsc-show-page-subheader
         h4 = t('authors.authored_books')
-      .col-sx-12
+      .col-xs-12
         .row = render('books/list', books: @author.books.limit(4))

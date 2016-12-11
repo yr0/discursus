@@ -1,3 +1,7 @@
+label {
+  font-weight: normal; // override bootstrap setting
+}
+
 .dsc-form-errors {
   color: $red;
   margin: 10px 0;

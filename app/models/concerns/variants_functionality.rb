@@ -1,8 +1,8 @@
 ##
 # A note on variants. A book can have many variants (paperback, hardcover, ebook, audio), but we don't need
-# to track the amount of books for each variant. Basically the variants only differ in price, files for digital
+# to track the amount of books for each variant. Basically the variants only differ in price. Files for digital
 # versions can easily be stored within one model. So we opted out of different table for variants and different models
-# for each variant. The variants are stored in a postgres :json field of structure { variant_name => price }
+# for each variant. The variants are stored in a postgres :json field structured as { variant_name => price }
 # If we ever need to store the variants in different models, we can easily migrate to that structure leaving the json
 # field to save the database queries where possible.
 module VariantsFunctionality
@@ -20,7 +20,8 @@ module VariantsFunctionality
   def variants=(variants_hash)
     self.available_variants = variants_hash.select do |k, v|
       v['is_available'].to_i.nonzero? && VARIANT_TYPES.include?(k)
-    end.map { |k, v| [k, v['price'].to_i] }.to_h
+    end.map { |k, v| [k, v['price'].to_f] }.to_h
+    self.is_available = available_variants.any?
   end
 
   private

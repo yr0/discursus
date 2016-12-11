@@ -1,0 +1,39 @@
+.dsc-book-buy-block
+  = form_tag books_path do
+    input#bookVariantsCheckbox.dsc-book-variants-checkbox type='checkbox'
+    - if @book.available_variants.present?
+      - @book.available_variants.keys.each.with_index do |name, i|
+        | <input class="dsc-book-variants-radio-#{name} dsc-book-variants-radio" #{ 'checked' if i.zero? }
+          id="bookVariantsRadio#{name}" type="radio"
+          name="variant" value="#{name}" />
+    .dsc-book-price-variants-block
+      - if @book.is_available?
+        - @book.available_variants.each do |name, price|
+          .dsc-books-variants-main-price-container.text-center class="dsc-variant-price-#{name}"
+            span.dsc-book-numerical-price  = price.to_i
+            | &nbsp;
+            span.dsc-book-currency = t(Rails.configuration.default_currency)
+            .dsc-book-selected-variant-desc.text-center
+              = t("books.variant_selected.#{name}").html_safe
+        - if @book.available_variants.size > 1
+          .dsc-book-variants-label-container
+            label.dsc-book-select-other-variants [for='bookVariantsCheckbox'
+              title="#{t('books.you_can_select_other_variant')}"]
+              span.dsc-book-select-other-variants-text = t('books.available_variants')
+      - else
+        h5 = t('books.unavailable')
+    .dsc-book-side-buttons-block
+      .dsc-book-other-variants
+        - @book.available_variants.to_h.each do |name, price|
+          label.dsc-book-variant-row class="dsc-book-variant-row-#{name}"  for="bookVariantsRadio#{name}"
+            / if you click any variant, the dropdown must close
+            .dsc-book-variant-label-with-icon class="dsc-book-variant-#{name}" = t("books.variants.#{name}")
+            .dsc-book-variant-price = readable_price(price, false)
+      .dsc-book-side-buttons
+        - if @book.is_available?
+          button.dsc-book-side-button.main type="submit"
+            = fa_icon('shopping-basket', text: t('buy'), class: 'action-icon')
+        button.dsc-book-side-button
+          = fa_icon('file-o', text: t('books.read_fragment'), class: 'action-icon')
+        button.dsc-book-side-button
+          = fa_icon('heart-o', text: t('add_to_favorites'), class: 'action-icon')

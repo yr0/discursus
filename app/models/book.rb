@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   mount_uploader :ebook_file, PdfUploader
   mount_uploader :audio_file, AudioUploader
 
-  default_scope { order(created_at: :desc) }
+  default_scope { order(is_available: :desc, created_at: :desc) }
 
   acts_as_taggable_on :categories
 

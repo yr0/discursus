@@ -13,9 +13,12 @@ $green: #91b806;
 $sidenav-header-size: 36px;
 $main-caption-size: 24px;
 $block-caption-size: 18px;
-$text-size: 11px;
-$button-text-size: 11px;
+$text-size: 12px;
+$button-text-size: 12px;
 $global-border-radius: 3px;
 // cards with actions
 $card-height: 340px;
 $image-container-height: $card-height - 100px;
+
+// app-logic related variables
+$available-variants: (paperback hardcover ebook audio);

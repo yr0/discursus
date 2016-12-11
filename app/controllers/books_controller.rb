@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
 
   def index
     load_categories
@@ -8,8 +8,10 @@ class BooksController < ApplicationController
     @search = Book.search &@search_query.to_sunspot(params[:page])
     @books = @search.results
 
-    # @books = @books.page(params[:page]).per(8)
     respond_to :html, :js
+  end
+
+  def show
   end
 
   private

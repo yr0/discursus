@@ -1,0 +1,162 @@
+.dsc-book-buy-container {
+  padding: 0;
+}
+
+.dsc-book-buy-block {
+  width: 100%;
+
+  .dsc-book-price-variants-block {
+    background-color: $color-darker;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: $white;
+    padding: 10px 0;
+
+    .dsc-books-variants-main-price-container {
+      display: none;
+    }
+
+    .dsc-book-numerical-price {
+      font-size: 8rem;
+    }
+
+    .dsc-book-currency {
+      font-size: 2rem;
+    }
+
+    .dsc-book-select-other-variants {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: $color-lighter;
+      border: 1px solid $white;
+      text-align: center;
+    }
+
+    .dsc-book-select-other-variants-text {
+      font-size: 1.3rem;
+    }
+
+    .dsc-book-selected-variant-desc {
+      font-size: 1.5rem;
+    }
+
+    .dsc-book-variants-label-container {
+      margin-top: 20px;
+    }
+
+    .dsc-book-select-other-variants-text:after {
+      content: '\f078';
+      font-family: 'FontAwesome';
+      margin-left: 5px;
+    }
+  }
+}
+
+.dsc-book-buy-block .dsc-book-other-variants {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  color: $black;
+  width: 100%;
+  max-height: 0;
+  background: $white;
+  transition: max-height 0s; // hide immediately
+  overflow: hidden;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+
+  .dsc-book-variant-row {
+    cursor: pointer;
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    font-size: 20px;
+
+    .dsc-book-variant-price {
+      color: $color-darker;
+    }
+
+    .dsc-book-variant-label-with-icon:before {
+      font-family: 'FontAwesome';
+      margin-right: 10px;
+    }
+
+    .dsc-book-variant-paperback:before,
+    .dsc-book-variant-hardcover:before {
+      content: '\f02d';
+    }
+
+    .dsc-book-variant-ebook:before {
+      content: '\f10a';
+    }
+
+    .dsc-book-variant-audio:before {
+      content: '\f025';
+    }
+  }
+}
+
+// .dsc-book-variants-checkbox plays only cosmetic function for hiding/showing the drop-down with variants
+.dsc-book-buy-block .dsc-book-variants-checkbox {
+  @include existing-yet-invisible;
+
+  &:checked ~ .dsc-book-side-buttons-block .dsc-book-other-variants {
+    transition: max-height 0.55s ease-in;
+    max-height: 500px;
+  }
+
+  &:checked ~ .dsc-book-price-variants-block .dsc-book-select-other-variants-text:after {
+    content: '\f077';
+  }
+}
+
+// .dsc-book-variants-radio is used when sending the form to add certain variant to cart and to show/hide
+// the corresponding variant data
+.dsc-book-buy-block .dsc-book-variants-radio {
+  @include existing-yet-invisible;
+
+  @each $variant in $available-variants {
+    &:checked.dsc-book-variants-radio-#{$variant} {
+      & ~ .dsc-book-price-variants-block .dsc-variant-price-#{$variant} {
+        display: block;
+      }
+
+      & ~ .dsc-book-side-buttons-block .dsc-book-variant-row-#{$variant} {
+        display: none;
+      }
+    }
+  }
+}
+
+.dsc-book-buy-block .dsc-book-side-buttons-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom: 2px solid $color-darker;
+  padding: 10px 20px;
+
+  .dsc-book-side-button {
+    font-size: 1.3rem;
+    width: 100%;
+    margin: 5px 0;
+    border: 1px solid $color-darker;
+    background-color: transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: $color-darker;
+
+    &.main {
+      background-color: $color-darker;
+      color: $white;
+    }
+
+    .action-icon {
+      margin-right: 5px;
+    }
+  }
+}

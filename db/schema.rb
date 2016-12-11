@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103071447) do
+ActiveRecord::Schema.define(version: 20161210141952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,12 +77,13 @@ ActiveRecord::Schema.define(version: 20161103071447) do
     t.integer  "pages_amount"
     t.string   "cover_type"
     t.decimal  "main_price",         precision: 8, scale: 2
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.json     "available_variants"
     t.string   "ebook_file"
     t.string   "audio_file"
     t.string   "slug"
+    t.boolean  "is_available",                               default: false
     t.index ["slug"], name: "index_books_on_slug", unique: true, using: :btree
   end
 

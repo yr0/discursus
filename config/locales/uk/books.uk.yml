@@ -24,3 +24,14 @@ uk:
       authors: За авторами
     all_categories: Усі категорії
     authors_filter_placeholder: "Виберіть зі списку"
+    # show
+    available_variants: Доступні варіанти
+    unavailable: Книги поки що немає
+    variant_selected:
+      paperback: "За книгу <strong>з м'якою обкладинкою</strong>"
+      hardcover: "За книгу <strong>з твердою обкладинкою</strong>"
+      ebook: "За <strong>електронну</strong> книгу"
+      audio: "За <strong>аудіокнигу</strong>"
+    you_can_select_other_variant: "Ви можете обрати інший варіант книги і придбати його"
+    read_fragment: Читати уривок
+    author: Автор

@@ -1,0 +1,45 @@
+.dsc-book-show-container {
+  margin: 20px 0;
+
+  @media (min-width: 1300px) {
+    margin: 20px 10%;
+  }
+}
+
+.dsc-book-images-container {
+  padding: 0;
+
+  .dsc-book-main-image-container {
+    width: 100%;
+    min-height: 400px;
+    border: 1px solid $color-darker;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .dsc-book-main-image {
+    width: 100%;
+  }
+}
+
+.dsc-book-info {
+  padding: 0 30px;
+
+  .dsc-book-field-name {
+    color: $color-darker;
+  }
+
+  .dsc-book-description {
+    margin-top: 10px;
+  }
+
+  .dsc-book-share-block {
+    margin-top: 30px;
+
+    .dsc-book-share-icon {
+      margin-right: 10px;
+      color: $color-darker;
+    }
+  }
+}
