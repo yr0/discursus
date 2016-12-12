@@ -1,5 +1,5 @@
 module BooksHelper
-  AVAILABLE_SHARE_PROVIDERS = %w(facebook twitter vk)
+  AVAILABLE_SHARE_PROVIDERS = %w(facebook twitter vk).freeze
 
   def share_icons_for(_book)
     AVAILABLE_SHARE_PROVIDERS.each do |provider|

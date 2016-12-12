@@ -2,6 +2,8 @@ module AdminPanel
   module AdminPanelHelper
     NAVIGATION = %w(books authors articles team_members bookstores).freeze
 
+    # Provided data is completely isolated from user input
+    # rubocop:disable Rails/OutputSafety
     def admin_navigation
       content_tag :ul, class: 'sidebar-menu' do
         NAVIGATION.each do |item_name|
@@ -11,6 +13,7 @@ module AdminPanel
         end
       end
     end
+    # rubocop:enable Rails/OutputSafety
 
     def within_controller?(name)
       controller_name == name.to_s

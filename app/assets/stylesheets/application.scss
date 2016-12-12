@@ -1,6 +1,7 @@
 // vendor
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'gritter';
 @import 'font-awesome';
 @import 'tooltipster.bundle.min';
 @import 'selectize';
@@ -11,6 +12,7 @@
 @import 'mixins/**/*';
 @import 'shared/**/*';
 @import 'books/**/*';
+@import 'orders/**/*';
 @import 'articles';
 @import 'authors';
 @import 'about_us';

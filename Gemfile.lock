@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.11.0)
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
       nio4r (~> 1.2)
@@ -276,6 +277,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   acts-as-taggable-on (~> 4.0)
   acts_as_list (~> 0.8)
   autoprefixer-rails (~> 6.4)

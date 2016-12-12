@@ -1,0 +1,11 @@
+uk:
+  orders:
+    errors:
+      variant_unavailable: Цей варіант книги недоступний
+      variant_is_bought_once: Цей варіант книги не потрібно купувати двічі
+    populated: Книгу додано до кошика
+    cart:
+      empty: Ваш кошик порожній
+      short_description:
+        total_items: "Усього позицій:"
+        total_sum: "на загальну суму"

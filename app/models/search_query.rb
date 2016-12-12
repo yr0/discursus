@@ -15,9 +15,10 @@ class SearchQuery
     self.order_field ||= DEFAULT_ORDER_FIELD
   end
 
+  # rubocop:disable Metrics/AbcSize - we pass this block to search query
   def to_sunspot(page = 1)
-    Proc.new do
-      order_by *order_conditions
+    proc do
+      order_by(*order_conditions)
       paginate page: page, per_page: RESULTS_PER_PAGE
 
       fulltext(text_query) if text_query.present?
@@ -39,8 +40,9 @@ class SearchQuery
   end
 
   def nonempty?
-    [text_query, category_ids, price_range, author_ids].any?(&:present?) || order_field != DEFAULT_ORDER_FIELD ||
-        order_by_desc != DEFAULT_ORDER_BY_DESC
+    [text_query, category_ids, price_range, author_ids].any?(&:present?) ||
+      order_field != DEFAULT_ORDER_FIELD ||
+      order_by_desc != DEFAULT_ORDER_BY_DESC
   end
 
   def to_param

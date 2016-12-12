@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :articles, only: %i(index show)
   get 'about_us', to: 'about_us#index'
 
+  scope :orders, controller: :orders do
+    post 'populate'
+  end
+
   devise_for :users
 
   devise_for :admins

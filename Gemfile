@@ -64,6 +64,8 @@ gem 'acts_as_list', '~> 0.8'
 gem 'acts-as-taggable-on', '~> 4.0'
 # full text search with apache solr
 gem 'sunspot_rails'
+# finite state machines
+gem 'aasm'
 
 # friendly urls
 gem 'friendly_id', '~> 5.1'

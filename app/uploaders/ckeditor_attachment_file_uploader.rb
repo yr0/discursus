@@ -19,7 +19,7 @@ class CkeditorAttachmentFileUploader < CarrierWave::Uploader::Base
   end
 
   def url(options = {})
-    super(options).sub(/\A\/public\//, '/')
+    super(options).sub(%r{\A\/public\/}, '/')
   end
 
   def cache_dir

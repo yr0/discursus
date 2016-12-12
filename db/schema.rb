@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210141952) do
+ActiveRecord::Schema.define(version: 20161211110728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,38 @@ ActiveRecord::Schema.define(version: 20161210141952) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "order_id"
+    t.string  "variant"
+    t.decimal "price",    precision: 8, scale: 2
+    t.integer "quantity"
+    t.index ["book_id"], name: "index_line_items_on_book_id", using: :btree
+    t.index ["order_id"], name: "index_line_items_on_order_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "customer_type"
+    t.string   "aasm_state"
+    t.text     "failure_comment"
+    t.decimal  "total",                    precision: 8, scale: 2
+    t.string   "payment_method"
+    t.string   "external_payment_id"
+    t.decimal  "external_commissions",     precision: 8, scale: 2
+    t.string   "phone"
+    t.string   "email"
+    t.string   "full_name"
+    t.string   "shipment_method"
+    t.string   "shipping_service"
+    t.string   "shipping_service_details"
+    t.text     "shipping_address"
+    t.text     "comment"
+    t.datetime "completed_at"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.string   "taggable_type"
@@ -146,6 +178,13 @@ ActiveRecord::Schema.define(version: 20161210141952) do
     t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "temporary_users", force: :cascade do |t|
+    t.string   "uuid"
+    t.datetime "last_active_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|

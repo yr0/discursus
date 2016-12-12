@@ -7,7 +7,7 @@ nav.dsc-icons-nav
       - unless view_within_controller?('books')
         label.dsc-icons-nav-search-label for="#{search_flag_id}"
           = fa_icon(:search)
-    li.dsc-nav-icon
-      a [href] = fa_icon('shopping-basket')
+    li.dsc-nav-icon.dsc-icons-nav-cart-container
+      = render('shared/nav/short_cart')
     li.dsc-nav-icon
       a [href] = fa_icon(:user)

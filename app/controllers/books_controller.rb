@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     load_categories
     load_authors
     initialize_search_query
-    @search = Book.search &@search_query.to_sunspot(params[:page])
+    @search = Book.search(&@search_query.to_sunspot(params[:page]))
     @books = @search.results
 
     respond_to :html, :js
@@ -31,8 +31,8 @@ class BooksController < ApplicationController
 
   def search_query_params
     return {} unless params[:search_query].present?
-    params.require(:search_query).permit(:order_field, :text_query, :search_all_categories, author_ids: [],
-                                         category_ids: [], price_range: [],
+    params.require(:search_query).permit(:order_field, :text_query, :search_all_categories,
+                                         author_ids: [], category_ids: [], price_range: [],
                                          order_by_desc: [:order_title, :main_price, :created_at])
   end
 end

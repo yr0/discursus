@@ -1,17 +1,15 @@
 class Book < ApplicationRecord
-  include VariantsFunctionality
-
-  before_save :update_price_from_variants, if: :available_variants_changed?
+  include VariantsFunctionality # before_save, validate
 
   validates :title, presence: true, length: { minimum: 1, maximum: 250 }
   validates :pages_amount, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { maximum: 10_000 }
-  # validate :variants_must_contain_valid_data
 
   has_many :authors_books
   has_many :authors, through: :authors_books
   has_many :extra_images, class_name: 'BookExtraImage'
-  accepts_nested_attributes_for :extra_images, reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },
+  accepts_nested_attributes_for :extra_images,
+                                reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },
                                 allow_destroy: true
 
   mount_uploader :image, ImageUploader
@@ -31,6 +29,7 @@ class Book < ApplicationRecord
     string(:order_title) { title.downcase }
     text :description
     time :created_at
+    boolean :is_available
     double :main_price
     integer :category_ids, multiple: true
     integer :author_ids, multiple: true

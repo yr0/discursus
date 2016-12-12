@@ -1,5 +1,6 @@
 .dsc-book-buy-block
-  = form_tag books_path do
+  = form_tag populate_path, remote: true do
+    = hidden_field_tag(:book_id, @book.id)
     input#bookVariantsCheckbox.dsc-book-variants-checkbox type='checkbox'
     - if @book.available_variants.present?
       - @book.available_variants.keys.each.with_index do |name, i|

@@ -1,0 +1,15 @@
+a.dsc-cart-icon.has-tooltipster [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
+  data-tooltip-content='.dsc-small-cart-contents' class="#{' active' if current_order&.items?}"]
+  = fa_icon('shopping-basket')
+.dsc-cart-hidden-contents
+  span.dsc-small-cart-contents
+    - if current_order&.items?
+      = t('orders.cart.short_description.total_items')
+      | &nbsp;
+      span.dsc-small-cart-numbers = current_order.line_items.size
+      br
+      = t('orders.cart.short_description.total_sum')
+      | &nbsp;
+      span.dsc-small-cart-numbers = readable_price current_order.total
+    - else
+      = t('orders.cart.empty')

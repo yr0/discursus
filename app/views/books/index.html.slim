@@ -42,7 +42,7 @@
         .dsc-books-filter-actions
             = submit_tag t('apply'), class: 'dsc-button dsc-book-filter-action'
             = link_to t('clear'), books_path, class: 'dsc-button clear  dsc-book-filter-action'
-    .col-md-10.container
+    .col-md-10
       - if @books.any?
         .row.dsc-books-list-row
           = render('list', books: @books)

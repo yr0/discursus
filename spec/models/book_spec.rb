@@ -4,10 +4,8 @@ describe Book, type: :model do
     let(:variants) { { Book::VARIANT_TYPES.first => 2, Book::VARIANT_TYPES.second => 2 } }
     let(:reverse_order_variants) { { Book::VARIANT_TYPES.last => 100, Book::VARIANT_TYPES.first => expected_price } }
     let(:form_variants) do
-      {
-          Book::VARIANT_TYPES.first => { 'is_available' => 1, 'price' => expected_price },
-          Book::VARIANT_TYPES.second => { 'is_available' => 0, 'price' => 2 }
-      }
+      { Book::VARIANT_TYPES.first => { 'is_available' => 1, 'price' => expected_price },
+        Book::VARIANT_TYPES.second => { 'is_available' => 0, 'price' => 2 } }
     end
 
     let(:form_variants_transformed) { { Book::VARIANT_TYPES.first => expected_price } }

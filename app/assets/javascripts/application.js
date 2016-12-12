@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require gritter
 //= require tooltipster.bundle.min
 //= require selectize.min
 //= require turbolinks
@@ -22,3 +23,7 @@
 //= require checkbox_main_among
 //= require books
 //= require book
+
+$.extend($.gritter.options, {
+    position: 'top-left'
+});
