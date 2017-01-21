@@ -2,6 +2,8 @@
   h2.dsc-header-text = t('orders.your_order')
 .dsc-order-container
   - if current_order.items?
+    input#elementsSwitcher.dsc-orders-elements-switcher type="checkbox"
     = render('orders/cart_table')
+    = render('orders/order_steps')
   - else
     h4.text-center = t('.empty')

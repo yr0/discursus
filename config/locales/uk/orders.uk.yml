@@ -1,6 +1,9 @@
 uk:
   orders:
+    start_order: Оформити замовлення
     your_order: Ваше замовлення
+    enter_data_or: Уведіть Ваші контактні дані або
+    authorize: Авторизуйтеся
     errors:
       variant_unavailable: Цей варіант книги недоступний
       variant_is_bought_once: Цей варіант книги не потрібно купувати двічі

@@ -1,40 +1,56 @@
-table.dsc-cart-table
-  thead
-    tr
-      th.dsc-th-image
-      th.dsc-th-title = t('attributes.title')
-      th.dsc-th-kind = t('orders.cart.book_kind')
-      - if current_order.line_items.physical.any?
-        th.dsc-th-quantity = t('orders.cart.quantity')
-      th.dsc-th-price = t('orders.cart.sum')
-      th.dsc-th-actions
-  tbody
-    - current_order.line_items.includes(:book).each do |item|
-      tr.spacer
-        td colspan=6
+.dsc-switchable-cart-closed
+  .dsc-orders-section-title
+    = t('orders.cart.short_description.total_items')
+    | &nbsp;
+    strong
+      = current_order.line_items.size
+    | &nbsp;
+    = t('orders.cart.short_description.total_sum')
+    | &nbsp;
+    strong
+      = readable_price current_order.total
+    | &emsp;(
+    label.dsc-cart-table-unfold for="elementsSwitcher" = t('unfold')
+    | )
+.dsc-switchable-cart
+  table.dsc-cart-table
+    thead
       tr
-        td.text-center.dsc-small-padding.dsc-orders-book-image = image_tag(item.book.image.url(:small))
-        td.dsc-bordered-right
-          .dsc-orders-item-title = item.book.title
-          .dsc-orders-item-description = truncate(strip_tags(item.book.description), length: 100, separator: ' ')
-        td.dsc-bordered-right colspan="#{ item.digital? ? 2 : 1 }"
-          .dsc-orders-kind-container
-            .dsc-kind-with-icon class="dsc-kind-#{ item.variant }"
-            .dsc-kind-name = t("books.variants.#{item.variant}")
-        - unless item.digital?
-          td.text-center.dsc-bordered-right.dsc-small-padding
-            = link_to fa_icon('minus'), root_path, class: 'dsc-orders-modify-quantity'
-            input.dsc-orders-item-quantity value="#{item.quantity}"
-            = link_to fa_icon('plus'), root_path, class: 'dsc-orders-modify-quantity'
-            .dsc-orders-item-before-price = fa_icon('times')
-            .dsc-orders-item-one-price = readable_price(item.price, false)
-        td.text-center.dsc-orders-sum = readable_price(item.total, false)
-        td.text-center.dsc-orders-delete-item-cell = link_to fa_icon('times'), root_path
-      tr.spacer.bordered
-        td colspan=6
-.dsc-orders-total-container
-  = t('orders.cart.total')
-  | :&nbsp;
-  span.dsc-orders-total-price = readable_price(current_order.total, false, false)
-  | &nbsp;
-  = t(Rails.configuration.default_currency)
+        th.dsc-th-image
+        th.dsc-th-title = t('attributes.title')
+        th.dsc-th-kind = t('orders.cart.book_kind')
+        - if current_order.line_items.physical.any?
+          th.dsc-th-quantity = t('orders.cart.quantity')
+        th.dsc-th-price = t('orders.cart.sum')
+        th.dsc-th-actions
+    tbody
+      - current_order.line_items.includes(:book).each do |item|
+        tr.spacer
+          td colspan=6
+        tr
+          td.text-center.dsc-small-padding.dsc-orders-book-image = image_tag(item.book.image.url(:small))
+          td.dsc-bordered-right
+            = link_to item.book.title, book_path(item.book.friendly_id), class: 'dsc-orders-item-title'
+            .dsc-orders-item-description = truncate(strip_tags(item.book.description), length: 100, separator: ' ')
+          td.dsc-bordered-right colspan="#{ item.digital? ? 2 : 1 }"
+            .dsc-orders-kind-container
+              .dsc-kind-with-icon class="dsc-kind-#{ item.variant }"
+              .dsc-kind-name = t("books.variants.#{item.variant}")
+          - unless item.digital?
+            td.text-center.dsc-bordered-right.dsc-small-padding
+              = link_to fa_icon('minus'), root_path, class: 'dsc-orders-modify-quantity'
+              input.dsc-orders-item-quantity value="#{item.quantity}"
+              = link_to fa_icon('plus'), root_path, class: 'dsc-orders-modify-quantity'
+              .dsc-orders-item-before-price = fa_icon('times')
+              .dsc-orders-item-one-price = readable_price(item.price, false)
+          td.text-center.dsc-orders-sum = readable_price(item.total, false)
+          td.text-center.dsc-orders-delete-item-cell = link_to fa_icon('times'), root_path
+        tr.spacer.bordered
+          td colspan=6
+  .dsc-orders-total-container
+    .dsc-orders-total-area
+      = t('orders.cart.total')
+      | &emsp;
+      span.dsc-orders-total-price = readable_price(current_order.total, false, false)
+      | &nbsp;
+      = t(Rails.configuration.default_currency)

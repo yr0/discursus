@@ -3,7 +3,8 @@ module OrdersFunctionality
     def populate!(book_id, variant, quantity = 1)
       book = get_book_if_available(book_id, variant)
       line_item = line_items.find_or_initialize_by(book: book, variant: variant)
-      raise ActiveRecord::RecordNotSaved, I18n.t('orders.errors.variant_is_bought_once') if cannot_buy_twice?(line_item)
+      raise ActiveRecord::RecordNotSaved, I18n.t('orders.errors.variant_is_bought_once') if
+          quantity > 0 && cannot_buy_twice?(line_item)
       line_item.assign_attributes(quantity: line_item.quantity.to_i + quantity, price: book.price_of(variant))
       line_item.save!
     end

@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   def cart
   end
 
+  # params: :book_id, :variant, :subtract (default false), :quantity (default 1)
   def populate
     current_order.populate!(params[:book_id], params[:variant])
   end

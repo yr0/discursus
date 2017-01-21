@@ -1,0 +1,14 @@
+.dsc-switchable-orders-closed
+  .text-center
+    label.dsc-button.dsc-primary-action.large-margin for="elementsSwitcher"
+      = t('orders.start_order')
+.dsc-switchable-orders
+  .dsc-orders-section-title.dsc-title-primary
+    h4 = t('orders.start_order')
+  .dsc-orders-first-step-container
+    h4
+      = t('orders.enter_data_or')
+      | &nbsp;
+      = link_to root_path, t('orders.authorize')
+
+
