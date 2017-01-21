@@ -1,10 +1,7 @@
-.dsc-cart-hidden-contents {
-  display: none;
-}
+.dsc-order-container {
+  margin: 20px 0;
 
-.dsc-small-cart-contents {
-  .dsc-small-cart-numbers {
-    font-size: 1.5rem;
-    font-weight: bold;
+  @media (min-width: 1300px) {
+    margin: 20px 10%;
   }
 }

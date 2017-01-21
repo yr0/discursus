@@ -1,0 +1,142 @@
+.dsc-cart-table {
+  width: 100%;
+
+  th {
+    font-weight: normal;
+    font-size: 1.2em;
+    padding: 15px 20px;
+    background-color: $gray;
+    color: $white;
+    text-align: center;
+  }
+
+  .dsc-th-image {
+    width: 5%;
+  }
+
+  .dsc-th-title {
+    width: 44%;
+    text-align: left;
+  }
+
+  .dsc-th-kind {
+    width: 20%;
+  }
+
+  .dsc-th-quantity {
+    width: 10%;
+  }
+
+  .dsc-th-price {
+    width: 15%;
+  }
+
+  .dsc-th-actions {
+    padding: 0;
+    width: 20px;
+  }
+
+  tr.spacer {
+    height: 25px;
+
+    &.bordered {
+      border-bottom: 2px solid $gray;
+    }
+  }
+
+  .dsc-orders-book-image {
+    max-height: 100px;
+  }
+
+  td {
+    font-size: 1.4em;
+    padding: 0 20px;
+
+    &.dsc-bordered-right {
+      border-right: 2px solid $gray;
+    }
+
+    &.dsc-small-padding {
+      padding: 0 5px;
+    }
+  }
+
+  .dsc-orders-item-title {
+    font-size: larger;
+    color: $color-darker;
+    margin-bottom: 10px;
+  }
+
+  .dsc-orders-item-description {
+    font-size: smaller;
+  }
+
+  .dsc-orders-delete-item-cell {
+    padding: 0 5px;
+    background-color: $gray;
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
+  .dsc-orders-kind-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .dsc-kind-with-icon {
+    font-size: 2em;
+    content: '';
+  }
+
+  .dsc-kind-name {
+    font-size: 1.4em;
+  }
+
+  .dsc-kind-with-icon:before {
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    color: $color-darker;
+  }
+
+  .dsc-kind-paperback:before,
+  .dsc-kind-hardcover:before {
+    content: '\f02d';
+  }
+
+  .dsc-kind-ebook:before {
+    content: '\f10a';
+  }
+
+  .dsc-kind-audio:before {
+    content: '\f025';
+  }
+
+  .dsc-orders-item-quantity {
+    margin: 0 10px;
+    width: 35px;
+    padding: 5px;
+  }
+
+  .dsc-orders-modify-quantity {
+    color: $color-darker;
+    text-decoration: none;
+  }
+
+  .dsc-orders-item-before-price {
+    margin-top: 10px;
+    color: $color-darker;
+  }
+
+  .dsc-orders-item-one-price {
+    margin-top: 10px;
+    font-size: inherit;
+  }
+
+  .dsc-orders-sum {
+    font-size: 1.6em;
+    color: $color-darker;
+  }
+}

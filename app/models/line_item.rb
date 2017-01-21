@@ -10,4 +10,12 @@ class LineItem < ApplicationRecord
 
   # recalculate total order sum after creation, updating, or deletion
   after_commit -> { order.recalculate_total }
+
+  def digital?
+    ebook? || audio?
+  end
+
+  def total
+    price * quantity
+  end
 end

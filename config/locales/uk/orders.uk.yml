@@ -1,11 +1,19 @@
 uk:
   orders:
+    your_order: Ваше замовлення
     errors:
       variant_unavailable: Цей варіант книги недоступний
       variant_is_bought_once: Цей варіант книги не потрібно купувати двічі
     populated: Книгу додано до кошика
     cart:
+      quantity_for_price: по
       empty: Ваш кошик порожній
+      book_kind: Тип книги
+      quantity: "Кількість, ціна"
+      sum: Сума
+      total: "Разом"
+      total_books: "Разом за книги"
       short_description:
+        go_to_cart: Переглянути замовлення
         total_items: "Усього позицій:"
         total_sum: "на загальну суму"

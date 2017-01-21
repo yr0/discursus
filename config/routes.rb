@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'about_us', to: 'about_us#index'
 
   scope :orders, controller: :orders do
+    get 'cart'
     post 'populate'
   end
 

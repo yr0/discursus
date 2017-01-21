@@ -26,10 +26,12 @@ module ApplicationHelper
   end
   # rubocop:enable Rails/OutputSafety
 
-  def readable_price(price, show_fractions = true)
+  def readable_price(price, show_fractions = true, show_currency = true)
     price ||= 0
-    fractions = show_fractions ? 2 : 0
-    format("%.0#{fractions}f грн", price)
+    # hide fractions only if price has no fraction part and the show_fractions is set to false
+    fractions = (show_fractions || price % 1 != 0) ? 2 : 0
+    currency = show_currency ? " #{t(Rails.configuration.default_currency)}" : ''
+    format("%.0#{fractions}f%s", price, currency)
   end
 
   def readable_date(date, show_time = false)
@@ -66,8 +68,8 @@ module ApplicationHelper
     result
   end
 
-  def view_within_controller?(*names)
-    names.map(&:to_s).include?(controller_name)
+  def view_within_controller?(*names, **options)
+    names.map(&:to_s).include?(controller_name) && (options[:actions].empty? || options[:actions].include?(action_name))
   end
 
   def search_url_from_controller

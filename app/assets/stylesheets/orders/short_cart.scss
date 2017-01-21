@@ -1,0 +1,25 @@
+.dsc-cart-icon {
+  cursor: pointer;
+
+  &.active .fa {
+    color: $green;
+  }
+}
+
+.dsc-cart-hidden-contents {
+  display: none;
+}
+
+.dsc-small-cart-contents {
+  .dsc-small-cart-numbers {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .dsc-small-cart-link {
+    display: block;
+    color: $white;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}

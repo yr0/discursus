@@ -11,7 +11,7 @@
       - if @book.is_available?
         - @book.available_variants.each do |name, price|
           .dsc-books-variants-main-price-container.text-center class="dsc-variant-price-#{name}"
-            span.dsc-book-numerical-price  = price.to_i
+            span.dsc-book-numerical-price  = readable_price(price, false, false)
             | &nbsp;
             span.dsc-book-currency = t(Rails.configuration.default_currency)
             .dsc-book-selected-variant-desc.text-center

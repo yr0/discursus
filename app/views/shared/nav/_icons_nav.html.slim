@@ -4,7 +4,7 @@ nav.dsc-icons-nav
       title="#{t('search_hint')}"]
   ul.dsc-icons-nav-items.text-left
     li.dsc-nav-icon.dsc-icons-nav-search-label-container
-      - unless view_within_controller?('books')
+      - unless view_within_controller?('books', actions: 'index')
         label.dsc-icons-nav-search-label for="#{search_flag_id}"
           = fa_icon(:search)
     li.dsc-nav-icon.dsc-icons-nav-cart-container
