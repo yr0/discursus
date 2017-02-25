@@ -75,6 +75,7 @@ gem 'unicode', '~> 0.4'
 # auth
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'
+gem 'recaptcha', '~> 4.1', require: 'recaptcha/rails'
 
 # env load and process control
 gem 'dotenv', '~> 2.1'

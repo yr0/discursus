@@ -1,0 +1,54 @@
+// locals: order_submission
+- order = order_submission.order
+
+.dsc-orders-text-summary
+  p
+    = t('orders.order_submission.summary.total_items')
+    | &nbsp;
+    strong
+      = order.line_items.size
+    | &nbsp;
+    = t('orders.cart.short_description.total_sum')
+    | &nbsp;
+    strong
+      = readable_price order.total
+    |. &nbsp;
+    = t('orders.order_submission.summary.look_up')
+
+  p
+    = t('orders.order_submission.summary.contact_data.intro')
+    |:&nbsp;
+    = user_for_order_contacts(order_submission.user_for_order)
+
+  p
+    - if order.requires_shipping?
+      - if order.pickup?
+        = t('orders.order_submission.summary.shipping.physical_shipping_pickup')
+      - elsif order.shipping_method.blank? || order.address.blank?
+        = t('orders.order_submission.summary.shipping.no_shipping_method_selected')
+      - else
+        = t('orders.order_submission.summary.shipping.physical_shipping_standard',
+                company: t("orders.order_submission.summary.shipping.#{order.shipping_method}"), address: order.address)
+
+      - if order.has_digital?
+        p
+          = t('orders.order_submission.summary.shipping.mixed_shipping')
+          | &nbsp;
+          = t('orders.order_submission.summary.shipping.digital')
+    - else
+        = t('orders.order_submission.summary.shipping.no_shipping')
+
+  p
+    - if order.payment_method.blank?
+      = t('orders.order_submission.summary.payment.no_payment_method')
+    - elsif order.card?
+      = t('orders.order_submission.summary.payment.card')
+    - else
+      = t('orders.order_submission.summary.payment.cash')
+  - if order.comment.present?
+    p
+      = t('orders.order_submission.summary.comment')
+      |: &nbsp;
+      em = order.comment
+
+  p = t('orders.order_submission.summary.outro')

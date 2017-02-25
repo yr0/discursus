@@ -1,5 +1,7 @@
 uk:
   attributes:
+    city: Місто
+    street: Вулиця / Номер складу пошти
     title: Назва
     slug: Читабельний URL
     tags: Теги
@@ -10,7 +12,7 @@ uk:
     body: Текст
     created_at: Дата створення
     password: Пароль
-    password_confirmation: Підтвердження пароля
+    password_confirmation: Підтвердження паролю
     file: Файл
     remember_me: "Запам'ятати"
     authors: Автори
@@ -26,6 +28,11 @@ uk:
     name: "Ім'я"
     phone: "Номер телефону"
     email: "E-mail"
+    shipping_method: Спосіб доставки
+    city: Місто
+    street: Вулиця
+    comment: Коментар
+    payment_method: Спосіб оплати
   activerecord:
     errors:
       attributes:
@@ -50,6 +57,7 @@ uk:
         greater_than_or_equal: "мусить бути більше, ніж %{count}"
         less_than_or_equal: "мусить бути менше, ніж %{count}"
         not_a_number: має бути числом
+        does_not_match_password: "не збігається з паролем"
       models:
         book:
           attributes:

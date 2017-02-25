@@ -11,6 +11,9 @@
         a href="#orderFirstStep" 1
       li
         a href="#orderSecondStep" 2
-    #orderSecondStep = render('orders/order_steps_tabs/user_data')
-    #orderFirstStep = render('orders/order_steps_tabs/order_data')
-
+      li
+        a href="#orderThirdStep" 3
+    #orderFirstStep = render('orders/order_steps_tabs/user_data')
+    = simple_form_for @order_submission, url: submit_order_path, remote: true do |f|
+      #orderSecondStep = render('orders/order_steps_tabs/order_data', f: f)
+      #orderThirdStep = render('orders/order_steps_tabs/summary', f: f)

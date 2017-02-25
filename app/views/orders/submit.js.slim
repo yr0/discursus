@@ -1,0 +1,11 @@
+- if @errors.present?
+  | $('.dsc-orders-submission-errors').addClass('dsc-form-errors-bordered')
+      .html('#{ j @errors.join('<br/>').html_safe }');
+- elsif @presubmit
+  | $('.dsc-orders-submission-errors').removeClass('dsc-form-errors-bordered').html('');
+    $('.dsc-orders-summary-container')
+      .html('#{ j render('orders/order_steps_tabs/text_summary', order_submission: @order_submission) }')
+    // go to next tab
+    $('#orderSteps').tabs('option', 'active', 2);
+- else
+  | alert('Submitted!');

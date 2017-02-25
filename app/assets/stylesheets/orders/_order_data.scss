@@ -1,4 +1,4 @@
-.dsc-orders-second-step-container {
+.dsc-orders-submission-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@
     align-items: center;
     width: 100%;
 
-    button:first-of-type {
+    :first-child {
       margin-right: 1em;
     }
   }
@@ -31,6 +31,10 @@
   .dsc-orders-fields-inner-container {
     margin: 1em 15px;
 
+    .form-control.string {
+      width: 100%;
+    }
+
     .dsc-orders-underlined-field {
       padding: 5px 15px;
       border-bottom: 1px solid $color-darker;
@@ -39,5 +43,18 @@
     .dsc-orders-radio-label {
       margin-left: 1em;
     }
+  }
+}
+
+.dsc-orders-summary-outer {
+  flex-direction: column;
+
+  .dsc-orders-summary-container {
+    max-width: 800px;
+    margin: 20px;
+  }
+
+  .dsc-orders-recaptcha-container {
+    margin: 20px;
   }
 }

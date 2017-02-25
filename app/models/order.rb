@@ -1,15 +1,33 @@
 class Order < ApplicationRecord
   SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup)
-  PAYMENT_METHODS = %w(card upon_receipt)
+  PAYMENT_METHODS = %w(card cash)
+
+  enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
+  enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
   include OrdersFunctionality::StateMachine
+
+  validates :city, :street, length: { maximum: 250 }
+  validates :comment, length: { maximum: 10_000 }
 
   belongs_to :customer, polymorphic: true
   has_many :line_items
   has_many :books, through: :line_items
 
   def requires_shipping?
+    has_physical?
+  end
+
+  def has_physical?
     line_items.physical.any?
+  end
+
+  def has_digital?
+    line_items.digital.any?
+  end
+
+  def address
+    [city, street].reject(&:blank?).join('. ')
   end
 
   def recalculate_total
