@@ -1,0 +1,9 @@
+- if @errors.present?
+  | $('.dsc-orders-first-step-errors').addClass('dsc-form-errors-bordered')
+      .html('#{ j @errors.join('<br/>').html_safe }');
+- else
+  | $('.dsc-orders-first-step-errors').removeClass('dsc-form-errors-bordered').html('');
+    // copy all values to next form
+    cloneUserFields();
+    // go to next tab
+    $('#orderSteps').tabs('option', 'active', 1);

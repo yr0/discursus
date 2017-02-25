@@ -1,12 +1,19 @@
 uk:
   orders:
+    shipping_methods:
+      nova_poshta: Нова пошта
+      ukrposhta: Укрпошта
+      pickup: Самовивіз
+    payment_methods:
+      card: Карткою
+      upon_receipt: По отриманні
     start_order: Оформити замовлення
     your_order: Ваше замовлення
     enter_data_or: Уведіть Ваші контактні дані або
     authorize: Авторизуйтеся
     errors:
       variant_unavailable: Цей варіант книги недоступний
-      variant_is_bought_once: Цей варіант книги не потрібно купувати двічі
+      variant_is_bought_once: Цей варіант книги вже є у кошику
     populated: Книгу додано до кошика
     cart:
       quantity_for_price: по
@@ -20,3 +27,11 @@ uk:
         go_to_cart: Переглянути замовлення
         total_items: "Усього позицій:"
         total_sum: "на загальну суму"
+    order_submission:
+      create_account: Створити акаунт?
+      proceed: Далі
+      back: Назад
+      shipping_method: Спосіб доставки
+      shipping_address: Адреса доставки
+      payment_method: Спосіб оплати
+      comment: Коментарі

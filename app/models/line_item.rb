@@ -1,4 +1,6 @@
 class LineItem < ApplicationRecord
+  include Populating
+
   # store variant as string in database
   enum variant: VariantsFunctionality::VARIANT_TYPES.map { |v| [v, v] }.to_h
 

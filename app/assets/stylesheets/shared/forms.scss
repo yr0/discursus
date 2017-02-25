@@ -7,6 +7,15 @@ label {
   margin: 10px 0;
 }
 
+.dsc-form-errors-bordered {
+  border-left: 3px solid $red;
+  background-color: rgba($red, 0.1);
+  color: $black;
+  padding: 5px 25px;
+  margin: 10px 0;
+  min-width: 50%;
+}
+
 .dsc-input-checkable {
   @extend .dsc-existing-yet-invisible;
 

@@ -23,6 +23,9 @@ uk:
     audio_file: Файл аудіокниги
     ebook_file: Файл електронної книги
     categories: Категорії
+    name: "Ім'я"
+    phone: "Номер телефону"
+    email: "E-mail"
   activerecord:
     errors:
       attributes:
@@ -33,7 +36,7 @@ uk:
           invalid: 'неправильний код відновлення'
         password_confirmation:
           confirmation: 'не сходиться'
-      messages:
+      messages: &messages_default
         blank: "не може бути порожнім"
         too_short: "містить замало символів (мінімум - %{count})"
         too_long: "містить забагато символів (максимум - %{count})"
@@ -54,6 +57,17 @@ uk:
               variants_invalid: Такого типу варіанту книги не існує
               variants_price_invalid: Ціна варіанту книги не може бути меншою 0 чи більшою 10000
               variants_files_invalid: Додайте файли електронної та аудіокниги, якщо робите ці варіанти доступними
+
+  activemodel:
+    errors:
+      messages:
+        <<: *messages_default
+      models:
+        user_for_order:
+          attributes:
+            base:
+              must_have_email_or_phone: Будь ласка, введіть e-mail та/або телефон.
+
   errors:
     messages:
-      extension_white_list_error: "имеет недопустимое разрешение"
+      extension_white_list_error: "має неправильний формат"

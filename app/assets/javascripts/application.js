@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widgets/tabs
+//= require jquery-ui/effect.all
 //= require gritter
 //= require tooltipster.bundle.min
 //= require selectize.min
@@ -23,6 +25,7 @@
 //= require checkbox_main_among
 //= require books
 //= require book
+//= require cart
 
 $.extend($.gritter.options, {
     position: 'top-left'

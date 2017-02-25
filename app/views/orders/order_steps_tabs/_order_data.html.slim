@@ -1,0 +1,41 @@
+= simple_form_for @order_submission, url: submit_order_path, remote: true do |f|
+  .dsc-orders-second-step-container
+    = f.simple_fields_for :user_for_order do |u|
+      = u.input :name, as: :hidden, input_html: { id: 'hidden-user-name' }
+      = u.input :phone, as: :hidden, input_html: { id: 'hidden-user-phone' }
+      = u.input :email, as: :hidden, input_html: { id: 'hidden-user-email' }
+      = u.input :password, as: :hidden, input_html: { id: 'hidden-user-password' }
+    .dsc-orders-fields-flex
+      .dsc-orders-fields-container.dsc-orders-shipping-method-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.shipping_method')
+        .dsc-orders-fields-inner-container
+          - Order::SHIPPING_METHODS.each do |shipping_method|
+            .dsc-orders-underlined-field
+              input.dsc-checkbox [type="radio" name="shipping_method" value="#{shipping_method}"
+                id="shipping_#{shipping_method}"]
+              label.dsc-orders-radio-label for="shipping_#{shipping_method}"
+                = t("orders.shipping_methods.#{shipping_method}")
+      .dsc-orders-fields-container.dsc-orders-payment-method-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.payment_method')
+        .dsc-orders-fields-inner-container
+          - Order::PAYMENT_METHODS.each do |payment_method|
+            .dsc-orders-underlined-field
+              input.dsc-checkbox [type="radio" name="payment_method" value="#{payment_method}"
+                id="payment_#{payment_method}"]
+              label.dsc-orders-radio-label for="payment_#{payment_method}"
+                = t("orders.payment_methods.#{payment_method}")
+      .dsc-orders-fields-container.dsc-orders-shipping-address-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.shipping_address')
+        .dsc-orders-fields-inner-container
+          = f.input :
+      .dsc-orders-fields-container.dsc-orders-comment-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.comment')
+        .dsc-orders-fields-inner-container
+          = f.input :comment, as: :text, label: false, input_html: { cols: 5, rows: 5 }
+      .dsc-orders-buttons-flex
+        button.dsc-button.clear = t('orders.order_submission.back')
+        button.dsc-button = t('orders.order_submission.proceed')

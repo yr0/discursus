@@ -1,0 +1,48 @@
+form.new_order_submission {
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .control-label {
+    margin-bottom: 0;
+  }
+
+  .form-control.string,.form-control.password {
+    border-radius: 0;
+    width: 250px;
+  }
+}
+
+.dsc-orders-first-step-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .subtitle {
+    margin: 20px 0;
+  }
+}
+
+.dsc-create-account-container {
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 20px;
+
+  .dsc-create-account-checkbox {
+    @include checkbox-positioned(-2px);
+
+    & ~ .dsc-account-password-container {
+      display: none;
+    }
+
+    &:checked ~ .dsc-account-password-container {
+      display: block;
+    }
+  }
+}
+
+.dsc-account-password-container {
+  text-align: left;
+}

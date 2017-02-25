@@ -1,0 +1,43 @@
+.dsc-orders-second-step-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .dsc-orders-fields-flex {
+    display: flex;
+    justify-content: space-between;
+    max-width: 650px;
+    flex-wrap: wrap;
+  }
+
+  .dsc-orders-buttons-flex {
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    button:first-of-type {
+      margin-right: 1em;
+    }
+  }
+
+  .dsc-orders-fields-container {
+    width: 300px;
+    margin-bottom: 1em;
+  }
+
+  .dsc-orders-fields-inner-container {
+    margin: 1em 15px;
+
+    .dsc-orders-underlined-field {
+      padding: 5px 15px;
+      border-bottom: 1px solid $color-darker;
+    }
+
+    .dsc-orders-radio-label {
+      margin-left: 1em;
+    }
+  }
+}

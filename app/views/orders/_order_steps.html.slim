@@ -5,10 +5,12 @@
 .dsc-switchable-orders
   .dsc-orders-section-title.dsc-title-primary
     h4 = t('orders.start_order')
-  .dsc-orders-first-step-container
-    h4
-      = t('orders.enter_data_or')
-      | &nbsp;
-      = link_to root_path, t('orders.authorize')
-
+  #orderSteps
+    ul.dsc-existing-yet-invisible
+      li
+        a href="#orderFirstStep" 1
+      li
+        a href="#orderSecondStep" 2
+    #orderSecondStep = render('orders/order_steps_tabs/user_data')
+    #orderFirstStep = render('orders/order_steps_tabs/order_data')
 

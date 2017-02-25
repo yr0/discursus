@@ -1,6 +1,6 @@
-a.dsc-cart-icon.has-tooltipster [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
+a.dsc-cart-icon [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
   data-tooltip-content='.dsc-small-cart-contents' data-tooltipster-interactive=1
-  class="#{' active' if current_order&.items?}"]
+  class="#{' active' if current_order&.items?}#{' has-tooltipster' unless view_within_controller?('orders', actions: ['cart'])}"]
   = fa_icon('shopping-basket')
 .dsc-cart-hidden-contents
   span.dsc-small-cart-contents

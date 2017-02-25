@@ -18,3 +18,38 @@ h1,h2,h3,h4,h5,h6 {
 p,div,span {
   font-size: $text-size;
 }
+
+a {
+  color: $color-darker;
+
+  &:hover {
+    color: $color-darker;
+  }
+}
+
+input[type=text],textarea {
+  &.form-control {
+    border: 1px solid $color-darker;
+    border-radius: 0;
+  }
+}
+
+.dsc-checkbox {
+  visibility: hidden;
+  vertical-align: middle;
+  margin: 0 !important;
+
+  &:before {
+    cursor: pointer;
+    visibility: visible;
+    font-family: 'FontAwesome';
+    content: '\f096';
+    color: $color-darker;
+    font-size: inherit;
+  }
+
+  &:checked:before {
+    content: '\f046';
+  }
+}
+

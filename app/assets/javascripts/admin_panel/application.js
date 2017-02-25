@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/tooltip
+//= require jquery-ui/widgets/tooltip
 //= require bootstrap-sprockets
 //= require adminlte/adminlte.min
 //= require ckeditor/init

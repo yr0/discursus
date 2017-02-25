@@ -2,7 +2,7 @@
   margin: 20px 0;
 
   @media (min-width: 1300px) {
-    margin: 20px 10%;
+    margin: 20px 5%;
   }
 }
 
@@ -10,13 +10,21 @@
   width: 100%;
   font-weight: normal;
   font-size: 1.2em;
-  padding: 15px 20px;
+  padding: 3px 20px;
   background-color: $gray;
   color: $white;
   text-align: center;
 
   &.dsc-title-primary {
     background-color: $color-darker;
+  }
+
+  &.dsc-title-secondary {
+    background-color: $color-darker;
+    h4 {
+      font-size: 1em;
+      margin: 0;
+    }
   }
 }
 
@@ -43,5 +51,20 @@
     .dsc-switchable-cart,.dsc-switchable-orders-closed {
       display: none;
     }
+  }
+}
+
+form.new_order_submission {
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .control-label {
+    margin-bottom: 0;
+  }
+
+  .form-control.string,.form-control.password {
+    border-radius: 0;
+    width: 250px;
   }
 }

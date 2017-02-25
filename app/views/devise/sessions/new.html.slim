@@ -8,9 +8,10 @@
     .form-group
       = f.input :password, input_html: { autocomplete: 'off', class: 'form-control' }
     - if devise_mapping.rememberable?
-      .checkbox
-        label
-          = f.check_box :remember_me
+      .dsc-checbox-and-label-container
+        = f.check_box :remember_me, class: 'dsc-checkbox', id: 'rememberMe'
+        label for="rememberMe"
+          | &ensp;
           = t('attributes.remember_me')
 
     .form-actions

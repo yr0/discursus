@@ -1,0 +1,11 @@
+uk:
+  simple_form:
+    required:
+      html: ''
+    labels:
+      user_for_order:
+        name: "Ім'я"
+        phone: "Номер телефону"
+        email: "E-mail"
+        password: "Пароль для наступного входу"
+        password_confirmation: "Пароль ще раз"
