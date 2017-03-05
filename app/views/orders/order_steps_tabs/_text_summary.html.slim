@@ -1,5 +1,5 @@
 // locals: order_submission
-- order = order_submission.order
+- order = current_order
 
 .dsc-orders-text-summary
   p
@@ -18,7 +18,7 @@
   p
     = t('orders.order_submission.summary.contact_data.intro')
     |:&nbsp;
-    = user_for_order_contacts(order_submission.user_for_order)
+    = user_for_order_contacts(order)
 
   p
     - if order.requires_shipping?

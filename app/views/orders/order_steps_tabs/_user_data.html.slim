@@ -1,20 +1,20 @@
-= simple_form_for @order_submission, url: submit_user_path, remote: true do  |f|
-  .dsc-orders-first-step-container
-    = f.simple_fields_for :user_for_order do |u|
-      h4.subtitle
-        = t('orders.enter_data_or')
-        | &nbsp;
-        = link_to t('orders.authorize'), root_path
-      .dsc-orders-first-step-errors
-      = u.input :name
-      = u.input :phone
-      = u.input :email
-      .form-group.dsc-create-account-container
-        input.dsc-create-account-checkbox type="checkbox" id="createAccount"
-        label for="createAccount"
-          | &ensp;
-          = t('orders.order_submission.create_account')
-        .dsc-account-password-container
-          = u.input :password
-          = u.input :password_confirmation
-      = f.submit t('orders.order_submission.proceed'), class: 'dsc-button'
+.dsc-orders-first-step-container
+  h4.subtitle
+    = t('orders.enter_data_or')
+    | &nbsp;
+    = link_to t('orders.authorize'), root_path
+  .dsc-orders-step-errors
+  = f.input :full_name
+  = f.input :phone
+  = f.input :email
+  .form-group.dsc-create-account-container
+    input.dsc-create-account-checkbox type="checkbox" id="createAccount"
+    label for="createAccount"
+      | &ensp;
+      = t('orders.order_submission.create_account')
+    /p
+    /  small = t('orders.order_submission.create_account_info')
+    .dsc-account-password-container
+      = f.input :password
+      = f.input :password_confirmation
+  = f.submit t('orders.order_submission.proceed'), class: 'dsc-button'

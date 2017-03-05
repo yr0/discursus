@@ -1,12 +1,13 @@
 withinControllerScope('orders', 'cart', function(W, D, $) {
-    W.cloneUserFields = function() {
-        var fields = ['name', 'phone', 'email', 'password'];
+    W.goToNextTab = function() {
+        var nextTabNumber = +$('#orderSteps').tabs('option')['active'] + 1;
+        $('#orderSteps').tabs('option', 'active', nextTabNumber);
+        return nextTabNumber;
+    };
 
-        for(var i = 0; i < fields.length; i++) {
-            var field = fields[i],
-                value = $('#order_submission_user_for_order_' + field).val();
-            $('#hidden-user-' + field).val(value);
-        }
+    W.addErrorsAtTab = function(errors, tabNumber) {
+        $('#orderSteps').tabs('option', 'active', tabNumber);
+        $('.dsc-orders-step-errors:visible').addClass('dsc-form-errors-bordered').html(errors);
     };
 
     $('#orderSteps').tabs({

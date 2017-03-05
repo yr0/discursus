@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     get 'cart'
     get 'modify_line_item_quantity'
     post 'populate'
-    post 'submit_user'
-    post 'submit', as: 'submit_order'
+    patch 'submit', as: 'submit_order'
   end
 
   devise_for :users

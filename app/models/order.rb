@@ -1,4 +1,7 @@
 class Order < ApplicationRecord
+  # If user passes password and confirmation, they will be validated and stored as digests
+  has_secure_password validations: false
+
   SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup)
   PAYMENT_METHODS = %w(card cash)
 
@@ -6,9 +9,7 @@ class Order < ApplicationRecord
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
   include OrdersFunctionality::StateMachine
-
-  validates :city, :street, length: { maximum: 250 }
-  validates :comment, length: { maximum: 10_000 }
+  include OrdersFunctionality::Validations
 
   belongs_to :customer, polymorphic: true
   has_many :line_items

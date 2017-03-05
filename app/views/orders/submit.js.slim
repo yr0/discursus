@@ -1,11 +1,9 @@
 - if @errors.present?
-  | $('.dsc-orders-submission-errors').addClass('dsc-form-errors-bordered')
-      .html('#{ j @errors.join('<br/>').html_safe }');
+  | addErrorsAtTab('#{ j @errors.join('<br/>').html_safe }', #{tab_number_from_errors});
 - elsif @presubmit
-  | $('.dsc-orders-submission-errors').removeClass('dsc-form-errors-bordered').html('');
-    $('.dsc-orders-summary-container')
-      .html('#{ j render('orders/order_steps_tabs/text_summary', order_submission: @order_submission) }')
-    // go to next tab
-    $('#orderSteps').tabs('option', 'active', 2);
+  | $('.dsc-orders-step-errors').removeClass('dsc-form-errors-bordered').html('');
+    var nextTabNumber = goToNextTab();
+    if(nextTabNumber === 1) $('.dsc-orders-summary-container')
+      .html('#{ j render('orders/order_steps_tabs/text_summary', order_submission: @order_submission) }');
 - else
   | alert('Submitted!');

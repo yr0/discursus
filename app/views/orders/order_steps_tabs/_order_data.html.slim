@@ -1,10 +1,5 @@
-.dsc-orders-submission-errors
+.dsc-orders-step-errors
 .dsc-orders-submission-container
-  = f.simple_fields_for :user_for_order do |u|
-    = u.input :name, as: :hidden, input_html: { id: 'hidden-user-name' }
-    = u.input :phone, as: :hidden, input_html: { id: 'hidden-user-phone' }
-    = u.input :email, as: :hidden, input_html: { id: 'hidden-user-email' }
-    = u.input :password, as: :hidden, input_html: { id: 'hidden-user-password' }
   .dsc-orders-fields-flex
     .dsc-orders-fields-container.dsc-orders-shipping-method-container
       .dsc-orders-section-title.dsc-title-secondary

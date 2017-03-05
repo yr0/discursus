@@ -17,7 +17,6 @@ uk:
     remember_me: "Запам'ятати"
     authors: Автори
     pages_amount: Кількість сторінок
-    name: "Ім'я"
     role: Роль
     motto: Гасло
     position: Порядок
@@ -26,6 +25,7 @@ uk:
     ebook_file: Файл електронної книги
     categories: Категорії
     name: "Ім'я"
+    full_name: "Ім'я"
     phone: "Номер телефону"
     email: "E-mail"
     shipping_method: Спосіб доставки
@@ -65,16 +65,21 @@ uk:
               variants_invalid: Такого типу варіанту книги не існує
               variants_price_invalid: Ціна варіанту книги не може бути меншою 0 чи більшою 10000
               variants_files_invalid: Додайте файли електронної та аудіокниги, якщо робите ці варіанти доступними
+        order:
+          attributes:
+            base:
+              must_have_email_or_phone: Будь ласка, введіть e-mail та/або телефон.
+              email_presence_on_digital: >
+                Будь ласка, введіть e-mail, щоб ми могли надіслати на нього книги цифрових форматів.
+              email_presence_on_account: >
+                Будь ласка, введіть e-mail, щоб ми могли зареєструвати Ваш аккаунт у системі.
+            password_confirmation:
+              confirmation: 'не сходиться'
 
   activemodel:
     errors:
       messages:
         <<: *messages_default
-      models:
-        user_for_order:
-          attributes:
-            base:
-              must_have_email_or_phone: Будь ласка, введіть e-mail та/або телефон.
 
   errors:
     messages:
