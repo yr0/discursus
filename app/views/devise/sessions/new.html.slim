@@ -1,5 +1,15 @@
 .dsc-single-block-centered
   h2.text-center = t('log_in')
+  h3.text-center
+    = t('through')
+    |&nbsp;
+    = link_to fa_stacked_icon('facebook inverse', base: 'square', class: 'fa-lg'),
+            user_facebook_omniauth_authorize_path, title: 'Facebook'
+    |&nbsp;
+    = link_to fa_stacked_icon('google inverse', base: 'circle', class: 'fa-lg'),
+            user_google_oauth2_omniauth_authorize_path, title: 'Google'
+  h3.text-center
+    = t('or')
   - if flash[:alert].present?
     .dsc-form-errors = flash[:alert]
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
@@ -14,6 +24,8 @@
           | &ensp;
           = t('attributes.remember_me')
 
-    .form-actions
-      = f.submit t('log_in'), class: 'dsc-button'
-  = render 'devise/shared/links'
+    .form-actions.row
+      .col-md-6.text-left
+        = f.submit t('log_in'), class: 'dsc-button'
+      .col-md-6.text-right
+        = render 'devise/shared/links'

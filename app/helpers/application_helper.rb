@@ -14,13 +14,15 @@ module ApplicationHelper
   end
 
   # rubocop:disable Rails/OutputSafety Provided data is completely isolated from user input
-  def site_navigation(css_class_infix)
+  def site_navigation(css_class_infix, no_turbolinks = false)
     content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
       NAVIGATION.each do |item_name, route|
         link_class = "dsc-#{css_class_infix}-nav-link"
         link_class += ' active' if item_name == controller_name
-        concat content_tag(:li, link_to(I18n.t("nav.#{item_name}").gsub(' ', '&nbsp;').html_safe, url_for(route),
-                                        class: link_class), class: "dsc-#{css_class_infix}-nav-item")
+        concat content_tag(:li,
+                           link_to(I18n.t("nav.#{item_name}").gsub(' ', '&nbsp;').html_safe, url_for(route),
+                                   class: link_class, 'data-turbolinks': !no_turbolinks),
+                           class: "dsc-#{css_class_infix}-nav-item")
       end
     end
   end

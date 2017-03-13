@@ -66,6 +66,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'sunspot_rails'
 # finite state machines
 gem 'aasm'
+# liqpay API wrapper
+gem 'liqpay', github: 'yr0/liqpay'
 
 # friendly urls
 gem 'friendly_id', '~> 5.1'
@@ -76,6 +78,8 @@ gem 'unicode', '~> 0.4'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'
 gem 'recaptcha', '~> 4.1', require: 'recaptcha/rails'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # env load and process control
 gem 'dotenv', '~> 2.1'

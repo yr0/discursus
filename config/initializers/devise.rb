@@ -12,6 +12,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'hello@discursus.com'
+  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

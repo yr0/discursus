@@ -42,7 +42,7 @@ uk:
           blank: 'неправильний код відновлення'
           invalid: 'неправильний код відновлення'
         password_confirmation:
-          confirmation: 'не сходиться'
+          confirmation: 'не збігається з паролем'
       messages: &messages_default
         blank: "не може бути порожнім"
         too_short: "містить замало символів (мінімум - %{count})"
@@ -58,6 +58,7 @@ uk:
         less_than_or_equal: "мусить бути менше, ніж %{count}"
         not_a_number: має бути числом
         does_not_match_password: "не збігається з паролем"
+        confirmation: "не збігається з паролем"
       models:
         book:
           attributes:

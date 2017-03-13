@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     patch 'submit', as: 'submit_order'
   end
 
-  devise_for :users
+  devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: 'users/registrations'
+  }
 
   devise_for :admins
   namespace :admin_panel do

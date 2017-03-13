@@ -1,17 +1,17 @@
-a.dsc-cart-icon [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
-  data-tooltip-content='.dsc-small-cart-contents' data-tooltipster-interactive=1
+a.dsc-nav-clickable-icon [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
+  data-tooltip-content='.dsc-small-cart-content' data-tooltipster-interactive=1
   class="#{' active' if current_order&.items?}#{' has-tooltipster' unless view_within_controller?('orders', actions: ['cart'])}"]
   = fa_icon('shopping-basket')
-.dsc-cart-hidden-contents
-  span.dsc-small-cart-contents
+.dsc-cart-hidden-content
+  span.dsc-small-cart-content.dsc-nav-tooltip-content
     - if current_order&.items?
       = t('orders.cart.short_description.total_items')
       | &nbsp;
-      span.dsc-small-cart-numbers = current_order.line_items.size
+      span.dsc-nav-tooltip-numbers = current_order.line_items.size
       br
       = t('orders.cart.short_description.total_sum')
       | &nbsp;
-      span.dsc-small-cart-numbers = readable_price current_order.total
-      = link_to t('orders.cart.short_description.go_to_cart'), cart_path, class: 'dsc-small-cart-link'
+      span.dsc-nav-tooltip-numbers = readable_price current_order.total
+      = link_to t('orders.cart.short_description.go_to_cart'), cart_path, class: 'dsc-nav-tooltip-link'
     - else
       = t('orders.cart.empty')

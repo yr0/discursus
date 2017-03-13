@@ -54,4 +54,8 @@ class Order < ApplicationRecord
     end
     item
   end
+
+  def payment_url
+    'https://google.com'
+  end
 end
