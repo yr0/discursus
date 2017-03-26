@@ -31,9 +31,9 @@ module ApplicationHelper
   def readable_price(price, show_fractions = true, show_currency = true)
     price ||= 0
     # hide fractions only if price has no fraction part and the show_fractions is set to false
-    fractions = (show_fractions || price % 1 != 0) ? 2 : 0
+    show_fractions ||= (price % 1).nonzero?
     currency = show_currency ? " #{t(Rails.configuration.default_currency)}" : ''
-    format("%.0#{fractions}f%s", price, currency)
+    format("%.0#{show_fractions ? 2 : 0}f%s", price, currency)
   end
 
   def readable_date(date, show_time = false)

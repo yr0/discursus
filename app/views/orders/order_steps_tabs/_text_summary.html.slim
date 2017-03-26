@@ -30,7 +30,7 @@
         = t('orders.order_submission.summary.shipping.physical_shipping_standard',
                 company: t("orders.order_submission.summary.shipping.#{order.shipping_method}"), address: order.address)
 
-      - if order.has_digital?
+      - if order.digital?
         p
           = t('orders.order_submission.summary.shipping.mixed_shipping')
           | &nbsp;

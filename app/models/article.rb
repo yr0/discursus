@@ -14,4 +14,11 @@ class Article < ApplicationRecord
     text :title, boost: 5.0
     text :body
   end
+
+  def self.sunspot_search(options = {})
+    search do
+      fulltext options[:query]
+      paginate page: options[:page], per_page: options[:per_page]
+    end
+  end
 end

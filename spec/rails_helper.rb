@@ -12,6 +12,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   include FactoryGirl::Syntax::Methods
+  include ControllerHelpers
+
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
@@ -26,5 +28,9 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  config.after(:each, search: true) do
+    Sunspot.remove_all!
   end
 end

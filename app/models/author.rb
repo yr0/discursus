@@ -14,10 +14,13 @@ class Author < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  # returns a string containing first 3 books of the author
-  def books_list
-    # we use #[] and #map, because #limit and #pluck would use the additional sql query per author,
-    # which we avoid using Author.includes(:books)
-    books[0..3].map(&:title).join(', ')
+  # returns a string containing last 3 books of the author
+  def last_book_titles
+    # we prefer #[] and #map on eager load, because #limit and #pluck would use the additional sql query per author
+    @last_book_titles ||= if books.loaded?
+                            books[0..3].map(&:title).join(', ')
+                          else
+                            books.limit(3).pluck(:title).join(', ')
+                          end
   end
 end

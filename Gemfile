@@ -20,25 +20,6 @@ gem 'turbolinks', '~> 5'
 # use rspec for testing
 gem 'rspec-rails'
 
-group :test do
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'database_cleaner'
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-end
-
-group :development do
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop'
-  gem 'capistrano-rails'
-end
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -85,3 +66,24 @@ gem 'omniauth-google-oauth2'
 gem 'dotenv', '~> 2.1'
 gem 'dotenv-rails', '~> 2.1'
 gem 'foreman'
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'sunspot_test'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'db-query-matchers'
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+end
+
+group :development do
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop'
+  gem 'capistrano-rails'
+end

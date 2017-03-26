@@ -32,7 +32,8 @@ module VariantsFunctionality
   end
 
   # Transforms hash received from form into expected format, removing variants that are not defined and those
-  # that have empty or zero price
+  # that have empty or zero price.
+  # Example: { 'paperback' => { 'is_available' => 1, 'price' => 20.0 } }
   def variants=(variants_hash)
     variants = variants_hash.select do |k, v|
       v['is_available'].to_i.nonzero? && VARIANT_TYPES.include?(k)

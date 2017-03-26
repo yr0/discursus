@@ -26,6 +26,7 @@ class SearchQuery
       with(:author_ids, author_ids) if author_ids.present?
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def category_ids=(categories)
     @category_ids = search_all_categories.to_i.nonzero? ? [] : categories.reject(&:blank?).map(&:to_i)

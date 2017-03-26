@@ -4,9 +4,8 @@ Source code for the website.
 ## Installation
 1. Install rvm and ruby 2.3.1
 0. Install PostgreSQL 9.5
-0. Install Solr 6.3 (latest at the time of writing), create core collection, and specify path to it 
-    in *config/solr.yml*. Copy sunspot config files *schema.xml* and *solrconfig.xml* from 
-    [Sunspot github page](https://github.com/sunspot/sunspot/tree/master/sunspot_solr/solr/solr/configsets/sunspot/conf) 
+0. Install Solr 6.3 (latest at the time of writing), create a new core, and specify path to it 
+    in *config/solr.yml*. Copy sunspot config files *schema.xml* and *solrconfig.xml* from config/sunspot 
     and place them in /var/solr/data/<collection_name>/conf. Restart the solr service afterwards. 
 0. `cd` into app directory and run `bundle` to install the dependencies
 0. Create *.env* file in directory root and populate it with the following data:

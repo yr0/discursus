@@ -26,8 +26,8 @@ class Book < ApplicationRecord
 
   searchable do
     text :title, boost: 5.0
-    string(:order_title) { title.downcase }
     text :description
+    string(:order_title) { title.downcase }
     time :created_at
     boolean :is_available
     double :main_price
@@ -39,9 +39,13 @@ class Book < ApplicationRecord
     ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' }).distinct
   end
 
+  # Returns names of book authors separated by comma
   def author_names
-    # we use #map, because #pluck would use the additional sql query per book,
-    # which we avoid using Book.includes(:authors)
-    authors.map(&:name).join(', ')
+    # we prefer #map on eager load, because #pluck would use the additional sql query per book
+    @author_names ||= if authors.loaded?
+                        authors.map(&:name).join(', ')
+                      else
+                        authors.pluck(:name).join(', ')
+                      end
   end
 end

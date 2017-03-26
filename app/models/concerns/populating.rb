@@ -23,12 +23,12 @@ module Populating
 
   # Either increases the line item's quantity or decreases it. Will destroy item if quantity turns out less than 1
   def change_quantity_by(amount)
-    check_purchasing_multiple! if amount > 0
+    check_purchasing_multiple! if amount.positive?
     desired_quantity = quantity.to_i + amount
     if desired_quantity < 1
       destroy! if persisted?
     else
-      assign_attributes(quantity: desired_quantity, price: book.price_of(variant))
+      self.quantity = desired_quantity
       save!
     end
   end

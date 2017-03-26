@@ -1,26 +1,28 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
+  before_action :set_default_per_page, only: :index
 
   def index
     @articles = if params[:query].present?
-                  search_articles
+                  search_articles_result
                 else
-                  @articles.page(params[:page]).per(per_page)
+                  @articles.page(params[:page]).per(params[:per_page])
                 end
     respond_to :html, :js
   end
 
   private
 
-  def search_articles
-    @search = Article.search do
-      fulltext params[:query]
-      paginate page: params[:page], per_page: per_page
-    end
+  def set_default_per_page
+    params[:per_page] ||= params[:page].to_i > 1 ? 8 : 14
+  end
+
+  def search_articles_result
+    @search = Article.sunspot_search permitted_search_params
     @search.results
   end
 
-  def per_page
-    @per_page ||= params[:page].to_i > 1 ? 8 : 14
+  def permitted_search_params
+    params.permit(:query, :page, :per_page)
   end
 end

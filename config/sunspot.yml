@@ -19,5 +19,5 @@ test:
     hostname: localhost
     port: 8983
     log_level: WARNING
-    path: /solr/discursus
+    path: /solr/dsc_test
     

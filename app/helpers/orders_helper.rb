@@ -8,9 +8,9 @@ module OrdersHelper
   end
 
   def tab_number_from_errors
-    if current_order.has_user_errors?
+    if current_order.user_errors?
       0
-    elsif current_order.has_recaptcha_error?
+    elsif current_order.recaptcha_error?
       2
     else
       1

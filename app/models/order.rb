@@ -2,8 +2,8 @@ class Order < ApplicationRecord
   # If user passes password and confirmation, they will be validated and stored as digests
   has_secure_password validations: false
 
-  SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup)
-  PAYMENT_METHODS = %w(card cash)
+  SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup).freeze
+  PAYMENT_METHODS = %w(card cash).freeze
 
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
@@ -16,14 +16,14 @@ class Order < ApplicationRecord
   has_many :books, through: :line_items
 
   def requires_shipping?
-    has_physical?
+    physical?
   end
 
-  def has_physical?
+  def physical?
     line_items.physical.any?
   end
 
-  def has_digital?
+  def digital?
     line_items.digital.any?
   end
 

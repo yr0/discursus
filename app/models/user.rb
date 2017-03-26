@@ -12,7 +12,7 @@ class User < ApplicationRecord
                                  email: request_data&.info&.email || "#{request_data.uid}@devnull",
                                  password: SecureRandom.hex(8))
           # fail silently if for example email exists for now
-          user.save(validate: false)
+          user.save
         end
       end
     end
