@@ -22,4 +22,9 @@ describe Book do
       end.to make_database_queries(count: 3)
     end
   end
+
+  it 'returns all categories of books' do
+    books = create_list(:book, 2, :with_categories)
+    expect(Book.all_categories.pluck(:name)).to match_array(books.flat_map(&:categories).map(&:name))
+  end
 end

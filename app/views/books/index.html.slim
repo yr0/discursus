@@ -11,7 +11,7 @@
           .dsc-books-filter-section-title = t('books.sort')
           .dsc-books-filter-section-body
             .dsc-books-filter-options
-              - %i(order_title main_price created_at).each do |field|
+              - %i(title_for_sorting main_price created_at).each do |field|
                 = render('sort_filter_option', field: field, f: f)
         section.dsc-books-filter-section
           .dsc-books-filter-section-title = t('books.filter')

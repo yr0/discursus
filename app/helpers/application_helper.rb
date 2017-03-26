@@ -66,7 +66,7 @@ module ApplicationHelper
 
   def params_with_search(records)
     result = { page: records.next_page }
-    result.merge!(@search_query.to_param) if @search_query.try(:nonempty?)
+    result.merge!(@search_query.to_param) unless @search_query.try(:default?)
     result
   end
 

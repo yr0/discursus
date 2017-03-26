@@ -4,4 +4,5 @@
   = check_box_tag "search_query[order_by_desc][#{field}]", 1, f.object.order_by_desc[field.to_sym].to_i.nonzero?,
           class: 'dsc-input-order-desc'
   = label_tag "search_query_order_by_desc_#{field}", '',
-          class: "dsc-label-order-desc#{' dsc-order-alpha' if field == :order_title}", title: t('click_to_change_order')
+          class: "dsc-label-order-desc#{' dsc-order-alpha' if field == :title_for_sorting}",
+          title: t('click_to_change_order')

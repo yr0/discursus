@@ -8,6 +8,10 @@ FactoryGirl.define do
       authors { [create(:author)] }
     end
 
+    trait :with_categories do
+      categories { [create(:category)] }
+    end
+
     VariantsFunctionality::VARIANT_TYPES.each do |variant_kind|
       trait variant_kind.to_sym do
         variants do

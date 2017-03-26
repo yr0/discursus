@@ -27,7 +27,7 @@ class Book < ApplicationRecord
   searchable do
     text :title, boost: 5.0
     text :description
-    string(:order_title) { title.downcase }
+    string(:title_for_sorting) { title.downcase }
     time :created_at
     boolean :is_available
     double :main_price

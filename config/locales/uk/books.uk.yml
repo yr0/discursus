@@ -15,7 +15,7 @@ uk:
     sort: Сортування
     filter: Фільтри
     sort_by:
-      order_title: За назвою
+      title_for_sorting: За назвою
       main_price: За ціною
       created_at: За датою виходу
     filter_by:
