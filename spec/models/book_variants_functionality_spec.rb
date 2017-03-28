@@ -71,5 +71,32 @@ describe 'Book VariantsFunctionality' do
         expect(book.available_variants).to eq form_variants_transformed
       end
     end
+
+    context '#price_of' do
+      it 'returns price of provided variant' do
+        book = create(:book, :hardcover, variant_price: 50.0)
+        expect(book.price_of(:hardcover)).to eq 50.0
+      end
+
+      it 'returns 0 if provided variant is not available' do
+        expect(create(:book, :hardcover).price_of(:ebook)).to eq 0.0
+      end
+    end
+
+    context '.find_by_availability' do
+      let(:book) { create(:book, :hardcover) }
+
+      it 'returns book if it is available' do
+        expect(Book.find_by_availability(book.id, :hardcover).id).to eq book.id
+      end
+
+      it 'returns nil if book cannot be found' do
+        expect(Book.find_by_availability(0, :hardcover)).not_to be
+      end
+
+      it 'returns nil if variant is unavailable' do
+        expect(Book.find_by_availability(book.id, :ebook)).not_to be
+      end
+    end
   end
 end

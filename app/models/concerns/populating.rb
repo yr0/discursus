@@ -14,10 +14,8 @@ module Populating
     private
 
     def get_book_if_available(book_id, variant)
-      book = Book.find_by(id: book_id)
-      raise OrderPopulatingError, t('orders.errors.variant_unavailable') unless
-          book && book.variant_available?(variant)
-      book
+      Book.find_by_availability(book_id, variant) ||
+        raise(OrderPopulatingError, I18n.t('orders.errors.variant_unavailable'))
     end
   end
 

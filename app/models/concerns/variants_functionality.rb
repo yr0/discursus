@@ -20,6 +20,12 @@ module VariantsFunctionality
     def variant_types
       VARIANT_TYPES
     end
+
+    # Returns book only if it is found by id and if it's variant of +variant_type+ is available. Otherwise returns nil
+    def find_by_availability(id, variant_type)
+      book = Book.find_by(id: id)
+      book if book&.variant_available?(variant_type)
+    end
   end
 
   def variant_available?(variant)
@@ -28,6 +34,7 @@ module VariantsFunctionality
   end
 
   def price_of(variant)
+    return 0.0 unless available_variants.present?
     available_variants[variant.to_s].to_f
   end
 
@@ -69,8 +76,8 @@ module VariantsFunctionality
 
   # validate files presence if available variants include ebook and audio
   def variants_must_contain_files
-    if available_variants.keys.include?('ebook') && !ebook_file.present? ||
-       available_variants.keys.include?('audio') && !audio_file.present?
+    if available_variants.keys.include?('ebook') && ebook_file.blank? ||
+       available_variants.keys.include?('audio') && audio_file.blank?
       errors.add(:base, :variants_files_invalid)
     end
   end

@@ -3,8 +3,10 @@ FactoryGirl.define do
     sequence(:email) { Faker::Internet.email }
     customer { create(:user) }
 
-    after(:build) do |order|
-      order.line_items = [create(:line_item, order: order)]
+    trait :with_lin_items do
+      after(:build) do |order|
+        order.line_items = [create(:line_item, order: order)]
+      end
     end
 
     trait :with_temporary_user do
