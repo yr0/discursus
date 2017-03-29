@@ -33,8 +33,11 @@ class Order < ApplicationRecord
 
   def recalculate_total
     # we might add cost of shipping here
-    update(total: 0.0) unless line_items.any?
-    update(total: line_items.pluck(:price, :quantity).map { |e| e.reduce(&:*) }.reduce(&:+))
+    if line_items.any?
+      update(total: line_items.pluck(:price, :quantity).map { |e| e.reduce(&:*) }.reduce(&:+))
+    else
+      update(total: 0.0)
+    end
   end
 
   def items?
