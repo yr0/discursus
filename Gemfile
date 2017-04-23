@@ -55,6 +55,11 @@ gem 'friendly_id', '~> 5.1'
 gem 'babosa', '~> 1.0'
 gem 'unicode', '~> 0.4'
 
+# async jobs
+gem 'sidekiq'
+# Namespaced redis instances
+gem 'redis-namespace'
+
 # auth
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'

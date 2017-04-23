@@ -11,7 +11,7 @@ module OrdersFunctionality
       validates :password, allow_nil: true, length: { minimum: 6, maximum: 250 }
       validates :password, confirmation: true, allow_blank: true
       validate :must_have_email_or_phone
-      validate :email_must_be_unique, if: -> { password.present? }
+      validate :email_must_be_unique, if: -> { password.present? && email_changed? }
     end
 
     def user_errors?

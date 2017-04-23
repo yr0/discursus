@@ -14,5 +14,6 @@ module Discursus
     config.time_zone = 'Kyiv'
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.default_currency = :uah
+    config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -24,7 +24,8 @@ module OrdersFunctionality
         # order can be transitioned to completed only by administrator - either from paid_for (when appropriate
         # payment method was selected) or from :submitted (when user pays after receiving books)
         event :success, before: -> { self.completed_at = DateTime.current } do
-          transitions from: [:submitted, :paid_for], to: :completed
+          transitions from: :paid_for, to: :completed
+          transitions from: :submitted, to: :completed, guard: -> { cash? }
         end
 
         event :fail do
@@ -55,9 +56,15 @@ module OrdersFunctionality
     end
 
     def swap_customer_with_new_user
-      user = User.create(email: email, encrypted_password: password_digest, name: full_name, phone: phone)
-      TemporaryUser.find(customer_id).destroy!
-      update!(customer: user)
+      self.class.transaction do
+        user = User.create(email: email, name: full_name, phone: phone, password: SecureRandom.hex(8))
+        return unless user.valid?
+        user.encrypted_password = password_digest
+        user.save(validate: false)
+        temp_user_id = customer_id
+        update(customer: user)
+        TemporaryUser.find(temp_user_id).destroy!
+      end
     end
   end
 end
