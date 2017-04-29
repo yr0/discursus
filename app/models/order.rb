@@ -8,8 +8,7 @@ class Order < ApplicationRecord
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
-  include OrdersFunctionality::StateMachine
-  include OrdersFunctionality::Validations
+  include OrdersFunctionality # before_create, state machine callbacks, validations
 
   belongs_to :customer, polymorphic: true
   has_many :line_items

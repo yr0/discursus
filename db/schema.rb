@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411200304) do
+ActiveRecord::Schema.define(version: 20170429155745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,11 +140,12 @@ ActiveRecord::Schema.define(version: 20170411200304) do
     t.string   "shipping_service_details"
     t.text     "comment"
     t.datetime "completed_at"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
     t.string   "city"
     t.string   "street"
     t.string   "password_digest"
+    t.boolean  "form_submission_started",                          default: false
   end
 
   create_table "taggings", force: :cascade do |t|

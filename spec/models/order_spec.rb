@@ -99,5 +99,40 @@ describe Order do
         expect { order.modify_line_item_quantity(0, true) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
+
+    context '#autocomplete_user_information' do
+      let(:order_data) do
+        { email: Faker::Internet.email, phone: '123456789', full_name: Faker::GameOfThrones.character,
+          payment_method: 'cash', shipping_method: 'pickup', city: Faker::Lorem.word, street: Faker::Lorem.word }
+      end
+      let(:user_data) { { email: Faker::Internet.email, phone: '123456789', name: Faker::GameOfThrones.character } }
+      let(:user) { create(:user, user_data) }
+      let(:temp) { create(:temporary_user) }
+
+      it 'clones previous order data after order is created for user' do
+        order = create(:order, customer: user)
+        order.update(order_data)
+        new_order = user.orders.pending.create
+        expect(new_order.as_json.with_indifferent_access).to include order_data
+      end
+
+      it 'clones previous order data after order is created for temp user' do
+        order = create(:order, customer: temp)
+        order.update(order_data)
+        new_order = temp.orders.pending.create
+        expect(new_order.as_json.with_indifferent_access).to include order_data
+      end
+
+      it 'clones user data if there is no previous order' do
+        new_order = user.orders.pending.create
+        expect(new_order.as_json.with_indifferent_access).to include user_data.except(:name)
+        expect(new_order.full_name).to eq user_data[:name]
+      end
+
+      it 'does not clone user data if there is no previous order for temp user' do
+        new_order = temp.orders.pending.create
+        expect(new_order.as_json.values_at(*%w(email full_name phone)).all?(&:nil?)).to eq true
+      end
+    end
   end
 end

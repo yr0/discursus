@@ -9,6 +9,10 @@
     justify-content: space-between;
     max-width: 650px;
     flex-wrap: wrap;
+
+    @media (max-width: 655px) {
+      justify-content: center;
+    }
   }
 
   .dsc-orders-buttons-flex {

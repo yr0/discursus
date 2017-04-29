@@ -1,32 +1,43 @@
 .dsc-orders-step-errors
 .dsc-orders-submission-container
   .dsc-orders-fields-flex
-    .dsc-orders-fields-container.dsc-orders-shipping-method-container
-      .dsc-orders-section-title.dsc-title-secondary
-        h4 = t('orders.order_submission.shipping_method')
-      .dsc-orders-fields-inner-container
-        - Order::SHIPPING_METHODS.each do |shipping_method|
+    - if f.object.requires_shipping?
+      .dsc-orders-fields-container.dsc-orders-shipping-method-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.shipping_method')
+        .dsc-orders-fields-inner-container
+          - Order::SHIPPING_METHODS.each do |shipping_method|
+            .dsc-orders-underlined-field
+              input.dsc-checkbox [type="radio" name="order[shipping_method]" value="#{shipping_method}"
+                id="shipping_#{shipping_method}"]
+              label.dsc-orders-radio-label for="shipping_#{shipping_method}"
+                = t("orders.shipping_methods.#{shipping_method}")
+      .dsc-orders-fields-container.dsc-orders-payment-method-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.payment_method')
+        .dsc-orders-fields-inner-container
+          - Order::PAYMENT_METHODS.each do |payment_method|
+            .dsc-orders-underlined-field
+              input.dsc-checkbox [type="radio" name="order[payment_method]" value="#{payment_method}"
+                id="payment_#{payment_method}"]
+              label.dsc-orders-radio-label for="payment_#{payment_method}"
+                = t("orders.payment_methods.#{payment_method}")
+      .dsc-orders-fields-container.dsc-orders-shipping-address-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.shipping_address')
+        .dsc-orders-fields-inner-container
+          = f.input :city
+          = f.input :street
+    - else
+      .dsc-orders-fields-container.dsc-orders-payment-method-container
+        .dsc-orders-section-title.dsc-title-secondary
+          h4 = t('orders.order_submission.payment_method')
+        .dsc-orders-fields-inner-container
           .dsc-orders-underlined-field
-            input.dsc-checkbox [type="radio" name="order_submission[shipping_method]" value="#{shipping_method}"
-              id="shipping_#{shipping_method}"]
-            label.dsc-orders-radio-label for="shipping_#{shipping_method}"
-              = t("orders.shipping_methods.#{shipping_method}")
-    .dsc-orders-fields-container.dsc-orders-payment-method-container
-      .dsc-orders-section-title.dsc-title-secondary
-        h4 = t('orders.order_submission.payment_method')
-      .dsc-orders-fields-inner-container
-        - Order::PAYMENT_METHODS.each do |payment_method|
-          .dsc-orders-underlined-field
-            input.dsc-checkbox [type="radio" name="order_submission[payment_method]" value="#{payment_method}"
-              id="payment_#{payment_method}"]
-            label.dsc-orders-radio-label for="payment_#{payment_method}"
-              = t("orders.payment_methods.#{payment_method}")
-    .dsc-orders-fields-container.dsc-orders-shipping-address-container
-      .dsc-orders-section-title.dsc-title-secondary
-        h4 = t('orders.order_submission.shipping_address')
-      .dsc-orders-fields-inner-container
-        = f.input :city
-        = f.input :street
+            input.dsc-checkbox [type="radio" name="order[payment_method]" value="card"
+              id="payment_card" checked="checked"]
+            label.dsc-orders-radio-label for="payment_card"
+              = t('orders.payment_methods.card')
     .dsc-orders-fields-container.dsc-orders-comment-container
       .dsc-orders-section-title.dsc-title-secondary
         h4 = t('orders.order_submission.comment')

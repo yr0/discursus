@@ -6,3 +6,4 @@
   | $('#itemRow#{@line_item.id} .dsc-orders-item-quantity').text('#{@line_item.quantity}');
   | $('#itemRow#{@line_item.id} .dsc-orders-sum').text('#{readable_price(@line_item.total, false)}');
 | $('.dsc-orders-total-price').text('#{readable_price(current_order.total, false, false)}');
+| $('#cartLineDescription').html('#{ j render('orders/order_steps_tabs/order_line_description') }');

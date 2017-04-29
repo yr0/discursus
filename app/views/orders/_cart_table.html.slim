@@ -1,17 +1,6 @@
+- order_has_physical = current_order.physical?
 .dsc-switchable-cart-closed
-  .dsc-orders-section-title
-    = t('orders.cart.short_description.total_items')
-    | &nbsp;
-    strong
-      = current_order.line_items.size
-    | &nbsp;
-    = t('orders.cart.short_description.total_sum')
-    | &nbsp;
-    strong
-      = readable_price current_order.total
-    | &emsp;(
-    label.dsc-cart-table-unfold for="elementsSwitcher" = t('unfold')
-    | )
+  .dsc-orders-section-title#cartLineDescription = render('orders/order_steps_tabs/order_line_description')
 .dsc-switchable-cart
   table.dsc-cart-table
     thead
@@ -19,9 +8,9 @@
         th.dsc-th-image
         th.dsc-th-title = t('attributes.title')
         th.dsc-th-kind = t('orders.cart.book_kind')
-        - if current_order.line_items.physical.any?
+        - if order_has_physical
           th.dsc-th-quantity = t('orders.cart.quantity')
-        th.dsc-th-price = t('orders.cart.sum')
+        th.dsc-th-price colspan="#{ order_has_physical ? 1 : 2 }" = t('orders.cart.sum')
         th.dsc-th-actions
     tbody
       - current_order.line_items.includes(:book).each do |item|
@@ -32,7 +21,7 @@
           td.dsc-bordered-right
             = link_to item.book.title, book_path(item.book.friendly_id), class: 'dsc-orders-item-title'
             .dsc-orders-item-description = truncate(strip_tags(item.book.description), length: 100, separator: ' ')
-          td.dsc-bordered-right colspan="#{ item.digital? ? 2 : 1 }"
+          td.dsc-bordered-right
             .dsc-orders-kind-container
               .dsc-kind-with-icon class="dsc-kind-#{ item.variant }"
               .dsc-kind-name = t("books.variants.#{item.variant}")
@@ -45,7 +34,7 @@
                       class: 'dsc-orders-modify-quantity', remote: true
               .dsc-orders-item-before-price = fa_icon('times')
               .dsc-orders-item-one-price = readable_price(item.price, false)
-          td.text-center.dsc-orders-sum = readable_price(item.total, false)
+          td.text-center.dsc-orders-sum colspan="#{ item.digital? ? 2 : 1 }" = readable_price(item.total, false)
           td.text-center.dsc-orders-delete-item-cell
             = link_to fa_icon('times'), modify_line_item_quantity_path(id: item.id, destroy: true), remote: true
         tr.spacer.bordered

@@ -1,20 +1,29 @@
 .dsc-orders-first-step-container
-  h4.subtitle
-    = t('orders.enter_data_or')
-    | &nbsp;
-    = link_to t('orders.authorize'), root_path
-  .dsc-orders-step-errors
-  = f.input :full_name
-  = f.input :phone
-  = f.input :email
-  .form-group.dsc-create-account-container
-    input.dsc-create-account-checkbox type="checkbox" id="createAccount"
-    label for="createAccount"
-      | &ensp;
-      = t('orders.order_submission.create_account')
-    /p
-    /  small = t('orders.order_submission.create_account_info')
-    .dsc-account-password-container
-      = f.input :password
-      = f.input :password_confirmation
+  - if current_user.present?
+    - last_order = current_user.last_order
+    h4.subtitle
+      = t('orders.your_data')
+    .dsc-orders-step-errors
+    = f.input :full_name, input_html: { value: last_order&.full_name || current_user.name }
+    = f.input :phone, input_html: { value: last_order&.phone || current_user.phone }
+    = f.input :email, input_html: { value: last_order&.email || current_user.email }
+  - else
+    h4.subtitle
+      = t('orders.enter_data_or')
+      | &nbsp;
+      = link_to t('orders.authorize'), root_path
+    .dsc-orders-step-errors
+    = f.input :full_name
+    = f.input :phone
+    = f.input :email
+    .form-group.dsc-create-account-container
+      input.dsc-create-account-checkbox type="checkbox" id="createAccount"
+      label for="createAccount"
+        | &ensp;
+        = t('orders.order_submission.create_account')
+      /p
+      /  small = t('orders.order_submission.create_account_info')
+      .dsc-account-password-container
+        = f.input :password
+        = f.input :password_confirmation
   = f.submit t('orders.order_submission.proceed'), class: 'dsc-button'

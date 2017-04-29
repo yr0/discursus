@@ -73,9 +73,7 @@ gem 'dotenv-rails', '~> 2.1'
 gem 'foreman'
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'sunspot_test'
-  gem 'faker'
   gem 'database_cleaner'
   gem 'db-query-matchers'
 end
@@ -83,6 +81,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do

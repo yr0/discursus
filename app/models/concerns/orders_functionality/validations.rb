@@ -5,12 +5,10 @@ module OrdersFunctionality
     included do
       validates :city, :street, length: { maximum: 250 }
       validates :comment, length: { maximum: 10_000 }
-      validates :full_name, length: { maximum: 250 }
       validates :full_name, :email, length: { maximum: 250 }
       validates :phone, length: { maximum: 50 }
-      validates :password, allow_nil: true, length: { minimum: 6, maximum: 250 }
-      validates :password, confirmation: true, allow_blank: true
-      validate :must_have_email_or_phone
+      validates :password, confirmation: true, allow_blank: true, allow_nil: true, length: { minimum: 6, maximum: 250 }
+      validate :must_have_email_or_phone, if: -> { submitted? || form_submission_started? }
       validate :email_must_be_unique, if: -> { password.present? && email_changed? }
     end
 

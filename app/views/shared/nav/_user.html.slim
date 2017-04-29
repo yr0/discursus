@@ -5,6 +5,7 @@ a.dsc-nav-clickable-icon [data-tooltipster-side='bottom' data-tooltipster-trigge
 .dsc-user-hidden-content
   span.dsc-nav-user-content.dsc-nav-tooltip-content
     - if current_user.present?
+      = link_to t('nav.backoffice'), class: 'dsc-nav-tooltip-link'
       = link_to t('log_out'), destroy_user_session_path, method: :delete, class: 'dsc-nav-tooltip-link'
     - else
       = link_to t('log_in'), new_session_path(:user), class: 'dsc-nav-tooltip-link'

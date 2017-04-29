@@ -5,8 +5,8 @@ class LineItem < ApplicationRecord
   enum variant: VariantsFunctionality::VARIANT_TYPES.map { |v| [v, v] }.to_h
 
   before_validation -> { self.price = book.price_of(variant) }
-  validates :book, presence: true
-  validates :order, presence: true
+  validates :book_id, presence: true
+  validates :order_id, presence: true
   validates :price, :quantity, numericality: true, presence: true
   validates :variant, presence: true
 

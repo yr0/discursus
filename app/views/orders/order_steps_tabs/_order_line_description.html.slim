@@ -1,0 +1,12 @@
+= t('orders.cart.short_description.total_items')
+| &nbsp;
+strong
+  = current_order.line_items.size
+| &nbsp;
+= t('orders.cart.short_description.total_sum')
+| &nbsp;
+strong
+  = readable_price current_order.total
+| &emsp;(
+label.dsc-cart-table-unfold for="elementsSwitcher" = t('unfold')
+| )

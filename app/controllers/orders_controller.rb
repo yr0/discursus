@@ -14,10 +14,10 @@ class OrdersController < ApplicationController
   # Presubmission runs all validations but doesn't store the order
   def submit
     @presubmit = params[:commit] != I18n.t('orders.submit')
-    current_order.assign_attributes(order_submission_params)
+    current_order.assign_attributes(order_submission_params.merge(form_submission_started: true))
 
     try_submitting_order unless @presubmit
-    @errors ||= current_order.errors.full_messages.uniq unless current_order.valid?
+    process_order_errors
   end
 
   def populate
@@ -39,6 +39,12 @@ class OrdersController < ApplicationController
   def order_submission_params
     params.require(:order).permit(:shipping_method, :city, :street, :payment_method, :comment,
                                   :full_name, :phone, :email, :password, :password_confirmation)
+  end
+
+  def process_order_errors
+    return if current_order.valid?
+    @errors ||= current_order.errors.full_messages.uniq
+    current_order.form_submission_started = false
   end
 
   def try_submitting_order

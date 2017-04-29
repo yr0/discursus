@@ -4,6 +4,7 @@ class BooksController < ApplicationController
   def index
     load_categories
     load_authors
+    initialize_search_query
     @search = @search_query.search(params[:page])
     @books = @search.results
 
@@ -25,7 +26,7 @@ class BooksController < ApplicationController
   end
 
   def initialize_search_query
-    @search_query = SearchQuery.new(search_query_params)
+    @search_query = BookSearchQuery.new(search_query_params)
   end
 
   def search_query_params
