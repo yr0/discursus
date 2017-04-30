@@ -72,9 +72,11 @@ module OrdersFunctionality
       end
     end
 
+    # If order includes digital books, for each of that book a token will be generated
     def process_digital_items
       # generate digital links
-      # OrderMailer.digital_books(self).deliver_later
+      tokens_for_digital_books.create(line_items.digital.select(:book_id, :variant).as_json)
+      OrderMailer.digital_books(self).deliver_later
     end
   end
 end

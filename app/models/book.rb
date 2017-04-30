@@ -8,6 +8,7 @@ class Book < ApplicationRecord
   has_many :authors_books
   has_many :authors, through: :authors_books
   has_many :extra_images, class_name: 'BookExtraImage'
+  has_many :tokens_for_digital_books
   accepts_nested_attributes_for :extra_images,
                                 reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },
                                 allow_destroy: true

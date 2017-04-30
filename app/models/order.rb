@@ -13,6 +13,7 @@ class Order < ApplicationRecord
   belongs_to :customer, polymorphic: true
   has_many :line_items
   has_many :books, through: :line_items
+  has_many :tokens_for_digital_books
 
   def requires_shipping?
     physical?

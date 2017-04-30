@@ -60,6 +60,20 @@ context 'state machine' do
       expect { order.pay! }.to initiate_email_subjects(I18n.t('mailers.order.subject', id: order.id),
                                                        I18n.t('mailers.order.notify_admin.subject', id: order.id))
     end
+
+    it 'creates tokens for digital books if order includes them' do
+      order = create(:order, :with_line_items, :card, :submitted, book_variant: :ebook)
+      expect(order.line_items.digital).not_to be_empty
+      expect { order.pay! }.to change { order.tokens_for_digital_books.size }.by(order.line_items.digital.size)
+    end
+
+    it 'enqueues email to be sent to user after order is paid and contains digital items' do
+      order = create(:order, :with_line_items, :card, :submitted, book_variant: :ebook)
+      expect(order.line_items.digital).not_to be_empty
+      expect { order.pay! }.to initiate_email_subjects(I18n.t('mailers.order.subject', id: order.id),
+                                                       I18n.t('mailers.order.notify_admin.subject', id: order.id),
+                                                       I18n.t('mailers.order.digital_books.subject', id: order.id))
+    end
   end
 
   context 'complete' do

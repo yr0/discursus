@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :articles, only: %i(index show)
   get 'about_us', to: 'about_us#index'
 
+  resources :tokens_for_digital_books, only: %i(show) do
+    get 'download', on: :member
+  end
+
   scope :orders, controller: :orders do
     get 'cart'
     get 'modify_line_item_quantity'

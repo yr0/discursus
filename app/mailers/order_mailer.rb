@@ -23,6 +23,8 @@ class OrderMailer < ApplicationMailer
   end
 
   # Sends out links to digital copies of books to customer
-  def digital_books
+  def digital_books(order)
+    @order = order
+    mail(to: order.email, subject: I18n.t('mailers.order.digital_books.subject', id: @order.id))
   end
 end
