@@ -1,6 +1,9 @@
 | Logo
 p = t('mailers.order.intro')
-p = t('mailers.order.notify_cash.message').html_safe
+p = t('mailers.order.notify_card.message').html_safe
+- if @order.digital?
+  p = t('mailers.order.notify_card.message_before_digital').html_safe
+p = t('mailers.order.notify_card.message_before_details').html_safe
 div
   = render 'order_mailer/order_table'
 p = t('mailers.order.outro')

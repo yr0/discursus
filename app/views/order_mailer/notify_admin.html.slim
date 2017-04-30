@@ -1,0 +1,5 @@
+p = t('mailers.order.intro')
+p = t('mailers.order.notify_admin.message')
+div
+  = render 'order_mailer/order_table'
+p = t('mailers.order.notify_admin.outro', orders_count: @orders_count, orders_sum: @orders_sum)

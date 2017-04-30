@@ -5,14 +5,14 @@ module CurrentOrder
     helper_method :current_order
   end
 
-  def current_temp_user
-    @current_temp_user ||= TemporaryUser.find_by(uuid: cookies[:temp_user_uuid])
-  end
-
   def current_order
     return @current_order if @current_order
     user = current_user || current_temp_user
     @current_order = user.orders.pending.first if user
+  end
+
+  def current_temp_user
+    @current_temp_user ||= TemporaryUser.find_by(uuid: cookies[:temp_user_uuid])
   end
 
   private
@@ -25,9 +25,16 @@ module CurrentOrder
     end
   end
 
+  # If uuid cookie is present, fetches the temporary user from database
+  # Otherwise, creates temp user if cookie is wrong or absent and writes the uuid into cookie.
   def create_temp_user
-    uuid = cookies[:temp_user_uuid] || SecureRandom.uuid
-    @current_temp_user = TemporaryUser.find_or_create_by(uuid: uuid)
+    if cookies[:temp_user_uuid].present?
+      @current_temp_user = TemporaryUser.find_by(uuid: cookies[:temp_user_uuid])
+      return if @current_temp_user.present?
+    end
+
+    uuid = SecureRandom.uuid
+    @current_temp_user = TemporaryUser.create(uuid: uuid)
     cookies[:temp_user_uuid] = uuid
   end
 end

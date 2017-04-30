@@ -12,11 +12,14 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   include FactoryGirl::Syntax::Methods
-  include ControllerHelpers
+  include ::ControllerHelpers
 
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.after(:each) { ActionMailer::Base.deliveries.clear }
 
   config.before(:suite) do
     FactoryGirl.lint

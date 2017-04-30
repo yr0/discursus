@@ -37,10 +37,20 @@ RSpec::Matchers.define :be_equal_by_ids_to do |expected|
   end
 end
 
-RSpec::Matchers.define :initiate_email_sending do |size = 1|
+RSpec::Matchers.define :initiate_email_subjects do |*subjects|
   match do |actual|
     perform_enqueued_jobs(&actual)
-    change { ActionMailer::Base.deliveries.size }.by size
+    expect(ActionMailer::Base.deliveries.map(&:subject).map(&:strip)).to match_array subjects.map(&:strip)
+  end
+
+  match_when_negated do |actual|
+    perform_enqueued_jobs(&actual)
+    expect(ActionMailer::Base.deliveries).to be_empty
+  end
+
+  failure_message do
+    "Expected that mailer deliveries would initiate emails with subjects #{subjects}. "\
+    "Instead got these subjects: #{ActionMailer::Base.deliveries.map(&:subject)}"
   end
 
   supports_block_expectations

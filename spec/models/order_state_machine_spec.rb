@@ -40,11 +40,11 @@ context 'state machine' do
       end.to change { TemporaryUser.count }.by(-1)
     end
 
-    xit 'sends out user notification if order is marked as paid in cash' do
+    it 'sends out user and admin notification if order is marked as paid in cash' do
       order = create(:order, :cash, :with_line_items, :valid_for_user_swap)
-      expect do
-        perform_enqueued_jobs { order.submit! }
-      end.to change { ActionMailer::Base.deliveries.size }.by 1
+
+      expect { order.submit! }.to initiate_email_subjects(I18n.t('mailers.order.subject', id: order.id),
+                                                          I18n.t('mailers.order.notify_admin.subject', id: order.id))
     end
   end
 
@@ -55,19 +55,17 @@ context 'state machine' do
       expect(order.paid_for?).to eq true
     end
 
-    xit 'sends out user notification if order is marked as paid by card' do
+    it 'sends out user notification if order is marked as paid by card' do
       order = create(:order, :card, :submitted)
-      expect do
-        perform_enqueued_jobs { order.pay! }
-      end.to change { ActionMailer::Base.deliveries.size }.by 1
+      expect { order.pay! }.to initiate_email_subjects(I18n.t('mailers.order.subject', id: order.id),
+                                                       I18n.t('mailers.order.notify_admin.subject', id: order.id))
     end
   end
 
   context 'complete' do
-    it 'can transition to completed after being submitted if order is paid by cash' do
+    it 'cannot transition to completed after being submitted if order is paid by cash' do
       order = create(:order, :cash, :submitted)
-      order.success!
-      expect(order.completed?).to eq true
+      expect { order.success! }.to raise_error(AASM::InvalidTransition)
     end
 
     it 'can transition to completed after being paid if order is paid by card' do
