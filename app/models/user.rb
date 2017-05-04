@@ -3,7 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, omniauth_providers: %i(facebook google_oauth2)
 
   validates :name, :email, length: { maximum: 250 }
-  has_many :orders, as: :customer, dependent: :destroy
+  has_many :orders, as: :customer
+  has_many :users_favorite_books
+  has_many :favorite_books, through: :users_favorite_books, source: :book
 
   class << self
     def from_omniauth(request_data)

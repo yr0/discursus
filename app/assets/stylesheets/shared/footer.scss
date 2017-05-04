@@ -6,6 +6,10 @@
   width: 100%;
   overflow: hidden;
   color: $white;
+
+  &.small-footer {
+    height: 50px;
+  }
 }
 
 .dsc-footer-big {

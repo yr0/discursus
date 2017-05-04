@@ -30,9 +30,9 @@ class BooksController < ApplicationController
   end
 
   def search_query_params
-    return {} unless params[:search_query].present?
-    params.require(:search_query).permit(:order_field, :text_query, :search_all_categories,
-                                         author_ids: [], category_ids: [],
-                                         order_by_desc: [:title_for_sorting, :main_price, :created_at])
+    return {} unless params[:book_search_query].present?
+    params.require(:book_search_query).permit(:order_field, :text_query, :search_all_categories,
+                                              author_ids: [], category_ids: [],
+                                              order_by_desc: [:title_for_sorting, :main_price, :created_at])
   end
 end

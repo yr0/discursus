@@ -1,8 +1,8 @@
 .dsc-books-filter-option
   = f.radio_button :order_field, field, class: 'dsc-input-checkable'
   = f.label "order_field_#{field}", t("books.sort_by.#{field}"), class: 'dsc-label-checkable dsc-checkable-radio'
-  = check_box_tag "search_query[order_by_desc][#{field}]", 1, f.object.order_by_desc[field.to_sym].to_i.nonzero?,
+  = check_box_tag "book_search_query[order_by_desc][#{field}]", 1, f.object.order_by_desc[field.to_sym].to_i.nonzero?,
           class: 'dsc-input-order-desc'
-  = label_tag "search_query_order_by_desc_#{field}", '',
+  = label_tag "book_search_query_order_by_desc_#{field}", '',
           class: "dsc-label-order-desc#{' dsc-order-alpha' if field == :title_for_sorting}",
           title: t('click_to_change_order')

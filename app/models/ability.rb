@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    @user = user
     can :read, [Book, Article, TeamMember, Bookstore, Author]
     return unless user # user is a guest
     user_abilities
@@ -12,10 +13,10 @@ class Ability
 
   def admin_abilities
     can :index, AdminPanel::DashboardController
-    can :manage, [Book, Article, TeamMember, Bookstore, Author]
+    can :manage, [Book, Article, TeamMember, Bookstore, Author, Order]
   end
 
   def user_abilities
-    can :read, [Book, Article, TeamMember, Bookstore, Author]
+    can :modify, @user
   end
 end

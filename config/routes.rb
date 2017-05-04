@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   resources :articles, only: %i(index show)
   get 'about_us', to: 'about_us#index'
 
+  devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: 'users/registrations'
+  }
+
   resources :tokens_for_digital_books, only: %i(show) do
     get 'download', on: :member
   end
@@ -17,10 +22,11 @@ Rails.application.routes.draw do
     patch 'submit', as: 'submit_order'
   end
 
-  devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations'
-  }
+  namespace :u, module: :personal, as: '' do
+    get 'bookshelf', to: 'bookshelf#index'
+    get 'favorite_books', to: 'favorite_books#index'
+    get 'orders', to: 'orders#index', as: :personal_orders
+  end
 
   devise_for :admins
   namespace :admin_panel do

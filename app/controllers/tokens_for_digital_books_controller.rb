@@ -5,6 +5,7 @@ class TokensForDigitalBooksController < ApplicationController
 
   def download
     token = TokenForDigitalBook.find_by!(code: params[:id])
+    # increase download count!
     if token.ebook?
       send_file token.book.ebook_file.file
     elsif token.audio?
