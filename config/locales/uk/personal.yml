@@ -1,0 +1,13 @@
+uk:
+  personal:
+    nav:
+      bookshelf: Книжкова полиця
+      favorite: Обрані книги
+      orders: Замовлення
+      profile: Персональні дані
+    bookshelf:
+      empty: Полиця поки що порожня
+    orders:
+      empty: Ви ще не здійснили жодного замовлення
+    favorite:
+      empty: Ви не обрали жодної книги

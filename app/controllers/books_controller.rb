@@ -14,6 +14,12 @@ class BooksController < ApplicationController
   def show
   end
 
+  # We do not skip load resource to make sure the book exists
+  def toggle_favorite
+    current_user.users_favorite_books.find_or_create_by(book_id: params[:id])
+    head :ok
+  end
+
   private
 
   def load_categories

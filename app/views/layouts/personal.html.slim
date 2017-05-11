@@ -12,12 +12,34 @@ html
     = render 'shared/header'
     section.dsc-main-content
       .dsc-header.dsc-section-header
-        h2.dsc-header-text = t('nav.backoffice')
+        h2.dsc-header-text.hidden-xs = t('nav.backoffice')
+        h2.dsc-header-text.visible-xs = current_personal_page
       .container
-        row
-        .col-md-3 Nav
-        .col-md-9
-          == yield
+        .row
+          .col-md-3.col-xs-12
+            nav.personal-nav.row
+              .col-md-12.col-sm-6.col-xs-3
+                = link_to bookshelf_path,
+                        class: "personal-nav-item #{'active' if controller_name == 'bookshelf'}" do
+                  = image_tag 'bookshelf.png', class: 'personal-nav-icon'
+                  span.hidden-xs = t('personal.nav.bookshelf')
+              .col-md-12.col-sm-6.col-xs-3
+                = link_to personal_orders_path,
+                        class: "personal-nav-item #{'active' if controller_name == 'orders'}" do
+                  = fa_icon 'briefcase 2x', class: 'personal-nav-icon'
+                  span.hidden-xs = t('personal.nav.orders')
+              .col-md-12.col-sm-6.col-xs-3
+                = link_to favorite_books_path,
+                        class: "personal-nav-item #{'active' if controller_name == 'favorite_books'}" do
+                  = fa_icon 'heart 2x', class: 'personal-nav-icon'
+                  span.hidden-xs = t('personal.nav.favorite')
+              .col-md-12.col-sm-6.col-xs-3
+                = link_to root_path,
+                        class: "personal-nav-item #{'active' if controller_name == 'profile'}" do
+                  = fa_icon 'pencil 2x', class: 'personal-nav-icon'
+                  span.hidden-xs = t('personal.nav.profile')
+          .col-md-9.col-xs-12
+            == yield
     = render 'shared/small_footer'
     - if content_for?(:uses_spinner?)
       = render 'shared/spinner'

@@ -1,2 +1,5 @@
-h1
-  | Orders
+- if @orders.any?
+  h1
+    | Orders in progress
+- else
+  h4.text-center = t('personal.orders.empty')

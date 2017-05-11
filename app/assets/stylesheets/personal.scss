@@ -1,0 +1,46 @@
+.personal-nav {
+  margin-top: 20px;
+
+  .personal-nav-item {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    color: $white;
+    background-color: $gray;
+    min-width: 50px;
+
+    &:hover {
+      text-decoration: none;
+      background-color: darken($gray, 5);
+    }
+
+    &.active {
+      background-color: $color-darker;
+    }
+
+    & > span {
+      font-size: 1.7rem;
+    }
+
+    .personal-nav-icon {
+      padding: 0 20px;
+    }
+
+    img.personal-nav-icon {
+      height: 25px;
+      padding: 0 15px;
+    }
+  }
+}
+
+@media(max-width: 767px) {
+  .personal-nav-item {
+    justify-content: center;
+
+    .personal-nav-icon {
+      padding: 0;
+    }
+  }
+}

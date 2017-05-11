@@ -6,6 +6,13 @@ class User < ApplicationRecord
   has_many :orders, as: :customer
   has_many :users_favorite_books
   has_many :favorite_books, through: :users_favorite_books, source: :book
+  has_many :line_items, through: :orders
+  has_many :bought_books,
+           -> { where(orders: { aasm_state: :completed })
+                    .select('DISTINCT ON (books.id) books.*')
+                    .reorder('books.id ASC')
+                    .group('orders.updated_at, books.id') },
+           through: :line_items, source: :book
 
   class << self
     def from_omniauth(request_data)

@@ -18,5 +18,6 @@ class Ability
 
   def user_abilities
     can :modify, @user
+    can :toggle_favorite, Book
   end
 end

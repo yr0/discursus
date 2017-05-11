@@ -5,6 +5,8 @@ class Book < ApplicationRecord
   validates :pages_amount, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { maximum: 10_000 }
 
+  scope :with_variants_for, ->(user) { joins() }
+
   has_many :authors_books
   has_many :authors, through: :authors_books
   has_many :extra_images, class_name: 'BookExtraImage'

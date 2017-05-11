@@ -1,2 +1,5 @@
-h1
-  | Bookshelf
+- if @books.any?
+  h1
+    | Bookshelf in progress
+- else
+  h4 = t('personal.bookshelf.empty')

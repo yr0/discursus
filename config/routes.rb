@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   root 'home#index'
-  resources :books, only: %i(index show)
+  resources :books, only: %i(index show) do
+    put 'toggle_favorite', on: :member
+  end
   resources :authors, only: %i(index show)
   resources :articles, only: %i(index show)
   get 'about_us', to: 'about_us#index'
