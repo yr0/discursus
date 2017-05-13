@@ -13,7 +13,7 @@ module OrdersFunctionality
         state :failed
         state :canceled
 
-        event :submit, after: :on_submit_actions do
+        event :submit, before: -> { self.submitted_at = Time.current }, after: :on_submit_actions do
           transitions from: [:pending, :submitted], to: :submitted, guard: -> { line_items.present? }
         end
 
@@ -21,8 +21,8 @@ module OrdersFunctionality
           transitions from: :submitted, to: :paid_for
         end
 
-        # order can be transitioned to completed only by administrator from paid_for
-        event :success, before: -> { self.completed_at = DateTime.current } do
+        # order can be transitioned to completed only by administrator from paid_for unless all of its items are digital
+        event :success, before: -> { self.completed_at = Time.current } do
           transitions from: :paid_for, to: :completed
         end
 

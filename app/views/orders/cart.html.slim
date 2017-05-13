@@ -3,6 +3,8 @@
 .dsc-order-container
   - if current_order&.items?
     input#elementsSwitcher.dsc-orders-elements-switcher type="checkbox"
+    .dsc-switchable-cart-closed
+      .dsc-orders-section-title#cartLineDescription = render('orders/order_steps_tabs/order_line_description')
     = render('orders/cart_table')
     = render('orders/order_steps')
   - else

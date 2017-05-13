@@ -49,6 +49,8 @@ gem 'sunspot_rails'
 gem 'aasm'
 # liqpay API wrapper
 gem 'liqpay', github: 'yr0/liqpay'
+# Mailgun wrapper for rails
+gem 'mailgun_rails'
 
 # friendly urls
 gem 'friendly_id', '~> 5.1'

@@ -33,6 +33,7 @@ uk:
     street: Вулиця
     comment: Коментар
     payment_method: Спосіб оплати
+    aasm_state: Статус
   activerecord:
     errors:
       attributes:

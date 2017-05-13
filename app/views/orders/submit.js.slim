@@ -3,7 +3,7 @@
 - elsif @presubmit
   | $('.dsc-orders-step-errors').removeClass('dsc-form-errors-bordered').html('');
     var nextTabNumber = goToNextTab();
-    if(nextTabNumber === 1) $('.dsc-orders-summary-container')
-      .html('#{ j render('orders/order_steps_tabs/text_summary', order_submission: @order_submission) }');
+    if(nextTabNumber === 2) $('.dsc-orders-summary-container')
+      .html('#{ j render('orders/order_steps_tabs/text_summary') }');
 - else
-  | alert('Submitted!');
+  | console.log('Order Submitted!');

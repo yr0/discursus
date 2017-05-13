@@ -1,8 +1,9 @@
-- order_has_physical = current_order.physical?
-.dsc-switchable-cart-closed
-  .dsc-orders-section-title#cartLineDescription = render('orders/order_steps_tabs/order_line_description')
+- order ||= current_order
+- order_frozen ||= false
+- order_has_physical = order.physical?
+
 .dsc-switchable-cart
-  table.dsc-cart-table
+  table.dsc-table.dsc-cart-table
     thead
       tr
         th.dsc-th-image
@@ -13,7 +14,7 @@
         th.dsc-th-price colspan="#{ order_has_physical ? 1 : 2 }" = t('orders.cart.sum')
         th.dsc-th-actions
     tbody
-      - current_order.line_items.includes(:book).each do |item|
+      - order.line_items.includes(:book).each do |item|
         tr.spacer
           td colspan=6
         tr id="itemRow#{item.id}"
@@ -27,22 +28,26 @@
               .dsc-kind-name = t("books.variants.#{item.variant}")
           - unless item.digital?
             td.text-center.dsc-bordered-right.dsc-small-padding
-              = link_to fa_icon('minus'), modify_line_item_quantity_path(id: item.id, subtract: true),
-                      class: 'dsc-orders-modify-quantity', remote: true
-              span.dsc-orders-item-quantity = item.quantity
-              = link_to fa_icon('plus'), modify_line_item_quantity_path(id: item.id),
-                      class: 'dsc-orders-modify-quantity', remote: true
+              - if order_frozen
+                span.dsc-orders-item-quantity = item.quantity
+              - else
+                = link_to fa_icon('minus'), modify_line_item_quantity_path(id: item.id, subtract: true),
+                        class: 'dsc-orders-modify-quantity', remote: true
+                span.dsc-orders-item-quantity = item.quantity
+                = link_to fa_icon('plus'), modify_line_item_quantity_path(id: item.id),
+                        class: 'dsc-orders-modify-quantity', remote: true
               .dsc-orders-item-before-price = fa_icon('times')
               .dsc-orders-item-one-price = readable_price(item.price, false)
           td.text-center.dsc-orders-sum colspan="#{ item.digital? ? 2 : 1 }" = readable_price(item.total, false)
           td.text-center.dsc-orders-delete-item-cell
-            = link_to fa_icon('times'), modify_line_item_quantity_path(id: item.id, destroy: true), remote: true
+            - unless order_frozen
+              = link_to fa_icon('times'), modify_line_item_quantity_path(id: item.id, destroy: true), remote: true
         tr.spacer.bordered
           td colspan=6
   .dsc-orders-total-container
     .dsc-orders-total-area
       = t('orders.cart.total')
       | &emsp;
-      span.dsc-orders-total-price = readable_price(current_order.total, false, false)
+      span.dsc-orders-total-price = readable_price(order.total, false, false)
       | &nbsp;
       = t(Rails.configuration.default_currency)

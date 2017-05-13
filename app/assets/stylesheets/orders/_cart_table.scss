@@ -1,15 +1,6 @@
 .dsc-cart-table {
   width: 100%;
 
-  th {
-    font-weight: normal;
-    font-size: 1.2em;
-    padding: 15px 20px;
-    background-color: $gray;
-    color: $white;
-    text-align: center;
-  }
-
   .dsc-th-image {
     width: 5%;
   }
@@ -36,29 +27,8 @@
     width: 3%;
   }
 
-  tr.spacer {
-    height: 25px;
-
-    &.bordered {
-      border-bottom: 2px solid $gray;
-    }
-  }
-
   .dsc-orders-book-image {
     max-height: 100px;
-  }
-
-  td {
-    font-size: 1.4em;
-    padding: 0 20px;
-
-    &.dsc-bordered-right {
-      border-right: 2px solid $gray;
-    }
-
-    &.dsc-small-padding {
-      padding: 0 5px;
-    }
   }
 
   .dsc-orders-item-title {

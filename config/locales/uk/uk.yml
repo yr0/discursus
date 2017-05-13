@@ -16,6 +16,7 @@ uk:
   uah: грн
   sold: Продано
   see: Глянути
+  inspect: Переглянути
   unfold: Розгорнути
   add_to_favorites: Додати до улюблених
   buy: Придбати
@@ -29,3 +30,5 @@ uk:
   pcs: "шт."
   unspecified: Не вказано
   go_to_download: Перейти до завантаження
+  actions: Дії
+

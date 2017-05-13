@@ -1,0 +1,44 @@
+- order_has_physical = @order.physical?
+
+h2 = "#{t('orders.order')} ##{@order.id}"
+
+.box
+  .box-header
+    h4 = t('personal.orders.books')
+  .box-body.no-padding
+    - %w(physical digital).each do |kind|
+      - next unless @order.line_items.send(kind).any?
+      .box.box-solid
+        .box-header
+          strong = t("admin_panel.orders.items_#{kind}")
+        .box-body.no-padding.table-responsive
+          table.table.table-hover
+            thead
+              tr
+                th.dsc-th-title = t('attributes.title')
+                th.dsc-th-kind = t('orders.cart.book_kind')
+                th.dsc-th-quantity = t('orders.cart.quantity')
+                th.dsc-th-price = t('orders.cart.sum')
+            tbody
+              - @order.line_items.send(kind).includes(:book).each do |item|
+                tr
+                  td
+                    = link_to item.book.title, book_path(item.book.friendly_id)
+                  td = t("books.variants.#{item.variant}")
+                  td.text-center
+                    = item.quantity
+                    |&ensp;x&ensp;
+                    = readable_price(item.price, false)
+                  td.text-right = readable_price(item.total, false)
+    .box-footer
+      h4.text-right
+        strong = t('orders.cart.total')
+        | &nbsp;
+        = readable_price(@order.total, false, false)
+        | &nbsp;
+        = t(Rails.configuration.default_currency)
+.box
+  .box-header
+    h4 = t('personal.orders.info')
+  .box-body
+    = personal_order_detailed_information(@order)

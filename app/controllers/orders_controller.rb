@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
   def submit
     @presubmit = params[:commit] != I18n.t('orders.submit')
     current_order.assign_attributes(order_submission_params.merge(form_submission_started: true))
-
     try_submitting_order unless @presubmit
     process_order_errors
   end
@@ -49,9 +48,15 @@ class OrdersController < ApplicationController
 
   def try_submitting_order
     if verify_recaptcha(model: current_order)
-      current_order.submit!
+      submit_and_redirect!
     else
+      @recaptcha_error = true
       @errors = [I18n.t('recaptcha_failed')]
     end
+  end
+
+  def submit_and_redirect!
+    current_order.submit!
+    redirect_to current_order.card? ? current_order.payment_url : { action: 'thank_you' }
   end
 end

@@ -1,0 +1,8 @@
+- content_for :personal_section_header, "#{t('orders.order')} ##{@order.id}"
+
+section.personal-order-info
+  h4 = t('personal.orders.info')
+  = personal_order_detailed_information(@order)
+section.personal-order-books
+  h4 = t('personal.orders.books')
+  = render('orders/cart_table', order: @order, order_frozen: true)

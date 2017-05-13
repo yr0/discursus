@@ -9,6 +9,10 @@ body {
   //  for footer. footer is 570px high, we add 20 additional px for proper margin
   margin: 0 0 590px;
   z-index: 0;
+
+  &.with-small-footer {
+    margin: 0 0 70px;
+  }
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -53,3 +57,34 @@ input[type=text],textarea {
   }
 }
 
+.dsc-table {
+  th {
+    font-weight: normal;
+    font-size: 1.2em;
+    padding: 15px 20px;
+    background-color: $gray;
+    color: $white;
+    text-align: center;
+  }
+
+  tr.spacer {
+    height: 25px;
+
+    &.bordered {
+      border-bottom: 2px solid $gray;
+    }
+  }
+
+  td {
+    font-size: 1.4em;
+    padding: 0 20px;
+
+    &.dsc-bordered-right {
+      border-right: 2px solid $gray;
+    }
+
+    &.dsc-small-padding {
+      padding: 0 5px;
+    }
+  }
+}

@@ -14,6 +14,10 @@ class User < ApplicationRecord
                     .group('orders.updated_at, books.id') },
            through: :line_items, source: :book
 
+  def last_order
+    orders.where.not(aasm_state: :pending).order(created_at: :desc).first
+  end
+
   class << self
     def from_omniauth(request_data)
       find_or_initialize_by(oauth_provider: request_data.provider, oauth_uid: request_data.uid).tap do |user|

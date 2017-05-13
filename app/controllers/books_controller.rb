@@ -16,7 +16,8 @@ class BooksController < ApplicationController
 
   # We do not skip load resource to make sure the book exists
   def toggle_favorite
-    current_user.users_favorite_books.find_or_create_by(book_id: params[:id])
+    favorite = current_user.users_favorite_books.find_or_initialize_by(book_id: params[:id])
+    favorite.new_record? ? favorite.save : favorite.destroy
     head :ok
   end
 

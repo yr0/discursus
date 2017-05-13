@@ -25,7 +25,7 @@ uk:
     all_categories: Усі категорії
     authors_filter_placeholder: "Виберіть зі списку"
     # show
-    available_variants: Доступні варіанти
+    available_variants: Інші варіанти
     unavailable: Книги поки що немає
     variant_selected:
       paperback: "За книгу <strong>з м'якою обкладинкою</strong>"

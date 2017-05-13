@@ -46,6 +46,13 @@ context 'state machine' do
       expect { order.submit! }.to initiate_email_subjects(I18n.t('mailers.order.subject', id: order.id),
                                                           I18n.t('mailers.order.notify_admin.subject', id: order.id))
     end
+
+    it 'stores date of submission on event' do
+      order = create(:order, :with_line_items)
+      expect(order.submitted_at).not_to be
+      order.submit!
+      expect(order.reload.submitted_at).to be_within(10.seconds).of(Time.current)
+    end
   end
 
   context 'pay' do

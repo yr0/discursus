@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504062145) do
+ActiveRecord::Schema.define(version: 20170513131035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170504062145) do
     t.string   "street"
     t.string   "password_digest"
     t.boolean  "form_submission_started",                          default: false
+    t.datetime "submitted_at"
   end
 
   create_table "taggings", force: :cascade do |t|

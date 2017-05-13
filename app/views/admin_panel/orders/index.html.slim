@@ -1,0 +1,38 @@
+.box
+  .box-header
+    h2 = t('nav.orders')
+  - if @orders.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.description')
+            th = t('attributes.aasm_state')
+            th = t('orders.cart.sum')
+            th width='10%'
+        tbody
+          - @orders.each do |order|
+            tr
+              td
+                = personal_order_description(order)
+                br
+                = [order.full_name, order.phone, order.email].reject(&:blank?).join(' ')
+              td = t("orders.states.#{order.aasm_state}")
+              td = readable_price(order.total)
+              td.text-right
+                .col-md-12 = link_to t('inspect'), [:admin_panel, order], class: 'btn btn-info'
+                - if order.cash? && order.submitted?
+                  .col-md-12
+                    = link_to t('admin_panel.orders.acknowledge_payment'), [:acknowledge_payment, :admin_panel, order],
+                            method: :put, class: 'btn btn-warning', remote: true, 'data-confirm' => true
+                - unless order.completed?
+                  .col-md-12
+                    = link_to t('admin_panel.orders.complete'), [:complete, :admin_panel, order], method: :put,
+                            class: 'btn btn-success', remote: true, 'data-confirm' => true
+      div
+        = paginate @orders
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.orders.no_orders')

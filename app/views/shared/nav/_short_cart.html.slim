@@ -1,4 +1,4 @@
-a.dsc-nav-clickable-icon [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
+a.dsc-nav-clickable-icon#shortCartTrigger [data-tooltipster-side='bottom' data-tooltipster-trigger='click'
   data-tooltip-content='.dsc-small-cart-content' data-tooltipster-interactive=1
   class="#{' active' if current_order&.items?}#{' has-tooltipster' unless view_within_controller?('orders', actions: ['cart'])}"]
   = fa_icon('shopping-basket')

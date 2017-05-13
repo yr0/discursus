@@ -8,12 +8,15 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
-  body data-scope="#{controller_name}.#{action_name}"
+  body.with-small-footer data-scope="#{controller_name}.#{action_name}"
     = render 'shared/header'
     section.dsc-main-content
       .dsc-header.dsc-section-header
-        h2.dsc-header-text.hidden-xs = t('nav.backoffice')
-        h2.dsc-header-text.visible-xs = current_personal_page
+        - if content_for?(:personal_section_header)
+          h2.dsc-header-text = yield(:personal_section_header)
+        - else
+          h2.dsc-header-text.hidden-xs = t('nav.backoffice')
+          h2.dsc-header-text.visible-xs = current_personal_page
       .container
         .row
           .col-md-3.col-xs-12

@@ -1,0 +1,14 @@
+uk:
+  admin_panel:
+    orders:
+      title: Замовлення
+      no_orders: Поки немає замовлень
+      filter:
+        all: Усі
+        submitted: Підтверджені
+        paid_for: Оплачені
+        completed: Готові
+      acknowledge_payment: Позначити як оплачене
+      complete: Позначити як готове
+      items_physical: Паперові книги
+      items_digital: Цифрові книги

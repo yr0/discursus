@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   scope :orders, controller: :orders do
     get 'cart'
+    get 'thank_you'
     get 'modify_line_item_quantity'
     post 'populate'
     patch 'submit', as: 'submit_order'
@@ -27,12 +28,16 @@ Rails.application.routes.draw do
   namespace :u, module: :personal, as: '' do
     get 'bookshelf', to: 'bookshelf#index'
     get 'favorite_books', to: 'favorite_books#index'
-    get 'orders', to: 'orders#index', as: :personal_orders
+    resources 'orders', only: %i(index show), as: :personal_orders
   end
 
   devise_for :admins
   namespace :admin_panel do
-    get '/', to: 'dashboard#index'
+    get '/', to: 'orders#index'
+    resources :orders, only: %i(index show) do
+      put 'acknowledge_payment', on: :member
+      put 'complete', on: :member
+    end
     resources :books
     resources :articles
     resources :team_members

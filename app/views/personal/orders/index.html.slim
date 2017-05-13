@@ -1,5 +1,23 @@
 - if @orders.any?
-  h1
-    | Orders in progress
+  table.dsc-table.dsc-personal-orders-table
+    thead
+      tr
+        th = t('attributes.description')
+        th = t('attributes.aasm_state')
+        th = t('actions')
+    tbody
+      - @orders.each do |order|
+        tr.spacer
+          td colspan=3
+        tr
+          td.dsc-bordered-right
+            = personal_order_description(order)
+          td.dsc-bordered-right
+            = t("orders.states.#{order.aasm_state}")
+          td.text-center
+            = link_to t('inspect'), personal_order_path(order)
+        tr.spacer.bordered
+        td colspan=3
+  = paginate @orders
 - else
   h4.text-center = t('personal.orders.empty')
