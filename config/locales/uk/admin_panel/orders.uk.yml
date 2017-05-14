@@ -2,6 +2,7 @@ uk:
   admin_panel:
     orders:
       title: Замовлення
+      transition_error: Не вдалося перевести замовлення в такий статус
       no_orders: Поки немає замовлень
       filter:
         all: Усі

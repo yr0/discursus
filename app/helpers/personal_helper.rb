@@ -13,9 +13,12 @@ module PersonalHelper
   end
 
   def personal_order_description(order)
-    "#{I18n.t('orders.order')} ##{order.id} (#{readable_date(order.submitted_at, true)})<br/>"\
+    data = "#{I18n.t('orders.order')} ##{order.id} (#{readable_date(order.submitted_at, true)})<br/>"\
     "#{I18n.t('orders.cart.short_description.total_items')}&nbsp;<b>#{order.line_items.size}</b><br/>"\
-    "#{I18n.t('orders.cart.short_description.total_sum')}&nbsp;<b>#{readable_price(order.total)}</b>".html_safe
+    "#{I18n.t('orders.cart.short_description.total_sum')}&nbsp;<b>#{readable_price(order.total)}</b>"
+    data += "<br/>#{I18n.t('personal.orders.completed', date: readable_date(order.completed_at, true))}" if
+        order.completed?
+    data.html_safe
   end
 
   def personal_order_detailed_information(order)

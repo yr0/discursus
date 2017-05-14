@@ -3,9 +3,9 @@ p = t('mailers.order.intro')
 p = t('mailers.order.digital_books.message').html_safe
 - @order.tokens_for_digital_books.includes(:book).each do |token|
   section
-    span = t("books.variants.#{token.variant}#")
+    span = t("books.variants.#{token.variant}")
     |&nbsp;
     em = "\"#{token.book.title}\""
     |&emsp;
     strong = link_to t('go_to_download'), token_for_digital_book_url(id: token.code)
-p = t('mailers.order.digital_books.outro')
+p = t('mailers.order.digital_books.outro').html_safe

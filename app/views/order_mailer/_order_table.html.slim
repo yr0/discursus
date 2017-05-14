@@ -1,9 +1,10 @@
 table border=1 style="width: 100%; border: 1px solid #b8aed1; border-collapse: collapse"
-  - @order.line_items.includes(:book).each do |item|
+  - @order.line_items.includes(book: :authors).each do |item|
     tr style="padding: 5px"
       td style="padding: 5px" = item.book.author_names
       td style="padding: 5px"
         strong= item.book.title
+        em = t("books.variants.#{item.variant}")
       td style="padding: 5px" = "#{item.quantity} #{t('pcs')}"
       td style="padding: 5px" = readable_price(item.price)
   tr style="border-top: 2px solid #b8aed1"
@@ -12,22 +13,5 @@ table border=1 style="width: 100%; border: 1px solid #b8aed1; border-collapse: c
     td style="padding: 5px"
       strong = readable_price(@order.total)
 
-- %w(full_name phone email comment).each do |field|
-  section
-    strong = t("attributes.#{field}")
-    span = "|: &nbsp;#{@order[field] || t('unspecified')}"
-
 section
-  strong = t('attributes.payment_method')
-  span
-    |: &nbsp;
-    = @order.payment_method.present? ? t("orders.payment_methods.#{@order.payment_method}") : t('unspecified')
-
-- if @order.physical?
-  section
-    strong = t('attributes.shipping_method')
-    span
-      |: &nbsp;
-      = @order.shipping_method.present? ? t("orders.shipping_methods.#{@order.shipping_method}") : t('unspecified')
-    br
-    span = [@order.city, @order.street].reject(&:blank?).join(', ')
+  = personal_order_detailed_information(@order)

@@ -1,4 +1,6 @@
 class OrderMailer < ApplicationMailer
+  add_template_helper PersonalHelper
+
   # Notifies user about order with instructions on how to pay with cash
   def notify_cash(order)
     @order = order

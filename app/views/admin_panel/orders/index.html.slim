@@ -17,18 +17,19 @@
                 = personal_order_description(order)
                 br
                 = [order.full_name, order.phone, order.email].reject(&:blank?).join(' ')
-              td = t("orders.states.#{order.aasm_state}")
+              td id="orderState#{order.id}" = t("orders.states.#{order.aasm_state}")
               td = readable_price(order.total)
               td.text-right
-                .col-md-12 = link_to t('inspect'), [:admin_panel, order], class: 'btn btn-info'
+                = link_to fa_icon(:eye), [:admin_panel, order], title: t('inspect'), class: 'btn btn-info'
                 - if order.cash? && order.submitted?
-                  .col-md-12
-                    = link_to t('admin_panel.orders.acknowledge_payment'), [:acknowledge_payment, :admin_panel, order],
-                            method: :put, class: 'btn btn-warning', remote: true, 'data-confirm' => true
-                - unless order.completed?
-                  .col-md-12
-                    = link_to t('admin_panel.orders.complete'), [:complete, :admin_panel, order], method: :put,
-                            class: 'btn btn-success', remote: true, 'data-confirm' => true
+                  | &nbsp;
+                  = link_to fa_icon(:dollar), [:acknowledge_payment, :admin_panel, order], remote: true,
+                          title: t('admin_panel.orders.acknowledge_payment'), id: "acknowledgePayment#{order.id}",
+                          method: :put, class: 'btn btn-warning', 'data-confirm' => true
+                | &nbsp;
+                = link_to fa_icon(:check), [:complete, :admin_panel, order], method: :put, remote: true,
+                        title: t('admin_panel.orders.complete'), id: "complete#{order.id}",
+                        class: "btn btn-success #{'hidden' unless order.paid_for?}", 'data-confirm' => true
       div
         = paginate @orders
   - else

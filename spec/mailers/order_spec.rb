@@ -89,12 +89,14 @@ describe OrderMailer, type: :mailer do
     end
 
     it 'does not send message if admin email is not present' do
+      old_email = Rails.configuration.admin_email
       Rails.configuration.admin_email = nil
       expect do
         perform_enqueued_jobs do
           OrderMailer.notify_admin(order).deliver_later
         end
       end.to change { ActionMailer::Base.deliveries.size }.by(0)
+      Rails.configuration.admin_email = old_email
     end
 
     it 'sends out email with card order to admin with correct data' do
@@ -134,7 +136,7 @@ describe OrderMailer, type: :mailer do
 
       expect(order.tokens_for_digital_books).not_to be_empty
       order.tokens_for_digital_books.each do |token|
-        expect(ActionMailer::Base.deliveries.last.body).to include I18n.t("books.variants.#{token.variant}#")
+        expect(ActionMailer::Base.deliveries.last.body).to include I18n.t("books.variants.#{token.variant}")
         expect(ActionMailer::Base.deliveries.last.body).to include CGI.escapeHTML(token.book.title)
         expect(ActionMailer::Base.deliveries.last.body).to include token.code
       end

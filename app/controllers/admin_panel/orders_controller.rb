@@ -4,7 +4,7 @@ module AdminPanel
     load_resource except: %i(index)
 
     rescue_from AASM::InvalidTransition do
-      head :bad_request
+      render 'transition_error'
     end
 
     def index
@@ -20,15 +20,13 @@ module AdminPanel
     def show
     end
 
-    def complete
-      @order.success!
-      head :ok
-    end
-
     # For orders that are to be paid in cash - submit marks the order having been paid
     def acknowledge_payment
       @order.pay!
-      head :ok
+    end
+
+    def complete
+      @order.success!
     end
   end
 end

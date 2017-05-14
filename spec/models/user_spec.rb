@@ -37,4 +37,17 @@ describe User do
       end.to change { User.count }.by 0
     end
   end
+
+  context 'bought_books' do
+    it 'selects bought books correctly with bought variants that reflect the orders' do
+      user = create(:user)
+      order = create(:order, :digital_and_physical, customer: user)
+      bought_books = order.line_items.map { |li| [li.book_id, li.variant] }.to_h
+      order.submit!
+      order.pay!
+      order.success!
+      expect(user.bought_books).not_to be_empty
+      expect(user.bought_books.all? { |b| b.bought_variants == [bought_books[b.id]] })
+    end
+  end
 end

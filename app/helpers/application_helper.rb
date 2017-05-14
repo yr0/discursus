@@ -47,11 +47,13 @@ module ApplicationHelper
   end
 
   # Provided data is completely validated and isolated from user input
-  def book_card_variants(available_variants)
+  def book_card_variants(available_variants, bought = false)
     return t('sold') if available_variants.blank?
-    available_variants.keys.map do |variant|
+    available_variants = available_variants.keys unless available_variants.is_a?(Array)
+    available_variants.map do |variant|
       content_tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),
-                  class: 'dsc-book-card-variant-item has-tooltipster', title: t("books.available.#{variant}"),
+                  class: 'dsc-book-card-variant-item has-tooltipster',
+                  title: bought ? t("personal.bookshelf.bought_as.#{variant}") : t("books.available.#{variant}"),
                   'data-tooltipster-side': 'bottom')
     end.uniq.join.html_safe # rubocop:disable Rails/OutputSafety
   end

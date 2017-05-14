@@ -1,0 +1,3 @@
+| $("#acknowledgePayment#{@order.id}").addClass('hidden');
+| $("#complete#{@order.id}").removeClass('hidden');
+| $("#orderState#{@order.id}").html("#{t('orders.states.paid_for')}");
