@@ -141,6 +141,8 @@
   padding: 10px 20px;
 
   .dsc-book-side-button {
+    display: inline-block;
+    text-align: center;
     font-size: 1.3rem;
     width: 100%;
     margin: 5px 0;
@@ -157,6 +159,10 @@
 
     .action-icon {
       margin-right: 5px;
+    }
+
+    &:hover {
+      text-decoration: none;
     }
   }
 }

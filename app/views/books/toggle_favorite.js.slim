@@ -1,0 +1,4 @@
+- if @favorited
+  | $('#bookToggleFavorite').html('#{ fa_icon('heart', text: t('favorited'), class: 'action-icon') }');
+- else
+  | $('#bookToggleFavorite').html('#{ fa_icon('heart-o', text: t('add_to_favorites'), class: 'action-icon') }');

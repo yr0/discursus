@@ -1,15 +1,6 @@
 - if @books.any?
   .row.dsc-books-list-row
-    - @books.each do |book|
-      .col-md-4.col-sm-6.col-xs-12
-        .dsc-card-container
-          .dsc-card
-            .dsc-card-image-container
-              .dsc-card-actions
-                = link_to fa_icon('eye 2x'), book_path(book), class: 'dsc-card-action has-tooltipster', title: t('see')
-              = image_tag book.image.url(:medium), class: 'dsc-book-card-image'
-            .dsc-book-card-body
-              h4.dsc-book-card-title = book.title
-              ul.dsc-book-card-variants = book_card_variants(book.bought_variants, true)
+    = render 'books/list', books: @books, skip_lg_limit: true, skip_price: true,
+            book_variants_lambda: ->(book) { book_card_variants(book.bought_variants, true) }
 - else
   h4 = t('personal.bookshelf.empty')

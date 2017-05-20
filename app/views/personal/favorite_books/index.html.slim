@@ -1,5 +1,5 @@
 - if @books.any?
-  h1
-    | Favs in progress
+  .row.dsc-books-list-row
+    = render 'books/list', books: @books, skip_lg_limit: true
 - else
   h4.text-center = t('personal.favorite.empty')

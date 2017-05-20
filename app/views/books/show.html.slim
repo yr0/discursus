@@ -2,39 +2,39 @@
   h2.dsc-header-text = @book.title
 .container-fluid.dsc-book-show-container
   .row
-    .col-md-3.dsc-book-images-container
+    .col-sm-3.col-sm-offset-0.col-xs-offset-3.col-xs-6.dsc-book-images-container
       .dsc-book-main-image-container
         = image_tag @book.image.url(:medium), class: 'dsc-book-main-image'
-    .col-md-6.dsc-book-info
-        - authors_amount = @book.authors.size
-        - if authors_amount.nonzero?
-          div
-            span.dsc-book-field-name = authors_amount > 1 ? t('attributes.authors') : t('books.author')
-            |:&nbsp;
-            = @book.author_names
-        - if @book.categories.any?
-          div
-            span.dsc-book-field-name = t('attributes.categories')
-            |:&nbsp;
-            = @book.category_list.join(', ')
+    .col-sm-6.col-xs-12.dsc-book-info
+      - authors_amount = @book.authors.size
+      - if authors_amount.nonzero?
         div
-          span.dsc-book-field-name = t('attributes.pages_amount')
+          span.dsc-book-field-name = authors_amount > 1 ? t('attributes.authors') : t('books.author')
           |:&nbsp;
-          = @book.pages_amount
+          = @book.author_names
+      - if @book.categories.any?
         div
-          span.dsc-book-field-name ISBN
+          span.dsc-book-field-name = t('attributes.categories')
           |:&nbsp;
-          | No isbn?
-        .dsc-book-description = raw @book.description
-        .dsc-book-share-block
-          span.dsc-book-field-name = t('share')
-          .dsc-book-share-icons-container
-            - share_icons_for(@book)
-    .col-md-3.dsc-book-buy-container
-      = render 'books/show/book_buy_large_screens'
+          = @book.category_list.join(', ')
+      div
+        span.dsc-book-field-name = t('attributes.pages_amount')
+        |:&nbsp;
+        = @book.pages_amount
+      div
+        span.dsc-book-field-name ISBN
+        |:&nbsp;
+        | No isbn?
+      .dsc-book-description = raw @book.description
+      .dsc-book-share-block
+        span.dsc-book-field-name = t('share')
+        .dsc-book-share-icons-container
+          - share_icons_for(@book)
+    .col-sm-3.col-sm-offset-0.col-xs-12.dsc-book-buy-container
+      = render 'books/buy'
 
   .row
     .col-xs-12.dsc-show-page-subheader
       h4 = t('see_also')
     .col-xs-12
-      .row = render('books/list', books: Book.where.not(id: @book.id).limit(4))
+      .row = render('books/list', books: random_books(@book))

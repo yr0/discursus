@@ -19,6 +19,7 @@ class Book < ApplicationRecord
                                 allow_destroy: true
 
   mount_uploader :image, ImageUploader
+  mount_uploader :fragment_file, PdfUploader
   mount_uploader :ebook_file, PdfUploader
   mount_uploader :audio_file, AudioUploader
 

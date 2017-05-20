@@ -4,7 +4,7 @@ html
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
-    title Discursus
+    title = "#{t('nav.backoffice')} - #{t('general_title')}"
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
@@ -21,26 +21,26 @@ html
         .row
           .col-md-3.col-xs-12
             nav.personal-nav.row
-              .col-md-12.col-sm-6.col-xs-3
+              .col-md-12.col-sm-6.col-xs-4
                 = link_to bookshelf_path,
                         class: "personal-nav-item #{'active' if controller_name == 'bookshelf'}" do
                   = image_tag 'bookshelf.png', class: 'personal-nav-icon'
                   span.hidden-xs = t('personal.nav.bookshelf')
-              .col-md-12.col-sm-6.col-xs-3
+              .col-md-12.col-sm-6.col-xs-4
                 = link_to personal_orders_path,
                         class: "personal-nav-item #{'active' if controller_name == 'orders'}" do
                   = fa_icon 'briefcase 2x', class: 'personal-nav-icon'
                   span.hidden-xs = t('personal.nav.orders')
-              .col-md-12.col-sm-6.col-xs-3
+              .col-md-12.col-sm-6.col-xs-4
                 = link_to favorite_books_path,
                         class: "personal-nav-item #{'active' if controller_name == 'favorite_books'}" do
                   = fa_icon 'heart 2x', class: 'personal-nav-icon'
                   span.hidden-xs = t('personal.nav.favorite')
-              .col-md-12.col-sm-6.col-xs-3
-                = link_to root_path,
-                        class: "personal-nav-item #{'active' if controller_name == 'profile'}" do
-                  = fa_icon 'pencil 2x', class: 'personal-nav-icon'
-                  span.hidden-xs = t('personal.nav.profile')
+              /.col-md-12.col-sm-6.col-xs-3
+              /  = link_to root_path,
+              /          class: "personal-nav-item #{'active' if controller_name == 'profile'}" do
+              /    = fa_icon 'pencil 2x', class: 'personal-nav-icon'
+              /    span.hidden-xs = t('personal.nav.profile')
           .col-md-9.col-xs-12
             == yield
     = render 'shared/small_footer'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513131035) do
+ActiveRecord::Schema.define(version: 20170520080033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170513131035) do
     t.string   "audio_file"
     t.string   "slug"
     t.boolean  "is_available",                               default: false
+    t.string   "fragment_file"
     t.index ["slug"], name: "index_books_on_slug", unique: true, using: :btree
   end
 
@@ -232,8 +233,9 @@ ActiveRecord::Schema.define(version: 20170513131035) do
   create_table "users_favorite_books", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "is_favorited", default: true
     t.index ["book_id"], name: "index_users_favorite_books_on_book_id", using: :btree
     t.index ["user_id"], name: "index_users_favorite_books_on_user_id", using: :btree
   end

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   load_and_authorize_resource find_by: :slug
 
+
   def index
     load_categories
     load_authors
@@ -16,9 +17,10 @@ class BooksController < ApplicationController
 
   # We do not skip load resource to make sure the book exists
   def toggle_favorite
-    favorite = current_user.users_favorite_books.find_or_initialize_by(book_id: params[:id])
-    favorite.new_record? ? favorite.save : favorite.destroy
-    head :ok
+    favorite = UsersFavoriteBook.find_or_initialize_by(user_id: current_user.id, book_id: @book.id)
+    favorite.assign_attributes(is_favorited: !favorite.is_favorited?) unless favorite.new_record?
+    favorite.save
+    @favorited = favorite.is_favorited?
   end
 
   private

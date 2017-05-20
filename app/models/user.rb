@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :name, :email, length: { maximum: 250 }
   has_many :orders, as: :customer
-  has_many :users_favorite_books
+  has_many :users_favorite_books, -> { where(is_favorited: true) }
   has_many :favorite_books, through: :users_favorite_books, source: :book
   has_many :line_items, through: :orders
   has_many :bought_books,

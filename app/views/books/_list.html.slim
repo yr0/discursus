@@ -1,16 +1,22 @@
+- skip_lg_limit ||= false
+- skip_price ||= false
+- book_variants_lambda ||= ->(book) { book_card_variants(book.available_variants) }
+
 - books.each do |book|
-  .col-lg-3.col-md-4.col-sm-6.col-xs-12
+  .col-md-4.col-sm-6.col-xs-12 class="#{ 'col-lg-3' unless skip_lg_limit }"
     .dsc-card-container
-      .dsc-card
-        .dsc-card-image-container
-          .dsc-card-actions
-            = link_to fa_icon('eye 2x'), book_path(book), class: 'dsc-card-action has-tooltipster', title: t('see')
-            = link_to fa_icon('heart 2x'), root_path, class: 'dsc-card-action has-tooltipster',
-                    title: t('add_to_favorites')
-            = link_to fa_icon('shopping-basket 2x'), root_path, class: 'dsc-card-action has-tooltipster',
-                    title: t('buy')
-          = image_tag book.image.url(:medium), class: 'dsc-book-card-image'
-        .dsc-book-card-body
-          h4.dsc-book-card-title = book.title
-          .dsc-book-card-price = book_card_price(book.main_price.to_f)
-          ul.dsc-book-card-variants = book_card_variants(book.available_variants)
+      = link_to book_path(book) do
+        .dsc-card
+          .dsc-card-image-container
+            .dsc-card-actions
+              = fa_icon('eye 2x', class: 'dsc-card-action', title: t('see'))
+              /= link_to fa_icon('heart 2x'), root_path, class: 'dsc-card-action has-tooltipster',
+              /        title: t('add_to_favorites')
+              /= link_to fa_icon('shopping-basket 2x'), root_path, class: 'dsc-card-action has-tooltipster',
+              /        title: t('buy')
+            = image_tag book.image.url(:medium), class: 'dsc-book-card-image'
+          .dsc-book-card-body
+            h4.dsc-book-card-title = book.title
+            - unless skip_price
+              .dsc-book-card-price = book_card_price(book.main_price.to_f)
+            ul.dsc-book-card-variants = book_variants_lambda.call(book)

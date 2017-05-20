@@ -19,6 +19,7 @@ uk:
   inspect: Переглянути
   unfold: Розгорнути
   add_to_favorites: Додати до улюблених
+  favorited: В улюблених
   buy: Придбати
   apply: Застосувати
   clear: Очистити
@@ -31,4 +32,4 @@ uk:
   unspecified: Не вказано
   go_to_download: Перейти до завантаження
   actions: Дії
-
+  general_title: 'Видавництво Discursus'

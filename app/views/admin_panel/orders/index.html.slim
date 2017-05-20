@@ -1,6 +1,15 @@
 .box
   .box-header
     h2 = t('nav.orders')
+    p
+      = link_to t('admin_panel.orders.filter.all'), admin_panel_orders_path,
+              class: "#{ params[:aasm_state].blank? ? 'btn-success' : 'btn-primary'  } btn margin"
+      = link_to t('admin_panel.orders.filter.submitted'), admin_panel_orders_path(aasm_state: 'submitted'),
+              class: "#{ params[:aasm_state] == 'submitted' ? 'btn-success' : 'btn-primary' } btn margin"
+      = link_to t('admin_panel.orders.filter.paid_for'), admin_panel_orders_path(aasm_state: 'paid_for'),
+              class: "#{ params[:aasm_state] == 'paid_for' ? 'btn-success' : 'btn-primary' } btn margin"
+      = link_to t('admin_panel.orders.filter.completed'), admin_panel_orders_path(aasm_state: 'completed'),
+              class: "#{ params[:aasm_state] == 'completed' ? 'btn-success' : 'btn-primary' } btn margin"
   - if @orders.any?
     .box-body.no-padding.table-responsive
       table.table.table-hover
