@@ -3,8 +3,11 @@
 .dsc-header.dsc-section-header
   h2.dsc-header-text = t('nav.books')
 .container-fluid.dsc-books-index-container
+  input.dsc-display-filter-checkbox.hidden type="checkbox" id="displayFilterCheckbox"
   .row
-    .col-md-2
+    .col-sm-12.hidden-lg.hidden-md.text-center
+      label.dsc-button.dsc-display-filter-label for="displayFilterCheckbox" id="displayFilter" = t('books.show_filter')
+    .col-md-2.col-sm-12.dsc-books-filter-container
       // filter/sort/search form
       = form_for @search_query, url: books_path, method: :get do |f|
         section.dsc-books-filter-section
@@ -41,8 +44,8 @@
 
         .dsc-books-filter-actions
             = submit_tag t('apply'), class: 'dsc-button dsc-book-filter-action'
-            = link_to t('clear'), books_path, class: 'dsc-button clear  dsc-book-filter-action'
-    .col-md-10
+            = link_to t('clear'), books_path, class: 'dsc-button clear dsc-book-filter-action'
+    .col-md-10.col-sm-12
       - if @books.any?
         .row.dsc-books-list-row
           = render('list', books: @books)

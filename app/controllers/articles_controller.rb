@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_default_per_page, only: :index
 
   def index

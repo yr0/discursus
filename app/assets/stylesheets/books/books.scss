@@ -7,3 +7,31 @@
     margin: 0 10%;
   }
 }
+
+@media(max-width: 991px) {
+  .dsc-display-filter-label {
+    margin: 20px;
+  }
+
+  .dsc-display-filter-checkbox ~ * {
+    .dsc-books-filter-container {
+      display: none;
+    }
+
+    .dsc-display-filter-label {
+      background-color: $color-darker;
+      color: $white;
+    }
+  }
+
+  .dsc-display-filter-checkbox:checked ~ * {
+    .dsc-books-filter-container {
+      display: block;
+    }
+
+    .dsc-display-filter-label {
+      background-color: $white;
+      color: $color-darker;
+    }
+  }
+}

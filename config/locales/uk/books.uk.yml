@@ -14,6 +14,8 @@ uk:
     no_books: "Книг поки що немає."
     sort: Сортування
     filter: Фільтри
+    show_filter: Відфільтрувати
+    hide_filter: Сховати
     sort_by:
       title_for_sorting: За назвою
       main_price: За ціною

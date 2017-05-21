@@ -26,6 +26,7 @@
 
 .dsc-main-nav-link {
   font-size: 19px;
+  color: $white;
 
   &:hover {
     text-decoration: none;
@@ -65,7 +66,6 @@
   width: 100%;
   //height: 60px;
 
-  .dsc-main-nav-link,
   .dsc-main-nav-item:before,
   .dsc-main-nav-item:after {
     color: $white;

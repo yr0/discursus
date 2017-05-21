@@ -1,0 +1,6 @@
+.dsc-header.dsc-section-header
+  h2.dsc-header-text = @article.title
+.container-fluid
+  .row
+    .dsc-article-content.col-lg-offset-3.col-lg-6.col-md-offset-2.col-md-8.col-sm-12
+      = @article.body.html_safe
