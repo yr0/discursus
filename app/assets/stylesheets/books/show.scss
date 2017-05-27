@@ -20,6 +20,25 @@
   .dsc-book-main-image {
     width: 100%;
   }
+
+  .dsc-book-extra-images-container {
+    margin: 10px 0;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .dsc-book-extra-image {
+      border: 1px solid $light-gray;
+      overflow: hidden;
+      width: 30%;
+      margin: 10px 3% 0 0;
+      height: 60px;
+    }
+
+    .dsc-book-extra-image img {
+      width: 100%;
+    }
+  }
 }
 
 .dsc-book-info {

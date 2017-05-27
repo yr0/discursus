@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
+
   root 'home#index'
+
+  devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: 'users/registrations'
+  }
+
   resources :books, only: %i(index show) do
     put 'toggle_favorite', on: :member
   end
   resources :authors, only: %i(index show)
   resources :articles, only: %i(index show)
   get 'about_us', to: 'about_us#index'
-
-  devise_for :users, controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      registrations: 'users/registrations'
-  }
 
   resources :tokens_for_digital_books, only: %i(show) do
     get 'download', on: :member

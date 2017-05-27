@@ -1,0 +1,19 @@
+.dsc-header.dsc-section-header
+  h2.dsc-header-text = "#{t('tokens_for_digital_books.title_start')} &laquo;#{@book.title}&raquo;".html_safe
+.dsc-download-book-major-container
+  .dsc-download-book-container
+    - if @token.is_used?
+      .dsc-download-book-text = t('tokens_for_digital_books.already_used')
+    - else
+      .dsc-download-book-text
+        - if @token.ebook?
+          = t('tokens_for_digital_books.ebook')
+        - else
+          = t('tokens_for_digital_books.audio')
+        div = t('tokens_for_digital_books.preface')
+        = link_to t('tokens_for_digital_books.download'), download_token_for_digital_book_path(id: @token.code),
+                class: 'dsc-button dsc-primary-action'
+    = link_to(t('tokens_for_digital_books.book_page'), book_path(@book), class: 'dsc-button')
+
+  div
+    = image_tag(@book.image.url(:large))

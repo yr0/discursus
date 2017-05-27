@@ -46,6 +46,7 @@ module OrdersFunctionality
     def on_pay_actions
       notify_on_card_payment if card?
       process_digital_items if digital?
+      success! unless physical?
     end
 
     # Notify user with email after payment is successful if they chose to pay immediately

@@ -1,0 +1,27 @@
+.dsc-download-book-major-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+.dsc-download-book-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  align-items: center;
+
+  & > * {
+    margin-bottom: 10px;
+  }
+}
+
+.dsc-download-book-text {
+  margin-bottom: 20px;
+}

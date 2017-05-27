@@ -81,6 +81,21 @@ context 'state machine' do
                                                        I18n.t('mailers.order.notify_admin.subject', id: order.id),
                                                        I18n.t('mailers.order.digital_books.subject', id: order.id))
     end
+
+    it 'transfers order to complete state if it only consists of digital items and has been paid for' do
+      order = create(:order, :with_line_items, :card, :submitted, book_variant: :ebook)
+      order.pay!
+      expect(order.reload.completed?).to be
+    end
+
+    it 'does not transfer order to complete state if it consists of digital and physical items' do
+      order = create(:order, :card, :submitted, :digital_and_physical)
+      expect(order.digital?).to be
+      expect(order.physical?).to be
+      order.pay!
+      expect(order.paid_for?).to be
+      expect(order.completed?).not_to be
+    end
   end
 
   context 'complete' do

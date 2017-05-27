@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/tabs
 //= require jquery-ui/effect.all
+//= require darkbox.min
 //= require gritter
 //= require tooltipster.bundle.min
 //= require selectize.min

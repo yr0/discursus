@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520080033) do
+ActiveRecord::Schema.define(version: 20170527115710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,8 +198,9 @@ ActiveRecord::Schema.define(version: 20170520080033) do
     t.integer  "order_id"
     t.integer  "book_id"
     t.integer  "downloads_count", default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "is_used",         default: false
     t.index ["book_id"], name: "index_tokens_for_digital_books_on_book_id", using: :btree
     t.index ["code"], name: "index_tokens_for_digital_books_on_code", using: :btree
     t.index ["order_id"], name: "index_tokens_for_digital_books_on_order_id", using: :btree

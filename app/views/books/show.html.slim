@@ -4,7 +4,14 @@
   .row
     .col-sm-3.col-sm-offset-0.col-xs-offset-3.col-xs-6.dsc-book-images-container
       .dsc-book-main-image-container
-        = image_tag @book.image.url(:medium), class: 'dsc-book-main-image'
+        = image_tag @book.image.url(:medium), class: 'dsc-book-main-image', 'data-darkbox' => @book.image.url,
+                'data-darkbox-description' => @book.title, 'data-darkbox-group' => 'bookImages'
+      - if @book.extra_images.present?
+        .dsc-book-extra-images-container
+          - @book.extra_images.each do |extra_image|
+            .dsc-book-extra-image
+              = image_tag extra_image.image.url(:medium), 'data-darkbox' => extra_image.image.url,
+                      'data-darkbox-description' => extra_image.title, 'data-darkbox-group' => 'bookImages'
     .col-sm-6.col-xs-12.dsc-book-info
       - authors_amount = @book.authors.size
       - if authors_amount.nonzero?
