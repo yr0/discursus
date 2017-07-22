@@ -12,6 +12,11 @@
   .dsc-author-card-title {
     font-size: $block-caption-size;
     margin: 0;
+    color: $black;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 

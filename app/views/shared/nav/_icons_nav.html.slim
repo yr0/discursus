@@ -1,7 +1,7 @@
 nav.dsc-icons-nav
   = form_tag search_url_from_controller, method: :get, class: 'dsc-form-enter-submitted' do
-    input.dsc-icons-nav-search-appearing.dsc-form-text.has-tooltipster [type="text" name="query" maxlength="30"
-      title="#{t('search_hint')}"]
+    input.dsc-icons-nav-search-appearing.dsc-form-text.has-tooltipster [type="text" name="book_search_query[text_query]"
+      maxlength="30" title="#{t('search_hint')}"]
   ul.dsc-icons-nav-items.text-left
     li.dsc-nav-icon.dsc-icons-nav-search-label-container
       - unless view_within_controller?('books', actions: 'index')

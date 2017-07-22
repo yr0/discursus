@@ -45,5 +45,6 @@ Rails.application.routes.draw do
     resources :team_members
     resources :bookstores
     resources :authors
+    resources :settings, only: %i(index update)
   end
 end

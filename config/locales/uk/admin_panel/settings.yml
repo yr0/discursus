@@ -1,0 +1,7 @@
+uk:
+  admin_panel:
+    settings:
+      title: Налаштування
+      phone_hint: "бажано у форматі (111) 111-11-11"
+      home_hero_details_hint: не буде відображатися на малих екранах
+      home_hero_image_hint: бажано 1800 x 750px або з такими ж пропорціями

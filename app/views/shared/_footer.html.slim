@@ -1,17 +1,17 @@
-footer.dsc-footer-container
+footer.dsc-footer-container#dscContacts
   .dsc-footer-big
     .dsc-header.dsc-section-header
       h2.dsc-header-text = t('nav.contacts')
     .dsc-footer-phone-email
-      = fa_icon 'phone', class: 'dsc-footer-phone-icon'
-      h2.dsc-footer-phone-number
-        | (095) 821 50 27
+      //"tel:+38 #{settings.phone}"
+      = fa_icon('phone', class: 'dsc-footer-phone-icon')
+      h2.dsc-footer-phone-number = settings.phone
       = fa_icon('envelope 3x')
-      h4 ladiscursus@gmail.com
+      h4 = settings.email
     .dsc-footer-social-media
-      = link_to fa_icon('facebook 3x'), 'https://facebook.com', class: 'dsc-footer-social-media-link'
-      = link_to fa_icon('twitter 3x'), 'https://twitter.com', class: 'dsc-footer-social-media-link'
-      = link_to fa_icon('google-plus 3x'), 'https://google.com', class: 'dsc-footer-social-media-link'
+      = link_to fa_icon('facebook 3x'), settings.facebook, class: 'dsc-footer-social-media-link'
+      = link_to fa_icon('twitter 3x'), settings.twitter, class: 'dsc-footer-social-media-link'
+      = link_to fa_icon('instagram 3x'), settings.instagram, class: 'dsc-footer-social-media-link'
   .dsc-footer-small
     | &copy; #{years_active}&nbsp;|&nbsp;#{t('footer.publishing_house')} &laquo;Discursus&raquo;&nbsp;|&nbsp;
     | #{t('footer.developed_at')}

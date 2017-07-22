@@ -126,7 +126,7 @@ describe BookSearchQuery do
         check_search_with(compose_hash_query('title_for_sorting', 1), books)
       end
 
-      it 'correctly orders by book price in descending and descending order' do
+      it 'correctly orders by book price in ascending and descending order' do
         books = [100, 200, 300].map do |price|
           create(:book, main_price: price)
         end

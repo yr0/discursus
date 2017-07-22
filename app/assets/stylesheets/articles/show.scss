@@ -1,4 +1,7 @@
-.dsc-article-content * {
+.dsc-article-content {
   margin-top: 20px;
-  font-size: $article-text-size;
+
+  &, & * {
+    font-size: $article-text-size;
+  }
 }

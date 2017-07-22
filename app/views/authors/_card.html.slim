@@ -7,5 +7,6 @@
           = link_to fa_icon('eye 2x'), author_path(author), class: 'dsc-card-action has-tooltipster', title: t('see')
       = image_tag author.image.url(:medium), class: 'dsc-author-card-image'
     .dsc-author-card-body
-      h4.dsc-author-card-title = author.name
+      = link_to author_path(author), class: 'dsc-author-card-title' do
+        h4 = author.name
       p = truncate(author.last_book_titles, length: 100, separator: ' ')

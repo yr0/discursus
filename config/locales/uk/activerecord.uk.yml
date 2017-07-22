@@ -34,6 +34,13 @@ uk:
     comment: Коментар
     payment_method: Спосіб оплати
     aasm_state: Статус
+    facebook: Facebook
+    twitter: Twitter
+    instagram: Instagram
+    home_hero_title: Заголовок на головній
+    home_hero_details: Опис на головній
+    home_hero_image: Фонове зображення на головній
+    team_hero_details: Опис на сторінці команди
   activerecord:
     errors:
       attributes:

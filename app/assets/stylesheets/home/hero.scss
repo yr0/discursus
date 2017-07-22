@@ -25,6 +25,7 @@
   margin: auto 5vh;
   height: 50vh;
   max-height: 500px;
+  width: 100%;
   border: 1px solid $color-lighter;
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -50,6 +51,7 @@
 
 .dsc-home-hero-text {
   position: relative;
+  width: 100%;
 
   &:before,
   &:after {

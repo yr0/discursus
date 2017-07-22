@@ -2,7 +2,7 @@ module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
     home: '/', books: '/books', articles: '/articles', bookstores: '#', authors: '/authors', about_us: '/about_us',
-    contacts: '#'
+    contacts: '#dscContacts'
   }.freeze
   VARIANTS_ICONS = {
     paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
@@ -83,5 +83,11 @@ module ApplicationHelper
   def search_url_from_controller
     # returns books_path unless controller search path with key controller_name is provided in the hash
     { 'articles' => articles_path }[controller_name] || books_path
+  end
+
+  def settings
+    Rails.cache.fetch('discursus_settings', expires_in: 5.minutes) do
+      @settings ||= Setting.retrieve
+    end
   end
 end

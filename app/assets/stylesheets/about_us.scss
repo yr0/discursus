@@ -1,7 +1,7 @@
 .dsc-about-us-header-container {
   position: relative;
-  height: 1000px;
-  background: image_url('about_us_bg.png') repeat-x center /auto 100%;
+  min-height: 500px;
+  background: image_url('about_us_bg.png') no-repeat center / 100% auto;
   display: flex;
   align-items: flex-end;
   padding-bottom: 120px;
@@ -19,12 +19,21 @@
   }
 
   .dsc-about-us-text {
+    width: 100%;
     columns: 200px 4;
     color: $white;
     margin: 0 100px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+  }
+
+  @media (max-width: 1200px) {
+    background: image_url('about_us_bg.png') repeat-x center /auto 100%;
+
+    .dsc-about-us-text {
+      margin: 0 10px;
+    }
   }
 }
 

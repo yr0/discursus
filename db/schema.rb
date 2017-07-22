@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527115710) do
+ActiveRecord::Schema.define(version: 20170722083548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,18 @@ ActiveRecord::Schema.define(version: 20170527115710) do
     t.string   "password_digest"
     t.boolean  "form_submission_started",                          default: false
     t.datetime "submitted_at"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "phone"
+    t.string "email"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
+    t.string "home_hero_title"
+    t.text   "home_hero_details"
+    t.string "home_hero_image"
+    t.text   "team_hero_details"
   end
 
   create_table "taggings", force: :cascade do |t|
