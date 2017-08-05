@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     get 'download', on: :member
   end
 
+  post 'liqpay_callback', to: 'payments#liqpay_callback'
+
   scope :orders, controller: :orders do
     get 'cart'
     get 'thank_you'

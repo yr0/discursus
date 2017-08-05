@@ -4,6 +4,7 @@ class Order < ApplicationRecord
 
   SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup).freeze
   PAYMENT_METHODS = %w(card cash).freeze
+  LIQPAY_CURRENCY = 'UAH'
 
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
@@ -59,6 +60,15 @@ class Order < ApplicationRecord
   end
 
   def payment_url
-    'https://google.com'
+    request_params = {
+          order_id: id,
+          amount: total,
+          server_url: Rails.application.routes.url_helpers.liqpay_callback_url,
+          result_url: Rails.application.routes.url_helpers.personal_orders_url,
+          description: I18n.t('orders.liqpay_description'),
+          sandbox: Rails.configuration.liqpay_sandbox
+      }
+    Rails.logger.warn request_params
+    Liqpay::Request.new(request_params).to_url
   end
 end

@@ -1,9 +1,9 @@
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {
-    home: '/', books: '/books', articles: '/articles', bookstores: '#', authors: '/authors', about_us: '/about_us',
+    home: '/', books: '/books', articles: '/articles', authors: '/authors', about_us: '/about_us',
     contacts: '#dscContacts'
-  }.freeze
+  }.freeze # bookstores - To be added later
   VARIANTS_ICONS = {
     paperback: 'book', hardcover: 'book', ebook: 'tablet', audio: 'headphones'
   }.freeze # '\f02d' - book, '\f10a' - tablet, '\f025' - headphones

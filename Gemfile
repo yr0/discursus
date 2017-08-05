@@ -5,13 +5,13 @@ ruby '2.3.1'
 # use postgres as DB
 gem 'pg', '~> 0.18'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.0.5'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 4.2'
 gem 'jquery-ui-rails', '~> 6.0'
-gem 'turbolinks', '~> 5'
+gem 'turbolinks', '~> 5.0.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
