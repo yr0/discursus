@@ -1,7 +1,7 @@
 .dsc-header.dsc-section-header
   h2.dsc-header-text = t('about_us.title')
 .dsc-about-us-header-container
-  .dsc-about-us-text = settings.team_hero_details.html_safe
+  .dsc-about-us-text = settings.team_hero_details&.html_safe
 
 - if @members.any?
   .container
