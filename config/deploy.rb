@@ -29,7 +29,7 @@ namespace :discursus do
   desc 'Create puma configuration in shared/config directory'
   task :load_puma_template do
     on roles(:app) do
-      config = File.open(File.join(__dir__, *%w(templates puma.tpl)), &:read)
+      config = File.open(File.join(__dir__, *%w(templates puma.rb)), &:read)
       config.gsub!('$$project_dir', deploy_to)
       upload! StringIO.new(config), "#{shared_path}/config/puma.rb"
     end
