@@ -29,6 +29,10 @@ a {
   &:hover {
     color: $color-darker;
   }
+
+  &.bigger {
+    font-size: $article-text-size;
+  }
 }
 
 input[type=text],textarea {

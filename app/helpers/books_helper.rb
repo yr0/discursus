@@ -9,7 +9,8 @@ module BooksHelper
 
   def share_icons_for(book)
     AVAILABLE_SHARE_ACTIONS.each do |icon, share_action|
-      concat link_to(fa_stacked_icon("#{icon} inverse", base: 'stop 2x', class: 'dsc-book-share-icon fa-2x'),
+      concat link_to(fa_stacked_icon("#{icon} inverse", base: 'stop 2x', class: 'dsc-book-share-icon fa-2x',
+                                     target: '_blank'),
                      share_action.call(book, book_url(book)))
     end
   end

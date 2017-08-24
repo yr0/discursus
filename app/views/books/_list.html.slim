@@ -14,7 +14,7 @@
               /        title: t('add_to_favorites')
               /= link_to fa_icon('shopping-basket 2x'), root_path, class: 'dsc-card-action has-tooltipster',
               /        title: t('buy')
-            = image_tag book.image.url(:medium), class: 'dsc-book-card-image'
+            = image_tag book.image.url(:large), class: 'dsc-book-card-image'
           .dsc-book-card-body
             h4.dsc-book-card-title = book.title
             - unless skip_price
