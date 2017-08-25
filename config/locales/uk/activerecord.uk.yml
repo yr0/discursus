@@ -41,6 +41,14 @@ uk:
     home_hero_details: Опис на головній
     home_hero_image: Фонове зображення на головній
     team_hero_details: Опис на сторінці команди
+    cover_designer: Дизайнер обкладинки
+    translator: Перекладач
+    year: Рік видання
+    age_recommendations: Вікові рекомендації
+    weight: Вага
+    dimensions: Розміри
+    isbn: ISBN
+    authors_within_anthology: Автори у збірці
   activerecord:
     errors:
       attributes:

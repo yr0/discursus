@@ -33,8 +33,9 @@
         .col-sm-12.col-md-6
           = f.input :category_list, input_html: { id: 'bookCategories', value: f.object.category_list.join(','),
                   'data-categories': book_categories_for_select }
-        .col-sm-12.col-md-3
-          = f.input :pages_amount
+        - %i(year weight dimensions isbn pages_amount authors_within_anthology cover_designer translator age_recommendations).each do |field|
+          .col-sm-12.col-md-3
+            = f.input field
 
   = render('admin_panel/books/form_parts/form_variants', f: f)
   = render('admin_panel/books/form_parts/form_media', f: f)

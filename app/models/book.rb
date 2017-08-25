@@ -3,9 +3,10 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 1, maximum: 250 }
   validates :pages_amount, presence: true, numericality: { greater_than: 0 }
-  validates :description, length: { maximum: 10_000 }
-
-  scope :with_variants_for, ->(user) { joins() }
+  validates :description, :cover_designer, :translator, :age_recommendations, :authors_within_anthology,
+            length: { maximum: 10_000 }
+  validates :weight, :dimensions, :isbn, length: { maximum: 1000 }
+  validates :year, numericality: { greater_than: 1900, less_than: 2200 }
 
   has_many :authors_books
   has_many :authors, through: :authors_books

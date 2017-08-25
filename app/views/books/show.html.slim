@@ -18,20 +18,24 @@
         div
           span.dsc-book-field-name = authors_amount > 1 ? t('attributes.authors') : t('books.author')
           |:&nbsp;
-          = @book.author_names
+          = @book.authors.map {|a| link_to a.name, a }.join(', ').html_safe
+      - elsif @book.authors_within_anthology.present?
+        div
+          span.dsc-book-field-name = t('attributes.authors_within_anthology')
+          |:&nbsp;
+          = @book.authors_within_anthology
       - if @book.categories.any?
         div
           span.dsc-book-field-name = t('attributes.categories')
           |:&nbsp;
           = @book.category_list.join(', ')
-      div
-        span.dsc-book-field-name = t('attributes.pages_amount')
-        |:&nbsp;
-        = @book.pages_amount
-      div
-        span.dsc-book-field-name ISBN
-        |:&nbsp;
-        | No isbn?
+      - %i(cover_designer translator year age_recommendations weight dimensions isbn pages_amount).each do |field|
+        - value = @book.public_send(field)
+        - if value.present?
+          div
+            span.dsc-book-field-name = t("attributes.#{field}")
+            |:&nbsp;
+            = value
       .dsc-book-description = raw @book.description
       .dsc-book-share-block
         span.dsc-book-field-name = t('share')
