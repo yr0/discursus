@@ -1,0 +1,24 @@
+---
+- block: # Install Solr
+    - get_url:
+      url: http://apache.cp.if.ua/lucene/solr/6.6.1/solr-6.6.1.tgz
+      dst: /tmp/solr.tgz
+    - unarchive:
+        src: /tmp/solr.tgz
+        dst: /tmp
+        extra_opts:
+          - 'solr-6.6.1/bin/install_solr_service.sh'
+          - '--strip-components=2'
+    - command: 'bash /tmp/install_solr_service.sh /tmp/solr.tgz'
+- name: Create solr collections for dev and test
+  command: 'solr create -c {{item}}'
+  with_items:
+    - discursus
+    - dsc_test
+  become: yes
+  become_user: solr
+#- name: Copy solr files
+#  copy:
+#    src: /config/solr/*
+#    dst: /etc/solr/data/
+

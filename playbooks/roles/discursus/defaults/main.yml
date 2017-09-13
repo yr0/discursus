@@ -1,0 +1,6 @@
+---
+app_dir: /vagrant
+home_dir: /home/ubuntu
+ruby_version: '2.3.1'
+db_password: '123456789'
+ui_url: '192.168.50.24:3000'

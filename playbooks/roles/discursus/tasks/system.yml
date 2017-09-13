@@ -1,0 +1,42 @@
+---
+- stat: path={{ home_dir }}/.rvm
+  register: st_rvm
+- stat: path=/usr/local/bin/pip
+  register: st_pip
+
+- name: Install sys dependencies
+  apt: name={{ item }} state=present
+  become: yes
+  with_items:
+    - curl
+    - libpq-dev
+    - ca-certificates
+    - tar
+    - postgresql
+    - postgresql-contrib
+    - nodejs
+    - openjdk-8*
+- block: # Install RVM
+    - command: "gpg --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+    - get_url:
+        url: https://get.rvm.io
+        dest: /tmp/rvm.sh
+    - command: "bash /tmp/rvm.sh"
+    - command: "echo '$PATH = {{ home_dir }}/.rvm/bin:$PATH' > {{ home_dir }}/.bashrc"
+  when: not st_rvm.stat.exists
+- block: # Install pip and psycopg2
+    - get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: /tmp/get-pip.py
+    - command: python /tmp/get-pip.py
+  become: yes
+  when: not st_pip.stat.exists
+- name: Install deps for postgres plugin
+  pip:
+    name: psycopg2
+  become: yes
+- block: #Install ruby
+    - command: "rvm install {{ ruby_version }}"
+    - command: "rvm alias create default {{ ruby_version }}"
+  become: yes
+  become_user: 'ubuntu -i'

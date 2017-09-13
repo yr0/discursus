@@ -1,0 +1,14 @@
+---
+- name:
+  template:
+    dest: /etc/postgresql/9.5/main/pg_hba.conf
+    src: pg_hba.conf
+  become: yes
+  become_user: postgres
+- name: 'Create postgres user'
+  postgresql_user:
+    name: discursus
+    password: '{{ db_password }}'
+    role_attr_flags: SUPERUSER
+  become: yes
+  become_user: postgres

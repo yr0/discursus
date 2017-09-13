@@ -8,12 +8,6 @@ module AdminPanel
     end
 
     def index
-      filter_query = {}
-      if params[:aasm_state].present? &&
-          Order.aasm.state_machine.states.map(&:name).include?(params[:aasm_state].to_sym)
-        filter_query = { aasm_state: params[:aasm_state] }
-      end
-
       @orders = Order.where.not(aasm_state: :pending).where(filter_query).order(submitted_at: :desc).page(params[:page])
     end
 
@@ -27,6 +21,17 @@ module AdminPanel
 
     def complete
       @order.success!
+    end
+
+    private
+
+    def filter_query
+      filter_query = {}
+      if params[:aasm_state].present? &&
+         Order.aasm.state_machine.states.map(&:name).include?(params[:aasm_state].to_sym)
+        filter_query[:aasm_state] = params[:aasm_state]
+      end
+      filter_query
     end
   end
 end

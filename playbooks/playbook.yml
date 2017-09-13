@@ -1,0 +1,4 @@
+---
+- hosts: discursus
+  roles:
+  - discursus
