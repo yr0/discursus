@@ -1,24 +1,47 @@
 ---
-- block: # Install Solr
-    - get_url:
-      url: http://apache.cp.if.ua/lucene/solr/6.6.1/solr-6.6.1.tgz
-      dst: /tmp/solr.tgz
-    - unarchive:
-        src: /tmp/solr.tgz
-        dst: /tmp
-        extra_opts:
-          - 'solr-6.6.1/bin/install_solr_service.sh'
-          - '--strip-components=2'
-    - command: 'bash /tmp/install_solr_service.sh /tmp/solr.tgz'
+- stat: "path=/tmp/solr-{{ solr_version }}.tgz"
+  register: st_solr_install
+- stat: "path=/opt/solr-{{ solr_version }}/bin/solr"
+  register: st_solr
+- stat: path=/var/solr/data/discursus
+  register: st_solr_discursus
+  become: true
+
+- block:
+  - get_url:
+      url: "http://apache.cp.if.ua/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
+      dest: /tmp
+  - unarchive:
+      copy: no
+      src: "/tmp/solr-{{ solr_version }}.tgz"
+      dest: /tmp
+      extra_opts:
+        - 'solr-{{ solr_version }}/bin/install_solr_service.sh'
+        - '--strip-components=2'
+  when: not st_solr_install.stat.exists and not st_solr.stat.exists
+- name: Install solr service
+  command: 'bash /tmp/install_solr_service.sh /tmp/solr-{{ solr_version }}.tgz'
+  when: not st_solr.stat.exists
+  become: yes
+- file:
+    src: '/opt/solr-{{ solr_version }}/bin/solr'
+    dest: '/usr/bin/solr'
+    state: link
+  become: yes
 - name: Create solr collections for dev and test
-  command: 'solr create -c {{item}}'
+  command: "solr create -c {{item}}"
   with_items:
     - discursus
     - dsc_test
   become: yes
   become_user: solr
-#- name: Copy solr files
-#  copy:
-#    src: /config/solr/*
-#    dst: /etc/solr/data/
-
+  when: not st_solr_discursus.stat.exists
+- name: Copy solr files
+  shell: "cp -R {{app_dir}}/config/solr/*.xml /var/solr/data/{{ item }}/conf"
+  args:
+    executable: /bin/bash
+  with_items:
+    - discursus
+    - dsc_test
+  become: yes
+  become_user: solr

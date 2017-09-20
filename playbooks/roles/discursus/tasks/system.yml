@@ -1,6 +1,8 @@
 ---
 - stat: path={{ home_dir }}/.rvm
   register: st_rvm
+- stat: "path={{ home_dir }}/.rvm/rubies/ruby-{{ ruby_version }}"
+  register: st_ruby
 - stat: path=/usr/local/bin/pip
   register: st_pip
 
@@ -31,12 +33,11 @@
     - command: python /tmp/get-pip.py
   become: yes
   when: not st_pip.stat.exists
-- name: Install deps for postgres plugin
-  pip:
-    name: psycopg2
+- name: Install ruby
+  command: "/bin/bash -lc '{{ item }}'"
+  with_items:
+    - "rvm install {{ ruby_version }}"
+    - "rvm alias create default {{ ruby_version }}"
+  when: not st_ruby.stat.exists
   become: yes
-- block: #Install ruby
-    - command: "rvm install {{ ruby_version }}"
-    - command: "rvm alias create default {{ ruby_version }}"
-  become: yes
-  become_user: 'ubuntu -i'
+  become_user: ubuntu

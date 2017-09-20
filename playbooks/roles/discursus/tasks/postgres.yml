@@ -1,4 +1,8 @@
 ---
+- name: Install deps for postgres plugin
+  pip:
+    name: psycopg2
+  become: yes
 - name:
   template:
     dest: /etc/postgresql/9.5/main/pg_hba.conf
