@@ -4,11 +4,13 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'sidekiq/testing'
 
 # require all files from 'support'
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 # Checks for pending migration and applies them before tests are run.
 ActiveRecord::Migration.maintain_test_schema!
+Sidekiq::Testing.fake!
 
 RSpec.configure do |config|
   include FactoryGirl::Syntax::Methods
