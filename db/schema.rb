@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825063205) do
+ActiveRecord::Schema.define(version: 20170921190353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20170825063205) do
     t.text     "description"
     t.integer  "pages_amount"
     t.decimal  "main_price",               precision: 8, scale: 2
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                                       null: false
+    t.datetime "updated_at",                                                                       null: false
     t.json     "available_variants"
     t.string   "ebook_file"
     t.string   "audio_file"
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 20170825063205) do
     t.string   "dimensions"
     t.string   "isbn"
     t.text     "authors_within_anthology"
+    t.boolean  "is_top",                                           default: false
+    t.datetime "published_at",                                     default: '2013-01-01 00:00:00'
     t.index ["slug"], name: "index_books_on_slug", unique: true, using: :btree
   end
 
@@ -155,6 +157,20 @@ ActiveRecord::Schema.define(version: 20170825063205) do
     t.string   "password_digest"
     t.boolean  "form_submission_started",                          default: false
     t.datetime "submitted_at"
+    t.string   "raw_promo_code"
+    t.integer  "promo_code_id"
+    t.index ["promo_code_id"], name: "index_orders_on_promo_code_id", using: :btree
+  end
+
+  create_table "promo_codes", force: :cascade do |t|
+    t.string   "code"
+    t.datetime "expires_at"
+    t.integer  "limit"
+    t.integer  "orders_count"
+    t.integer  "discount_percent"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["code"], name: "index_promo_codes_on_code", using: :btree
   end
 
   create_table "settings", force: :cascade do |t|

@@ -47,8 +47,13 @@ FactoryGirl.define do
       after(:create, &:submit!)
     end
 
+    trait :submitted_no_swap do
+      with_line_items
+      after(:create, &:submit!)
+    end
+
     trait :paid_for do
-      submitted
+      submitted_no_swap
       after(:create, &:pay!)
     end
   end

@@ -10,8 +10,11 @@ class Order < ApplicationRecord
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
+  before_validation :try_to_fetch_promo_code
+  after_save :recalculate_total, if: -> { raw_promo_code_changed? && promo_code_id.present? }
 
   belongs_to :customer, polymorphic: true
+  belongs_to :promo_code
   has_many :line_items
   has_many :books, through: :line_items
   has_many :tokens_for_digital_books
@@ -33,9 +36,9 @@ class Order < ApplicationRecord
   end
 
   def recalculate_total
-    # we might add cost of shipping here
     if line_items.any?
-      update(total: line_items.pluck(:price, :quantity).map { |e| e.reduce(&:*) }.reduce(&:+))
+      line_items_total = line_items.pluck(:price, :quantity).map { |pq| pq.reduce(&:*) }.reduce(&:+)
+      update(total: with_promo_discounts(line_items_total))
     else
       update(total: 0.0)
     end
@@ -70,5 +73,17 @@ class Order < ApplicationRecord
       }
     Rails.logger.warn request_params
     Liqpay::Request.new(request_params).to_url
+  end
+
+  private
+
+  def with_promo_discounts(amount)
+    return amount if promo_code.blank?
+    promo_code.apply_discount(amount)
+  end
+
+  def try_to_fetch_promo_code
+    return if raw_promo_code&.strip.blank?
+    self.promo_code_id = PromoCode.find_by_code(raw_promo_code)
   end
 end

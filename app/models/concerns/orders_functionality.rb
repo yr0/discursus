@@ -15,7 +15,9 @@ module OrdersFunctionality
     if last_customer_order
       assign_attributes(last_customer_order.as_json.slice(*AUTOCOMPLETE_FIELDS))
     elsif customer.is_a? User
-      assign_attributes(email: customer.email, phone: customer.phone, full_name: customer.name)
+      user_attributes = { email: customer.email, phone: customer.phone, full_name: customer.name }
+      user_attributes.reject! { |k| self[k].present? }
+      assign_attributes user_attributes
     end
   end
 
