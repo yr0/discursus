@@ -6,6 +6,7 @@ FactoryGirl.define do
 
     sequence(:title) { |n| "#{Faker::Book.title}-#{n}" }
     pages_amount 200
+    year 1984
     description Faker::Lorem.paragraph
 
     trait :with_authors do

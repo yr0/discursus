@@ -45,3 +45,7 @@
     - dsc_test
   become: yes
   become_user: solr
+- service:
+    name: solr
+    state: restarted
+  become: yes

@@ -1,0 +1,39 @@
+---
+- stat: "path=/tmp/redis-stable"
+  register: st_redis_install_dir
+- stat: "path=/var/lib/redis"
+  register: st_redis_dir
+
+- unarchive:
+    src: http://download.redis.io/redis-stable.tar.gz
+    dest: /tmp
+    remote_src: yes
+  when: not st_redis_install_dir.stat.exists
+- block: #Install redis
+  - make:
+      chdir: /tmp/redis-stable
+      target: install
+  - file:
+      path: /etc/redis
+      state: directory
+  - template:
+      dest: /etc/redis/redis.conf
+      src: redis.conf
+  - template:
+      dest: /etc/systemd/system/redis.service
+      src: redis.service
+  - user:
+      name: redis
+      createhome: no
+      system: yes
+  - file:
+      path: /var/lib/redis
+      state: directory
+      owner: redis
+      group: redis
+      mode: 0770
+  - service:
+      name: redis
+      state: started
+  when: not st_redis_dir.stat.exists
+  become: yes

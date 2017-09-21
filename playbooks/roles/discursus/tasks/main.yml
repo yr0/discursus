@@ -2,37 +2,36 @@
 - include: system.yml
 - include: postgres.yml
 - include: solr.yml
+- include: redis.yml
 
 - name: Copy .env template
   template:
     dest: /vagrant/.env
     src: env
 - name: Provision Rails app
-  command: "{{ item }}"
+  command: "/bin/bash -lc '{{ item }}'"
   args:
     chdir: "{{ app_dir }}"
   with_items:
     - 'rvm use 2.3.1'
     - 'gem install bundle'
-    - bundle
-    - "bin/rails db:create db:migrate db:seed"
+    - 'bundle install'
+    - 'bin/rails db:create db:migrate db:seed'
   become: yes
-  become_user: 'ubuntu -i'
+  become_user: ubuntu
 - name: Provision DB for test env
-  command: 'bin/rails db:schema:load'
-  environment:
-    rails_env: test
+  command: "/bin/bash -lc 'RAILS_ENV=test bin/rails db:environment:set db:schema:load'"
   args:
     chdir: "{{ app_dir }}"
   become: yes
-  become_user: 'ubuntu -i'
+  become_user: ubuntu
 - name: Add instruction to cd into app directory on login
   shell: echo "cd {{ app_dir }}" >> /home/ubuntu/.bashrc
 - name: Display post-install message
   debug:
     msg:
       - "The box is ready to use - log into it with `vagrant ssh`, "
-      - "run `bin/rails s -b 0.0.0.0` and access the ui at {{ ui_url }}."
+      - "run `foreman start -f Procfile.dev` and access the ui at {{ ui_url }}."
       - "The admin sign in resides at {{ ui_url }}/admins/sign_in. You can look up the default admin login and "
       - "password in .env file within project root."
       - "For the website to function in full, you will have to provide the ENV values for APIs of facebook, "
