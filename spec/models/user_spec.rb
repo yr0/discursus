@@ -38,7 +38,7 @@ describe User do
     end
   end
 
-  context 'bought_books' do
+  describe 'bought_books' do
     it 'selects bought books correctly with bought variants that reflect the orders' do
       user = create(:user)
       order = create(:order, :digital_and_physical, customer: user)

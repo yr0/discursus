@@ -32,7 +32,7 @@ describe BookSearchQuery do
       expect(query.to_param).to eq(search_query: changed_attributes.deep_stringify_keys)
     end
 
-    context 'order' do
+    describe 'order' do
       it 'sets default values to order fields if they are not provided' do
         query = BookSearchQuery.new
         expect(query.order_by_desc).to eq BookSearchQuery::DEFAULT_ORDER_BY_DESC
@@ -45,7 +45,7 @@ describe BookSearchQuery do
       end
     end
 
-    context '#default?' do
+    describe '#default?' do
       it 'returns true if query has not been changed' do
         expect(BookSearchQuery.new.default?).to eq true
       end
@@ -58,12 +58,12 @@ describe BookSearchQuery do
     end
   end
 
-  context 'search', search: true do
+  describe 'search', search: true do
     let(:search_fragment) { 'discursus' }
     let(:category) { create(:category) }
     let(:author) { create(:author) }
 
-    context 'quality' do
+    describe 'quality' do
       after(:each) do
         Sunspot.commit
         create_list(:book, 2)
@@ -94,7 +94,7 @@ describe BookSearchQuery do
       end
     end
 
-    context 'ordering' do
+    describe 'ordering' do
       def compose_hash_query(field, order_desc)
         { order_field: field,
           order_by_desc: {

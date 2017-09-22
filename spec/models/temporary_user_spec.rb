@@ -1,7 +1,7 @@
 describe TemporaryUser do
-  context 'callbacks' do
+  describe 'callbacks' do
     it 'adds uuid to user after create' do
-      expect(create(:temporary_user).uuid).to be
+      expect(create(:temporary_user).uuid).to be_present
     end
   end
 end

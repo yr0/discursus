@@ -64,4 +64,11 @@ describe PromoCode do
       expect(promo_code.used_by?(email)).to eq true
     end
   end
+
+  context '#apply_discount' do
+    it 'subtracts from amount discount percent' do
+      new_code = create(:promo_code, discount_percent: 50)
+      expect(new_code.apply_discount(200)).to eq 100
+    end
+  end
 end

@@ -1,7 +1,7 @@
 describe Author do
   it_behaves_like 'Sluggable', :name
 
-  context 'named_like scope' do
+  describe 'named_like scope' do
     let(:searched_fragment) { 'Dsc Someone' }
 
     it 'returns only authors with given name' do
@@ -11,7 +11,7 @@ describe Author do
     end
   end
 
-  context '#last_book_titles' do
+  describe '#last_book_titles' do
     let(:author) { create(:author) }
     let(:another_author) { create(:author) }
     let(:authors_list) { create_list(:author, rand(2..4), :with_books) }

@@ -1,7 +1,7 @@
 describe Book do
   it_behaves_like 'Sluggable'
 
-  context '#author_names' do
+  describe '#author_names' do
     let(:authors) { create_list(:author, 2) }
     let(:book) { create(:book, authors: authors) }
     let(:books_list) { create_list(:book, rand(2..4), :with_authors) }

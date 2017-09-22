@@ -1,5 +1,5 @@
 describe 'Book VariantsFunctionality' do
-  context 'Variants Functionality' do
+  describe 'Variants Functionality' do
     let(:book) { create(:book) }
     let(:variants) { { Book::VARIANT_TYPES.first => 2, Book::VARIANT_TYPES.second => 2 } }
     let(:reverse_order_variants) { { Book::VARIANT_TYPES.last => 100, Book::VARIANT_TYPES.first => expected_price } }
@@ -45,7 +45,7 @@ describe 'Book VariantsFunctionality' do
       expect(book.update(available_variants: variants)).to eq true
     end
 
-    context '#update_price_from_variants' do
+    describe '#update_price_from_variants' do
       it 'infers price from available variant' do
         book.assign_attributes(available_variants: variants)
         book.send(:update_price_from_variants)
@@ -59,20 +59,20 @@ describe 'Book VariantsFunctionality' do
       end
 
       it 'calls #update_price_from_variants in callback and saves book' do
-        expect(book.main_price).not_to be
+        expect(book.main_price).not_to be_present
         book.update(available_variants: variants)
         expect(book.main_price).to eq expected_price.to_d
       end
     end
 
-    context '#variants=' do
+    describe '#variants=' do
       it 'saves available variants provided from hash variants' do
         book.update(variants: form_variants)
         expect(book.available_variants).to eq form_variants_transformed
       end
     end
 
-    context '#price_of' do
+    describe '#price_of' do
       it 'returns price of provided variant' do
         book = create(:book, :hardcover, variant_price: 50.0)
         expect(book.price_of(:hardcover)).to eq 50.0
@@ -83,7 +83,7 @@ describe 'Book VariantsFunctionality' do
       end
     end
 
-    context '.find_by_availability' do
+    describe '.find_by_availability' do
       let(:book) { create(:book, :hardcover) }
 
       it 'returns book if it is available' do
@@ -91,11 +91,11 @@ describe 'Book VariantsFunctionality' do
       end
 
       it 'returns nil if book cannot be found' do
-        expect(Book.find_by_availability(0, :hardcover)).not_to be
+        expect(Book.find_by_availability(0, :hardcover)).not_to be_present
       end
 
       it 'returns nil if variant is unavailable' do
-        expect(Book.find_by_availability(book.id, :ebook)).not_to be
+        expect(Book.find_by_availability(book.id, :ebook)).not_to be_present
       end
     end
   end

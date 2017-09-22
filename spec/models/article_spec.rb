@@ -1,7 +1,7 @@
 describe Article do
   it_behaves_like 'Sluggable'
 
-  context 'sunspot_search', search: true do
+  describe 'sunspot_search', search: true do
     let(:search_fragment) { 'discursus' }
 
     after(:each) do

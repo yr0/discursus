@@ -32,6 +32,6 @@ class PromoCode < ApplicationRecord
   end
 
   def apply_discount(amount)
-    amount - (amount * (discount_percent.to_i / 100))
+    amount - (amount * (discount_percent.to_f / 100))
   end
 end

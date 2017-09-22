@@ -11,7 +11,7 @@ class Order < ApplicationRecord
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
   before_validation :try_to_fetch_promo_code
-  after_save :recalculate_total, if: -> { raw_promo_code_changed? && promo_code_id.present? }
+  after_save :recalculate_total, if: -> { raw_promo_code.present? && raw_promo_code_changed? && promo_code_id.present? }
 
   belongs_to :customer, polymorphic: true
   belongs_to :promo_code
@@ -38,9 +38,9 @@ class Order < ApplicationRecord
   def recalculate_total
     if line_items.any?
       line_items_total = line_items.pluck(:price, :quantity).map { |pq| pq.reduce(&:*) }.reduce(&:+)
-      update(total: with_promo_discounts(line_items_total))
+      update(total: total_with_promo_discounts(line_items_total), raw_promo_code: nil)
     else
-      update(total: 0.0)
+      update(total: 0.0, raw_promo_code: nil)
     end
   end
 
@@ -77,13 +77,13 @@ class Order < ApplicationRecord
 
   private
 
-  def with_promo_discounts(amount)
+  def total_with_promo_discounts(amount)
     return amount if promo_code.blank?
     promo_code.apply_discount(amount)
   end
 
   def try_to_fetch_promo_code
     return if raw_promo_code&.strip.blank?
-    self.promo_code_id = PromoCode.find_by_code(raw_promo_code)
+    self.promo_code = PromoCode.find_by_code(raw_promo_code)
   end
 end

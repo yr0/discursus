@@ -11,16 +11,16 @@ module OrdersFunctionality
       validate :must_have_email_or_phone, if: -> { submitted? || form_submission_started? }
       validate :email_must_be_unique, if: -> { password.present? && email_changed? }
 
-      # with_options(if: -> { pending? && raw_promo_code&.strip.present? }) do
-      #   validate(unless: :promo_code_id) { errors.add(:base, I18n.t('errors.messages.promo_code.blank')) }
-      #   validate(if: -> { promo_code_id && promo_code.used_by?(email) }) do
-      #     errors.add(:base, I18n.t('errors.messages.promo_code.already_used'))
-      #   end
-      #   with_options(if: :promo_code_id) do
-      #     validate { errors.add(:base, I18n.t('errors.messages.promo_code.expired')) if promo_code.expired? }
-      #     validate { errors.add(:base, I18n.t('errors.messages.promo_code.exhausted')) if promo_code.exhausted? }
-      #   end
-      # end
+      validate(if: -> { pending? && raw_promo_code&.strip.present? && promo_code_id.blank? }) do
+        errors.add(:base, I18n.t('errors.messages.promo_code.blank'))
+      end
+      validate(if: -> { promo_code_id && promo_code.used_by?(email) }) do
+        errors.add(:base, I18n.t('errors.messages.promo_code.already_used'))
+      end
+      with_options(if: :promo_code_id) do
+        validate { errors.add(:base, I18n.t('errors.messages.promo_code.expired')) if promo_code.expired? }
+        validate { errors.add(:base, I18n.t('errors.messages.promo_code.exhausted')) if promo_code.exhausted? }
+      end
     end
 
     def user_errors?

@@ -1,11 +1,11 @@
 describe LineItem do
-  context 'callbacks' do
+  describe 'callbacks' do
     let(:book) { create(:book, :hardcover, main_price: 50) }
     let(:order) { create(:order) }
     let(:line_item) { create(:line_item, order: order, book: book) }
 
     it 'stores book price before validation' do
-      expect(line_item.price).to be
+      expect(line_item.price).to be_present
       expect(line_item.price).to eq line_item.book.main_price
     end
 
@@ -25,7 +25,7 @@ describe LineItem do
     end
   end
 
-  context 'scopes' do
+  describe 'scopes' do
     let!(:order) { create(:order) }
     let!(:digital) { [create(:line_item, :ebook, order: order), create(:line_item, :audio, order: order)] }
     let!(:physical) { [create(:line_item, :hardcover, order: order), create(:line_item, :paperback, order: order)] }
@@ -39,10 +39,10 @@ describe LineItem do
     end
   end
 
-  context 'public instance methods' do
+  describe 'public instance methods' do
     it 'returns true if line item has digital book' do
-      expect(create(:line_item, :ebook).digital?).to be
-      expect(create(:line_item, :audio).digital?).to be
+      expect(create(:line_item, :ebook).digital?).to be_present
+      expect(create(:line_item, :audio).digital?).to be_present
     end
 
     it 'returns total price of line item' do
@@ -52,8 +52,8 @@ describe LineItem do
     end
   end
 
-  context Populating do
-    context '.find_and_populate' do
+  describe 'Populating' do
+    describe '.find_and_populate' do
       let(:book) { create(:book, :hardcover) }
       let(:order) { create(:order) }
 
@@ -75,7 +75,7 @@ describe LineItem do
       end
     end
 
-    context '#change_quantity_by' do
+    describe '#change_quantity_by' do
       let(:order) { create(:order) }
       let(:item) { create(:line_item, :hardcover, quantity: 3, order: order) }
 

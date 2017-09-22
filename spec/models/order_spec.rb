@@ -1,6 +1,6 @@
 describe Order do
-  context 'public instance methods' do
-    context '#physical?,#requires_shipping?' do
+  describe 'public instance methods' do
+    describe '#physical?,#requires_shipping?' do
       it 'returns true if order contains physical line items' do
         expect(create(:order, :with_line_items).physical?).to eq true
       end
@@ -14,7 +14,7 @@ describe Order do
       end
     end
 
-    context '#digital?' do
+    describe '#digital?' do
       it 'returns true if order contains digital items' do
         expect(create(:order, :with_line_items, book_variant: :ebook).digital?).to eq true
       end
@@ -28,7 +28,7 @@ describe Order do
       end
     end
 
-    context '#address' do
+    describe '#address' do
       it 'returns order address as city and street joined by dot' do
         street = Faker::TwinPeaks.location
         city = Faker::Pokemon.location
@@ -43,22 +43,45 @@ describe Order do
       end
     end
 
-    context '#recalculate_total' do
+    describe '#recalculate_total' do
       it 'returns 0.0 if order has no line items' do
         order = create(:order)
-        expect(order.recalculate_total).to be
+        expect(order.recalculate_total).to be_present
         expect(order.reload.total).to eq 0.0
       end
 
       it 'calculates total as sum of order line items' do
         order = create(:order)
         line_item = create(:line_item, order: order)
-        expect(order.recalculate_total).to be
+        expect(order.recalculate_total).to be_present
         expect(order.total).to eq line_item.price * line_item.quantity
+      end
+
+      it 'includes promo discount if order has promo code' do
+        promo = create(:promo_code, discount_percent: 20)
+        order = create(:order, raw_promo_code: promo.code)
+        line_item = create(:line_item, order: order)
+        order.recalculate_total
+        total = line_item.price * line_item.quantity
+        expect(order.total).to eq(total - total * 0.2)
+      end
+
+      it 'launches the method after save if raw code changed and promo id is present' do
+        promo = create(:promo_code)
+        allow_any_instance_of(Order).to receive(:recalculate_total)
+        order = create(:order)
+        order.update(raw_promo_code: promo.code)
+        expect(order).to have_received(:recalculate_total)
+      end
+
+      it 'does not launch the method after save if raw code changed but promo id is not present' do
+        allow_any_instance_of(Order).to receive(:recalculate_total) { raise StandardError }
+        order = create(:order)
+        expect { order.update(raw_promo_code: '123') }.not_to raise_error
       end
     end
 
-    context '#items?' do
+    describe '#items?' do
       it 'returns true if line items are present' do
         expect(create(:order, :with_line_items).items?).to eq true
       end
@@ -76,7 +99,7 @@ describe Order do
       end.to change { order.line_items.count }.by 1
     end
 
-    context '#modify_line_item_quantity' do
+    describe '#modify_line_item_quantity' do
       let(:order) { create(:order) }
       let(:line_item) { create(:line_item, order: order, quantity: 2) }
 
@@ -100,7 +123,7 @@ describe Order do
       end
     end
 
-    context '#autocomplete_user_information' do
+    describe '#autocomplete_user_information' do
       let(:order_data) do
         { email: Faker::Internet.email, phone: '123456789', full_name: Faker::GameOfThrones.character,
           payment_method: 'cash', shipping_method: 'pickup', city: Faker::Lorem.word, street: Faker::Lorem.word }
@@ -133,6 +156,24 @@ describe Order do
         new_order = temp.orders.pending.create
         expect(new_order.as_json.values_at(*%w(email full_name phone)).all?(&:nil?)).to eq true
       end
+    end
+  end
+
+  describe '#try_to_fetch_promo_code' do
+    it 'fetches promo code if raw promo is provided and stores it within an attribute' do
+      promo = create(:promo_code)
+      order = create(:order)
+      order.raw_promo_code = promo.code
+      order.send(:try_to_fetch_promo_code)
+      expect(order.raw_promo_code).to eq promo.code
+      expect(order.promo_code).to eq promo
+    end
+
+    it 'launches the method before validation' do
+      allow_any_instance_of(Order).to receive(:try_to_fetch_promo_code)
+      order = build(:order)
+      order.valid?
+      expect(order).to have_received(:try_to_fetch_promo_code)
     end
   end
 end

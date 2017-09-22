@@ -22,7 +22,7 @@ describe OrderMailer, type: :mailer do
   end
   # rubocop:enable Metrics/AbcSize
 
-  context '#notify_cash' do
+  describe '#notify_cash' do
     let!(:order) do
       create(:order, :cash, :digital_and_physical, :submitted,
              city: Faker::Lorem.word, street: Faker::Lorem.word,
@@ -47,7 +47,7 @@ describe OrderMailer, type: :mailer do
     end
   end
 
-  context '#notify_card' do
+  describe '#notify_card' do
     let!(:order) do
       create(:order, :card, :paid_for, :digital_and_physical,
              city: Faker::Lorem.word, street: Faker::Lorem.word,
@@ -76,7 +76,7 @@ describe OrderMailer, type: :mailer do
     end
   end
 
-  context '#notify_admin' do
+  describe '#notify_admin' do
     let!(:order) do
       create(:order, :card, :paid_for, :digital_and_physical,
              city: Faker::Lorem.word, street: Faker::Lorem.word,
@@ -114,7 +114,7 @@ describe OrderMailer, type: :mailer do
     end
   end
 
-  context '#digital_books' do
+  describe '#digital_books' do
     let!(:order) do
       create(:order, :paid_for, :digital_and_physical)
     end

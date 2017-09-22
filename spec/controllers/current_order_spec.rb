@@ -1,6 +1,6 @@
 describe ApplicationController, type: :controller do
-  context 'CurrentOrder' do
-    context '#current_temp_user' do
+  context 'with current order' do
+    describe '#current_temp_user' do
       it 'returns temp user by cookies uid' do
         temp = create(:temporary_user)
         request.cookies[:temp_user_uuid] = temp.uuid
@@ -8,7 +8,7 @@ describe ApplicationController, type: :controller do
       end
     end
 
-    context '#current_order' do
+    describe '#current_order' do
       it 'returns first pending order for current signed in user' do
         user = create(:user)
         order = create(:order, customer: user)
@@ -28,10 +28,10 @@ describe ApplicationController, type: :controller do
       end
     end
 
-    context 'create_temp_user' do
+    describe '#create_temp_user' do
       it 'sets cookies temp_user_uuid to secure random digest' do
         controller.send(:create_temp_user)
-        expect(controller.send(:cookies)[:temp_user_uuid]).to be
+        expect(controller.send(:cookies)[:temp_user_uuid]).to be_present
       end
 
       it 'returns stored user if they are found in database by uuid' do
@@ -50,7 +50,7 @@ describe ApplicationController, type: :controller do
       it 'stores saved user uuid in table and in cookies' do
         controller.send(:create_temp_user)
         temp = TemporaryUser.last
-        expect(temp.uuid).to be
+        expect(temp.uuid).to be_present
         expect(temp.uuid).to eq controller.send(:cookies)[:temp_user_uuid]
       end
 
@@ -62,12 +62,12 @@ describe ApplicationController, type: :controller do
       end
     end
 
-    context '#create_or_get_user_with_order!' do
+    describe '#create_or_get_user_with_order!' do
       it 'creates order for temp user if current user is not present' do
         expect do
           controller.send(:create_or_get_user_with_order!)
         end.to change { TemporaryUser.count }.by 1
-        expect(TemporaryUser.last.orders.pending.first).to be
+        expect(TemporaryUser.last.orders.pending.first).to be_present
       end
 
       it 'creates order for current user if they are authorized' do
