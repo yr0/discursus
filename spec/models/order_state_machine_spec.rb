@@ -126,5 +126,13 @@ describe OrdersFunctionality::StateMachine do
       order.success!
       expect(order.completed_at).to be_present
     end
+
+    it 'increments orders count on promo if it is present' do
+      promo = create(:promo_code)
+      order = create(:order, :paid_for, promo_code: promo)
+      expect do
+        order.success!
+      end.to change { promo.orders_count }.from(nil).to(1)
+    end
   end
 end

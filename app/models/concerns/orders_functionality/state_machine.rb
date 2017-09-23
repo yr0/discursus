@@ -23,7 +23,7 @@ module OrdersFunctionality
 
         # order can be transitioned to completed only by administrator from paid_for unless all of its items are digital
         event :success, before: -> { self.completed_at = Time.current },
-              after: -> { promo_code.increment(:orders_count) if promo_code.present? } do
+              after: -> { promo_code.increment!(:orders_count) if promo_code.present? } do
           transitions from: :paid_for, to: :completed
         end
 
