@@ -17,6 +17,6 @@ module BooksHelper
 
   def random_books(except_book = nil, limit = 4)
     Book.where.not(id: except_book&.id).where(is_available: true)
-        .reorder('RANDOM(), books.created_at DESC').limit(limit)
+        .reorder('RANDOM(), books.published_at DESC').limit(limit)
   end
 end

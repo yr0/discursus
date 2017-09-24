@@ -19,5 +19,6 @@ module Discursus
     config.admin_email = ENV['ADMIN_EMAIL']
     config.liqpay_sandbox = Rails.application.secrets.liqpay['sandbox'].to_i == 1 ? 1 : 0
     Rails.application.routes.default_url_options[:host] = ENV['DISCURSUS_HOST']
+    config.disable_recaptcha = ENV['DISABLE_RECAPTCHA'].present?
   end
 end

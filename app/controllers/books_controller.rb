@@ -1,7 +1,4 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource find_by: :slug
-
-
   def index
     load_categories
     load_authors
@@ -13,6 +10,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Book.available.friendly.find(params[:id])
   end
 
   # We do not skip load resource to make sure the book exists
@@ -42,6 +40,6 @@ class BooksController < ApplicationController
     return {} unless params[:book_search_query].present?
     params.require(:book_search_query).permit(:order_field, :text_query, :search_all_categories,
                                               author_ids: [], category_ids: [],
-                                              order_by_desc: [:title_for_sorting, :main_price, :created_at])
+                                              order_by_desc: [:title_for_sorting, :main_price, :published_at])
   end
 end

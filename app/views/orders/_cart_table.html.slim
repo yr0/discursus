@@ -47,7 +47,11 @@
   .dsc-orders-total-container
     .dsc-orders-total-area
       = t('orders.cart.total')
+      - if order.promo_code.present?
+        |*
       | &emsp;
       span.dsc-orders-total-price = readable_price(order.total, false, false)
       | &nbsp;
       = t(Rails.configuration.default_currency)
+  - if order.promo_code.present?
+    h5.text-right = "* #{t('orders.price_with_promo_code', percent: order.promo_code.discount_percent)}"

@@ -35,5 +35,6 @@
   - service:
       name: redis
       state: started
+      enabled: yes
   when: not st_redis_dir.stat.exists
   become: yes

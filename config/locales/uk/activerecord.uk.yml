@@ -53,6 +53,10 @@ uk:
     discount_percent: Знижка
     expires_at: Термін придатності
     limit: Максимальна кількість
+    is_top: Перед усіма
+    is_hidden: Приховати
+    published_at: Дата видання
+    raw_promo_code: Промо-код
   activerecord:
     errors:
       attributes:

@@ -17,7 +17,8 @@ module AdminPanel
     def record_params
       params.require(:book).permit(:title, :description, :price, :pages_amount, :category_list,
                                    :ebook_file, :ebook_file_cache, :audio_file, :audio_file_cache,
-                                   :image, :image_cache, :сover_designer, :translator, :year, :age_recommendations,
+                                   :image, :image_cache, :сover_designer, :translator, :age_recommendations,
+                                   :is_hidden, :is_top, :published_at, :fragment_file, :fragment_file_cache,
                                    :weight, :dimensions, :isbn, :authors_within_anthology, author_ids: [],
                                    extra_images_attributes: [:id, :title, :position, :image, :image_cache, :_destroy],
                                    variants: Book.variant_types.map { |v| [v, %i(is_available price)] }.to_h)

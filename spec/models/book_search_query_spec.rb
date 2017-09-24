@@ -1,6 +1,6 @@
 describe BookSearchQuery do
   changed_attributes = { text_query: 'hello', category_ids: [1], author_ids: [1], order_field: 'title_for_sorting',
-                         order_by_desc: { title_for_sorting: 1, main_price: 0, created_at: 0 } }
+                         order_by_desc: { title_for_sorting: 1, main_price: 0, published_at: 0 } }
 
   context 'instance without search' do
     it 'stores category ids from params hash' do
@@ -98,7 +98,7 @@ describe BookSearchQuery do
       def compose_hash_query(field, order_desc)
         { order_field: field,
           order_by_desc: {
-            title_for_sorting: 0, main_price: 0, created_at: 0
+            title_for_sorting: 0, main_price: 0, published_at: 0
           }.merge(field.to_sym => order_desc.nonzero?) }
       end
 
@@ -112,10 +112,10 @@ describe BookSearchQuery do
 
       it 'correctly orders by date of creating in ascending and descending order' do
         books = [1, 2, 3].map do |period|
-          create(:book, created_at: period.days.since(1.month.ago))
+          create(:book, published_at: period.days.since(1.month.ago))
         end
-        check_search_with(compose_hash_query('created_at', 0), books)
-        check_search_with(compose_hash_query('created_at', 1), books)
+        check_search_with(compose_hash_query('published_at', 0), books)
+        check_search_with(compose_hash_query('published_at', 1), books)
       end
 
       it 'correctly orders by title in ascending and descending order' do

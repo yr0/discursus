@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   validates :description, :cover_designer, :translator, :age_recommendations, :authors_within_anthology,
             length: { maximum: 10_000 }
   validates :weight, :dimensions, :isbn, length: { maximum: 1000 }
-  validates :year, numericality: { greater_than: 1900, less_than: 2200 }
+  validates :published_at, presence: true
 
   has_many :authors_books
   has_many :authors, through: :authors_books
@@ -25,6 +25,7 @@ class Book < ApplicationRecord
   mount_uploader :audio_file, AudioUploader
 
   default_scope { order(is_available: :desc, created_at: :desc) }
+  scope :available, -> { where(is_available: true) }
 
   acts_as_taggable_on :categories
 
@@ -38,6 +39,8 @@ class Book < ApplicationRecord
     string(:title_for_sorting) { title.downcase }
     time :created_at
     boolean :is_available
+    boolean :is_top
+    date :published_at
     double :main_price
     integer :category_ids, multiple: true
     integer :author_ids, multiple: true

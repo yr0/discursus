@@ -48,4 +48,5 @@
 - service:
     name: solr
     state: restarted
+    enabled: yes
   become: yes

@@ -40,9 +40,10 @@
               = t('orders.payment_methods.card')
     .dsc-orders-fields-container.dsc-orders-comment-container
       .dsc-orders-section-title.dsc-title-secondary
-        h4 = t('orders.order_submission.comment')
+        h4 &nbsp
       .dsc-orders-fields-inner-container
-        = f.input :comment, as: :text, label: false, input_html: { cols: 5, rows: 5 }
+        = f.input :raw_promo_code
+        = f.input :comment, as: :text, input_html: { cols: 2, rows: 2 }
     .dsc-orders-buttons-flex
       .dsc-button.clear.orders-steps-go-back = t('orders.order_submission.back')
       = f.submit t('orders.order_submission.proceed'), class: 'dsc-button'

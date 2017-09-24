@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921190353) do
+ActiveRecord::Schema.define(version: 20170924203219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20170921190353) do
     t.string   "fragment_file"
     t.text     "cover_designer"
     t.text     "translator"
-    t.integer  "year"
     t.text     "age_recommendations"
     t.string   "weight"
     t.string   "dimensions"
@@ -159,6 +158,7 @@ ActiveRecord::Schema.define(version: 20170921190353) do
     t.datetime "submitted_at"
     t.string   "raw_promo_code"
     t.integer  "promo_code_id"
+    t.decimal  "total_no_promo",           precision: 8, scale: 2
     t.index ["promo_code_id"], name: "index_orders_on_promo_code_id", using: :btree
   end
 

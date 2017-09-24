@@ -1,6 +1,16 @@
 - order_has_physical = @order.physical?
 
 h2 = "#{t('orders.order')} ##{@order.id}"
+h4 = t("orders.states.#{@order.aasm_state}")
+- if @order.cash? && @order.submitted?
+  | &nbsp;
+  = link_to fa_icon(:dollar), [:acknowledge_payment, :admin_panel, @order], remote: true,
+          title: t('admin_panel.orders.acknowledge_payment'), id: "acknowledgePayment#{@order.id}",
+          method: :put, class: 'btn btn-warning', 'data-confirm' => true
+  | &nbsp;
+= link_to fa_icon(:check), [:complete, :admin_panel, @order], method: :put, remote: true,
+        title: t('admin_panel.orders.complete'), id: "complete#{@order.id}",
+        class: "btn btn-success #{'hidden' unless @order.paid_for?}", 'data-confirm' => true
 
 .box
   .box-header
@@ -31,6 +41,8 @@ h2 = "#{t('orders.order')} ##{@order.id}"
                     = readable_price(item.price, false)
                   td.text-right = readable_price(item.total, false)
     .box-footer
+      - if @order.promo_code.present?
+        h4.text-right= "#{readable_price(@order.total_no_promo)} - #{@order.promo_code.discount_percent}%"
       h4.text-right
         strong = t('orders.cart.total')
         | &nbsp;
@@ -41,4 +53,9 @@ h2 = "#{t('orders.order')} ##{@order.id}"
   .box-header
     h4 = t('personal.orders.info')
   .box-body
+    - if @order.promo_code.present?
+      p
+        b = t('orders.promo_code')
+        |:&nbsp;
+        = link_to(@order.promo_code.code, [:edit, :admin_panel, @order.promo_code])
     = personal_order_detailed_information(@order)

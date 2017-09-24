@@ -3,8 +3,8 @@ class BookSearchQuery
 
   ALLOWED_ATTRIBUTES = %i(order_field order_by_desc text_query category_ids
                           search_all_categories author_ids).freeze
-  DEFAULT_ORDER_BY_DESC = { title_for_sorting: 0, main_price: 0, created_at: 1 }.freeze
-  DEFAULT_ORDER_FIELD = :created_at
+  DEFAULT_ORDER_BY_DESC = { title_for_sorting: 0, main_price: 0, published_at: 1 }.freeze
+  DEFAULT_ORDER_FIELD = :published_at
   RESULTS_PER_PAGE = 8
 
   attr_accessor(*ALLOWED_ATTRIBUTES)
@@ -28,6 +28,9 @@ class BookSearchQuery
   # rubocop:disable Metrics/AbcSize - we pass this block to search query
   def to_sunspot(page)
     proc do
+      with(:is_available, true)
+
+      order_by(:is_top, :desc) if default?
       order_by(*order_conditions)
       paginate page: page, per_page: RESULTS_PER_PAGE
 

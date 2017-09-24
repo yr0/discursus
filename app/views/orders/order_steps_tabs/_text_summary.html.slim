@@ -6,12 +6,18 @@
     | &nbsp;
     strong
       = order.line_items.size
-    | &nbsp;
-    = t('orders.cart.short_description.total_sum')
-    | &nbsp;
-    strong
-      = readable_price order.total
-    |. &nbsp;
+    - if order.promo_code.present?
+      |. &nbsp;
+      = raw t('orders.order_submission.summary.promo_discount',
+              discount: order.promo_code.discount_percent,
+              price: readable_price(order.promo_code.apply_discount(order.total)))
+    - else
+      | &nbsp;
+      = t('orders.cart.short_description.total_sum')
+      | &nbsp;
+      strong
+        = readable_price order.total
+      |. &nbsp;
     = t('orders.order_submission.summary.look_up')
 
   p
@@ -35,7 +41,7 @@
           | &nbsp;
           = t('orders.order_submission.summary.shipping.digital')
     - else
-        = t('orders.order_submission.summary.shipping.no_shipping')
+      = t('orders.order_submission.summary.shipping.no_shipping')
 
   p
     - if order.payment_method.blank?
@@ -50,4 +56,4 @@
       |: &nbsp;
       em = order.comment
 
-  p = t('orders.order_submission.summary.outro')
+  p = t('orders.order_submission.summary.go_back')

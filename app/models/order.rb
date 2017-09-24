@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   # If user passes password and confirmation, they will be validated and stored as digests
   has_secure_password validations: false
 
-  SHIPPING_METHODS = %w(nova_poshta ukrposhta pickup).freeze
+  SHIPPING_METHODS = %w(nova_poshta pickup).freeze
   PAYMENT_METHODS = %w(card cash).freeze
   LIQPAY_CURRENCY = 'UAH'
 
@@ -38,9 +38,9 @@ class Order < ApplicationRecord
   def recalculate_total
     if line_items.any?
       line_items_total = line_items.pluck(:price, :quantity).map { |pq| pq.reduce(&:*) }.reduce(&:+)
-      update(total: total_with_promo_discounts(line_items_total), raw_promo_code: nil)
+      update(total_no_promo: line_items_total, total: total_with_promo_discounts(line_items_total), raw_promo_code: nil)
     else
-      update(total: 0.0, raw_promo_code: nil)
+      update(total_no_promo: 0.0, total: 0.0, raw_promo_code: nil)
     end
   end
 

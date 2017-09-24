@@ -19,6 +19,10 @@
       .row
         .col-sm-12.col-md-6
           = f.input :title
+        .col-sm-12.col-md-6
+          = f.input :published_at, as: :string,
+                  input_html: { class: 'datepicker',
+                          value: readable_date(f.object.persisted? ? f.object.published_at : nil) }
         .col-sm-12
           = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
                   ckeditor: { height: 300, locale: I18n.locale } }
@@ -33,7 +37,7 @@
         .col-sm-12.col-md-6
           = f.input :category_list, input_html: { id: 'bookCategories', value: f.object.category_list.join(','),
                   'data-categories': book_categories_for_select }
-        - %i(year weight dimensions isbn pages_amount authors_within_anthology cover_designer translator age_recommendations).each do |field|
+        - %i(weight dimensions isbn pages_amount authors_within_anthology cover_designer translator age_recommendations).each do |field|
           .col-sm-12.col-md-3
             = f.input field
 
@@ -43,6 +47,8 @@
   .box
     .box-body
       .row
+        .col-sm-offset-6.col-md-offset-10.col-md-2.col-sm-6
+          = f.input :is_top
         .col-md-12.text-right
           = f.submit t('save'), class: 'btn btn-primary margin'
           = link_to t('cancel'), [:admin_panel, :books], class: 'btn btn-warning margin'

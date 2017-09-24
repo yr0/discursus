@@ -3,4 +3,4 @@
     = render 'books/list', books: @books, skip_lg_limit: true, skip_price: true,
             book_variants_lambda: ->(book) { book_card_variants(book.bought_variants, true) }
 - else
-  h4 = t('personal.bookshelf.empty')
+  h4.text-center = t('personal.bookshelf.empty')

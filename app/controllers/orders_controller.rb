@@ -37,7 +37,8 @@ class OrdersController < ApplicationController
 
   def order_submission_params
     params.require(:order).permit(:shipping_method, :city, :street, :payment_method, :comment,
-                                  :full_name, :phone, :email, :password, :password_confirmation)
+                                  :full_name, :phone, :email, :password, :password_confirmation,
+                                  :raw_promo_code)
   end
 
   def process_order_errors
@@ -47,7 +48,7 @@ class OrdersController < ApplicationController
   end
 
   def try_submitting_order
-    if verify_recaptcha(model: current_order)
+    if Rails.configuration.disable_recaptcha || verify_recaptcha(model: current_order)
       submit_and_redirect!
     else
       @recaptcha_error = true

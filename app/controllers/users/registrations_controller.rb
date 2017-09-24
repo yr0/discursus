@@ -5,7 +5,7 @@ module Users
 
     # POST /resource
     def create
-      super if verify_recaptcha(model: User)
+      super if Rails.configuration.disable_recaptcha || verify_recaptcha(model: User)
     end
 
     # GET /resource/edit

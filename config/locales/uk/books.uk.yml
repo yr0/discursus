@@ -19,7 +19,7 @@ uk:
     sort_by:
       title_for_sorting: За назвою
       main_price: За ціною
-      created_at: За датою виходу
+      published_at: За датою виходу
     filter_by:
       title: За фрагментом назви чи опису
       categories: За категоріями

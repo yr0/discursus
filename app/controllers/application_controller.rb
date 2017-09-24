@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do
     redirect_to root_path
   end
+
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to root_path
+  end
 end

@@ -10,7 +10,7 @@
         .dsc-book-extra-images-container
           - @book.extra_images.each do |extra_image|
             .dsc-book-extra-image
-              = image_tag extra_image.image.url(:medium), 'data-darkbox' => extra_image.image.url,
+              = image_tag extra_image.image.url(:large), 'data-darkbox' => extra_image.image.url,
                       'data-darkbox-description' => extra_image.title, 'data-darkbox-group' => 'bookImages'
     .col-sm-6.col-xs-12.dsc-book-info
       - authors_amount = @book.authors.size
@@ -29,7 +29,11 @@
           span.dsc-book-field-name = t('attributes.categories')
           |:&nbsp;
           = @book.category_list.join(', ')
-      - %i(cover_designer translator year age_recommendations weight dimensions isbn pages_amount).each do |field|
+      div
+        span.dsc-book-field-name = t('attributes.year')
+        |:&nbsp;
+        = @book.published_at.year
+      - %i(cover_designer translator age_recommendations weight dimensions isbn pages_amount).each do |field|
         - value = @book.public_send(field)
         - if value.present?
           div

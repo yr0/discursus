@@ -1,6 +1,7 @@
 .box.box-success
   .box-header.with-border
     h2 = "#{t('orders.promo_code')} #{@promo_code.code}"
+    h4 = t('admin_panel.promo_codes.used_codes', count: @promo_code.orders_count.to_i)
   .box-body
     .row
       = simple_form_for [:admin_panel, @promo_code], html: { class: 'form' } do |f|
