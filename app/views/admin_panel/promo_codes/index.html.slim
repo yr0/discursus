@@ -1,0 +1,37 @@
+.box
+  .box-header
+    h2 = t('admin_panel.promo_codes.title')
+    h4 = t('admin_panel.promo_codes.its_ok')
+    .text-center
+      = link_to new_admin_panel_promo_code_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @promo_codes.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.code')
+            th = t('attributes.discount_percent')
+            th = t('attributes.expires_at')
+            th = t('admin_panel.promo_codes.orders_count')
+            th width='10%'
+        tbody
+          - @promo_codes.each do |promo|
+            tr
+              td = promo.code
+              td = "#{promo.discount_percent}%"
+              td = promo.expires_at.present? ? readable_date(promo.expires_at) : '∞'
+              td = "#{promo.orders_count.to_i} / #{promo.limit.to_i > 0 ? promo.limit : '∞'}"
+              td.text-right
+                = link_to fa_icon(:pencil), [:edit, :admin_panel, promo], class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), [:admin_panel, promo], method: :delete, class: 'btn btn-danger',
+                        'data-confirm' => true
+      div
+        = paginate @promo_codes
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.promo_codes.no_promo_codes')

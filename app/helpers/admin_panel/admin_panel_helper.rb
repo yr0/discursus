@@ -1,6 +1,6 @@
 module AdminPanel
   module AdminPanelHelper
-    NAVIGATION = %w(orders books authors articles team_members bookstores settings).freeze
+    NAVIGATION = %w(orders books authors articles team_members promo_codes bookstores settings).freeze
 
     # Provided data is completely isolated from user input
     # rubocop:disable Rails/OutputSafety

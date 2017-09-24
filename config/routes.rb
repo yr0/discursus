@@ -48,5 +48,6 @@ Rails.application.routes.draw do
     resources :bookstores
     resources :authors
     resources :settings, only: %i(index update)
+    resources :promo_codes
   end
 end

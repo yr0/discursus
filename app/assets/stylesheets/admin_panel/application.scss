@@ -8,6 +8,7 @@
 @import 'sweetalert2.min';
 @import 'selectize';
 @import 'jquery-ui/tooltip';
+@import 'jquery-ui/datepicker';
 
 // local
 @import 'fonts';
@@ -16,4 +17,17 @@
   font-size: smaller;
   color: #666;
   margin-top: -10px;
+}
+
+.ui-datepicker {
+  background-color: #fff;
+
+  .ui-icon {
+    text-indent: 0;
+    cursor: pointer;
+  }
+
+  .ui-state-active {
+    background-color: #ff9;
+  }
 }

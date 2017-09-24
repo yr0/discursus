@@ -1,0 +1,7 @@
+.box.box-success
+  .box-header.with-border
+    h2 = "#{t('orders.promo_code')} #{@promo_code.code}"
+  .box-body
+    .row
+      = simple_form_for [:admin_panel, @promo_code], html: { class: 'form' } do |f|
+        = render('form', f: f)

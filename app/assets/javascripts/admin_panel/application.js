@@ -1,6 +1,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/widgets/tooltip
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/i18n/datepicker-uk
 //= require bootstrap-sprockets
 //= require adminlte/adminlte.min
 //= require ckeditor/init
@@ -39,6 +41,12 @@
             if($(this).css('visibility') != 'hidden') {
                 CKEDITOR.replace(ckeditorId);
             }
+        });
+
+        $("input.datepicker").each(function() {
+            $(this).datepicker({
+                dateFormat: "dd.mm.yy"
+            });
         });
 
         // Reinitialize sweet alert

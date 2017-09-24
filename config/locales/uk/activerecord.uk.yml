@@ -49,6 +49,10 @@ uk:
     dimensions: Розміри
     isbn: ISBN
     authors_within_anthology: Автори у збірці
+    code: Код
+    discount_percent: Знижка
+    expires_at: Термін придатності
+    limit: Максимальна кількість
   activerecord:
     errors:
       attributes:
