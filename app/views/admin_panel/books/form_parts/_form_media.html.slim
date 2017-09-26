@@ -7,10 +7,16 @@
   .box-body
     .row
       .col-sm-12.col-md-6
+        h4 = t('attributes.fragment_file')
+        - if f.object.fragment_file.present?
+          = link_to f.object.fragment_file.filename, f.object.fragment_file.url
+        = f.input :fragment_file, label: false, error: false, input_html: {class: 'input-invisible'}
+        = f.input :fragment_file_cache, as: :hidden
+      .col-sm-12.col-md-6
         h4 = t('admin_panel.books.main_image')
         - if f.object.image.present?
           = image_tag f.object.image.url(:small)
-        = f.input :image, error: false, input_html: { class: 'input-invisible' }
+        = f.input :image, label: false, error: false, input_html: { class: 'input-invisible' }
         = f.input :image_cache, as: :hidden
     h4 = t('admin_panel.books.extra_images')
     .row

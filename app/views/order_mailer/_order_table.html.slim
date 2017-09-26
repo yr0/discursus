@@ -4,14 +4,22 @@ table border=1 style="width: 100%; border: 1px solid #b8aed1; border-collapse: c
       td style="padding: 5px" = item.book.author_names
       td style="padding: 5px"
         strong= item.book.title
+        | &emsp;(
         em = t("books.variants.#{item.variant}")
+        |)
       td style="padding: 5px" = "#{item.quantity} #{t('pcs')}"
       td style="padding: 5px" = readable_price(item.price)
   tr style="border-top: 2px solid #b8aed1"
     td style="padding: 5px" colspan=3
       = t('orders.cart.total')
+      - if @order.promo_code.present?
+        |*
     td style="padding: 5px"
       strong = readable_price(@order.total)
-
+- if @order.promo_code.present?
+  h5 = "* #{t('orders.price_with_promo_code', percent: @order.promo_code.discount_percent)}"
+br
+br
 section
+  h3 = t('your_data')
   = personal_order_detailed_information(@order)

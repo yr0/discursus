@@ -15,6 +15,7 @@ class BooksController < ApplicationController
 
   # We do not skip load resource to make sure the book exists
   def toggle_favorite
+    return unless current_user.present?
     favorite = UsersFavoriteBook.find_or_initialize_by(user_id: current_user.id, book_id: @book.id)
     favorite.assign_attributes(is_favorited: !favorite.is_favorited?) unless favorite.new_record?
     favorite.save

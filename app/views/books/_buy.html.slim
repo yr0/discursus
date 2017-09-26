@@ -34,9 +34,9 @@
         - if @book.is_available?
           button.dsc-book-side-button.main type="submit"
             = fa_icon('shopping-basket', text: t('buy'), class: 'action-icon')
-        /- if @book.fragment_file.present?
-        /  a.dsc-book-side-button
-        /    = fa_icon('file-o', text: t('books.read_fragment'), class: 'action-icon')
+        - if @book.fragment_file.present?
+          = link_to @book.fragment_file.url, class: 'dsc-book-side-button' do
+            = fa_icon('file-o', text: t('books.read_fragment'), class: 'action-icon')
         - if current_user.present?
           = link_to toggle_favorite_book_path(@book), remote: true, class: 'dsc-book-side-button',
                   id: 'bookToggleFavorite', method: :put do
