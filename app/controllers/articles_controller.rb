@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     @articles = if params[:query].present?
                   search_articles_result
                 else
-                  @articles.page(params[:page]).per(params[:per_page])
+                  Article.page(params[:page]).per(params[:per_page])
                 end
     respond_to :html, :js
   end
