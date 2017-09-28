@@ -10,7 +10,10 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   body data-scope="#{controller_name}.#{action_name}"
-    = render 'shared/header'
+    - if content_for?(:uses_home_header?)
+      = render 'shared/home_header'
+    - else
+      = render 'shared/header'
     section.dsc-main-content
       == yield
     = render 'shared/footer'
