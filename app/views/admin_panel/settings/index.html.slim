@@ -27,14 +27,17 @@
         .col-sm-12.col-md-6
           = f.input :home_hero_title
         .col-sm-12.col-md-6
-          = f.input :home_hero_details, as: :ckeditor, input_html: { class: 'input-ckeditor',
-                  ckeditor: { height: 300, locale: I18n.locale } }
-          h6.input-help-block = t('admin_panel.settings.home_hero_details_hint')
+          = f.input :home_hero_link, as: :string
+          h6.input-help-block = t('admin_panel.settings.home_hero_link_hint')
         .col-sm-12.col-md-6
           = image_tag f.object.home_hero_image.url(:medium) if f.object.home_hero_image?
           = f.input :home_hero_image
           = f.input :home_hero_image_cache, as: :hidden
           h6.input-help-block = t('admin_panel.settings.home_hero_image_hint')
+        .col-sm-12.col-md-6
+          = f.input :home_hero_details, as: :ckeditor, input_html: { class: 'input-ckeditor',
+                  ckeditor: { height: 300, locale: I18n.locale } }
+          h6.input-help-block = t('admin_panel.settings.home_hero_details_hint')
         .col-sm-12.col-md-6
           = f.input :team_hero_details, as: :ckeditor, input_html: { class: 'input-ckeditor',
                   ckeditor: { height: 300, locale: I18n.locale } }

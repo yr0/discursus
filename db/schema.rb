@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924203219) do
+ActiveRecord::Schema.define(version: 20170928202812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170924203219) do
     t.text   "home_hero_details"
     t.string "home_hero_image"
     t.text   "team_hero_details"
+    t.text   "home_hero_link"
   end
 
   create_table "taggings", force: :cascade do |t|
