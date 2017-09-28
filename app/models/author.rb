@@ -2,7 +2,7 @@ class Author < ApplicationRecord
   acts_as_list
   default_scope { order(position: :asc) }
   scope :named_like, ->(q) { where('name ILIKE ?', "%#{q}%") }
-  scope :for_index, -> { where.not(image: nil).order('reverse(split_part(reverse(authors.name), " ", 1) ASC') }
+  scope :for_index, -> { where.not(image: nil).order("reverse(split_part(reverse(authors.name), ' ', 1)) ASC") }
 
   validates :name, presence: true, length: { minimum: 3, maximum: 250 }
   after_commit -> { books.all.each(&:index!) }, on: %i(update destroy)
