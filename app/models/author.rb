@@ -5,6 +5,7 @@ class Author < ApplicationRecord
   scope :for_index, -> { where.not(image: nil).order('reverse(split_part(reverse(authors.name), " ", 1) ASC') }
 
   validates :name, presence: true, length: { minimum: 3, maximum: 250 }
+  after_commit -> { books.all.each(&:index!) }, on: %i(update destroy)
 
   has_many :authors_books
   has_many :books, through: :authors_books

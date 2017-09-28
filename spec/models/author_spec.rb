@@ -19,7 +19,7 @@ describe Author do
 
     it 'returns last book titles of author joined by comma' do
       author_books
-      expect(author.last_book_titles).to eq author_books.pluck(:title).reverse[0..2].join(', ')
+      expect(author.last_book_titles).to eq author_books.pluck(:title)[0..2].join(', ')
     end
 
     it 'does not fail if author has no books' do

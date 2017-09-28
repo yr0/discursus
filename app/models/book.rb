@@ -35,6 +35,7 @@ class Book < ApplicationRecord
 
   searchable do
     text :title, boost: 5.0
+    text(:authors, boost: 3.0) { authors.pluck(:name).join(' ') if authors.present? }
     text :description
     string(:title_for_sorting) { title.downcase }
     time :created_at

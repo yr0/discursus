@@ -83,6 +83,23 @@ describe BookSearchQuery do
         @hash_query = { text_query: search_fragment }
       end
 
+      it 'searches for books with fragment in author name' do
+        @book = create(:book, authors: [create(:author, name: "The #{search_fragment}")])
+        @hash_query = { text_query: search_fragment }
+      end
+
+      it 'searches for books with fragment in updated author name' do
+        @book = create(:book, :with_authors)
+        @book.authors.first.update(name: "The #{search_fragment}")
+        @hash_query = { text_query: search_fragment }
+      end
+
+      it 'searches for books with fragment in created author name' do
+        @book = create(:book)
+        @book.authors << create(:author, name: "The #{search_fragment}")
+        @hash_query = { text_query: search_fragment }
+      end
+
       it 'searches for books with certain category id' do
         @book = create(:book, categories: [category])
         @hash_query = { category_ids: [category.id] }
