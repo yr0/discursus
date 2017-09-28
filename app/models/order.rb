@@ -2,7 +2,8 @@ class Order < ApplicationRecord
   # If user passes password and confirmation, they will be validated and stored as digests
   has_secure_password validations: false
 
-  SHIPPING_METHODS = %w(nova_poshta pickup).freeze
+  SHIPPING_METHODS = %w(nova_poshta pickup ukrposhta).freeze
+  AVAILABLE_SHIPPING_METHODS = %w(nova_poshta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
   LIQPAY_CURRENCY = 'UAH'
 

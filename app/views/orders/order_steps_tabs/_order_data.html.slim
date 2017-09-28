@@ -6,7 +6,7 @@
         .dsc-orders-section-title.dsc-title-secondary
           h4 = t('orders.order_submission.shipping_method')
         .dsc-orders-fields-inner-container
-          - Order::SHIPPING_METHODS.each do |shipping_method|
+          - Order::AVAILABLE_SHIPPING_METHODS.each do |shipping_method|
             .dsc-orders-underlined-field
               input.dsc-checkbox [type="radio" name="order[shipping_method]" value="#{shipping_method}"
                 id="shipping_#{shipping_method}"]
@@ -27,7 +27,7 @@
           h4 = t('orders.order_submission.shipping_address')
         .dsc-orders-fields-inner-container
           = f.input :city
-          = f.input :street
+          = f.input :street, label: t('orders.street_or_department')
     - else
       .dsc-orders-fields-container.dsc-orders-payment-method-container
         .dsc-orders-section-title.dsc-title-secondary

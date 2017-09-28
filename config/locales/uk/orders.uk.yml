@@ -8,7 +8,8 @@ uk:
       pickup: Самовивіз
     payment_methods:
       card: Карткою
-      cash: Готівкою (або по отриманні)
+      cash: Готівкою при одержанні
+    street_or_department: Вулиця або відділення
     start_order: Оформити замовлення
     your_order: Ваше замовлення
     enter_data_or: Уведіть Ваші контактні дані або

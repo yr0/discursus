@@ -11,6 +11,7 @@
   become: yes
   with_items:
     - curl
+    - imagemagick
     - libpq-dev
     - ca-certificates
     - tar

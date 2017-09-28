@@ -24,7 +24,7 @@ class Book < ApplicationRecord
   mount_uploader :ebook_file, PdfUploader
   mount_uploader :audio_file, AudioUploader
 
-  default_scope { order(is_available: :desc, created_at: :desc) }
+  scope :top_recent, -> { order(is_top: :desc, published_at: :desc) }
   scope :available, -> { where(is_available: true) }
 
   acts_as_taggable_on :categories
@@ -47,7 +47,8 @@ class Book < ApplicationRecord
   end
 
   def self.all_categories
-    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' }).distinct
+    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
+        .order('tags.name ASC').distinct
   end
 
   # Returns names of book authors separated by comma
