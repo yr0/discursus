@@ -67,7 +67,7 @@ class Order < ApplicationRecord
     request_params = {
           order_id: id,
           amount: total,
-          server_url: Rails.application.routes.url_helpers.liqpay_callback_url.gsub(/^http:/, 'https'),
+          server_url: Rails.application.routes.url_helpers.liqpay_callback_url.gsub(/^http:/, 'https:'),
           result_url: Rails.application.routes.url_helpers.personal_orders_url,
           description: I18n.t('orders.liqpay_description'),
           sandbox: Rails.configuration.liqpay_sandbox
