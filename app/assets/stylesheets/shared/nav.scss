@@ -30,11 +30,11 @@
 
   &:hover {
     text-decoration: none;
-    color: $color-darker;
+    color: $white;
   }
 
   &.active {
-    color: $color-darker;
+    font-weight: bold;
   }
 }
 

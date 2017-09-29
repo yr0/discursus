@@ -26,11 +26,11 @@
             - if @categories.any?
               .dsc-books-filter-subtitle = t('books.filter_by.categories')
               .dsc-books-filter-options#dscFilterCategories
-                .dsc-books-filter-option
-                  = f.check_box :search_all_categories, class: 'dsc-input-checkable',
-                          'data-main-among' => '#dscFilterCategories'
-                  = f.label :search_all_categories, t('books.all_categories'),
-                          class: 'dsc-label-checkable dsc-checkable-checkbox'
+                /.dsc-books-filter-option
+                  /= f.check_box :search_all_categories, class: 'dsc-input-checkable',
+                  /        'data-main-among' => '#dscFilterCategories'
+                  /= f.label :search_all_categories, t('books.all_categories'),
+                  /        class: 'dsc-label-checkable dsc-checkable-checkbox'
                 = f.collection_check_boxes(:category_ids, @categories, :id, :name) do |cb|
                   = content_tag :div, class: 'dsc-books-filter-option' do
                     = cb.check_box(class: 'dsc-input-checkable')

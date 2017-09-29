@@ -13,8 +13,7 @@
         a href="#orderSecondStep" 2
       li
         a href="#orderThirdStep" 3
-    = simple_form_for current_order,
-            url: submit_order_path, remote: true do |f|
+    = simple_form_for current_order, url: submit_order_path, remote: true, html: { autocomplete: 'off' } do |f|
       #orderFirstStep = render('orders/order_steps_tabs/user_data', f: f)
       #orderSecondStep = render('orders/order_steps_tabs/order_data', f: f)
       #orderThirdStep = render('orders/order_steps_tabs/summary', f: f)
