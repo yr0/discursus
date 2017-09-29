@@ -24,8 +24,14 @@
     color: $white;
     margin: 0 100px;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1;
+
+    @media (max-width: 1200px) {
+      max-height: 70vh;
+      overflow-y: auto;
+      columns: unset;
+    }
   }
 
   @media (max-width: 1200px) {
