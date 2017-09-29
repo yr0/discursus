@@ -37,6 +37,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+
+
+  process :optimize_for_website
+
+  def optimize_for_website
+    manipulate! do |img|
+      img.strip
+      img.quality '85%'
+      img.interlace 'Plane'
+      img.gaussian_blur '0.05'
+    end
+  end
+
   version :thumb do
     process resize_to_fit: [50, 50]
   end
