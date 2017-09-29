@@ -32,10 +32,16 @@ $.extend($.gritter.options, {
     position: 'top-left'
 });
 
-
 $(window).on('scroll', function(){
     $('.dsc-clicked-inview').each(function(){
-        var clientRect = $(this)[0].getBoundingClientRect();
-        if(clientRect.top >= 0 && clientRect.bottom <= window.innerHeight) $(this).click();
+        var $element = $(this),
+            clientRect = $element[0].getBoundingClientRect();
+        if(clientRect.top >= 0 && clientRect.bottom <= window.innerHeight) {
+            $element.click();
+            $element.removeClass('dsc-clicked-inview');
+            setTimeout(function(){
+                $element.addClass('dsc-clicked-inview');
+            }, 1000);
+        }
     });
 });
