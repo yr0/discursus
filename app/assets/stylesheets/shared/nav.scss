@@ -108,7 +108,7 @@
   cursor: pointer;
 
   &.active .fa {
-    color: $green;
+    color: $green !important;
   }
 }
 

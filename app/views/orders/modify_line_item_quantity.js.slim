@@ -1,3 +1,5 @@
+- unless current_order.items?
+  | window.location.reload();
 - if @line_item.destroyed?
   | $('#itemRow#{@line_item.id}').prev().remove();
   | $('#itemRow#{@line_item.id}').next().remove();
