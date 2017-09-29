@@ -20,6 +20,7 @@ class PaymentsController < ApplicationController
     if liqpay_success_statuses.include?(liqpay_response.status)
       @order.pay!
     else
+      @order.update(comment: "#{@order.comment.to_s} #{liqpay_response.status}")
       Rails.logger.fatal "Non-success liqpay response status for order #{@order.id}: #{liqpay_response.status}"
     end
   end

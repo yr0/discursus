@@ -14,7 +14,7 @@ class PromoCode < ApplicationRecord
 
     def normalize(string)
       return string if string.blank?
-      string.downcase.strip
+      string.mb_chars.downcase.strip.to_s
     end
   end
 
