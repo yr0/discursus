@@ -33,7 +33,7 @@ $.extend($.gritter.options, {
 });
 
 $(window).on('scroll', function(){
-    $('.dsc-clicked-inview').each(function(){
+    $('.dsc-clicked-inview:visible').each(function(){
         var $element = $(this),
             clientRect = $element[0].getBoundingClientRect();
         if(clientRect.top >= 0 && clientRect.bottom <= window.innerHeight) {
