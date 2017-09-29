@@ -36,6 +36,17 @@ class CkeditorPictureUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :optimize_for_website
+
+  def optimize_for_website
+    manipulate! do |img|
+      img.strip
+      img.quality '85%'
+      img.interlace 'Plane'
+      img.gaussian_blur '0.05'
+    end
+  end
+
   process :extract_dimensions
 
   # Create different versions of your uploaded files:

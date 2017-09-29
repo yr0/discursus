@@ -37,8 +37,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-
-
   process :optimize_for_website
 
   def optimize_for_website
