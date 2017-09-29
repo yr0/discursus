@@ -8,7 +8,8 @@
       = render('list', articles: @articles)
     - unless @articles.last_page?
       .text-center
-        = button_to t('load_more'), articles_path(params_with_search(@articles)), class: 'dsc-button large-margin',
+        = button_to t('load_more'), articles_path(params_with_search(@articles)),
+                class: 'dsc-button large-margin dsc-clicked-inview',
                 remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-articles' }
   - else
       h4.text-center = t("articles.no_articles#{ '_found' if @search.present? }")

@@ -51,7 +51,8 @@
           = render('list', books: @books)
         - unless @books.last_page?
           .text-center
-            = button_to t('load_more'), books_path(params_with_search(@books)), class: 'dsc-button large-margin',
+            = button_to t('load_more'), books_path(params_with_search(@books)),
+                    class: 'dsc-button large-margin dsc-clicked-inview',
                     remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
       - else
         h4.text-center = t("books.no_books#{ '_found' if @search.present? }")
