@@ -40,7 +40,7 @@
             span.dsc-book-field-name = t("attributes.#{field}")
             |:&nbsp;
             = value
-      .dsc-book-description = raw @book.description
+      .dsc-book-description.dsc-from-ckeditor = raw @book.description
       .dsc-book-share-block
         span.dsc-book-field-name = t('share')
         .dsc-book-share-icons-container

@@ -4,7 +4,7 @@
   .row
     .col-xs-12.col-sm-4.col-lg-3 = render('card', author: @author, hide_show_link: true)
     .col-xs-12.col-sm-8.col-lg-9
-      .dsc-author-description = raw @author.description
+      .dsc-author-description.dsc-from-ckeditor = raw @author.description
 
   - if @author.books.any?
     .row
