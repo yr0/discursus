@@ -33,9 +33,10 @@ $.extend($.gritter.options, {
 });
 
 $(window).on('scroll', function(){
-    $('.dsc-clicked-inview:visible').each(function(){
+    $('.dsc-clicked-inview').each(function(){
         var $element = $(this),
             clientRect = $element[0].getBoundingClientRect();
+        if($element.parent().hasClass('dsc-disappearing')) return;
         if(clientRect.top >= 0 && clientRect.bottom <= window.innerHeight) {
             $element.click();
             $element.removeClass('dsc-clicked-inview');
