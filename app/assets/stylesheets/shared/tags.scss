@@ -62,9 +62,11 @@ input[type=text],textarea {
 }
 
 .dsc-table {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
+  @media(max-width: 900px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 
   th {
     font-weight: normal;
