@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
   load_resource find_by: :slug, only: :show
 
   def index
-    @authors = Author.with_last_book_titles.for_index.page(params[:page]).per(8)
+    @authors = Author.for_index.with_image.page(params[:page]).per(8)
     respond_to :html, :js
   end
 

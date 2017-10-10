@@ -11,6 +11,13 @@ describe Author do
     end
   end
 
+  describe 'for_index scope' do
+    it 'performs the query without errors' do
+      authors = create_list(:author, 2, :with_books, books_amount: 2)
+      expect(Author.for_index).to match_array authors
+    end
+  end
+
   describe '#with_last_book_titles' do
     let(:authors_with_books) { create_list(:author, 2, :with_books, books_amount: 2) }
 
