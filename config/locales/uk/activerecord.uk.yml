@@ -26,7 +26,7 @@ uk:
     fragment_file: Уривок
     categories: Категорії
     name: "Ім'я"
-    full_name: "Ім'я"
+    full_name: "Ім'я та прізвище"
     phone: "Номер телефону"
     email: "E-mail"
     shipping_method: Спосіб доставки
