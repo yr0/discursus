@@ -11,19 +11,49 @@ describe Author do
     end
   end
 
+  describe '#with_last_book_titles' do
+    let(:authors_with_books) { create_list(:author, 2, :with_books, books_amount: 2) }
+
+    def get_book_titles(author)
+      author.books.pluck(:title).join(', ')
+    end
+
+    it 'returns book titles along with authors info' do
+      author1, author2 = authors_with_books
+      expect(Author.with_last_book_titles.map(&:last_book_titles))
+        .to match_array([get_book_titles(author1), get_book_titles(author2)])
+    end
+
+    it 'returns author with all other fields intact' do
+      authors_with_books
+      the_author = Author.with_last_book_titles.first
+      expect(the_author.id).to be_present
+      expect(the_author.created_at).to be_present
+      expect(the_author.name).to be_present
+    end
+
+    it 'performs a single DB query to get the titles' do
+      expect do
+        Author.with_last_book_titles.map(&:last_book_titles)
+      end.to make_database_queries(count: 1)
+    end
+
+    it 'returns empty string for book titles if author has no books yet' do
+      authors_with_books
+      author = create(:author)
+      expect(Author.with_last_book_titles.find(author.id).last_book_titles).to eq ''
+    end
+  end
+
   describe '#last_book_titles' do
     let(:author) { create(:author) }
     let(:another_author) { create(:author) }
-    let(:authors_list) { create_list(:author, rand(2..4), :with_books) }
-    let(:author_books) { Array.new(5) { |n| create(:book, authors: [author], created_at: n.days.since) } }
+    let(:authors_list) { create_list(:author, 2, :with_books) }
+    let(:author_books) { Array.new(3) { |n| create(:book, authors: [author], created_at: n.days.since) } }
 
-    it 'returns last book titles of author joined by comma' do
+    it 'falls over to method if with_last_book_titles has not been loaded' do
       author_books
-      expect(author.last_book_titles).to eq author_books.pluck(:title)[0..2].join(', ')
-    end
-
-    it 'does not fail if author has no books' do
-      expect(another_author.last_book_titles).to eq ''
+      expect(author.last_book_titles.split(', ')).to match_array author_books.pluck(:title)
     end
 
     it 'performs 3 queries (authors, author_books, books) for n authors when used in collection with :includes' do

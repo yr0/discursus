@@ -47,12 +47,21 @@ class Book < ApplicationRecord
     integer :author_ids, multiple: true
   end
 
-  def self.all_categories
-    ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
-        .order('tags.name ASC').distinct
+  class << self
+    def with_author_names
+      authors_subquery = Author.select(:name).order(:name)
+      select("DISTINCT ON (books.id) books.*, array_to_string(array(#{authors_subquery.to_sql}), ', ') AS author_names")
+          .left_joins(:authors)
+    end
+
+    def all_categories
+      ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
+          .order('tags.name ASC').distinct
+    end
   end
 
-  # Returns names of book authors separated by comma
+  # A fallback method that returns names of book authors separated by comma.
+  # USE with_author_names scope whenever possible!
   def author_names
     # we prefer #map on eager load, because #pluck would use the additional sql query per book
     @author_names ||= if authors.loaded?

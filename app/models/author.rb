@@ -1,6 +1,5 @@
 class Author < ApplicationRecord
   acts_as_list
-  default_scope { order(position: :asc) }
   scope :named_like, ->(q) { where('name ILIKE ?', "%#{q}%") }
   scope :for_index, -> { where.not(image: nil).order("reverse(split_part(reverse(authors.name), ' ', 1)) ASC") }
 
@@ -16,7 +15,14 @@ class Author < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  # returns a string containing last 3 books of the author
+  def self.with_last_book_titles
+    books_subquery = Book.select(:title).top_recent.limit(3)
+    select("DISTINCT ON (authors.id) authors.*, array_to_string(array(#{books_subquery.to_sql}), ', ') "\
+           'AS last_book_titles').left_joins(:books)
+  end
+
+  # A fallback that returns a string containing 3 books of the author
+  # USE with_last_book_titles scope whenever possible
   def last_book_titles
     # we prefer #[] and #map on eager load, because #limit and #pluck would use the additional sql query per author
     @last_book_titles ||= if books.loaded?

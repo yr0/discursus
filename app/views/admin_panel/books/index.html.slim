@@ -15,7 +15,7 @@
             th = t('attributes.price')
             th width='auto'
         tbody
-          - @books.each do |book|
+          - @books.with_author_names.each do |book|
             tr
               td = book.title
               td = book.author_names.present? ? book.author_names : book.authors_within_anthology

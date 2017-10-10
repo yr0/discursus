@@ -12,22 +12,32 @@ class OrderMailerPreview < ActionMailer::Preview
   private
 
   def recreate_order
-    user = User.find_or_initialize_by(email: 'foremailpreviews@discursus.com')
-    user.assign_attributes(FactoryGirl.attributes_for(:user).except(:email))
-    user.save
-    user.orders.all.each(&:destroy)
-    promo = PromoCode.find_or_initialize_by(code: 'TESTING ORDER MAILER')
-    promo.assign_attributes(discount_percent: 50, expires_at: 1.day.since)
-    promo.save
-    book = Book.find_by(title: 'TESTING ORDER MAILER')
-    unless book
-      book = FactoryGirl.create(:book, :hardcover, title: 'TESTING ORDER MAILER')
-    end
     @order = FactoryGirl.create(:order, customer: user)
     @order.populate(book, :hardcover)
     @order.raw_promo_code = promo.code
     @order.save
-    p @order.valid?
-    p @order.errors.details
+  end
+
+  def user
+    return @user if @user.present?
+    @user = User.find_or_initialize_by(email: 'foremailpreviews@discursus.com')
+    @user.assign_attributes(FactoryGirl.attributes_for(:user).except(:email))
+    @user.save!
+    @user.orders.all.each(&:destroy)
+    @user
+  end
+
+  def promo
+    return @promo if @promo.present?
+    @promo = PromoCode.find_or_initialize_by(code: 'TESTING ORDER MAILER')
+    @promo.assign_attributes(discount_percent: 50, expires_at: 1.day.since)
+    @promo.save
+    @promo
+  end
+
+  def book
+    return @book if @book.present?
+    @book = Book.find_by(title: 'TESTING ORDER MAILER')
+    @book ||= FactoryGirl.create(:book, :hardcover, title: 'TESTING ORDER MAILER')
   end
 end

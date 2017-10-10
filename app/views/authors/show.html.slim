@@ -6,9 +6,9 @@
     .col-xs-12.col-sm-8.col-lg-9
       .dsc-author-description.dsc-from-ckeditor = raw @author.description
 
-  - if @author.books.any?
+  - if @books.any?
     .row
       .col-xs-12.dsc-show-page-subheader
         h4 = t('authors.authored_books')
       .col-xs-12
-        .row = render('books/list', books: @author.books.limit(4))
+        .row = render('books/list', books: @books)

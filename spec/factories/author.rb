@@ -1,9 +1,13 @@
 FactoryGirl.define do
   factory :author do
-    sequence(:name) { Faker::GameOfThrones.character }
+    transient do
+      books_amount 1
+    end
+
+    sequence(:name) { |n| "#{Faker::GameOfThrones.character}-#{n}" }
 
     trait :with_books do
-      books { [create(:book)] }
+      books { create_list(:book, books_amount) }
     end
   end
 end

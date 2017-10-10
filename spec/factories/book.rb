@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :book do
     transient do
       variant_price 20.0
+      authors_amount 1
     end
 
     sequence(:title) { |n| "#{Faker::Book.title}-#{n}" }
@@ -11,7 +12,7 @@ FactoryGirl.define do
     is_available true
 
     trait :with_authors do
-      authors { [create(:author)] }
+      authors { create_list(:author, authors_amount) }
     end
 
     trait :with_categories do
