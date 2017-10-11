@@ -8,7 +8,7 @@ module AdminPanel
     end
 
     def index
-      @orders = Order.where.not(aasm_state: [:pending, :completed])
+      @orders = Order.where.not(aasm_state: [:pending, :completed, :canceled])
                      .rewhere(filter_query).order(submitted_at: :desc).page(params[:page])
     end
 
@@ -22,6 +22,10 @@ module AdminPanel
 
     def complete
       @order.success!
+    end
+
+    def cancel
+      @order.cancel!
     end
 
     private

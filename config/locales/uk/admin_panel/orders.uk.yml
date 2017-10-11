@@ -5,11 +5,12 @@ uk:
       transition_error: Не вдалося перевести замовлення в такий статус
       no_orders: Поки немає замовлень
       filter:
-        all: Усі
-        submitted: Підтверджені
-        paid_for: Оплачені
+        all: Активні
+        submitted: Очікують оплати
+        paid_for: Оплачені, але не відправлені
         completed: Готові
       acknowledge_payment: Позначити як оплачене
       complete: Позначити як готове
+      cancel: Відмінити
       items_physical: Паперові книги
       items_digital: Цифрові книги

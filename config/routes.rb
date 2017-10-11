@@ -39,8 +39,9 @@ Rails.application.routes.draw do
   namespace :admin_panel do
     get '/', to: 'orders#index'
     resources :orders, only: %i(index show) do
-      put 'acknowledge_payment', on: :member
-      put 'complete', on: :member
+      member do
+        %w(acknowledge_payment complete cancel).each { |action| put action }
+      end
     end
     resources :books
     resources :articles

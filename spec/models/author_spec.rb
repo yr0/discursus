@@ -22,7 +22,7 @@ describe Author do
     let(:authors_with_books) { create_list(:author, 2, :with_books, books_amount: 2) }
 
     def get_book_titles(author)
-      author.books.pluck(:title).join(', ')
+      author.books.top_recent.limit(3).pluck(:title).join(', ')
     end
 
     it 'returns book titles along with authors info' do

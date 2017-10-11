@@ -17,7 +17,7 @@ describe Book do
     let(:books_with_authors) { create_list(:book, 2, :with_authors, authors_amount: 2) }
 
     def get_author_names(book)
-      book.authors.pluck(:name).join(', ')
+      book.authors.order(:name).pluck(:name).join(', ')
     end
 
     it 'returns author names along with books info' do

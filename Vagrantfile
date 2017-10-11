@@ -14,8 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider 'virtualbox' do |v|
-    v.memory = 2048
-    v.cpus = 1
+    v.memory = 4096
+    v.cpus = 2
   end
 
   config.vm.provision 'ansible' do |ansible|
