@@ -15,7 +15,7 @@ Source code for [the website](https://discursus.com.ua).
 1. Install rvm and ruby 2.3.1
 0. Install PostgreSQL 9.5
 0. Install Solr 6.3 (latest at the time of writing), create a new core, and specify path to it 
-    in *config/solr.yml*. Copy sunspot config files *schema.xml* and *solrconfig.xml* from config/sunspot 
+    in *config/solr.yml*. Copy sunspot config files *schema.xml* and *solrconfig.xml* from config/solr 
     and place them in /var/solr/data/<collection_name>/conf. Restart the solr service afterwards. 
 0. Install Redis
 0. `cd` into app directory and run `bundle` to install the dependencies
