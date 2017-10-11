@@ -1,5 +1,5 @@
 describe OrderMailer, type: :mailer do
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def expect_to_match_order_table(order)
     delivery_body = ActionMailer::Base.deliveries.last.body
     expect(delivery_body).to include I18n.t("orders.payment_methods.#{order.payment_method}")
@@ -20,7 +20,7 @@ describe OrderMailer, type: :mailer do
       expect(delivery_body).to include item.price.to_f
     end
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   describe '#notify_cash' do
     let!(:order) do

@@ -35,7 +35,9 @@ RSpec.configure do |config|
     end
   end
 
-  config.after(:each, search: true) do
+  config.around(:each, search: true) do |example|
+    Sunspot.remove_all!
+    example.run
     Sunspot.remove_all!
   end
 end

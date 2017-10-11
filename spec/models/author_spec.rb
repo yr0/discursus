@@ -60,7 +60,7 @@ describe Author do
 
     it 'falls over to method if with_last_book_titles has not been loaded' do
       author_books
-      expect(author.last_book_titles.split(', ')).to match_array author_books.pluck(:title)
+      expect(author.last_book_titles.split(', ')).to match_array author_books.pluck(:title).join(', ').split(', ')
     end
 
     it 'performs 3 queries (authors, author_books, books) for n authors when used in collection with :includes' do
