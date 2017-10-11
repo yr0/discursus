@@ -8,7 +8,9 @@ module AdminPanel
     end
 
     def index
-      @orders = Order.where.not(aasm_state: :pending).where(filter_query).order(submitted_at: :desc).page(params[:page])
+      @orders = Order
+                  .where.not(aasm_state: [:pending, :completed])
+                  .where(filter_query).order(submitted_at: :desc).page(params[:page])
     end
 
     def show

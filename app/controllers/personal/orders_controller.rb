@@ -1,7 +1,7 @@
 module Personal
   class OrdersController < PersonalController
     def index
-      @orders = current_user.orders.where.not(aasm_state: :pending).page(params[:page])
+      @orders = current_user.orders.where.not(aasm_state: :pending).order(created_at: :desc).page(params[:page])
     end
 
     def show

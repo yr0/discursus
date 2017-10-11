@@ -1,6 +1,6 @@
 module OrdersHelper
   def user_for_order_contacts(order)
-    contacts = %i(name email phone).select { |contact| order[contact].present? }.map do |contact|
+    contacts = %i(full_name email phone).select { |contact| order[contact].present? }.map do |contact|
       "#{I18n.t("orders.order_submission.summary.contact_data.#{contact}")} - #{order[contact]}"
     end.join(', ')
     contacts += ". #{t('orders.order_submission.summary.contact_data.registration')}" if order.password.present?
