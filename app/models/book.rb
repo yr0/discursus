@@ -51,12 +51,15 @@ class Book < ApplicationRecord
     def with_author_names
       authors_subquery = Author.select(:name).order(:name)
       select("DISTINCT ON (books.id) books.*, array_to_string(array(#{authors_subquery.to_sql}), ', ') AS author_names")
-          .left_joins(:authors)
+        .left_joins(:authors)
     end
 
     def all_categories
-      ActsAsTaggableOn::Tag.joins(:taggings).where(taggings: { context: 'categories', taggable_type: 'Book' })
-          .order('tags.name ASC').distinct
+      ActsAsTaggableOn::Tag
+        .joins(:taggings)
+        .where(taggings: { context: 'categories', taggable_type: 'Book' })
+        .order('tags.name ASC')
+        .distinct
     end
   end
 

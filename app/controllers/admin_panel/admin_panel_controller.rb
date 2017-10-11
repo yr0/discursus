@@ -14,9 +14,8 @@ module AdminPanel
     end
 
     def check_admin
-      if current_admin.blank?
-        render file: Rails.root.join('public', '404'), layout: false, status: :not_found
-      end
+      return if current_admin.present?
+      render file: Rails.root.join('public', '404'), layout: false, status: :not_found
     end
   end
 end

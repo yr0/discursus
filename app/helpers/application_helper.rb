@@ -13,7 +13,7 @@ module ApplicationHelper
     [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe # rubocop:disable Rails/OutputSafety
   end
 
-  # rubocop:disable Rails/OutputSafety Provided data is completely isolated from user input
+  # rubocop:disable Rails/OutputSafety, Metrics/AbcSize Provided data is completely isolated from user input
   def site_navigation(css_class_infix, no_turbolinks = false)
     content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
       concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
@@ -30,7 +30,7 @@ module ApplicationHelper
       end
     end
   end
-  # rubocop:enable Rails/OutputSafety
+  # rubocop:enable Rails/OutputSafety, Metrics/AbcSize
 
   def readable_price(price, show_fractions = true, show_currency = true)
     price ||= 0

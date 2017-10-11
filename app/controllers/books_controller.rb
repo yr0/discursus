@@ -15,11 +15,7 @@ class BooksController < ApplicationController
 
   def toggle_favorite
     @book = Book.available.friendly.find(params[:id])
-    return unless current_user.present?
-    favorite = UsersFavoriteBook.find_or_initialize_by(user_id: current_user.id, book_id: @book.id)
-    favorite.assign_attributes(is_favorited: !favorite.is_favorited?) unless favorite.new_record?
-    favorite.save
-    @favorited = favorite.is_favorited?
+    load_and_change_favorite if current_user.present?
   end
 
   private
@@ -42,5 +38,12 @@ class BooksController < ApplicationController
     params.require(:book_search_query).permit(:order_field, :text_query, :search_all_categories,
                                               author_ids: [], category_ids: [],
                                               order_by_desc: [:title_for_sorting, :main_price, :published_at])
+  end
+
+  def load_and_change_favorite
+    favorite = UsersFavoriteBook.find_or_initialize_by(user_id: current_user.id, book_id: @book.id)
+    favorite.assign_attributes(is_favorited: !favorite.is_favorited?) unless favorite.new_record?
+    favorite.save
+    @favorited = favorite.is_favorited?
   end
 end

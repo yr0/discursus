@@ -15,9 +15,7 @@ module OrdersFunctionality
     if last_customer_order
       assign_attributes(last_customer_order.as_json.slice(*AUTOCOMPLETE_FIELDS))
     elsif customer.is_a? User
-      user_attributes = { email: customer.email, phone: customer.phone, full_name: customer.name }
-      user_attributes.reject! { |k| self[k].present? }
-      assign_attributes user_attributes
+      assign_present_personal_info
     end
   end
 
@@ -25,5 +23,11 @@ module OrdersFunctionality
 
   def last_customer_order
     @last_customer_order ||= customer.orders.order(created_at: :desc).first
+  end
+
+  def assign_present_personal_info
+    user_attributes = { email: customer.email, phone: customer.phone, full_name: customer.name }
+    user_attributes.reject! { |k| self[k].present? }
+    assign_attributes user_attributes
   end
 end

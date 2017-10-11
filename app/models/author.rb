@@ -4,7 +4,7 @@ class Author < ApplicationRecord
   scope :with_image, -> { where.not(image: nil) }
 
   validates :name, presence: true, length: { minimum: 3, maximum: 250 }
-  after_commit -> { books.all.each(&:index!) }, on: %i(update destroy)
+  after_commit -> { books.all.find_each(&:index!) }, on: %i(update destroy)
 
   has_many :authors_books
   has_many :books, through: :authors_books
@@ -28,7 +28,7 @@ class Author < ApplicationRecord
            "reverse(split_part(reverse(authors.name), ' ', 1)) AS author_surname, "\
            "array_to_string(array(#{books_subquery.to_sql}), ', ') "\
            'AS last_book_titles').left_joins(:books)
-      .order('author_surname ASC, id ASC')
+        .order('author_surname ASC, id ASC')
     end
   end
 

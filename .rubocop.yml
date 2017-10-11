@@ -6,9 +6,7 @@ AllCops:
     - '**/Gemfile'
     - '**/Rakefile'
   Exclude:
-    - '**/bin/spring'
-    - '**/bin/rake'
-    - '**/bin/rails'
+    - '**/bin/**'
     - '**/db/schema.rb'
     - '**/db/migrate/**'
     - '**/app/models/ckeditor/**'

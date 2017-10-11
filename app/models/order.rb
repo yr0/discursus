@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   SHIPPING_METHODS = %w(nova_poshta pickup ukrposhta).freeze
   AVAILABLE_SHIPPING_METHODS = %w(nova_poshta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
-  LIQPAY_CURRENCY = 'UAH'
+  LIQPAY_CURRENCY = 'UAH'.freeze
 
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
@@ -63,18 +63,19 @@ class Order < ApplicationRecord
     item
   end
 
+  # rubocop:disable Metrics/AbcSize doesn't make sense to move the hash to another method
   def payment_url
     request_params = {
-          order_id: id,
-          amount: total,
-          server_url: Rails.application.routes.url_helpers.liqpay_callback_url.gsub(/^http:/, 'https:'),
-          result_url: Rails.application.routes.url_helpers.personal_orders_url,
-          description: I18n.t('orders.liqpay_description'),
-          sandbox: Rails.configuration.liqpay_sandbox
-      }
-    Rails.logger.warn request_params
+      order_id: id,
+      amount: total,
+      server_url: Rails.application.routes.url_helpers.liqpay_callback_url.gsub(/^http:/, 'https:'),
+      result_url: Rails.application.routes.url_helpers.personal_orders_url,
+      description: I18n.t('orders.liqpay_description'),
+      sandbox: Rails.configuration.liqpay_sandbox
+    }
     Liqpay::Request.new(request_params).to_url
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 

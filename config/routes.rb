@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for :users, controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      registrations: 'users/registrations'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
   }
 
   resources :books, only: %i(index show) do

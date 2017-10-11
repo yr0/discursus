@@ -15,20 +15,24 @@ class PaymentsController < ApplicationController
   private
 
   def process_liqpay_response
-    liqpay_response = Liqpay::Response.new(params)
-    load_and_check_order_from!(liqpay_response)
-    if liqpay_success_statuses.include?(liqpay_response.status)
+    @liqpay_response = Liqpay::Response.new(params)
+    load_and_process_order!
+  end
+
+  def load_and_process_order!
+    @order = Order.find_by(id: @liqpay_response.order_id)
+    check_order!
+    if liqpay_success_statuses.include?(@liqpay_response.status)
       @order.pay!
     else
-      @order.update(comment: "#{@order.comment.to_s} #{liqpay_response.status}")
-      Rails.logger.fatal "Non-success liqpay response status for order #{@order.id}: #{liqpay_response.status}"
+      @order.update(comment: "#{@order.comment} #{@liqpay_response.status}")
+      Rails.logger.fatal "Non-success liqpay response status for order #{@order.id}: #{@liqpay_response.status}"
     end
   end
 
-  def load_and_check_order_from!(liqpay_response)
-    @order = Order.find_by(id: liqpay_response.order_id)
+  def check_order!
     unless @order.present? &&
-           liqpay_response.amount == @order.total.to_f && liqpay_response.currency == Order::LIQPAY_CURRENCY
+           @liqpay_response.amount == @order.total.to_f && @liqpay_response.currency == Order::LIQPAY_CURRENCY
       Rails.logger.fatal 'Liqpay Response did not pass validations'
       raise Liqpay::InvalidResponse
     end
