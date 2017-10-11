@@ -40,7 +40,7 @@
                         title: t('admin_panel.orders.complete'), id: "complete#{order.id}",
                         class: "btn btn-success #{'hidden' unless order.paid_for?}", 'data-confirm' => true
                 = link_to fa_icon(:times), [:cancel, :admin_panel, order], method: :put, remote: true,
-                        title: t('admin_panel.orders.complete'), id: "cancel#{order.id}",
+                        title: t('admin_panel.orders.cancel'), id: "cancel#{order.id}",
                         class: 'btn btn-danger', 'data-confirm' => true
       div
         = paginate @orders
