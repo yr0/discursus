@@ -2,7 +2,7 @@
 Source code for [the website](https://discursus.com.ua).
     
 ## Installation with Vagrant
-1. Make sure you have Vagrant Ansible, and nfsd installed. 
+1. Make sure you have Vagrant, Ansible, and nfsd installed (won't work on Windows). 
 0. Run `vagrant up`
 0. Run `vagrant ssh` to log into the box.
 
