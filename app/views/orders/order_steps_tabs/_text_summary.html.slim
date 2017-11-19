@@ -34,6 +34,12 @@
       - else
         = t('orders.order_submission.summary.shipping.physical_shipping_standard',
                 company: t("orders.order_submission.summary.shipping.#{order.shipping_method}"), address: order.address)
+        | &nbsp;
+        - if settings.free_shipping_price_after.to_i > 0 && order.total >= settings.free_shipping_price_after.to_i
+          = t('orders.order_submission.summary.shipping.physical_shipping_free_price')
+        - else
+          = t('orders.order_submission.summary.shipping.physical_shipping_standard_price')
+
 
       - if order.digital?
         p
