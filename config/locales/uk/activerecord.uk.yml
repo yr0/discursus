@@ -59,6 +59,7 @@ uk:
     is_hidden: Приховати
     published_at: Дата видання
     raw_promo_code: Промо-код
+    free_shipping_price_after: Мінімальна ціна для безкоштовної доставки
   activerecord:
     errors:
       attributes:

@@ -8,6 +8,7 @@ module OrdersFunctionality
       validates :full_name, :email, length: { maximum: 250 }
       validates :phone, length: { maximum: 50 }
       validates :password, confirmation: true, allow_blank: true, allow_nil: true, length: { minimum: 6, maximum: 250 }
+      validates :payment_method, presence: true, if: -> { submitted? || form_submission_started? }
       validate :must_have_email_or_phone, if: -> { submitted? || form_submission_started? }
       validate :email_must_be_unique, if: -> { password.present? && email_changed? }
 

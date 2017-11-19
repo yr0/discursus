@@ -8,6 +8,7 @@ FactoryGirl.define do
 
     sequence(:email) { |n| "#{n}_#{Faker::Internet.email}" }
     customer { create(:user) }
+    payment_method :cash
 
     trait :cash do
       payment_method :cash

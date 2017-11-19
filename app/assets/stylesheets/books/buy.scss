@@ -5,6 +5,15 @@
 .dsc-book-buy-block {
   width: 100%;
 
+  .dsc-book-variants-shipping-info {
+    padding: 20px 10px;
+    text-align: center;
+
+    b {
+      font-size: larger;
+    }
+  }
+
   .dsc-book-price-variants-block {
     background-color: $color-darker;
     display: flex;

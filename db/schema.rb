@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928202812) do
+ActiveRecord::Schema.define(version: 20171119144337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,16 +174,17 @@ ActiveRecord::Schema.define(version: 20170928202812) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string "phone"
-    t.string "email"
-    t.string "facebook"
-    t.string "twitter"
-    t.string "instagram"
-    t.string "home_hero_title"
-    t.text   "home_hero_details"
-    t.string "home_hero_image"
-    t.text   "team_hero_details"
-    t.text   "home_hero_link"
+    t.string  "phone"
+    t.string  "email"
+    t.string  "facebook"
+    t.string  "twitter"
+    t.string  "instagram"
+    t.string  "home_hero_title"
+    t.text    "home_hero_details"
+    t.string  "home_hero_image"
+    t.text    "team_hero_details"
+    t.text    "home_hero_link"
+    t.integer "free_shipping_price_after"
   end
 
   create_table "taggings", force: :cascade do |t|

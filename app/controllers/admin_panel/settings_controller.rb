@@ -16,7 +16,7 @@ module AdminPanel
     def setting_params
       params.require(:setting).permit(:email, :phone, :facebook, :instagram, :twitter,
                                       :home_hero_title, :home_hero_details, :home_hero_image, :home_hero_image_cache,
-                                      :home_hero_link, :team_hero_details)
+                                      :home_hero_link, :team_hero_details, :free_shipping_price_after)
     end
   end
 end

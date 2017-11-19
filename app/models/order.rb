@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
-  before_validation :try_to_fetch_promo_code
+  before_validation :try_to_fetch_promo_code, :set_default_payment_method
   after_save :recalculate_total, if: -> { raw_promo_code.present? && raw_promo_code_changed? && promo_code_id.present? }
 
   belongs_to :customer, polymorphic: true
@@ -87,5 +87,9 @@ class Order < ApplicationRecord
   def try_to_fetch_promo_code
     return if raw_promo_code&.strip.blank?
     self.promo_code = PromoCode.find_by_code(raw_promo_code)
+  end
+
+  def set_default_payment_method
+    self.payment_method ||= PAYMENT_METHODS.first
   end
 end
