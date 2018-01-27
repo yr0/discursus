@@ -53,14 +53,14 @@ module OrdersFunctionality
 
     # Notify user with email after payment is successful if they chose to pay immediately
     def notify_on_card_payment
-      OrderMailer.notify_card(self).deliver_later
-      OrderMailer.notify_admin(self).deliver_later
+      OrderMailer.notify_card(self).deliver_later(wait: 30.seconds)
+      OrderMailer.notify_admin(self).deliver_later(wait: 30.seconds)
     end
 
     # Notify user with email immediately after order submission if they chose to pay after receiving books
     def notify_on_cash_payment
-      OrderMailer.notify_cash(self).deliver_later
-      OrderMailer.notify_admin(self).deliver_later
+      OrderMailer.notify_cash(self).deliver_later(wait: 30.seconds)
+      OrderMailer.notify_admin(self).deliver_later(wait: 30.seconds)
     end
 
     def swap_customer_with_new_user
@@ -79,7 +79,7 @@ module OrdersFunctionality
     def process_digital_items
       # generate digital links
       tokens_for_digital_books.create(line_items.digital.select(:book_id, :variant).as_json)
-      OrderMailer.digital_books(self).deliver_later
+      OrderMailer.digital_books(self).deliver_later(wait: 30.seconds)
     end
   end
 end
