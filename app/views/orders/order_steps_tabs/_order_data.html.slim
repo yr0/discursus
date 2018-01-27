@@ -6,15 +6,19 @@
         .dsc-orders-section-title.dsc-title-secondary
           h4 = t('orders.order_submission.shipping_method')
         .dsc-orders-fields-inner-container
-          - Order::AVAILABLE_SHIPPING_METHODS.each do |shipping_method|
-            .dsc-orders-underlined-field
-              ruby:
-                checkbox_attrs = {type: 'radio', name: 'order[shipping_method]', value: shipping_method,
-                                  id: "shipping_#{shipping_method}"}
-                checkbox_attrs['checked'] = 'checked' if Order::AVAILABLE_SHIPPING_METHODS.one?
-              input.dsc-checkbox *checkbox_attrs
-              label.dsc-orders-radio-label for="shipping_#{shipping_method}"
-                = t("orders.shipping_methods.#{shipping_method}")
+          - if free_shipping?(f.object)
+            input [type="hidden" name="order[shipping_method]" value="#{Order::FREE_SHIPPING_METHOD}"]
+            p = t('orders.form_shipping_is_free')
+          - else
+            - Order::AVAILABLE_SHIPPING_METHODS.each do |shipping_method|
+              .dsc-orders-underlined-field
+                ruby:
+                  checkbox_attrs = {type: 'radio', name: 'order[shipping_method]', value: shipping_method,
+                                    id: "shipping_#{shipping_method}"}
+                  checkbox_attrs['checked'] = 'checked' if Order::AVAILABLE_SHIPPING_METHODS.one?
+                input.dsc-checkbox *checkbox_attrs
+                label.dsc-orders-radio-label for="shipping_#{shipping_method}"
+                  = t("orders.shipping_methods.#{shipping_method}")
       .dsc-orders-fields-container.dsc-orders-payment-method-container
         .dsc-orders-section-title.dsc-title-secondary
           h4 = t('orders.order_submission.payment_method')

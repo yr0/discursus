@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   AVAILABLE_SHIPPING_METHODS = %w(nova_poshta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
   LIQPAY_CURRENCY = 'UAH'.freeze
+  FREE_SHIPPING_METHOD = 'ukrposhta'.freeze
 
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h

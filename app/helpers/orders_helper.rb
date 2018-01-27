@@ -16,4 +16,8 @@ module OrdersHelper
       1
     end
   end
+
+  def free_shipping?(order)
+    settings.free_shipping_price_after.to_i > 0 && order.total >= settings.free_shipping_price_after.to_i
+  end
 end
