@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_secure_password validations: false
 
   SHIPPING_METHODS = %w(nova_poshta pickup ukrposhta).freeze
-  AVAILABLE_SHIPPING_METHODS = %w(nova_poshta).freeze
+  AVAILABLE_SHIPPING_METHODS = %w(nova_poshta ukrposhta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
   LIQPAY_CURRENCY = 'UAH'.freeze
   FREE_SHIPPING_METHOD = 'ukrposhta'.freeze
