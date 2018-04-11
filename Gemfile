@@ -74,6 +74,9 @@ gem 'dotenv', '~> 2.1'
 gem 'dotenv-rails', '~> 2.1'
 gem 'foreman'
 
+# use Sentry for tracking errors
+gem 'sentry-raven'
+
 group :test do
   gem 'sunspot_test'
   gem 'database_cleaner'
