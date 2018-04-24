@@ -15,7 +15,7 @@ section.dsc-home-hero-container.text-center style='background-image: url(#{hero_
 section.dsc-books-list.container-fluid
   .row.dsc-books-list-row
     = render 'books/list', books: @books
-/- unless @books.last_page?
-/  .text-center
-/    = button_to t('load_more'), books_path(page: @books.next_page), class: 'dsc-button large-margin',
-/            remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
+- unless @books.last_page?
+  .text-center
+    = button_to t('load_more'), books_path(page: @books.next_page), class: 'dsc-button large-margin',
+            remote: true, method: :get, form: { 'data-with-ajax-spinner' => true, class: 'load-more-books' }
