@@ -22,7 +22,7 @@ class BookSearchQuery
   end
 
   def search(page = 1)
-    Book.search(&to_sunspot(page))
+    Book.search(include: %i(authors categories), &to_sunspot(page))
   end
 
   # rubocop:disable Metrics/AbcSize - we pass this block to search query

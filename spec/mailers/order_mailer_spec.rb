@@ -14,7 +14,7 @@ describe OrderMailer, type: :mailer do
 
     expect(order.line_items).not_to be_empty
     order.line_items.each do |item|
-      expect(delivery_body).to include CGI.escapeHTML(item.book.author_names)
+      expect(delivery_body).to include CGI.escapeHTML(item.book.author_names.join(', '))
       expect(delivery_body).to include CGI.escapeHTML(item.book.title)
       expect(delivery_body).to include item.quantity
       expect(delivery_body).to include item.price.to_f

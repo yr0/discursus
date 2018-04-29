@@ -15,10 +15,10 @@
             th = t('attributes.price')
             th width='auto'
         tbody
-          - @books.with_author_names.each do |book|
+          - @books.with_authors.each do |book|
             tr
               td = book.title
-              td = book.author_names.present? ? book.author_names : book.authors_within_anthology
+              td = book.author_names.present? ? book.author_names.join(', ') : book.authors_within_anthology
               td = readable_price(book.main_price)
               td.text-right
                 = link_to fa_icon(:eye), book, class: 'btn btn-success'

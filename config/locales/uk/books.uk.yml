@@ -37,3 +37,4 @@ uk:
     you_can_select_other_variant: "Ви можете обрати інший варіант книги і придбати його"
     read_fragment: Читати уривок
     author: Автор
+    author_and_others: "%{author_name} та ін."

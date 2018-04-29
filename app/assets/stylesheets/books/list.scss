@@ -16,18 +16,32 @@
   padding: 10px;
   color: $white;
 
+  .dsc-book-card-title-author-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    padding-left: 0;
+  }
+
   .dsc-book-card-title {
     font-size: $block-caption-size;
     margin: 0;
-    height: 57px;
     overflow: hidden;
   }
 
-  .dsc-book-card-price {
-    font-size: $block-caption-size;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+  .dsc-book-card-price-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+    .dsc-book-card-price {
+      font-size: $block-caption-size;
+    }
   }
 
   .dsc-book-card-variants {

@@ -16,7 +16,14 @@
               /        title: t('buy')
             = image_tag book.image.url(:large), class: 'dsc-book-card-image'
           .dsc-book-card-body
-            h4.dsc-book-card-title = book.title
-            - unless skip_price
-              .dsc-book-card-price = book_card_price(book.main_price.to_f)
-            ul.dsc-book-card-variants = book_variants_lambda.call(book)
+            - if skip_price
+              .col-md-12.dsc-book-card-title-author-container
+                = limited_author_names(book.author_names)
+                h4.dsc-book-card-title = book.title
+            - else
+              .col-md-9.dsc-book-card-title-author-container
+                = limited_author_names(book.author_names)
+                h4.dsc-book-card-title = book.title
+              .col-md-3.dsc-book-card-price-container
+                .dsc-book-card-price = book_card_price(book.main_price.to_f)
+            /ul.dsc-book-card-variants = book_variants_lambda.call(book)

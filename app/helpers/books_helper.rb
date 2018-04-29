@@ -19,4 +19,16 @@ module BooksHelper
     Book.where.not(id: except_book&.id).where(is_available: true)
         .reorder('RANDOM(), books.published_at DESC').limit(limit)
   end
+
+  def limited_author_names(author_names)
+    return if author_names.blank?
+
+    if author_names.size > 1
+      content_tag(:div, title: author_names.join(', ')) do
+        t('books.author_and_others', author_name: author_names.first)
+      end
+    else
+      content_tag(:div) { author_names.first }
+    end
+  end
 end

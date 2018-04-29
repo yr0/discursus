@@ -9,7 +9,7 @@
 
 - block:
   - get_url:
-      url: "http://apache.cp.if.ua/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
+      url: "https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
       dest: /tmp
   - unarchive:
       copy: no

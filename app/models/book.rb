@@ -48,10 +48,8 @@ class Book < ApplicationRecord
   end
 
   class << self
-    def with_author_names
-      authors_subquery = Author.select(:name).order(:name)
-      select("DISTINCT ON (books.id) books.*, array_to_string(array(#{authors_subquery.to_sql}), ', ') AS author_names")
-        .left_joins(:authors)
+    def with_authors
+      includes(:authors).group(:id)
     end
 
     def all_categories
@@ -63,14 +61,10 @@ class Book < ApplicationRecord
     end
   end
 
-  # A fallback method that returns names of book authors separated by comma.
-  # USE with_author_names scope whenever possible!
+  # Returns names of book authors separated by comma.
+  # USE with_authors scope whenever possible!
   def author_names
     # we prefer #map on eager load, because #pluck would use the additional sql query per book
-    @author_names ||= if authors.loaded?
-                        authors.map(&:name).join(', ')
-                      else
-                        authors.pluck(:name).join(', ')
-                      end
+    @author_names ||= authors.loaded? ? authors.map(&:name) : authors.pluck(:name)
   end
 end

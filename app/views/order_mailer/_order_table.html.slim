@@ -1,7 +1,7 @@
 table border=1 style="width: 100%; border: 1px solid #b8aed1; border-collapse: collapse"
   - @order.line_items.includes(book: :authors).each do |item|
     tr style="padding: 5px"
-      td style="padding: 5px" = item.book.author_names
+      td style="padding: 5px" = item.book.author_names.join(', ')
       td style="padding: 5px"
         strong= item.book.title
         | &emsp;(
