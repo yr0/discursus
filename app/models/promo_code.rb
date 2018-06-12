@@ -27,8 +27,11 @@ class PromoCode < ApplicationRecord
     limit.to_i <= orders_count.to_i
   end
 
-  def used_by?(email)
-    Order.completed.where(email: email).any?
+
+  def used_by?(_email)
+    false
+    # Wrong implementation - disables promo-code for users who made purchase with other PC
+    # Order.completed.where(email: email).any?
   end
 
   def apply_discount(amount)

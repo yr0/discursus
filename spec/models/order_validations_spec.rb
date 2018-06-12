@@ -62,7 +62,8 @@ describe OrdersFunctionality::Validations do
       expect(order).to be_valid
     end
 
-    it 'adds error if a user with the same e-mail already made a purchase with this code' do
+    # Disabled as per Vasyl's request
+    xit 'adds error if a user with the same e-mail already made a purchase with this code' do
       promo = create(:promo_code, limit: 0)
       user = create(:user, email: email)
       order1, order2 = create_list(:order, 2, :with_line_items, customer: user)
