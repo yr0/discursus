@@ -1,8 +1,8 @@
 ---
 - include: system.yml
 - include: postgres.yml
-#- include: solr.yml
-#- include: redis.yml
+- include: solr.yml
+- include: redis.yml
 
 - name: Copy .env template
   template:

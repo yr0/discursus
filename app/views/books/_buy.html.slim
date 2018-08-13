@@ -21,10 +21,10 @@
             label.dsc-book-select-other-variants [for='bookVariantsCheckbox'
               title="#{t('books.you_can_select_other_variant')}"]
               span.dsc-book-select-other-variants-text = t('books.available_variants')
-        /- if settings.free_shipping_price_after.to_i > 0
-        /  .dsc-book-variants-shipping-info = raw t('orders.free_shipping', min_price: settings.free_shipping_price_after.to_i)
-        .dsc-book-variants-shipping-info
-          = raw t('orders.free_shipping_august')
+        - if settings.free_shipping_price_after.to_i > 0
+          .dsc-book-variants-shipping-info = raw t('orders.free_shipping', min_price: settings.free_shipping_price_after.to_i)
+        /.dsc-book-variants-shipping-info
+        /  = raw t('orders.free_shipping_august')
       - else
         h5 = t('books.unavailable')
     .dsc-book-side-buttons-block

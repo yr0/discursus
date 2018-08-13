@@ -16,7 +16,11 @@ uk:
     payment_methods:
       card: Карткою
       cash: Готівкою при одержанні
-    street_or_department: Вулиця або відділення
+    payment_methods_with_details:
+      card: Карткою (без комісії)
+      cash: Готівкою при одержанні (за тарифами перевізника)
+    street_or_department: >
+      Відділення або повна адреса (у разі адресної доставки)
     start_order: Оформити замовлення
     your_order: Ваше замовлення
     enter_data_or: Уведіть Ваші контактні дані або
