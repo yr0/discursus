@@ -77,6 +77,8 @@ gem 'foreman'
 # use Sentry for tracking errors
 gem 'sentry-raven'
 
+gem 'whenever', require: false
+
 group :test do
   gem 'sunspot_test'
   gem 'database_cleaner'
