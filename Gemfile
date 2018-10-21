@@ -44,7 +44,7 @@ gem 'acts_as_list', '~> 0.8'
 # tagging
 gem 'acts-as-taggable-on', '~> 4.0'
 # full text search with apache solr
-gem 'sunspot_rails'
+gem 'sunspot_rails', '~> 2.3.0'
 # finite state machines
 gem 'aasm'
 # liqpay API wrapper
