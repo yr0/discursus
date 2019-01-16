@@ -2,6 +2,6 @@
 app_dir: /vagrant
 home_dir: /home/ubuntu
 ruby_version: '2.3.1'
-solr_version: '6.6.1'
+solr_version: '7.6.0'
 db_password: '123456789'
 ui_url: '192.168.50.24:5000'
