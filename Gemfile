@@ -52,6 +52,11 @@ gem 'liqpay', github: 'yr0/liqpay'
 # Mailgun wrapper for rails
 gem 'mailgun_rails'
 
+gem 'rack', '>= 2.0.6'
+gem 'loofah', '>= 2.2.3'
+gem 'ffi', '>= 1.9.24'
+gem 'rack-protection', '>= 1.5.5'
+
 # friendly urls
 gem 'friendly_id', '~> 5.1'
 gem 'babosa', '~> 1.0'
@@ -96,7 +101,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop'
+  gem 'rubocop', '>= 0.49.0'
   gem 'capistrano', '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
