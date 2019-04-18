@@ -48,7 +48,7 @@ gem 'sunspot_rails', '~> 2.3.0'
 # finite state machines
 gem 'aasm'
 # liqpay API wrapper
-gem 'liqpay', github: 'yr0/liqpay'
+gem 'liqpay', '1.1.1', github: 'yr0/liqpay'
 # Mailgun wrapper for rails
 gem 'mailgun_rails'
 
