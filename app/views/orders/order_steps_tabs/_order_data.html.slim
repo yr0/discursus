@@ -23,7 +23,7 @@
         .dsc-orders-section-title.dsc-title-secondary
           h4 = t('orders.order_submission.payment_method')
         .dsc-orders-fields-inner-container
-          - Order::PAYMENT_METHODS.each.with_index do |payment_method, i|
+          - Order::AVAILABLE_PAYMENT_METHODS.each.with_index do |payment_method, i|
             ruby:
               checkbox_attrs = {type: 'radio', name: 'order[payment_method]', value: "#{payment_method}",
                                 id: "payment_#{payment_method}" }

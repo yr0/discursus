@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   SHIPPING_METHODS = %w(nova_poshta pickup ukrposhta).freeze
   AVAILABLE_SHIPPING_METHODS = %w(nova_poshta ukrposhta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
+  AVAILABLE_PAYMENT_METHODS = %w(cash).freeze
   LIQPAY_CURRENCY = 'UAH'.freeze
   FREE_SHIPPING_METHOD = 'ukrposhta'.freeze
 
@@ -91,6 +92,6 @@ class Order < ApplicationRecord
   end
 
   def set_default_payment_method
-    self.payment_method ||= PAYMENT_METHODS.first
+    self.payment_method ||= AVAILABLE_PAYMENT_METHODS.first
   end
 end
