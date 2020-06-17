@@ -20,6 +20,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.filter_run_excluding search: true
+
+  Sunspot.session = Sunspot::Rails::StubSessionProxy.new(Sunspot.session)
 
   config.after(:each) { ActionMailer::Base.deliveries.clear }
 
