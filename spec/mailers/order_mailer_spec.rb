@@ -40,9 +40,11 @@ describe OrderMailer, type: :mailer do
           OrderMailer.notify_cash(order).deliver_later
         end
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
-      expect(ActionMailer::Base.deliveries.last.to.first).to eq order.email
-      expect(ActionMailer::Base.deliveries.last.subject).to eq I18n.t('mailers.order.subject', id: order.id)
-      expect(ActionMailer::Base.deliveries.last.body).to include I18n.t('mailers.order.notify_cash.message')
+      last_delivery = ActionMailer::Base.deliveries.last
+
+      expect(last_delivery.to.first).to eq order.email
+      expect(last_delivery.subject).to eq I18n.t('mailers.order.subject', id: order.id)
+      expect(last_delivery.body).to include I18n.t('mailers.order.notify_cash.message').strip
       expect_to_match_order_table order
     end
   end
@@ -65,13 +67,13 @@ describe OrderMailer, type: :mailer do
           OrderMailer.notify_card(order).deliver_later
         end
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
-      expect(ActionMailer::Base.deliveries.last.to.first).to eq order.email
-      expect(ActionMailer::Base.deliveries.last.subject).to eq I18n.t('mailers.order.subject', id: order.id)
-      expect(ActionMailer::Base.deliveries.last.body).to include I18n.t('mailers.order.notify_card.message')
-      expect(ActionMailer::Base.deliveries.last.body)
-        .to include I18n.t('mailers.order.notify_card.message_before_digital')
-      expect(ActionMailer::Base.deliveries.last.body)
-        .to include I18n.t('mailers.order.notify_card.message_before_details')
+      last_delivery = ActionMailer::Base.deliveries.last
+
+      expect(last_delivery.to.first).to eq order.email
+      expect(last_delivery.subject).to eq I18n.t('mailers.order.subject', id: order.id)
+      expect(last_delivery.body).to include I18n.t('mailers.order.notify_card.message').strip
+      expect(last_delivery.body).to include I18n.t('mailers.order.notify_card.message_before_digital').strip
+      expect(last_delivery.body).to include I18n.t('mailers.order.notify_card.message_before_details').strip
       expect_to_match_order_table order
     end
   end
