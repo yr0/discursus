@@ -14,6 +14,15 @@ footer.dsc-footer-container#dscContacts
       = link_to fa_icon('facebook 3x'), settings.facebook, class: 'dsc-footer-social-media-link', target: '_blank'
       = link_to fa_icon('twitter 3x'), settings.twitter, class: 'dsc-footer-social-media-link', target: '_blank'
       = link_to fa_icon('instagram 3x'), settings.instagram, class: 'dsc-footer-social-media-link', target: '_blank'
-  .dsc-footer-small
+    .dsc-business-details
+      div
+        = t('footer.business_details.name')
+      div
+        = t('footer.business_details.code_title') + ': '
+        = t('footer.business_details.code')
+      div
+        = t('footer.business_details.address_title') + ': '
+        = t('footer.business_details.address')
+  .dsc-footer-small 
     | &copy; #{years_active}&nbsp;|&nbsp;#{t('footer.publishing_house')} &laquo;Discursus&raquo;&nbsp;|&nbsp;
     | #{t('footer.developed_at')}
