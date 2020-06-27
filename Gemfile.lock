@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/yr0/liqpay.git
-  revision: e81a7fc33b5e6ad1f33a352cc569e8485734a01f
-  specs:
-    liqpay (1.1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -384,7 +378,6 @@ DEPENDENCIES
   jquery-rails (~> 4.2)
   jquery-ui-rails (~> 6.0)
   kaminari (~> 0.17)
-  liqpay (= 1.1.1)!
   listen (~> 3.0.5)
   loofah (>= 2.2.3)
   mailgun_rails

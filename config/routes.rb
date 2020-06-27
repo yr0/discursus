@@ -19,11 +19,13 @@ Rails.application.routes.draw do
     get 'download', on: :member
   end
 
-  post 'liqpay_callback', to: 'payments#liqpay_callback'
+  post 'wayforpay_callback', to: 'payments#wayforpay_callback'
+  post 'wayforpay_redirect', to: 'payments#wayforpay_redirect'
 
   scope :orders, controller: :orders do
     get 'cart'
-    get 'thank_you'
+    get 'thank_you', as: 'orders_thank_you'
+    get 'payment_failed', as: 'orders_payment_failed'
     get 'modify_line_item_quantity'
     post 'populate'
     patch 'submit', as: 'submit_order'

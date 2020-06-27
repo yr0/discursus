@@ -1,44 +1,30 @@
 class PaymentsController < ApplicationController
-  LIQPAY_FAIL_STATUSES = %w(failure error reversed).freeze
+  protect_from_forgery except: %i(wayforpay_callback wayforpay_redirect)
 
-  protect_from_forgery except: :liqpay_callback
+  def wayforpay_callback
+    message = Wayforpay.process_and_produce_message_for(processed_wayforpay_params)
 
-  # Liqpay will return here with payment result
-  def liqpay_callback
-    process_liqpay_response
-  rescue Liqpay::InvalidResponse
-    Rails.logger.fatal "Incorrect liqpay response received: #{try(:liqpay_response)}"
-  ensure
-    head :ok
+    render json: message
+  end
+
+  def wayforpay_redirect
+    if Wayforpay.was_payment_successful?(params.to_unsafe_h.deep_symbolize_keys)
+      redirect_to orders_thank_you_path
+    else
+      redirect_to orders_payment_failed_path
+    end
+  rescue Wayforpay::Error
+    redirect_to root_path
   end
 
   private
 
-  def process_liqpay_response
-    @liqpay_response = Liqpay::Response.new(params)
-    load_and_process_order!
-  end
+  def processed_wayforpay_params
+    params_keys = params.to_unsafe_h.keys
+    wayforpay_key = params_keys.find { |key| key.match(/merchantAccount/) }
 
-  def load_and_process_order!
-    @order = Order.find_by(id: @liqpay_response.order_id)
-    check_order!
-    if liqpay_success_statuses.include?(@liqpay_response.status)
-      @order.pay!
-    else
-      @order.update(comment: "#{@order.comment} #{@liqpay_response.status}")
-      Rails.logger.fatal "Non-success liqpay response status for order #{@order.id}: #{@liqpay_response.status}"
-    end
-  end
+    raise 'No wayforpay payload found' if wayforpay_key.nil?
 
-  def check_order!
-    unless @order.present? &&
-           @liqpay_response.amount == @order.total.to_f && @liqpay_response.currency == Order::LIQPAY_CURRENCY
-      Rails.logger.fatal 'Liqpay Response did not pass validations'
-      raise Liqpay::InvalidResponse
-    end
-  end
-
-  def liqpay_success_statuses
-    Rails.configuration.liqpay_sandbox == 1 ? %w(success sandbox).freeze : %w(success).freeze
+    JSON.parse(wayforpay_key).deep_symbolize_keys
   end
 end

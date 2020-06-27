@@ -47,8 +47,6 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'sunspot_rails', '~> 2.3.0'
 # finite state machines
 gem 'aasm'
-# liqpay API wrapper
-gem 'liqpay', '1.1.1', github: 'yr0/liqpay'
 # Mailgun wrapper for rails
 gem 'mailgun_rails'
 
