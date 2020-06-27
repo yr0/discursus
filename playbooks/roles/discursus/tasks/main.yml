@@ -35,6 +35,6 @@
       - "The admin sign in resides at {{ ui_url }}/admins/sign_in. You can look up the default admin login and "
       - "password in .env file within project root."
       - "For the website to function in full, you will have to provide the ENV values for APIs of facebook, "
-      - "google (for SM auth), mailgun (for sending out emails), liqpay (for payments handling)."
+      - "google (for SM auth), mailgun (for sending out emails), wayforpay (for payments handling)."
       - ""
       - "Have fun"

@@ -5,5 +5,8 @@
     var nextTabNumber = goToNextTab();
     if(nextTabNumber === 2) $('.dsc-orders-summary-container')
       .html('#{ j render('orders/order_steps_tabs/text_summary') }');
+- elsif @payment_provider_form_settings
+  | $('.dsc-order-container').html('#{ j render('orders/order_steps_tabs/payment_provider_redirect') }');
+  | $('#paymentProviderRedirectForm').submit();
 - else
   | console.log('Order Submitted!');

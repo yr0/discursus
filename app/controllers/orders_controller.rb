@@ -58,6 +58,13 @@ class OrdersController < ApplicationController
 
   def submit_and_redirect!
     current_order.submit!
-    redirect_to current_order.card? ? current_order.payment_url : { action: 'thank_you' }
+    if current_order.card?
+      @payment_provider_form_settings = {
+        action: Wayforpay::PAYMENT_URL,
+        attributes: Wayforpay.prepare_params_from(current_order)
+      }
+    else
+      redirect_to action: 'thank_you'
+    end
   end
 end
