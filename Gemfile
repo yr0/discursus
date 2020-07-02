@@ -66,7 +66,7 @@ gem 'sidekiq'
 gem 'redis-namespace'
 
 # auth
-gem 'devise', '~> 4.2'
+gem 'devise', '~> 4.7'
 gem 'cancancan', '~> 1.15'
 gem 'recaptcha', '~> 4.1', require: 'recaptcha/rails'
 gem 'omniauth-facebook', '4.0.0'
