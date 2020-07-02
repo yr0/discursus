@@ -31,7 +31,7 @@ gem 'simple_form', '~> 3.2'
 # nested model forms
 gem 'cocoon', '~> 1.2'
 # pagination
-gem 'kaminari', '~> 0.17'
+gem 'kaminari', '~> 1.2'
 # ajax flash notifications
 gem 'gritter', '~> 1.2'
 # uploads
