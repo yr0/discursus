@@ -42,25 +42,6 @@ input[type=text],textarea {
   }
 }
 
-.dsc-checkbox {
-  visibility: hidden;
-  vertical-align: middle;
-  margin: 0 !important;
-
-  &:before {
-    cursor: pointer;
-    visibility: visible;
-    font-family: 'FontAwesome';
-    content: '\f096';
-    color: $color-darker;
-    font-size: inherit;
-  }
-
-  &:checked:before {
-    content: '\f046';
-  }
-}
-
 .dsc-table {
   @media(max-width: 900px) {
     display: block;

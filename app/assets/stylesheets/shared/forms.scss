@@ -24,16 +24,18 @@ label {
     position: relative;
     cursor: pointer;
     font-weight: normal;
+    line-height: 20px;
 
     &:before {
       position: absolute;
-      left: -25px;
+      left: -20px;
       top: 2px;
       width: 15px;
       height: 15px;
       border: 1px solid $color-darker;
       border-radius: 2px;
       content: '';
+      box-sizing: border-box;
     }
   }
 
@@ -45,11 +47,12 @@ label {
     content: '\f00c';
     z-index: 3;
     position: absolute;
-    left: -25px;
+    left: -20px;
     top: -1px;
     font-family: FontAwesome;
     font-size: 16px;
     color: $color-darker;
+    box-sizing: border-box;
   }
 
   &:checked + .dsc-checkable-radio:before {

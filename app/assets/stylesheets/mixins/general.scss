@@ -15,16 +15,3 @@
   left: 0;
   margin: auto;
 }
-
-@mixin checkbox-positioned($top: 'undefined', $bottom: 'undefined', $left: 'undefined', $right: 'undefined') {
-  @extend .dsc-checkbox;
-  position: relative;
-
-  &:before {
-    position: absolute;
-    @if $top != 'undefined' { top: $top; }
-    @if $bottom != 'undefined' { bottom: $bottom; }
-    @if $left != 'undefined' { left: $left; }
-    @if $right != 'undefined' { right: $right; }
-  }
-}
