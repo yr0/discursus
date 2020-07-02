@@ -48,7 +48,7 @@ gem 'sunspot_rails', '~> 2.3.0'
 # finite state machines
 gem 'aasm'
 # Mailgun wrapper for rails
-gem 'mailgun_rails'
+gem 'mailgun-ruby', '~>1.1.6'
 
 gem 'rack', '>= 2.0.6'
 gem 'loofah', '>= 2.2.3'
