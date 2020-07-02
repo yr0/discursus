@@ -16,8 +16,8 @@
                   checkbox_attrs = {type: 'radio', name: 'order[shipping_method]', value: shipping_method,
                                     id: "shipping_#{shipping_method}"}
                   checkbox_attrs['checked'] = 'checked' if Order::AVAILABLE_SHIPPING_METHODS.one?
-                input.dsc-checkbox *checkbox_attrs
-                label.dsc-orders-radio-label for="shipping_#{shipping_method}"
+                input.dsc-input-checkable *checkbox_attrs
+                label.dsc-label-checkable.dsc-checkable-radio for="shipping_#{shipping_method}"
                   = t("orders.shipping_methods.#{shipping_method}")
       .dsc-orders-fields-container.dsc-orders-payment-method-container
         .dsc-orders-section-title.dsc-title-secondary
@@ -29,8 +29,8 @@
                                 id: "payment_#{payment_method}" }
               checkbox_attrs['checked'] = 'checked' if f.object.payment_method == payment_method || f.object.payment_method.nil? && i.zero?
             .dsc-orders-underlined-field
-              input.dsc-checkbox *checkbox_attrs
-              label.dsc-orders-radio-label for="payment_#{payment_method}"
+              input.dsc-input-checkable *checkbox_attrs
+              label.dsc-label-checkable.dsc-checkable-radio for="payment_#{payment_method}"
                 = t("orders.payment_methods_with_details.#{payment_method}")
       .dsc-orders-fields-container.dsc-orders-shipping-address-container
         .dsc-orders-section-title.dsc-title-secondary
@@ -44,8 +44,7 @@
           h4 = t('orders.order_submission.payment_method')
         .dsc-orders-fields-inner-container
           .dsc-orders-underlined-field
-            input.dsc-checkbox [type="radio" name="order[payment_method]" value="card"
-              id="payment_card" checked="checked"]
+            input.dsc-checkbox [type="radio" name="order[payment_method]" value="card" id="payment_card" checked="checked"]
             label.dsc-orders-radio-label for="payment_card"
               = t('orders.payment_methods.card')
     .dsc-orders-fields-container.dsc-orders-comment-container

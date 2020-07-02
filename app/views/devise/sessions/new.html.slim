@@ -19,9 +19,8 @@
       = f.input :password, input_html: { autocomplete: 'off', class: 'form-control' }
     - if devise_mapping.rememberable?
       .dsc-checbox-and-label-container
-        = f.check_box :remember_me, class: 'dsc-checkbox', id: 'rememberMe'
-        label for="rememberMe"
-          | &ensp;
+        = f.check_box :remember_me, class: 'dsc-input-checkable', id: 'rememberMe'
+        label class="dsc-label-checkable dsc-checkable-checkbox" for="rememberMe"
           = t('attributes.remember_me')
 
     .form-actions.row

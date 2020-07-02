@@ -31,8 +31,6 @@ form.new_order_submission {
   margin-top: 20px;
 
   .dsc-create-account-checkbox {
-    @include checkbox-positioned(-2px);
-
     & ~ .dsc-account-password-container {
       display: none;
     }
