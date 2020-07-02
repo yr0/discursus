@@ -36,7 +36,7 @@ gem 'kaminari', '~> 0.17'
 gem 'gritter', '~> 1.2'
 # uploads
 gem 'carrierwave', '~> 0.11'
-gem 'mini_magick', '~> 4.5'
+gem 'mini_magick', '~> 4.9'
 # rich text editor
 gem 'ckeditor', '~> 4.2'
 # ordering records
