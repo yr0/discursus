@@ -27,7 +27,7 @@ gem 'slim-rails', '~> 3.1'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'font-awesome-rails', '~> 4.6'
 gem 'autoprefixer-rails', '~> 6.4'
-gem 'simple_form', '~> 3.2'
+gem 'simple_form', '~> 5.0'
 # nested model forms
 gem 'cocoon', '~> 1.2'
 # pagination
