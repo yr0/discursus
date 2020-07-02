@@ -20,7 +20,7 @@ label {
   @extend .dsc-existing-yet-invisible;
 
   & + .dsc-label-checkable {
-    margin-left: 20px;
+    margin-left: 25px;
     position: relative;
     cursor: pointer;
     font-weight: normal;
@@ -28,7 +28,7 @@ label {
 
     &:before {
       position: absolute;
-      left: -20px;
+      left: -25px;
       top: 2px;
       width: 15px;
       height: 15px;
@@ -47,7 +47,7 @@ label {
     content: '\f00c';
     z-index: 3;
     position: absolute;
-    left: -20px;
+    left: -25px;
     top: -1px;
     font-family: FontAwesome;
     font-size: 16px;
