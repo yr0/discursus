@@ -16,10 +16,13 @@ module ApplicationHelper
   # rubocop:disable Rails/OutputSafety, Metrics/AbcSize Provided data is completely isolated from user input
   def site_navigation(css_class_infix, no_turbolinks = false)
     content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
-      concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
-                                      class: "dsc-#{css_class_infix}-nav-link",
-                                      style: 'color: #47a378', 'data-turbolinks': false),
-                         class: "dsc-#{css_class_infix}-nav-item") if current_admin.present?
+      if current_admin.present?
+        concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
+                                        class: "dsc-#{css_class_infix}-nav-link",
+                                        style: 'color: #47a378', 'data-turbolinks': false),
+                           class: "dsc-#{css_class_infix}-nav-item") 
+      end
+
       NAVIGATION.each do |item_name, route|
         link_class = "dsc-#{css_class_infix}-nav-link"
         link_class += ' active' if item_name.to_s == controller_name
@@ -41,7 +44,8 @@ module ApplicationHelper
   end
 
   def readable_date(date, show_time = false)
-    return unless date.present?
+    return if date.blank?
+
     date.strftime("#{'%H:%M ' if show_time}%d.%m.%Y")
   end
 
@@ -53,6 +57,7 @@ module ApplicationHelper
   # Provided data is completely validated and isolated from user input
   def book_card_variants(available_variants, bought = false)
     return t('sold') if available_variants.blank?
+
     available_variants = available_variants.keys unless available_variants.is_a?(Array)
     available_variants.map do |variant|
       content_tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),

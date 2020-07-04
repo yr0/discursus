@@ -67,6 +67,7 @@ module OrdersFunctionality
       self.class.transaction do
         user = User.create(email: email, name: full_name, phone: phone, password: SecureRandom.hex(8))
         return unless user.valid?
+
         user.encrypted_password = password_digest
         user.save(validate: false)
         temp_user_id = customer_id

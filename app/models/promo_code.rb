@@ -7,13 +7,15 @@ class PromoCode < ApplicationRecord
   validates :discount_percent, numericality: { minimum: 1, maximum: 99 }, presence: true
 
   class << self
-    def find_by_code(code)
+    def fetch_by_code(code)
       return if code.blank?
+
       find_by(code: normalize(code))
     end
 
     def normalize(string)
       return string if string.blank?
+
       string.mb_chars.downcase.strip.to_s
     end
   end
@@ -24,6 +26,7 @@ class PromoCode < ApplicationRecord
 
   def exhausted?
     return false if limit.to_i.zero?
+    
     limit.to_i <= orders_count.to_i
   end
 

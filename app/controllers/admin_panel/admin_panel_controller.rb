@@ -10,11 +10,12 @@ module AdminPanel
     private
 
     def current_ability
-      @ability ||= Ability.new(current_admin)
+      @current_ability ||= Ability.new(current_admin)
     end
 
     def check_admin
       return if current_admin.present?
+
       render file: Rails.root.join('public', '404'), layout: false, status: :not_found
     end
   end

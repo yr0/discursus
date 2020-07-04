@@ -20,6 +20,7 @@ class OrderMailerPreview < ActionMailer::Preview
 
   def user
     return @user if @user.present?
+
     @user = User.find_or_initialize_by(email: 'foremailpreviews@discursus.com')
     @user.assign_attributes(FactoryGirl.attributes_for(:user).except(:email))
     @user.save!
@@ -29,6 +30,7 @@ class OrderMailerPreview < ActionMailer::Preview
 
   def promo
     return @promo if @promo.present?
+
     @promo = PromoCode.find_or_initialize_by(code: 'TESTING ORDER MAILER')
     @promo.assign_attributes(discount_percent: 50, expires_at: 1.day.since)
     @promo.save
@@ -37,6 +39,7 @@ class OrderMailerPreview < ActionMailer::Preview
 
   def book
     return @book if @book.present?
+
     @book = Book.find_by(title: 'TESTING ORDER MAILER')
     @book ||= FactoryGirl.create(:book, :hardcover, title: 'TESTING ORDER MAILER')
   end

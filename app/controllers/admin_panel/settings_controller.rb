@@ -3,7 +3,7 @@ module AdminPanel
     authorize_resource
 
     def index
-      @setting ||= Setting.retrieve
+      @setting = Setting.retrieve
     end
 
     def update

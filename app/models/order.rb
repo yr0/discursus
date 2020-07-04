@@ -17,9 +17,9 @@ class Order < ApplicationRecord
 
   belongs_to :customer, polymorphic: true
   belongs_to :promo_code
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   has_many :books, through: :line_items
-  has_many :tokens_for_digital_books
+  has_many :tokens_for_digital_books, dependent: :destroy
 
   def requires_shipping?
     physical?
@@ -68,12 +68,14 @@ class Order < ApplicationRecord
 
   def total_with_promo_discounts(amount)
     return amount if promo_code.blank?
+
     promo_code.apply_discount(amount)
   end
 
   def try_to_fetch_promo_code
     return if raw_promo_code&.strip.blank?
-    self.promo_code = PromoCode.find_by_code(raw_promo_code)
+
+    self.promo_code = PromoCode.fetch_by_code(raw_promo_code)
   end
 
   def set_default_payment_method

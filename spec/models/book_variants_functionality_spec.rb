@@ -83,19 +83,19 @@ describe 'Book VariantsFunctionality' do
       end
     end
 
-    describe '.find_by_availability' do
+    describe '.fetch_if_available' do
       let(:book) { create(:book, :hardcover) }
 
       it 'returns book if it is available' do
-        expect(Book.find_by_availability(book.id, :hardcover).id).to eq book.id
+        expect(Book.fetch_if_available(book.id, :hardcover).id).to eq book.id
       end
 
       it 'returns nil if book cannot be found' do
-        expect(Book.find_by_availability(0, :hardcover)).not_to be_present
+        expect(Book.fetch_if_available(0, :hardcover)).not_to be_present
       end
 
       it 'returns nil if variant is unavailable' do
-        expect(Book.find_by_availability(book.id, :ebook)).not_to be_present
+        expect(Book.fetch_if_available(book.id, :ebook)).not_to be_present
       end
     end
   end

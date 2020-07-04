@@ -12,7 +12,7 @@ class BookSearchQuery
   def initialize(*args)
     super
     self.order_by_desc ||= DEFAULT_ORDER_BY_DESC
-    self.order_field = DEFAULT_ORDER_FIELD unless DEFAULT_ORDER_BY_DESC.keys.include?(order_field&.to_sym)
+    self.order_field = DEFAULT_ORDER_FIELD unless DEFAULT_ORDER_BY_DESC.key?(order_field&.to_sym)
     self.category_ids ||= []
     self.author_ids ||= []
 

@@ -25,7 +25,8 @@ module PersonalHelper
   def personal_order_detailed_information(order)
     ORDER_DETAILS_FIELDS.map do |field|
       value = strip_tags order[field]
-      next unless value.present?
+      next if value.blank?
+
       if field == 'payment_method'
         value = I18n.t("orders.payment_methods.#{value}")
       elsif field == 'shipping_method'

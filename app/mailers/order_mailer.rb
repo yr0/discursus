@@ -16,7 +16,8 @@ class OrderMailer < ApplicationMailer
   # Sends notification to admin email if it is present
   def notify_admin(order)
     admin_email = Rails.configuration.admin_email
-    return unless admin_email.present?
+    return if admin_email.blank?
+
     @order = order
     @orders_count = order.customer.orders.completed.count
     @orders_sum = order.customer.orders.completed.sum(:total)
