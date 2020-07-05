@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/AbcSize, Metrics/ModuleLength
+# rubocop:disable Metrics/ModuleLength
 module Wayforpay
   Error = Class.new(RuntimeError)
   SignatureInvalidError = Class.new(Error)
@@ -19,18 +19,8 @@ module Wayforpay
     end
 
     def prepare_params_from(order)
-      base_params = [
-        ['merchantAccount', @config.fetch(:merchant_account)],
-        ['merchantDomainName', @config.fetch(:merchant_domain)],
-        ['orderReference', "#{ORDER_REFERENCE_PREFIX}#{order.id}"],
-        ['orderDate', order.updated_at.to_i],
-        ['amount', order.total.to_f],
-        ['currency', @config.fetch(:acceptable_currency)]
-      ]
-
-      base_params += products_spec_per(order)
+      base_params = base_params_array_for(order)
       signature = generate_signature_from(base_params.map(&:last).flatten)
-
       base_params.to_h.merge('merchantSignature' => signature).merge(additional_payment_params_for(order))
     end
 
@@ -64,6 +54,19 @@ module Wayforpay
       raise SignatureInvalidError
     end
 
+    def base_params_array_for(order)
+      base_params = [
+        ['merchantAccount', @config.fetch(:merchant_account)],
+        ['merchantDomainName', @config.fetch(:merchant_domain)],
+        ['orderReference', "#{ORDER_REFERENCE_PREFIX}#{order.id}"],
+        ['orderDate', order.updated_at.to_i],
+        ['amount', order.total.to_f],
+        ['currency', @config.fetch(:acceptable_currency)]
+      ]
+
+      base_params + products_spec_per(order)
+    end
+
     def additional_payment_params_for(order)
       {
         'language' => 'UA',
@@ -92,6 +95,8 @@ module Wayforpay
       ]
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # The commands in this module can be extracted into separate classes
     def validate_and_find_order_from!(params)
       verify_signature_for!(params[:merchantSignature], params.slice(*CHECKED_RESPONSE_PARAM_KEYS).values)
 
@@ -102,7 +107,10 @@ module Wayforpay
 
       raise ResponseOrderDataMismatchError, params.inspect
     end
+    # rubocop:enable all
 
+    # rubocop:disable Metrics/AbcSize
+    # The commands in this module can be extracted into separate classes
     def process_message_for(order, params)
       if params[:transactionStatus]&.downcase == APPROVED_TRANSACTION_STATUS &&
          params[:reason]&.downcase == APPROVED_REASON
@@ -115,6 +123,7 @@ module Wayforpay
         Rails.logger.error "Non-success wayforpay response status for order #{order.id}: #{reason}"
       end
     end
+    # rubocop:enable all
 
     def generate_response_message_for(order_reference)
       base_params = [
@@ -129,4 +138,3 @@ module Wayforpay
     end
   end
 end
-# rubocop:enable all
