@@ -414,7 +414,7 @@ DEPENDENCIES
   redis-namespace
   rspec-rails
   rubocop (~> 0.86.0)
-  rubocop-rails
+  rubocop-rails (~> 2.6)
   sass-rails (~> 5.0)
   sentry-raven
   sidekiq

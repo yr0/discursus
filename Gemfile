@@ -100,7 +100,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', '~> 0.86.0'
-  gem 'rubocop-rails'
+  gem 'rubocop-rails', '~> 2.6'
   gem 'capistrano', '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
