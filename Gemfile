@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.4.9'
 
 # use postgres as DB
 gem 'pg', '~> 0.18'
@@ -99,7 +99,8 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', '>= 0.49.0'
+  gem 'rubocop', '~> 0.86.0'
+  gem 'rubocop-rails'
   gem 'capistrano', '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'

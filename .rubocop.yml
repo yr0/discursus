@@ -1,5 +1,7 @@
+require: rubocop-rails
+
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   DisplayStyleGuide: true
   DisplayCopNames: true
   Exclude:
@@ -9,10 +11,7 @@ AllCops:
     - 'app/models/ckeditor/**'
     - 'Gemfile'
 
-Rails:
-  Enabled: true
-
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Metrics/MethodLength:
@@ -21,7 +20,7 @@ Metrics/MethodLength:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
+Rails/HelperInstanceVariable:
   Enabled: false
 
 Style/Semicolon:
@@ -39,7 +38,7 @@ Style/PercentLiteralDelimiters:
     '%w': '()'
     '%i': '()'
 
-Lint/UnneededSplatExpansion:
+Lint/RedundantSplatExpansion:
   Enabled: false
 
 Lint/ScriptPermission:
@@ -47,3 +46,45 @@ Lint/ScriptPermission:
 
 Style/FormatStringToken:
   Enabled: false
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+ 
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+ 
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true

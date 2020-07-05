@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119144337) do
+ActiveRecord::Schema.define(version: 20200705103710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20171119144337) do
     t.integer  "discount_percent"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["code"], name: "index_promo_codes_on_code", using: :btree
+    t.index ["code"], name: "index_promo_codes_on_code", unique: true, using: :btree
   end
 
   create_table "settings", force: :cascade do |t|

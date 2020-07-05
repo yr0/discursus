@@ -4,6 +4,6 @@ class PublicPdfUploader < PdfUploader
   end
 
   def url(options = {})
-    super(options).sub(%r{\A\/public\/}, '/')
+    super(options).sub(%r{\A/public/}, '/')
   end
 end

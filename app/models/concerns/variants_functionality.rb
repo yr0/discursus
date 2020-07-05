@@ -54,7 +54,7 @@ module VariantsFunctionality
   private
 
   def variants_with_float_prices(variants)
-    variants.map { |k, v| [k, v['price'].to_f] }.to_h
+    variants.transform_values { |v| v['price'].to_f }
   end
 
   # [ validate ]

@@ -2,9 +2,13 @@ module AdminPanel
   class BooksController < AdminPanelController
     include RestfulActions
 
-    # before_action :build_extra_image, only: [:new, :edit]
+    helper_method :book_categories_for_select
 
     private
+
+    def book_categories_for_select
+      @book_categories_for_select ||= Book.all_categories.pluck(:name).map { |c| { value: c, text: c } }.to_json
+    end
 
     def eager_load_associations
       { authors_books: :author }
