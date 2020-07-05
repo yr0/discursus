@@ -20,7 +20,7 @@ describe OrderMailer, type: :mailer do
       expect(delivery_body).to include item.price.to_f
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable all
 
   describe '#notify_cash' do
     let!(:order) do

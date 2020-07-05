@@ -13,7 +13,7 @@ module AdminPanel
         end
       end
     end
-    # rubocop:enable Rails/OutputSafety
+    # rubocop:enable all
 
     def within_controller?(name)
       controller_name == name.to_s

@@ -9,9 +9,11 @@ module ApplicationHelper
   }.freeze # '\f02d' - book, '\f10a' - tablet, '\f025' - headphones
 
   # Provided data is completely isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def years_active
-    [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe # rubocop:disable Rails/OutputSafety
+    [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe
   end
+  # rubocop:enable all
 
   # rubocop:disable Rails/OutputSafety, Metrics/AbcSize, Metrics/MethodLength
   # Provided data is completely isolated from user input
@@ -51,11 +53,14 @@ module ApplicationHelper
   end
 
   # Provided data is validated and completely isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def book_card_price(price)
-    format('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe # rubocop:disable Rails/OutputSafety
+    format('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe
   end
+  # rubocop:enable all
 
   # Provided data is completely validated and isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def book_card_variants(available_variants, bought = false)
     return t('sold') if available_variants.blank?
 
@@ -65,8 +70,9 @@ module ApplicationHelper
                   class: 'dsc-book-card-variant-item has-tooltipster',
                   title: bought ? t("personal.bookshelf.bought_as.#{variant}") : t("books.available.#{variant}"),
                   'data-tooltipster-side': 'bottom')
-    end.uniq.join.html_safe # rubocop:disable Rails/OutputSafety
+    end.uniq.join.html_safe
   end
+  # rubocop:enable all
 
   # used for injecting current locale translations into page for JS
   # Provided data is completely isolated from user input
@@ -74,7 +80,7 @@ module ApplicationHelper
   def raw_locale_hash(*exclude_keys)
     I18n.backend.send(:translations)[I18n.locale].with_indifferent_access.except(exclude_keys).to_json.html_safe
   end
-  # rubocop:enable Rails/OutputSafety
+  # rubocop:enable all
 
   def params_with_search(records)
     result = { page: records.next_page }
