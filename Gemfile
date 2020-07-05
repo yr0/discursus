@@ -104,4 +104,5 @@ group :development do
   gem 'capistrano', '3.6.1'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'net-ssh', '~> 5.1.0'
 end
