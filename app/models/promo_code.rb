@@ -26,10 +26,9 @@ class PromoCode < ApplicationRecord
 
   def exhausted?
     return false if limit.to_i.zero?
-    
+
     limit.to_i <= orders_count.to_i
   end
-
 
   def used_by?(_email)
     false

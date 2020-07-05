@@ -59,7 +59,8 @@ module VariantsFunctionality
 
   # [ validate ]
   def variants_must_contain_valid_data
-    return unless available_variants.present?
+    return if available_variants.blank?
+
     variants_must_contain_valid_types
     variant_prices_must_be_valid
     variants_must_contain_files
