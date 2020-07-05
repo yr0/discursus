@@ -1,4 +1,4 @@
-class Setting < ActiveRecord::Base
+class Setting < ApplicationRecord
   validates :email, :phone, :facebook, :instagram, :twitter, :home_hero_title, length: { maximum: 255 }
   validates :email, :phone, :home_hero_title, presence: true
   validates :home_hero_details, length: { maximum: 500 }

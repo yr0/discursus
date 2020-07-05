@@ -12,7 +12,7 @@ class BookSearchQuery
   def initialize(*args)
     super
     self.order_by_desc ||= DEFAULT_ORDER_BY_DESC
-    self.order_field = DEFAULT_ORDER_FIELD unless DEFAULT_ORDER_BY_DESC.keys.include?(order_field&.to_sym)
+    self.order_field = DEFAULT_ORDER_FIELD unless DEFAULT_ORDER_BY_DESC.key?(order_field&.to_sym)
     self.category_ids ||= []
     self.author_ids ||= []
 
@@ -25,7 +25,8 @@ class BookSearchQuery
     Book.search(include: %i(authors categories), &to_sunspot(page))
   end
 
-  # rubocop:disable Metrics/AbcSize - we pass this block to search query
+  # rubocop:disable Metrics/AbcSize
+  # We pass this block to search query
   def to_sunspot(page)
     proc do
       with(:is_available, true)
@@ -39,7 +40,7 @@ class BookSearchQuery
       with(:author_ids, author_ids) if author_ids.present?
     end
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable all
 
   # Check if search query involves default behavior without changes
   def default?

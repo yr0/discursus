@@ -20,7 +20,7 @@ module AdminPanel
                                    :image, :image_cache, :сover_designer, :translator, :age_recommendations,
                                    :is_hidden, :is_top, :published_at, :fragment_file, :fragment_file_cache,
                                    :weight, :dimensions, :isbn, :authors_within_anthology,
-                                   extra_images_attributes: [:id, :title, :position, :image, :image_cache, :_destroy],
+                                   extra_images_attributes: %i(id title position image image_cache _destroy),
                                    variants: variant_types_params, author_ids: [])
     end
 

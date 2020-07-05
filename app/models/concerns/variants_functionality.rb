@@ -22,19 +22,21 @@ module VariantsFunctionality
     end
 
     # Returns book only if it is found by id and if it's variant of +variant_type+ is available. Otherwise returns nil
-    def find_by_availability(id, variant_type)
+    def fetch_if_available(id, variant_type)
       book = Book.find_by(id: id)
       book if book&.variant_available?(variant_type)
     end
   end
 
   def variant_available?(variant)
-    return false unless available_variants.present?
-    available_variants.keys.include? variant.to_s
+    return false if available_variants.blank?
+
+    available_variants.key? variant.to_s
   end
 
   def price_of(variant)
-    return 0.0 unless available_variants.present?
+    return 0.0 if available_variants.blank?
+
     available_variants[variant.to_s].to_f
   end
 
@@ -57,7 +59,8 @@ module VariantsFunctionality
 
   # [ validate ]
   def variants_must_contain_valid_data
-    return unless available_variants.present?
+    return if available_variants.blank?
+
     variants_must_contain_valid_types
     variant_prices_must_be_valid
     variants_must_contain_files
@@ -76,8 +79,8 @@ module VariantsFunctionality
 
   # validate files presence if available variants include ebook and audio
   def variants_must_contain_files
-    if available_variants.keys.include?('ebook') && ebook_file.blank? ||
-       available_variants.keys.include?('audio') && audio_file.blank?
+    if available_variants.key?('ebook') && ebook_file.blank? ||
+       available_variants.key?('audio') && audio_file.blank?
       errors.add(:base, :variants_files_invalid)
     end
   end
@@ -85,7 +88,8 @@ module VariantsFunctionality
   # [ before_save ]
   # sets main price for book from its first 'privileged' available variant
   def update_price_from_variants
-    return unless available_variants.present?
+    return if available_variants.blank?
+
     # available_variants is a hash, which does not have any kind of order.
     # We need to fetch first price respecting VARIANT_TYPES order
     VARIANT_TYPES.find { |vt| self.main_price = available_variants[vt] }

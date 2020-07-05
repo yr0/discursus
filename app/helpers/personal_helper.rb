@@ -12,7 +12,8 @@ module PersonalHelper
     PAGE_NAMES[controller_name.to_sym]
   end
 
-  # rubocop:disable Rails/OutputSafety, Metrics/AbcSize Provided data goes through strip_tags
+  # rubocop:disable Rails/OutputSafety, Metrics/AbcSize
+  # Provided data goes through strip_tags
   def personal_order_description(order)
     data = "#{I18n.t('orders.order')} ##{order.id} (#{readable_date(order.submitted_at, true)})<br/>"\
     "#{I18n.t('orders.cart.short_description.total_items')}&nbsp;<b>#{order.line_items.size}</b><br/>"\
@@ -21,11 +22,15 @@ module PersonalHelper
         order.completed?
     data.html_safe
   end
+  # rubocop:enable all
 
+  # rubocop:disable Rails/OutputSafety
+  # Provided data goes through strip_tags
   def personal_order_detailed_information(order)
     ORDER_DETAILS_FIELDS.map do |field|
       value = strip_tags order[field]
-      next unless value.present?
+      next if value.blank?
+
       if field == 'payment_method'
         value = I18n.t("orders.payment_methods.#{value}")
       elsif field == 'shipping_method'
@@ -35,5 +40,5 @@ module PersonalHelper
       "<b>#{I18n.t("attributes.#{field}")}</b>: #{value}"
     end.compact.join('<br/>').html_safe
   end
-  # rubocop:enable Rails/OutputSafety, Metrics/AbcSize
+  # rubocop:enable all
 end

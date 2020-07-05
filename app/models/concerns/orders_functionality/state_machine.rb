@@ -14,7 +14,7 @@ module OrdersFunctionality
         state :canceled
 
         event :submit, before: -> { self.submitted_at = Time.current }, after: :on_submit_actions do
-          transitions from: [:pending, :submitted], to: :submitted, guard: -> { line_items.present? }
+          transitions from: %i(pending submitted), to: :submitted, guard: -> { line_items.present? }
         end
 
         event :pay, after: :on_pay_actions do
@@ -24,7 +24,7 @@ module OrdersFunctionality
         # order can be transitioned to completed only by administrator from paid_for unless all of its items are digital
         event :success,
               before: -> { self.completed_at = Time.current },
-              after: -> { promo_code.increment!(:orders_count) if promo_code.present? } do
+              after: -> { promo_code.update!(orders_count: promo_code.orders_count.to_i + 1) if promo_code.present? } do
           transitions from: :paid_for, to: :completed
         end
 
@@ -67,6 +67,7 @@ module OrdersFunctionality
       self.class.transaction do
         user = User.create(email: email, name: full_name, phone: phone, password: SecureRandom.hex(8))
         return unless user.valid?
+
         user.encrypted_password = password_digest
         user.save(validate: false)
         temp_user_id = customer_id

@@ -7,6 +7,7 @@ module CurrentOrder
 
   def current_order
     return @current_order if @current_order
+
     user = current_user || current_temp_user
     @current_order = user.orders.pending.first if user
   end

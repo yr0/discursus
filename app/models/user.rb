@@ -3,8 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, omniauth_providers: %i(facebook google_oauth2)
 
   validates :name, :email, length: { maximum: 250 }
-  has_many :orders, as: :customer
-  has_many :users_favorite_books, -> { where(is_favorited: true) }
+  has_many :orders, as: :customer, dependent: :nullify, inverse_of: :customer
+  has_many :users_favorite_books, -> { where(is_favorited: true) }, inverse_of: :favorited_by_users
   has_many :favorite_books, through: :users_favorite_books, source: :book
   has_many :line_items, through: :orders
 

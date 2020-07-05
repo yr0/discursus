@@ -7,8 +7,7 @@ class OrdersController < ApplicationController
     render 'warning'
   end
 
-  def cart
-  end
+  def cart; end
 
   # Called after submitting first/second (presubmit) and after third (submit) steps.
   # Presubmission runs all validations but doesn't store the order
@@ -43,6 +42,7 @@ class OrdersController < ApplicationController
 
   def process_order_errors
     return if current_order.valid?
+
     @errors ||= current_order.errors.full_messages.uniq
     current_order.form_submission_started = false
   end

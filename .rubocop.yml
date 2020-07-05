@@ -2,14 +2,12 @@ AllCops:
   TargetRubyVersion: 2.3
   DisplayStyleGuide: true
   DisplayCopNames: true
-  Include:
-    - '**/Gemfile'
-    - '**/Rakefile'
   Exclude:
-    - '**/bin/**'
-    - '**/db/schema.rb'
-    - '**/db/migrate/**'
-    - '**/app/models/ckeditor/**'
+    - 'bin/**'
+    - 'db/schema.rb'
+    - 'db/migrate/**'
+    - 'app/models/ckeditor/**'
+    - 'Gemfile'
 
 Rails:
   Enabled: true
@@ -24,4 +22,28 @@ Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Semicolon:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%w': '()'
+    '%i': '()'
+
+Lint/UnneededSplatExpansion:
+  Enabled: false
+
+Lint/ScriptPermission:
+  Enabled: false
+
+Style/FormatStringToken:
   Enabled: false

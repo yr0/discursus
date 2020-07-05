@@ -9,17 +9,23 @@ module ApplicationHelper
   }.freeze # '\f02d' - book, '\f10a' - tablet, '\f025' - headphones
 
   # Provided data is completely isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def years_active
-    [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe # rubocop:disable Rails/OutputSafety
+    [START_YEAR, Time.zone.now.year].uniq.join('&ndash;').html_safe
   end
+  # rubocop:enable all
 
-  # rubocop:disable Rails/OutputSafety, Metrics/AbcSize Provided data is completely isolated from user input
+  # rubocop:disable Rails/OutputSafety, Metrics/AbcSize, Metrics/MethodLength
+  # Provided data is completely isolated from user input
   def site_navigation(css_class_infix, no_turbolinks = false)
     content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
-      concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
-                                      class: "dsc-#{css_class_infix}-nav-link",
-                                      style: 'color: #47a378', 'data-turbolinks': false),
-                         class: "dsc-#{css_class_infix}-nav-item") if current_admin.present?
+      if current_admin.present?
+        concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
+                                        class: "dsc-#{css_class_infix}-nav-link",
+                                        style: 'color: #47a378', 'data-turbolinks': false),
+                           class: "dsc-#{css_class_infix}-nav-item")
+      end
+
       NAVIGATION.each do |item_name, route|
         link_class = "dsc-#{css_class_infix}-nav-link"
         link_class += ' active' if item_name.to_s == controller_name
@@ -30,7 +36,7 @@ module ApplicationHelper
       end
     end
   end
-  # rubocop:enable Rails/OutputSafety, Metrics/AbcSize
+  # rubocop:enable all
 
   def readable_price(price, show_fractions = true, show_currency = true)
     price ||= 0
@@ -41,26 +47,32 @@ module ApplicationHelper
   end
 
   def readable_date(date, show_time = false)
-    return unless date.present?
+    return if date.blank?
+
     date.strftime("#{'%H:%M ' if show_time}%d.%m.%Y")
   end
 
   # Provided data is validated and completely isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def book_card_price(price)
-    format('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe # rubocop:disable Rails/OutputSafety
+    format('<b>%d</b>&nbsp;%s', price, t('uah')).html_safe
   end
+  # rubocop:enable all
 
   # Provided data is completely validated and isolated from user input
+  # rubocop:disable Rails/OutputSafety
   def book_card_variants(available_variants, bought = false)
     return t('sold') if available_variants.blank?
+
     available_variants = available_variants.keys unless available_variants.is_a?(Array)
     available_variants.map do |variant|
       content_tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),
                   class: 'dsc-book-card-variant-item has-tooltipster',
                   title: bought ? t("personal.bookshelf.bought_as.#{variant}") : t("books.available.#{variant}"),
                   'data-tooltipster-side': 'bottom')
-    end.uniq.join.html_safe # rubocop:disable Rails/OutputSafety
+    end.uniq.join.html_safe
   end
+  # rubocop:enable all
 
   # used for injecting current locale translations into page for JS
   # Provided data is completely isolated from user input
@@ -68,7 +80,7 @@ module ApplicationHelper
   def raw_locale_hash(*exclude_keys)
     I18n.backend.send(:translations)[I18n.locale].with_indifferent_access.except(exclude_keys).to_json.html_safe
   end
-  # rubocop:enable Rails/OutputSafety
+  # rubocop:enable all
 
   def params_with_search(records)
     result = { page: records.next_page }

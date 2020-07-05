@@ -2,13 +2,13 @@ describe PromoCode do
   let(:promo_code) { create(:promo_code) }
   let(:code) { promo_code.code }
 
-  describe '.find_by_code' do
+  describe '.fetch_by_code' do
     it 'finds the promo code by code' do
-      expect(described_class.find_by_code(code)).to eq promo_code
+      expect(described_class.fetch_by_code(code)).to eq promo_code
     end
 
     it 'does not fail if promo code is nil' do
-      expect(described_class.find_by_code(nil)).to be_nil
+      expect(described_class.fetch_by_code(nil)).to be_nil
     end
   end
 

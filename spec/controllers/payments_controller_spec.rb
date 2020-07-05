@@ -52,7 +52,7 @@ describe PaymentsController, type: :controller do
     context 'when result of payment is unsuccessful' do
       let(:payment_successful_result) { false }
 
-      it { is_expected.to redirect_to(orders_payment_failed_path) }            
+      it { is_expected.to redirect_to(orders_payment_failed_path) }
     end
 
     context 'when Wayforpay wrapper raises an error' do

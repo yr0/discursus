@@ -23,7 +23,7 @@ describe Wayforpay do
       expect { subject }
         .to change { described_class.instance_variable_get(:@config)[config_key] }.from(nil).to(config_value)
     end
-  end  
+  end
 
   describe '.prepare_params_from' do
     subject(:prepare_params) { described_class.prepare_params_from(order) }
@@ -32,7 +32,7 @@ describe Wayforpay do
 
     it 'generates correct params from merchant config' do
       expect(prepare_params).to include(
-        'merchantAccount' => merchant_account, 
+        'merchantAccount' => merchant_account,
         'merchantDomainName' => merchant_domain,
         'currency' => acceptable_currency
       )
@@ -40,7 +40,7 @@ describe Wayforpay do
 
     it 'generates correct params from order itself' do
       expect(prepare_params).to include(
-        'orderReference' => "DSC-#{order.id}", 
+        'orderReference' => "DSC-#{order.id}",
         'orderDate' => order.updated_at.to_i,
         'amount' => order.total,
         'clientEmail' => order.email,
@@ -50,7 +50,7 @@ describe Wayforpay do
 
     it 'generates correct params from order items' do
       expect(prepare_params).to include(
-        'productName' => order.line_items.map { |item| item.book.title } , 
+        'productName' => order.line_items.map { |item| item.book.title },
         'productCount' => order.line_items.pluck(:quantity),
         'productPrice' => order.line_items.pluck(:price)
       )
@@ -67,7 +67,7 @@ describe Wayforpay do
     describe 'adding signature' do
       let(:signature_parts) do
         [
-          merchant_account, merchant_domain, "DSC-#{order.id}", order.updated_at.to_i, order.total, 
+          merchant_account, merchant_domain, "DSC-#{order.id}", order.updated_at.to_i, order.total,
           acceptable_currency, order.line_items.map { |item| item.book.title }, order.line_items.pluck(:quantity),
           order.line_items.pluck(:price)
         ].flatten
@@ -92,14 +92,14 @@ describe Wayforpay do
 
   shared_context 'wayforpay response' do
     let(:params) do
-      { 
-        merchantAccount: merchant_account, 
+      {
+        merchantAccount: merchant_account,
         orderReference: params_order_reference,
         amount: params_amount,
         currency: params_currency,
         authCode: params_auth_code,
         cardPan: params_card_pan,
-        transactionStatus: params_transaction_status, 
+        transactionStatus: params_transaction_status,
         reasonCode: params_reason_code,
         reason: params_reason,
         merchantSignature: params_signature
@@ -151,7 +151,7 @@ describe Wayforpay do
 
   describe '.process_and_produce_message_for' do
     subject(:process_and_produce_message) { described_class.process_and_produce_message_for(params) }
-    
+
     let!(:order) { create(:order, :submitted) }
 
     include_context 'wayforpay response'
@@ -163,8 +163,8 @@ describe Wayforpay do
 
     it 'generates correct message in response' do
       expect(process_and_produce_message).to include(
-        'orderReference' => params_order_reference, 
-        'status' => 'accept', 
+        'orderReference' => params_order_reference,
+        'status' => 'accept',
         'time' => be_an(Integer),
         'signature' => be_a(String)
       )
@@ -187,8 +187,8 @@ describe Wayforpay do
 
       it 'generates correct message in response' do
         expect(process_and_produce_message).to include(
-          'orderReference' => params_order_reference, 
-          'status' => 'accept', 
+          'orderReference' => params_order_reference,
+          'status' => 'accept',
           'time' => be_an(Integer),
           'signature' => be_a(String)
         )
@@ -216,7 +216,7 @@ describe Wayforpay do
 
   describe '.was_payment_successful?' do
     subject(:was_payment_successful) { described_class.was_payment_successful?(params) }
-    
+
     let!(:order) { create(:order, :submitted) }
 
     include_context 'wayforpay response'

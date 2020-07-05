@@ -6,7 +6,7 @@ class Author < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3, maximum: 250 }
   after_commit -> { books.all.find_each(&:index!) }, on: %i(update destroy)
 
-  has_many :authors_books
+  has_many :authors_books, dependent: :destroy
   has_many :books, through: :authors_books
 
   extend FriendlyId

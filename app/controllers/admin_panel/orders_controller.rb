@@ -8,12 +8,11 @@ module AdminPanel
     end
 
     def index
-      @orders = Order.where.not(aasm_state: [:pending, :completed, :canceled])
+      @orders = Order.where.not(aasm_state: %i(pending completed canceled))
                      .rewhere(filter_query).order(submitted_at: :desc).page(params[:page])
     end
 
-    def show
-    end
+    def show; end
 
     # For orders that are to be paid in cash - submit marks the order having been paid
     def acknowledge_payment

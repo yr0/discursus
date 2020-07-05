@@ -4,7 +4,8 @@ class Ability
   def initialize(user)
     @user = user
     can :read, [Book, Article, TeamMember, Bookstore, Author]
-    return unless user # user is a guest
+    return if user.blank? # user is a guest
+
     user_abilities
     admin_abilities if user.is_a?(Admin)
   end
