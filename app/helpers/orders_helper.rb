@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrdersHelper
   def user_for_order_contacts(order)
     contacts = %i(full_name email phone).select { |contact| order[contact].present? }.map do |contact|

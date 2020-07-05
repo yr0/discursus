@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Personal
   class PersonalController < ApplicationController
     layout 'personal'

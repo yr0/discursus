@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'Sluggable' do |sluggable_field = :title|
   let(:model) { subject.class }
   let(:record) { create(model.name.underscore) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/expectations'
 
 # checks if actual hash has keys from expected schema and if values of those keys are of expected kind

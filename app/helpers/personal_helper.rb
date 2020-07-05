@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PersonalHelper
   PAGE_NAMES = {
     bookshelf: I18n.t('personal.nav.bookshelf'),

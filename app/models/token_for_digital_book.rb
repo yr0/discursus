@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TokenForDigitalBook < ApplicationRecord
   belongs_to :order
   belongs_to :book

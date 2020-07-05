@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminPanel
   class TeamMembersController < AdminPanelController
     include RestfulActions

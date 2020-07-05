@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Sidekiq will connect to redis socket in namespace of DB_NAME, which is unique for every environment
 redis_url = ENV['REDIS_URL'] || 'redis://localhost:6379/0'
 namespace = ENV['DATABASE_NAME'] || 'discursus_production'

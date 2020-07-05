@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentsController < ApplicationController
   protect_from_forgery except: %i(wayforpay_callback wayforpay_redirect)
 

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
 set :application, 'discursus'
 set :repo_url, 'git@bitbucket.org:numberonename/discursus-rails.git'
 set :keep_releases, 5
-set :rvm_ruby_version, '2.3.1'
+set :rvm_ruby_version, '2.4.9'
 
 append :linked_files, 'config/database.yml', 'config/puma.rb', '.env'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads'

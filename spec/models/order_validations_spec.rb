@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe OrdersFunctionality::Validations do
   describe 'must_have_email_or_phone' do
     it 'adds error if order is submitted and no email and no phone is present' do

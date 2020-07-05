@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A note on variants. A book can have many variants (paperback, hardcover, ebook, audio), but we don't need
 # to track the amount of books for each variant. Basically the variants only differ in price. Files for digital
@@ -54,7 +56,7 @@ module VariantsFunctionality
   private
 
   def variants_with_float_prices(variants)
-    variants.map { |k, v| [k, v['price'].to_f] }.to_h
+    variants.transform_values { |v| v['price'].to_f }
   end
 
   # [ validate ]

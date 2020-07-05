@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe PromoCode do
   let(:promo_code) { create(:promo_code) }
   let(:code) { promo_code.code }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,11 +15,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def url(options = {})
-    super(options).sub(%r{\A\/public\/}, '/')
+    super(options).sub(%r{\A/public/}, '/')
   end
 
   def cache_dir
-    Rails.root.join('public', 'uploads', 'tmp')
+    Rails.root.join('public/uploads/tmp')
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

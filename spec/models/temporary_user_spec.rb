@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe TemporaryUser do
   describe 'callbacks' do
     it 'adds uuid to user after create' do

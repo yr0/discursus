@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   # If user passes password and confirmation, they will be validated and stored as digests
   has_secure_password validations: false
@@ -6,7 +8,7 @@ class Order < ApplicationRecord
   AVAILABLE_SHIPPING_METHODS = %w(nova_poshta ukrposhta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
   AVAILABLE_PAYMENT_METHODS = %w(card cash).freeze
-  FREE_SHIPPING_METHOD = 'ukrposhta'.freeze
+  FREE_SHIPPING_METHOD = 'ukrposhta'
 
   enum shipping_method: SHIPPING_METHODS.map { |sm| [sm, sm] }.to_h
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h

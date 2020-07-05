@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe User do
   context 'from omniauth' do
     let(:provider) { 'facebook' }
