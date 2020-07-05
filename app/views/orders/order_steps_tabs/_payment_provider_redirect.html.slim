@@ -2,4 +2,8 @@ h4.text-center = t('orders.order_submission.please_wait_redirecting')
 
 = form_tag(@payment_provider_form_settings[:action], id: 'paymentProviderRedirectForm') do
   - @payment_provider_form_settings[:attributes].each do |attribute, value|
-    = hidden_field_tag(attribute, value)
+    - if value.is_a?(Array)
+      - value.each do |sub_value|
+        = hidden_field_tag("#{attribute}[]", sub_value)  
+    - else
+      = hidden_field_tag(attribute, value)

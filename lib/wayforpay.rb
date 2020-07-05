@@ -23,7 +23,7 @@ module Wayforpay
         ['merchantDomainName', @config.fetch(:merchant_domain)],
         ['orderReference', "#{ORDER_REFERENCE_PREFIX}#{order.id}"],
         ['orderDate', order.updated_at.to_i],
-        ['amount', order.total],
+        ['amount', order.total.to_f],
         ['currency', @config.fetch(:acceptable_currency)],
       ]
 
@@ -95,7 +95,7 @@ module Wayforpay
       order.line_items.includes(:book).each do |item|
         product_names << item.book.title
         product_counts << item.quantity
-        product_prices << item.price
+        product_prices << item.price.to_f
       end
 
       [
