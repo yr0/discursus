@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BooksHelper
   AVAILABLE_SHARE_ACTIONS = [
     ['facebook', ->(_record, link) { "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(link)}" }],

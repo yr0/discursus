@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ArticlesHelper
   # returns column weight for article, depending on its position in list on the first page
   def column_weight_from_index(index)

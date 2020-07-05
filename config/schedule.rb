@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :output, 'log/whenever.log'
 
 every 4.hours do

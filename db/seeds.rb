@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # required seeds for app's first run
 

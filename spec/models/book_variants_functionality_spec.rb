@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Book VariantsFunctionality' do
   describe 'Variants Functionality' do
     let(:book) { create(:book) }

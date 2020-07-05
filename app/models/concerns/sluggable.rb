@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sluggable
   def should_generate_new_friendly_id?
     new_record? || slug.blank? || send("#{friendly_id_config.base}_changed?")

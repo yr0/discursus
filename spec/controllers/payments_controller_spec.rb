@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe PaymentsController, type: :controller do
   let(:wayforpay_params) { { merchantAccount: 'acc_acc', orderReference: '123123' } }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminPanel
   ##
   # A concern that can be used for any REST resources (in admin panel). Defines actions #index, #show, #new, #create,

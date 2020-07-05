@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminPanel
   class AuthorsController < AdminPanelController
     include RestfulActions

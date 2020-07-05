@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe OrdersFunctionality::StateMachine do
   include ActiveJob::TestHelper
 

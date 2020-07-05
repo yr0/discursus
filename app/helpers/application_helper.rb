@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   START_YEAR = 2016
   NAVIGATION = {

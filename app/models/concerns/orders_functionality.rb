@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Module for concerns related to order
 module OrdersFunctionality
   extend ActiveSupport::Concern

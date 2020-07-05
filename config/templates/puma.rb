@@ -1,4 +1,5 @@
 #!/usr/bin/env puma
+# frozen_string_literal: true
 
 directory '$$project_dir/current'
 rackup '$$project_dir/current/config.ru'

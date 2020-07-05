@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A note on variants. A book can have many variants (paperback, hardcover, ebook, audio), but we don't need
 # to track the amount of books for each variant. Basically the variants only differ in price. Files for digital

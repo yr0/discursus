@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Wayforpay do
   let(:merchant_account) { 'merchantAccountId' }
   let(:merchant_domain) { 'discursus.com' }

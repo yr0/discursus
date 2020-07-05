@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe LineItem do
   describe 'callbacks' do
     let(:book) { create(:book, :hardcover, main_price: 50) }

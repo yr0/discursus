@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PromoCode < ApplicationRecord
   has_many :orders, dependent: :nullify
 

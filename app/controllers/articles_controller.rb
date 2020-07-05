@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   load_resource find_by: :slug, only: :show
   before_action :set_default_per_page, only: :index

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bookstore < ApplicationRecord
   with_options presence: true do
     validates :title, length: { minimum: 1, maximum: 250 }

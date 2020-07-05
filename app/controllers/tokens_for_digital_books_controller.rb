@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TokensForDigitalBooksController < ApplicationController
   def show
     @token = TokenForDigitalBook.find_by!(code: params[:id])

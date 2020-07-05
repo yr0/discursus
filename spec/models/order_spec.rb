@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Order do
   describe 'public instance methods' do
     describe '#physical?,#requires_shipping?' do

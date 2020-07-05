@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Setting < ApplicationRecord
   validates :email, :phone, :facebook, :instagram, :twitter, :home_hero_title, length: { maximum: 255 }
   validates :email, :phone, :home_hero_title, presence: true

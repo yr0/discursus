@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminPanel
   module AdminPanelHelper
     NAVIGATION = %w(orders books authors articles team_members promo_codes bookstores settings).freeze

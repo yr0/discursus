@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ControllerHelpers
   def last_status
     response.status

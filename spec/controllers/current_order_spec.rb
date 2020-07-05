@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe ApplicationController, type: :controller do
   context 'with current order' do
     describe '#current_temp_user' do

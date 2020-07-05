@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderMailerPreview < ActionMailer::Preview
   def notify_cash
     recreate_order

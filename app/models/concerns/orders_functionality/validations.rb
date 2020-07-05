@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrdersFunctionality
   module Validations
     extend ActiveSupport::Concern

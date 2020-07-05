@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :promo_code do
     sequence(:code) { |n| "#{SecureRandom.hex(4)}#{n}" }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BookSearchQuery do
   changed_attributes = { text_query: 'hello', category_ids: [1], author_ids: [1], order_field: 'title_for_sorting',
                          order_by_desc: { title_for_sorting: 1, main_price: 0, published_at: 0 } }

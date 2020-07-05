@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Article do
   it_behaves_like 'Sluggable'
 

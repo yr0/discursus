@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe OrderMailer, type: :mailer do
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def expect_to_match_order_table(order)

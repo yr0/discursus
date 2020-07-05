@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminPanel
   class SettingsController < AdminPanelController
     authorize_resource

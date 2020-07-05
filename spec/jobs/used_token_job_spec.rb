@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe UsedTokenJob do
   describe 'perform' do
     let(:download_token) { create(:download_token) }

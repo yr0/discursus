@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Author < ApplicationRecord
   acts_as_list
   scope :named_like, ->(q) { where('name ILIKE ?', "%#{q}%") }

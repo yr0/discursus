@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/ModuleLength
 module Wayforpay
   Error = Class.new(RuntimeError)
   SignatureInvalidError = Class.new(Error)
   ResponseOrderDataMismatchError = Class.new(Error)
 
-  PAYMENT_URL = 'https://secure.wayforpay.com/pay'.freeze
-  APPROVED_TRANSACTION_STATUS = 'approved'.freeze
-  APPROVED_REASON = 'ok'.freeze
+  PAYMENT_URL = 'https://secure.wayforpay.com/pay'
+  APPROVED_TRANSACTION_STATUS = 'approved'
+  APPROVED_REASON = 'ok'
   CHECKED_RESPONSE_PARAM_KEYS = %i(merchantAccount orderReference amount currency authCode cardPan
                                    transactionStatus reasonCode).freeze
-  ACCEPT_RESPONSE_TEXT = 'accept'.freeze
-  ORDER_REFERENCE_PREFIX = 'DSC-'.freeze
+  ACCEPT_RESPONSE_TEXT = 'accept'
+  ORDER_REFERENCE_PREFIX = 'DSC-'
 
   class << self
     def configure

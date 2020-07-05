@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   # Fetch current user or create temporary user and fetch or create order for them - only on specific actions
   before_action :create_or_get_user_with_order!, only: %i(populate)
