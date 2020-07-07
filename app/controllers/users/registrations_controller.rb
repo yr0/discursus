@@ -7,7 +7,11 @@ module Users
 
     # POST /resource
     def create
-      super if Rails.configuration.disable_recaptcha || verify_recaptcha(model: User)
+      if Rails.configuration.disable_recaptcha || verify_recaptcha
+        super
+      else
+        flash[:alert] = I18n.t('recaptcha_failed')
+      end
     end
 
     # GET /resource/edit
