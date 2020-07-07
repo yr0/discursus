@@ -13,9 +13,10 @@ class Book < ApplicationRecord
   has_many :authors_books, dependent: :destroy
   has_many :authors, through: :authors_books, dependent: :nullify
   has_many :extra_images, class_name: 'BookExtraImage', dependent: :destroy
-  has_many :tokens_for_digital_books, dependent: :destroy
   has_many :users_favorite_books, dependent: :destroy
   has_many :favorited_by_users, through: :users_favorite_books, source: :user
+  has_many :tokens_for_digital_books, dependent: :restrict_with_error
+  has_many :line_items, dependent: :restrict_with_error
 
   accepts_nested_attributes_for :extra_images,
                                 reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },

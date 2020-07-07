@@ -20,7 +20,7 @@ module OrdersFunctionality
         end
 
         event :pay, after: :on_pay_actions do
-          transitions from: :submitted, to: :paid_for
+          transitions from: %i(submitted failed), to: :paid_for
         end
 
         # order can be transitioned to completed only by administrator from paid_for unless all of its items are digital
