@@ -7,7 +7,16 @@ module Users
 
     # POST /resource
     def create
-      super if Rails.configuration.disable_recaptcha || verify_recaptcha(model: User)
+      if Rails.configuration.disable_recaptcha || verify_recaptcha
+        super
+      else
+        self.resource = User.new sign_up_params
+        resource.validate # Look for any other validation errors besides reCAPTCHA
+        set_minimum_password_length
+
+        flash[:alert] = I18n.t('recaptcha_failed')
+        respond_with_navigational(resource) { render :new }
+      end
     end
 
     # GET /resource/edit
