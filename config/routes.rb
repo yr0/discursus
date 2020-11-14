@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
   resources :authors, only: %i(index show)
   resources :articles, only: %i(index show)
+  resources :series, only: :show
   get 'about_us', to: 'about_us#index'
 
   resources :tokens_for_digital_books, only: %i(show) do

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include ShareHelper
+
   START_YEAR = 2016
   NAVIGATION = {
     home: '/', books: '/books', articles: '/articles', authors: '/authors', about_us: '/about_us',

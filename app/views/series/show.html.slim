@@ -1,0 +1,16 @@
+- content_for :page_title, @series.title
+.dsc-header.dsc-section-header
+  h2.dsc-header-text = @series.title
+.container-fluid.dsc-container-side-padded
+  .row
+    .col-md-offset-1.col-md-10.col-sm-12.dsc-from-ckeditor.dsc-article-content
+      = @series.description.html_safe  
+  - if @series.books.any?
+    .row.dsc-margin-t-large
+      .col-xs-12.dsc-show-page-subheader
+        h4 = t('series.books_in_series')
+      .col-xs-12
+        .row = render 'books/list', books: @series.books
+      
+  .dsc-single-block-centered
+    = render('shared/share_block', title: @series.title, link: series_url(@series.slug))    
