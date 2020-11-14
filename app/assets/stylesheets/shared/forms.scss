@@ -2,6 +2,11 @@ label {
   font-weight: normal; // override bootstrap setting
 }
 
+.dsc-sign-in-block {
+  width: 40%;
+  margin: $default-margin * 2 auto;
+}
+
 .dsc-form-errors {
   color: $red;
   margin: 10px 0;
