@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200705103710) do
+ActiveRecord::Schema.define(version: 20201114143533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,13 @@ ActiveRecord::Schema.define(version: 20200705103710) do
     t.index ["slug"], name: "index_books_on_slug", unique: true, using: :btree
   end
 
+  create_table "books_series", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "series_id"
+    t.index ["book_id"], name: "index_books_series_on_book_id", using: :btree
+    t.index ["series_id"], name: "index_books_series_on_series_id", using: :btree
+  end
+
   create_table "bookstores", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -171,6 +178,15 @@ ActiveRecord::Schema.define(version: 20200705103710) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["code"], name: "index_promo_codes_on_code", unique: true, using: :btree
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.string   "title",                     null: false
+    t.string   "slug",                      null: false
+    t.string   "description", limit: 10000
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["slug"], name: "index_series_on_slug", unique: true, using: :btree
   end
 
   create_table "settings", force: :cascade do |t|

@@ -18,6 +18,9 @@ class Book < ApplicationRecord
   has_many :tokens_for_digital_books, dependent: :restrict_with_error
   has_many :line_items, dependent: :restrict_with_error
 
+  has_one :books_series, dependent: :destroy
+  has_one :series, through: :books_series
+
   accepts_nested_attributes_for :extra_images,
                                 reject_if: ->(attrs) { attrs['id'].blank? && attrs['image'].blank? },
                                 allow_destroy: true

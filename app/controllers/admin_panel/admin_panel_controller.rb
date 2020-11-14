@@ -6,6 +6,7 @@ module AdminPanel
     before_action :check_admin
 
     rescue_from CanCan::AccessDenied do
+      Rails.logger.warn('Access denied')
       redirect_to root_path
     end
 

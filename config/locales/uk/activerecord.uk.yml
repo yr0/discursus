@@ -5,6 +5,7 @@ uk:
     title: Назва
     slug: Читабельний URL
     tags: Теги
+    books: Книги
     description: Опис
     short_description: Короткий опис
     price: Ціна

@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     @user = user
-    can :read, [Book, Article, TeamMember, Bookstore, Author]
+    can :read, [Book, Article, TeamMember, Bookstore, Author, Series]
     return if user.blank? # user is a guest
 
     user_abilities
@@ -16,7 +16,7 @@ class Ability
 
   def admin_abilities
     can :index, AdminPanel::DashboardController
-    can :manage, [Book, Article, TeamMember, Bookstore, Author, Order, PromoCode, Setting]
+    can :manage, [Book, Article, TeamMember, Bookstore, Author, Order, PromoCode, Series, Setting]
   end
 
   def user_abilities
