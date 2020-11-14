@@ -13,11 +13,11 @@
             th = t('attributes.title')
             th width='auto'
         tbody
-          - @series.pluck(:id, :title).each do |id, title|
+          - @series.pluck(:id, :slug, :title).each do |id, slug, title|
             tr
               td = title
               td.text-right
-                = link_to fa_icon(:eye), admin_panel_series_path(id), class: 'btn btn-success'
+                = link_to fa_icon(:eye), series_path(slug), class: 'btn btn-success'
                 | &nbsp;
                 = link_to fa_icon(:pencil), edit_admin_panel_series_path(id), class: 'btn btn-info'
                 | &nbsp;
