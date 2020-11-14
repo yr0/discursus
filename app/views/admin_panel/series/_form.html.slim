@@ -1,0 +1,28 @@
+= simple_form_for [:admin_panel, @series], html: {class: 'form'} do |f|
+  - if f.object.errors.any?
+    .callout.callout-danger
+      h4
+        = fa_icon :warning
+        | &nbsp;
+        = t('changes_not_saved')
+      ul
+        - f.object.errors.full_messages.each do |message|
+          li = message
+      = t('correct_errors')
+  .box
+    .box-body
+      .row
+        .col-sm-12.col-md-6
+          = f.input :title
+        .col-sm-12.col-md-6
+          = f.input :slug
+        .col-sm-12
+          = f.label :books
+          = f.association :books, label: false, multiple: true, selected: f.object.book_ids, input_html: { id: 'seriesBooks' }
+        .col-sm-12
+          = f.input :description, as: :ckeditor, input_html: { class: 'input-ckeditor',
+                  ckeditor: { height: 300, locale: I18n.locale } }
+        .col-md-12
+          p
+            = f.submit t('save'), class: 'btn btn-primary margin'
+            = link_to t('cancel'), [:admin_panel, :series_index], class: 'btn btn-warning margin'

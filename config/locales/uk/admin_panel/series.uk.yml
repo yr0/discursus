@@ -1,0 +1,11 @@
+uk:
+  admin_panel:
+    series:
+      title: Серії книг
+      no_series: Ви ще не додали жодної серії книг
+      books_selector_placeholder: Почніть уводити назву або оберіть зі списку
+      new_series: Нова серія
+      saved: Серія успішно збережена
+      destroyed: Серію видалено
+      not_destroyed: "Не вдалося видалити серію: %{errors}"
+      

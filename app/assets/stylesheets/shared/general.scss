@@ -10,8 +10,19 @@
 }
 
 .dsc-single-block-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40%;
   margin: 20px auto;
+}
+
+.dsc-container-side-padded {
+  margin: 20px 0;
+
+  @media (min-width: 1300px) {
+    margin: 20px 10%;
+  }
 }
 
 .dsc-from-ckeditor {
@@ -21,6 +32,22 @@
     max-width: 100% !important;
     height: auto !important;
   }
+}
+
+.dsc-margin-t {
+  margin-top: $default-margin;
+}
+
+.dsc-margin-t-large {
+  margin-top: $default-margin * 2;
+}
+
+.dsc-margin-b {
+  margin-bottom: $default-margin;
+}
+
+.dsc-margin-b-large {
+  margin-bottom: $default-margin * 2;
 }
 
 //.dsc-sign-in-checkbox {

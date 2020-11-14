@@ -1,0 +1,31 @@
+.box
+  .box-header
+    h2 = t('nav.series')
+    .text-center
+      = link_to new_admin_panel_series_path, class: 'btn btn-app bg-olive' do
+        = fa_icon :plus
+        = t('create')
+  - if @series.any?
+    .box-body.no-padding.table-responsive
+      table.table.table-hover
+        thead
+          tr
+            th = t('attributes.title')
+            th width='auto'
+        tbody
+          - @series.pluck(:id, :slug, :title).each do |id, slug, title|
+            tr
+              td = title
+              td.text-right
+                = link_to fa_icon(:eye), series_path(slug), class: 'btn btn-success'
+                | &nbsp;
+                = link_to fa_icon(:pencil), edit_admin_panel_series_path(id), class: 'btn btn-info'
+                | &nbsp;
+                = link_to fa_icon(:times), admin_panel_series_path(id), method: :delete, class: 'btn btn-danger', 'data-confirm' => true
+      div
+        = paginate @series
+  - else
+    .box-body
+      .row
+        .col-md-6
+          .callout.callout-info = t('admin_panel.series.no_series')

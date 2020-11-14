@@ -21,6 +21,7 @@ $global-border-radius: 3px;
 // cards with actions
 $card-height: 340px;
 $image-container-height: $card-height - 100px;
+$default-margin: 10px;
 
 // app-logic related variables
 $available-variants: (paperback hardcover ebook audio);

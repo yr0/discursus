@@ -1,7 +1,7 @@
 - content_for :page_title, @book.title
 .dsc-header.dsc-section-header
   h2.dsc-header-text = @book.title
-.container-fluid.dsc-book-show-container
+.container-fluid.dsc-container-side-padded
   .row
     .col-sm-3.col-sm-offset-0.col-xs-offset-3.col-xs-6.dsc-book-images-container
       .dsc-book-main-image-container
@@ -25,6 +25,11 @@
           span.dsc-book-field-name = t('attributes.authors_within_anthology')
           |:&nbsp;
           = @book.authors_within_anthology
+      - if @book.series.present?
+        div
+          span.dsc-book-field-name = t('attributes.series')
+          |:&nbsp;
+          = link_to @book.series.title, series_path(@book.series.slug)
       - if @book.categories.any?
         div
           span.dsc-book-field-name = t('attributes.categories')
@@ -42,10 +47,7 @@
             |:&nbsp;
             = value
       .dsc-book-description.dsc-from-ckeditor = raw @book.description
-      .dsc-book-share-block
-        span.dsc-book-field-name = t('share')
-        .dsc-book-share-icons-container
-          - share_icons_for(@book)
+      = render('shared/share_block', title: @book.title, link: book_url(@book))
     .col-sm-3.col-sm-offset-0.col-xs-12.dsc-book-buy-container
       = render 'books/buy'
 
