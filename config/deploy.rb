@@ -9,7 +9,7 @@ set :keep_releases, 5
 set :rvm_ruby_version, '2.4.9'
 
 append :linked_files, 'config/database.yml', 'config/puma.rb', '.env'
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads', 'uploads'
 
 namespace :discursus do
   desc 'Restart service'
