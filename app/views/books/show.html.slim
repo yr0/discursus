@@ -1,4 +1,7 @@
 - content_for :page_title, @book.title
+- if flash[:alert].present?
+    javascript: 
+      #{add_gritter(flash[:alert], image: :error, title: t('gflash.titles.error'), time: 8000, nodom_wrap: true)}
 .dsc-header.dsc-section-header
   h2.dsc-header-text = @book.title
 .container-fluid.dsc-container-side-padded

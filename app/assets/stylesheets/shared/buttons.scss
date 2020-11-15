@@ -14,6 +14,14 @@
     margin: 40px 0 50px;
   }
 
+  &.accented {
+    background: $green;
+
+    &:hover {
+      background: $light-green;
+    }
+  }
+
   &:hover {
     border: 1px solid $button-hover-background;
     background: $button-hover-background;

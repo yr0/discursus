@@ -1,50 +1,27 @@
 .dsc-book-buy-block
-  = form_tag populate_path, remote: true do
-    = hidden_field_tag(:book_id, @book.id)
-    input#bookVariantsCheckbox.dsc-book-variants-checkbox type='checkbox'
-    - if @book.available_variants.present?
-      - @book.available_variants.keys.each.with_index do |name, i|
-        | <input class="dsc-book-variants-radio-#{name} dsc-book-variants-radio" #{ 'checked' if i.zero? }
-          id="bookVariantsRadio#{name}" type="radio"
-          name="variant" value="#{name}" />
-    .dsc-book-price-variants-block
-      - if @book.is_available?
-        - @book.available_variants.each do |name, price|
-          .dsc-books-variants-main-price-container.text-center class="dsc-variant-price-#{name}"
+  input#bookVariantsCheckbox.dsc-book-variants-checkbox type='checkbox'
+  - if @book.available_variants.present?
+    - @book.ordered_available_variants_array.each.with_index do |(name, price), i|
+      | <input class="dsc-book-variants-radio-#{name} dsc-book-variants-radio" #{ 'checked' if i.zero? }
+        id="bookVariantsRadio#{name}" type="radio"
+        name="variant_outside_form" value="#{name}" #{ 'data-is-free="1"' if price.zero? } />
+  .dsc-book-price-variants-block
+    - if @book.is_available?
+      - @book.ordered_available_variants_array.each do |name, price|
+        .dsc-books-variants-main-price-container.text-center class="dsc-variant-price-#{name}"
+          - if price.zero? && (name == 'ebook' || name = 'audio')
+            = render('books/buy/free_digital_book_form', book_variant: name)
+          - else
             span.dsc-book-numerical-price  = readable_price(price, false, false)
             | &nbsp;
             span.dsc-book-currency = t(Rails.configuration.default_currency)
             .dsc-book-selected-variant-desc.text-center
               = t("books.variant_selected.#{name}").html_safe
-        - if @book.available_variants.size > 1
-          .dsc-book-variants-label-container
-            label.dsc-book-select-other-variants [for='bookVariantsCheckbox'
-              title="#{t('books.you_can_select_other_variant')}"]
-              span.dsc-book-select-other-variants-text = t('books.available_variants')
-        - if settings.free_shipping_price_after.to_i > 0
-          .dsc-book-variants-shipping-info = raw t('orders.free_shipping', min_price: settings.free_shipping_price_after.to_i)
-        /.dsc-book-variants-shipping-info
-        /  = raw t('orders.free_shipping_august')
-      - else
-        h5 = t('books.unavailable')
-    .dsc-book-side-buttons-block
-      .dsc-book-other-variants
-        - @book.available_variants.to_h.each do |name, price|
-          label.dsc-book-variant-row class="dsc-book-variant-row-#{name}"  for="bookVariantsRadio#{name}"
-            / if you click any variant, the dropdown must close
-            .dsc-book-variant-label-with-icon class="dsc-book-variant-#{name}" = t("books.variants.#{name}")
-            .dsc-book-variant-price = readable_price(price, false)
-      .dsc-book-side-buttons
-        - if @book.is_available?
-          button.dsc-book-side-button.main type="submit"
-            = fa_icon('shopping-basket', text: t('buy'), class: 'action-icon')
-        - if @book.fragment_file.present?
-          = link_to @book.fragment_file.url, class: 'dsc-book-side-button' do
-            = fa_icon('file-o', text: t('books.read_fragment'), class: 'action-icon')
-        - if current_user.present?
-          = link_to toggle_favorite_book_path(@book), remote: true, class: 'dsc-book-side-button',
-                  id: 'bookToggleFavorite', method: :put do
-            - if current_user.favorite_book_ids.include?(@book.id)
-              = fa_icon('heart', text: t('favorited'), class: 'action-icon')
-            - else
-              = fa_icon('heart-o', text: t('add_to_favorites'), class: 'action-icon')
+      - if @book.available_variants.size > 1
+        .dsc-book-variants-label-container
+          label.dsc-book-select-other-variants [for='bookVariantsCheckbox'
+            title="#{t('books.you_can_select_other_variant')}"]
+            span.dsc-book-select-other-variants-text = t('books.available_variants')
+    - else
+      h5 = t('books.unavailable')
+  = render('books/buy/side_buttons_block')

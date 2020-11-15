@@ -16,7 +16,7 @@
               /        title: t('buy')
             = image_tag book.image.url(:large), class: 'dsc-book-card-image'
           .dsc-book-card-body
-            - if skip_price
+            - if skip_price || book.main_price.zero?
               .col-md-12.dsc-book-card-title-author-container
                 = limited_author_names(book.author_names)
                 h4.dsc-book-card-title = book.title

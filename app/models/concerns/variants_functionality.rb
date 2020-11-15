@@ -8,7 +8,7 @@
 # If we ever need to store the variants in different models, we can easily migrate to that structure leaving the json
 # field to save the database queries where possible.
 module VariantsFunctionality
-  VARIANT_TYPES = %w(paperback hardcover ebook audio).freeze
+  VARIANT_TYPES = %w(hardcover paperback ebook audio).freeze
   # Variants that can be bought only once
   VARIANTS_BOUGHT_ONCE = %w(ebook audio).freeze
   extend ActiveSupport::Concern
@@ -40,6 +40,10 @@ module VariantsFunctionality
     return 0.0 if available_variants.blank?
 
     available_variants[variant.to_s].to_f
+  end
+
+  def ordered_available_variants_array
+    VARIANT_TYPES.map { |name| next if available_variants[name].nil?; [name, available_variants[name]] }.compact
   end
 
   # Transforms hash received from form into expected format, removing variants that are not defined and those

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  before_action :load_and_validate_digital_book_download!, only: :download
+
   def index
     load_categories
     load_authors
@@ -18,6 +20,14 @@ class BooksController < ApplicationController
   def toggle_favorite
     @book = Book.available.friendly.find(params[:id])
     load_and_change_favorite if current_user.present?
+  end
+
+  def download
+    if params[:book_variant] == 'audio'
+      send_file @book.audio_file.path
+    else
+      send_file @book.ebook_file.path, filename: "#{@book.slug}.pdf", type: 'application/pdf'
+    end
   end
 
   private
@@ -48,5 +58,17 @@ class BooksController < ApplicationController
     favorite.assign_attributes(is_favorited: !favorite.is_favorited?) unless favorite.new_record?
     favorite.save
     @favorited = favorite.is_favorited?
+  end
+
+  def load_and_validate_digital_book_download!
+    @book = Book.find_by(id: params[:id])
+    variant_valid = @book.present? && 
+                    @book.variant_available?(params[:book_variant]) && 
+                    @book.price_of(params[:book_variant]).zero?
+
+    return if variant_valid && (Rails.configuration.disable_recaptcha || verify_recaptcha)
+
+    flash[:alert] = I18n.t('recaptcha_failed')
+    @book.present? ? redirect_to(book_path(@book.slug)) : redirect_to(root_path)
   end
 end
