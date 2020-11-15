@@ -1,0 +1,10 @@
+.dsc-margin-b-large
+  h4
+    strong= t('books.for_free')
+  h5= t("books.get_digital_book.#{book_variant}")
+  = form_tag download_book_path(@book.id) do
+    = hidden_field_tag(:book_variant, book_variant)
+    .dsc-centered-recaptcha
+      = recaptcha_tags
+    button.dsc-button.accented.dsc-margin-t type="submit"
+      = fa_icon('download', text: t('download'), class: 'action-icon')

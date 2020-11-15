@@ -38,3 +38,7 @@ uk:
     read_fragment: Читати уривок
     author: Автор
     author_and_others: "%{author_name} та ін."
+    for_free: Безкоштовно
+    get_digital_book: 
+      ebook: отримати електронну книгу
+      audio: отримати аудіокнигу

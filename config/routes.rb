@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :books, only: %i(index show) do
     put 'toggle_favorite', on: :member
+    post 'download', on: :member
   end
   resources :authors, only: %i(index show)
   resources :articles, only: %i(index show)
