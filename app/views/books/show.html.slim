@@ -52,7 +52,13 @@
       .dsc-book-description.dsc-from-ckeditor = raw @book.description
       = render('shared/share_block', title: @book.title, link: book_url(@book))
     .col-sm-3.col-sm-offset-0.col-xs-12.dsc-book-buy-container
-      = render 'books/buy'
+      - if Book::WORKBOOKS_UNAVAILABLE_FOR_DOWNLOAD.include?(@book.id)
+        .dsc-book-in-parts-block.dsc-margin-b-large
+          h4
+            strong= t('books.book_available_in_parts')
+          h5= t('books.book_available_in_parts_details')
+      - else
+        = render 'books/buy'
 
   .row
     .col-xs-12.dsc-show-page-subheader

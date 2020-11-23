@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+  WORKBOOKS_UNAVAILABLE_FOR_DOWNLOAD = [129, 126, 127, 128, 130].freeze
+
   include VariantsFunctionality # before_save, validate
 
   validates :title, presence: true, length: { minimum: 1, maximum: 250 }
