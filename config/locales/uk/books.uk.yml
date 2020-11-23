@@ -42,3 +42,5 @@ uk:
     get_digital_book: 
       ebook: отримати електронну книгу
       audio: отримати аудіокнигу
+    book_available_in_parts: Цю книгу можна завантажити частинами
+    book_available_in_parts_details: Відкриті для завантаження частини перелічені в описі книги 
