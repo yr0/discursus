@@ -9,7 +9,7 @@
     - if @book.is_available?
       - @book.ordered_available_variants_array.each do |name, price|
         .dsc-books-variants-main-price-container.text-center class="dsc-variant-price-#{name}"
-          - if price.zero? && (name == 'ebook' || name = 'audio')
+          - if price.zero? && (name == 'ebook' || name == 'audio')
             = render('books/buy/free_digital_book_form', book_variant: name)
           - else
             span.dsc-book-numerical-price  = readable_price(price, false, false)
