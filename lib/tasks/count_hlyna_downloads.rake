@@ -15,8 +15,8 @@ task count_hlyna_downloads: :environment do
     end
   end
 
-  log = File.read('./tmp/discursus_access.log.1')
-  hlyna_csv_file = './log/hlyna_downloads.csv'
+  log = File.read('/var/log/nginx/discursus_access.log.1')
+  hlyna_csv_file = Rails.root.join('log/hlyna_downloads.csv')
   csv = CSV.read(hlyna_csv_file) rescue [[]]
   previous_counts = csv[1..-1].map { |id, _, count| [id, count.to_i] }.to_h
   
