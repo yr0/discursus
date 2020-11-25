@@ -2,7 +2,7 @@
 
 set :output, 'log/whenever.log'
 
-every 4.hours do
+every 30.minutes do
   rake 'sunspot:reindex'
 end
 
