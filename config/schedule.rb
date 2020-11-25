@@ -6,9 +6,6 @@ every 4.hours do
   rake 'sunspot:reindex'
 end
 
-every 1.day, at: '11:15 pm' do
-  command 'sudo cp /var/log/nginx/discursus_access.log.1 /home/deploy/discursus/shared/tmp/'
-  command 'sudo chown deploy:deploy /home/deploy/discursus/shared/tmp/discursus_access.log.1'
+every 1.day, at: '8am' do
   rake 'count_hlyna_downloads'
-  command 'rm /home/deploy/discursus/shared/tmp/discursus_access.log.1'
 end
