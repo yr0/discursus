@@ -7,8 +7,9 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 1, maximum: 250 }
   validates :pages_amount, presence: true, numericality: { greater_than: 0 }
-  validates :description, :cover_designer, :translator, :age_recommendations, :authors_within_anthology,
+  validates :cover_designer, :translator, :age_recommendations, :authors_within_anthology,
             length: { maximum: 10_000 }
+  validates :description, length: { maximum: 100_000 }
   validates :weight, :dimensions, :isbn, length: { maximum: 1000 }
   validates :published_at, presence: true
 
