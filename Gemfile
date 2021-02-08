@@ -35,7 +35,7 @@ gem 'kaminari', '~> 1.2'
 # ajax flash notifications
 gem 'gritter', '~> 1.2'
 # uploads
-gem 'carrierwave', '~> 0.11'
+gem 'carrierwave', '~> 1.3'
 gem 'mini_magick', '~> 4.9'
 # rich text editor
 gem 'ckeditor', '~> 4.2'
