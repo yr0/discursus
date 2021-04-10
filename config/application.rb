@@ -10,6 +10,8 @@ Bundler.require(*Rails.groups)
 
 module Discursus
   class Application < Rails::Application
+    config.load_defaults 5.2
+
     config.i18n.available_locales = %i(uk en)
     config.i18n.default_locale = :uk
     config.i18n.fallbacks = [:en]

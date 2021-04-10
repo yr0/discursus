@@ -7,11 +7,12 @@ module AdminPanel
     # Provided data is completely isolated from user input
     # rubocop:disable Rails/OutputSafety
     def admin_navigation
-      content_tag :ul, class: 'sidebar-menu' do
+      tag :ul, class: 'sidebar-menu' do
         NAVIGATION.each do |item_name|
-          concat content_tag(:li, link_to(I18n.t("admin_panel.#{item_name}.title").gsub(' ', '&nbsp;').html_safe,
-                                          url_for([:admin_panel, index_resource(item_name)])),
-                             class: within_controller?(item_name) ? 'active' : '')
+          concat tag(:li,
+                     link_to(I18n.t("admin_panel.#{item_name}.title").gsub(' ', '&nbsp;').html_safe,
+                             url_for([:admin_panel, index_resource(item_name)])),
+                     class: within_controller?(item_name) ? 'active' : '')
         end
       end
     end

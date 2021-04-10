@@ -62,13 +62,17 @@ class BooksController < ApplicationController
 
   def load_and_validate_digital_book_download!
     @book = Book.find_by(id: params[:id])
-    variant_valid = @book.present? && 
-                    @book.variant_available?(params[:book_variant]) && 
-                    @book.price_of(params[:book_variant]).zero?
-
-    return if variant_valid && (Rails.configuration.disable_recaptcha || verify_recaptcha)
+    return if digital_book_valid_for_download?
 
     flash[:alert] = I18n.t('recaptcha_failed')
     @book.present? ? redirect_to(book_path(@book.slug)) : redirect_to(root_path)
+  end
+
+  def digital_book_valid_for_download?
+    variant_valid = @book.present? &&
+                    @book.variant_available?(params[:book_variant]) &&
+                    @book.price_of(params[:book_variant]).zero?
+
+    variant_valid && (Rails.configuration.disable_recaptcha || verify_recaptcha)
   end
 end

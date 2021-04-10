@@ -1,21 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '2.4.9'
+ruby '2.7.2'
 
 # use postgres as DB
 gem 'pg', '~> 0.18'
 
-gem 'rails', '~> 5.0.5'
+gem 'rails', '~> 5.2.5'
 gem 'puma', '~> 3.12'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 4.2'
 gem 'jquery-ui-rails', '~> 6.0'
-gem 'turbolinks', '5.0.1'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'turbolinks'
 
 # use rspec for testing
 gem 'rspec-rails'
@@ -25,7 +21,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails', '~> 3.1'
 gem 'bootstrap-sass', '~> 3.4'
-gem 'font-awesome-rails', '~> 4.6'
+gem 'font-awesome-rails', '~> 4.7'
 gem 'autoprefixer-rails', '~> 6.4'
 gem 'simple_form', '~> 5.0'
 # nested model forms
@@ -42,7 +38,7 @@ gem 'ckeditor', '~> 4.2'
 # ordering records
 gem 'acts_as_list', '~> 0.8'
 # tagging
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on'
 # full text search with apache solr
 gem 'sunspot_rails', '~> 2.3.0'
 # finite state machines
@@ -73,8 +69,8 @@ gem 'omniauth-facebook', '4.0.0'
 gem 'omniauth-google-oauth2'
 
 # env load and process control
-gem 'dotenv', '~> 2.1'
-gem 'dotenv-rails', '~> 2.1'
+gem 'dotenv', '~> 2.7'
+gem 'dotenv-rails', '~> 2.7'
 gem 'foreman'
 
 # use Sentry for tracking errors
@@ -84,7 +80,7 @@ gem 'whenever', require: false
 
 group :test do
   gem 'sunspot_test'
-  gem 'database_cleaner'
+  gem 'database_cleaner-active_record'
   gem 'db-query-matchers'
 end
 

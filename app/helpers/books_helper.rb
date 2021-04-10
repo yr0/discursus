@@ -26,11 +26,11 @@ module BooksHelper
     return if author_names.blank?
 
     if author_names.size > 1
-      content_tag(:div, title: author_names.join(', ')) do
+      tag(:div, title: author_names.join(', ')) do
         t('books.author_and_others', author_name: author_names.first)
       end
     else
-      content_tag(:div) { author_names.first }
+      tag(:div) { author_names.first }
     end
   end
 end

@@ -120,7 +120,7 @@ describe OrderMailer, type: :mailer do
 
   describe '#digital_books' do
     let!(:order) do
-      create(:order, :paid_for, :digital_and_physical)
+      create(:order, :digital_and_physical).tap(&:submit!).tap(&:pay!)
     end
 
     it 'enqueues mail for digital books order' do

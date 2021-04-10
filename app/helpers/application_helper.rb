@@ -22,21 +22,21 @@ module ApplicationHelper
   # rubocop:disable Rails/OutputSafety, Metrics/AbcSize, Metrics/MethodLength
   # Provided data is completely isolated from user input
   def site_navigation(css_class_infix, no_turbolinks = false)
-    content_tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
+    tag :ul, class: "dsc-#{css_class_infix}-nav-items" do
       if current_admin.present?
-        concat content_tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
-                                        class: "dsc-#{css_class_infix}-nav-link",
-                                        style: 'color: #47a378', 'data-turbolinks': false),
-                           class: "dsc-#{css_class_infix}-nav-item")
+        concat tag(:li, link_to(I18n.t('nav.admin_panel'), admin_panel_path,
+                                class: "dsc-#{css_class_infix}-nav-link",
+                                style: 'color: #47a378', 'data-turbolinks': false),
+                   class: "dsc-#{css_class_infix}-nav-item")
       end
 
       NAVIGATION.each do |item_name, route|
         link_class = "dsc-#{css_class_infix}-nav-link"
         link_class += ' active' if item_name.to_s == controller_name
-        concat content_tag(:li,
-                           link_to(I18n.t("nav.#{item_name}").gsub(' ', '&nbsp;').html_safe, url_for(route),
-                                   class: link_class, 'data-turbolinks': !no_turbolinks),
-                           class: "dsc-#{css_class_infix}-nav-item")
+        concat tag(:li,
+                   link_to(I18n.t("nav.#{item_name}").gsub(' ', '&nbsp;').html_safe, url_for(route),
+                           class: link_class, 'data-turbolinks': !no_turbolinks),
+                   class: "dsc-#{css_class_infix}-nav-item")
       end
     end
   end
@@ -70,10 +70,10 @@ module ApplicationHelper
 
     available_variants = available_variants.keys unless available_variants.is_a?(Array)
     available_variants.map do |variant|
-      content_tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),
-                  class: 'dsc-book-card-variant-item has-tooltipster',
-                  title: bought ? t("personal.bookshelf.bought_as.#{variant}") : t("books.available.#{variant}"),
-                  'data-tooltipster-side': 'bottom')
+      tag(:li, fa_icon("#{VARIANTS_ICONS[variant.to_sym]} 2x"),
+          class: 'dsc-book-card-variant-item has-tooltipster',
+          title: bought ? t("personal.bookshelf.bought_as.#{variant}") : t("books.available.#{variant}"),
+          'data-tooltipster-side': 'bottom')
     end.uniq.join.html_safe
   end
   # rubocop:enable all

@@ -15,10 +15,11 @@ class Order < ApplicationRecord
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
   before_validation :try_to_fetch_promo_code, :set_default_payment_method
-  after_save :recalculate_total, if: -> { raw_promo_code.present? && raw_promo_code_changed? && promo_code_id.present? }
+  after_save :recalculate_total,
+             if: -> { raw_promo_code.present? && saved_change_to_raw_promo_code? && promo_code_id.present? }
 
   belongs_to :customer, polymorphic: true
-  belongs_to :promo_code
+  belongs_to :promo_code, optional: true
   has_many :line_items, dependent: :destroy
   has_many :books, through: :line_items
   has_many :tokens_for_digital_books, dependent: :destroy
