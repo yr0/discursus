@@ -6,7 +6,7 @@ ruby '2.7.2'
 gem 'pg', '~> 0.18'
 
 gem 'rails', '~> 5.2.5'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 4.2'
@@ -31,10 +31,10 @@ gem 'kaminari', '~> 1.2'
 # ajax flash notifications
 gem 'gritter', '~> 1.2'
 # uploads
-gem 'carrierwave', '~> 0.11'
+gem 'carrierwave', '~> 1.3.2'
 gem 'mini_magick', '~> 4.9'
 # rich text editor
-gem 'ckeditor', '~> 4.2'
+gem 'ckeditor', '~> 5.1'
 # ordering records
 gem 'acts_as_list', '~> 0.8'
 # tagging
@@ -64,7 +64,7 @@ gem 'redis-namespace'
 # auth
 gem 'devise', '~> 4.7'
 gem 'cancancan', '~> 1.15'
-gem 'recaptcha', '~> 4.1', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'omniauth-facebook', '4.0.0'
 gem 'omniauth-google-oauth2'
 

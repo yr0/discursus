@@ -19,4 +19,4 @@ Rails.application.config.assets.paths << Rails.root.join('app/assets/fonts')
 
 # add fonts to assets path
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
-Rails.application.config.assets.precompile += %w(home.scss markerclusterer.js ckeditor/*)
+Rails.application.config.assets.precompile += %w(home.scss markerclusterer.js ckeditor/config.js)

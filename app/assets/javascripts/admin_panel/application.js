@@ -5,7 +5,6 @@
 //= require jquery-ui/i18n/datepicker-uk
 //= require bootstrap-sprockets
 //= require adminlte/adminlte.min
-//= require ckeditor/init
 //= require gritter
 //= require selectize.min
 //= require sweetalert2.min
@@ -32,16 +31,6 @@
 
         $.AdminLTE.layout.activate();
 
-        // reload CKEditor windows
-        $('.input-ckeditor').each(function() {
-            var ckeditorId =  $(this).attr('id');
-            if (CKEDITOR.instances[ckeditorId]) {
-                CKEDITOR.remove(CKEDITOR.instances[ckeditorId]);
-            }
-            if($(this).css('visibility') != 'hidden') {
-                CKEDITOR.replace(ckeditorId);
-            }
-        });
 
         $("input.datepicker").each(function() {
             $(this).datepicker({
