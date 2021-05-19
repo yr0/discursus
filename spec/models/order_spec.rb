@@ -69,11 +69,13 @@ describe Order do
       end
 
       it 'launches the method after save if raw code changed and promo id is present' do
-        promo = create(:promo_code)
-        allow_any_instance_of(Order).to receive(:recalculate_total)
-        order = create(:order)
+        promo = create(:promo_code, discount_percent: 20)
+        order = create(:order, :with_line_items)
+        old_total = order.total.to_f
+
         order.update(raw_promo_code: promo.code)
-        expect(order).to have_received(:recalculate_total)
+        expect(old_total).not_to eq 0
+        expect(order.reload.total.to_f).to eq(old_total * 0.8)
       end
 
       it 'does not launch the method after save if raw code changed but promo id is not present' do

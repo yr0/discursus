@@ -43,7 +43,11 @@ module VariantsFunctionality
   end
 
   def ordered_available_variants_array
-    VARIANT_TYPES.map { |name| next if available_variants[name].nil?; [name, available_variants[name]] }.compact
+    VARIANT_TYPES.map do |name|
+      next if available_variants[name].nil?
+
+      [name, available_variants[name]]
+    end.compact
   end
 
   # Transforms hash received from form into expected format, removing variants that are not defined and those

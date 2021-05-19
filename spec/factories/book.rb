@@ -18,7 +18,9 @@ FactoryGirl.define do
     end
 
     trait :with_categories do
-      categories { [create(:category)] }
+      after(:create) do |book|
+        book.category_list.add('Some category')
+      end
     end
 
     VariantsFunctionality::VARIANT_TYPES.each do |variant_kind|

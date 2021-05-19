@@ -21,14 +21,17 @@ FactoryGirl.define do
     end
 
     trait :with_line_items do
-      after(:build) do |order, evaluator|
-        order.line_items = [create(:line_item, evaluator.book_variant.to_sym)]
+      after(:create) do |order, evaluator|
+        create(:line_item, evaluator.book_variant.to_sym, order_id: order.id)
+        order.recalculate_total
       end
     end
 
     trait :digital_and_physical do
-      after(:build) do |order|
-        order.line_items = [create(:line_item, :hardcover), create(:line_item, :ebook)]
+      after(:create) do |order|
+        create(:line_item, :hardcover, order_id: order.id)
+        create(:line_item, :ebook, order_id: order.id)
+        order.recalculate_total
       end
     end
 
