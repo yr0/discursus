@@ -3,6 +3,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # TODO: Fix the root cause, this is a workaround
+  config.action_controller.default_protect_from_forgery = false
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
