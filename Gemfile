@@ -62,8 +62,9 @@ gem 'redis-namespace'
 gem 'devise', '~> 4.8'
 gem 'cancancan', '~> 1.15'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
+gem 'omniauth', '~> 1'
 gem 'omniauth-facebook', '4.0.0'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '0.8.2'
 gem 'omniauth-rails_csrf_protection'
 
 # env load and process control
