@@ -31,7 +31,7 @@ Metrics/BlockLength:
   Max: 30
   Exclude:
     - 'spec/**/*'
-    - 'config/routes.rb'
+    - 'config/**/*'
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:

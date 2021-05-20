@@ -5,16 +5,13 @@ ruby '2.7.2'
 # use postgres as DB
 gem 'pg', '~> 0.18'
 
-gem 'rails', '~> 5.2.5'
+gem 'rails', '~> 5.2.6'
 gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 4.2'
 gem 'jquery-ui-rails', '~> 6.0'
 gem 'turbolinks'
-
-# use rspec for testing
-gem 'rspec-rails'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -67,6 +64,7 @@ gem 'cancancan', '~> 1.15'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'omniauth-facebook', '4.0.0'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 
 # env load and process control
 gem 'dotenv', '~> 2.7'
@@ -79,6 +77,8 @@ gem 'sentry-raven'
 gem 'whenever', require: false
 
 group :test do
+  gem 'rspec-rails'
+
   gem 'sunspot_test'
   gem 'database_cleaner-active_record'
   gem 'db-query-matchers'
