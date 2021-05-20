@@ -4,10 +4,10 @@
     = t('through')
     |&nbsp;
     = link_to fa_stacked_icon('facebook inverse', base: 'square', class: 'fa-lg'),
-            user_facebook_omniauth_authorize_path, title: 'Facebook'
+            user_facebook_omniauth_authorize_path, title: 'Facebook', method: :post
     |&nbsp;
     = link_to fa_stacked_icon('google inverse', base: 'circle', class: 'fa-lg'),
-            user_google_oauth2_omniauth_authorize_path, title: 'Google'
+            user_google_oauth2_omniauth_authorize_path, title: 'Google', method: :post
   h3.text-center
     = t('or')
   - if flash[:alert].present?

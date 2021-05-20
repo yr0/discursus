@@ -11,7 +11,7 @@ module AdminPanel
         NAVIGATION.each do |item_name|
           concat tag.li(
             link_to(I18n.t("admin_panel.#{item_name}.title").gsub(' ', '&nbsp;').html_safe,
-                    url_for([:admin_panel, index_resource(item_name)])),
+                    url_for([:admin_panel, index_resource(item_name).to_sym])),
             class: within_controller?(item_name) ? 'active' : ''
           )
         end
