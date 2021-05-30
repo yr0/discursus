@@ -44,12 +44,16 @@ describe Payment do
       expect { subject }.to change { payment.reload.status }.from('initiated').to('failed')
     end
 
-    it 'does not change order balance or status' do
-      expect { subject }.not_to(change { [order.reload.balance, order.status].join })
+    it 'does not change order balance' do
+      expect { subject }.not_to(change { order.reload.balance })
     end
 
     it 'persists the failure reason' do
       expect { subject }.to change { payment.reload.failure_reason&.reason }.from(nil).to(failure_reason)
+    end
+
+    it 'transitions order to pending state' do
+      expect { subject }.to change { payment.order.reload.status }.from('submitted').to('pending')
     end
 
     context 'when payment cannot transition' do

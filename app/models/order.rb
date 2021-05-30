@@ -14,9 +14,7 @@ class Order < ApplicationRecord
   enum payment_method: PAYMENT_METHODS.map { |pm| [pm, pm] }.to_h
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
-  before_validation :try_to_fetch_promo_code, :set_default_payment_method
-  after_save :recalculate,
-             if: -> { raw_promo_code.present? && saved_change_to_raw_promo_code? && promo_code_id.present? }
+  before_validation :set_default_payment_method
 
   belongs_to :customer, polymorphic: true
   belongs_to :promo_code, optional: true
@@ -58,8 +56,7 @@ class Order < ApplicationRecord
 
       update!(
         total_no_promo: line_items_total,
-        total: total_with_promo_discounts(line_items_total),
-        raw_promo_code: nil
+        total: total_with_promo_discounts(line_items_total)
       )
     else
       update!(total_no_promo: 0.0, total: 0.0, raw_promo_code: nil)
@@ -84,21 +81,34 @@ class Order < ApplicationRecord
     item
   end
 
+  def apply_promo_code(code)
+    self.promo_code = PromoCode.fetch_by_code(code)
+    validate_promo_code
+
+    save! && recalculate if errors.blank?
+  end
+
   private
 
   def total_with_promo_discounts(amount)
-    return amount if promo_code.blank?
+    return amount if promo_code.nil?
 
     promo_code.apply_discount(amount)
-  end
-
-  def try_to_fetch_promo_code
-    return if raw_promo_code&.strip.blank?
-
-    self.promo_code = PromoCode.fetch_by_code(raw_promo_code)
   end
 
   def set_default_payment_method
     self.payment_method ||= AVAILABLE_PAYMENT_METHODS.first
   end
+
+  # rubocop:disable Metrics/AbcSize
+  def validate_promo_code
+    if promo_code.blank?
+      errors.add(:base, I18n.t('errors.messages.promo_code.blank'))
+    elsif promo_code.expired?
+      errors.add(:base, I18n.t('errors.messages.promo_code.expired'))
+    elsif promo_code.exhausted?
+      errors.add(:base, I18n.t('errors.messages.promo_code.exhausted'))
+    end
+  end
+  # rubocop:enable all
 end

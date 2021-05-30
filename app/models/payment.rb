@@ -7,7 +7,7 @@ class Payment < ApplicationRecord
   has_one :failure_reason, dependent: :destroy
 
   validates :amount, numericality: { greater_than: 0 }
-  validates :payment_type, inclusion: { in: PAYMENT_METHODS }
+  validates :payment_method, inclusion: { in: PAYMENT_METHODS }
 
   include AASM
 
@@ -20,7 +20,7 @@ class Payment < ApplicationRecord
       transitions from: :initiated, to: :succeeded
     end
 
-    event :fail, before: ->(reason) { create_failure_reason(reason: reason) } do
+    event :fail, before: ->(reason) { create_failure_reason(reason: reason) && order.reopen! } do
       transitions from: :initiated, to: :failed
     end
   end

@@ -18,7 +18,9 @@ module AdminPanel
 
     # For orders that are to be paid in cash - submit marks the order having been paid
     def acknowledge_payment
-      @order.pay!
+      @order.transaction do
+        @order.payments.find_or_create_by(status: 'initiated', amount: @order.total, payment_method: 'cash').succeed!
+      end
     end
 
     def complete

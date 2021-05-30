@@ -37,6 +37,10 @@ module OrdersFunctionality
         event :cancel do
           transitions to: :canceled
         end
+
+        event :reopen do
+          transitions from: :submitted, to: :pending
+        end
       end
     end
 

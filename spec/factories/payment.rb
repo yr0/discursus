@@ -5,6 +5,6 @@ FactoryGirl.define do
     order
 
     amount { 50.0 }
-    payment_type { 'card' }
+    payment_method { 'card' }
   end
 end

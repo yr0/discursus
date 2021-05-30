@@ -28,8 +28,9 @@ describe Wayforpay do
   end
 
   describe '.prepare_params_from' do
-    subject(:prepare_params) { described_class.prepare_params_from(order) }
+    subject(:prepare_params) { described_class.prepare_params_from(payment) }
 
+    let(:payment) { create(:payment, order: order, amount: order.total) }
     let(:order) { create(:order, :submitted) }
 
     it 'generates correct params from merchant config' do
@@ -42,9 +43,9 @@ describe Wayforpay do
 
     it 'generates correct params from order itself' do
       expect(prepare_params).to include(
-        'orderReference' => "DSC-#{order.id}",
-        'orderDate' => order.updated_at.to_i,
-        'amount' => order.total,
+        'orderReference' => "PAY-#{payment.id}",
+        'orderDate' => payment.created_at.to_i,
+        'amount' => payment.amount,
         'clientEmail' => order.email,
         'clientPhone' => order.phone
       )
@@ -69,7 +70,7 @@ describe Wayforpay do
     describe 'adding signature' do
       let(:signature_parts) do
         [
-          merchant_account, merchant_domain, "DSC-#{order.id}", order.updated_at.to_i, order.total,
+          merchant_account, merchant_domain, "PAY-#{payment.id}", payment.created_at.to_i, payment.amount,
           acceptable_currency, order.line_items.map { |item| item.book.title }, order.line_items.pluck(:quantity),
           order.line_items.pluck(:price)
         ].flatten
@@ -137,7 +138,7 @@ describe Wayforpay do
 
       it 'raises an error' do
         expect { subject }
-          .to raise_error(described_class::ResponseOrderDataMismatchError, a_kind_of(String))
+          .to raise_error(described_class::ResponseDataMismatchError, a_kind_of(String))
       end
     end
 
@@ -146,7 +147,7 @@ describe Wayforpay do
 
       it 'raises an error' do
         expect { subject }
-          .to raise_error(described_class::ResponseOrderDataMismatchError, a_kind_of(String))
+          .to raise_error(described_class::ResponseDataMismatchError, a_kind_of(String))
       end
     end
   end
@@ -214,6 +215,83 @@ describe Wayforpay do
 
       it_behaves_like 'handling non-success response'
     end
+
+    context 'when the response is for payment' do
+      let(:payment) { create(:payment, order: order, amount: order.total) }
+
+      let(:params_order_reference) { "PAY-#{payment.id}" }
+      let(:params_amount) { payment.amount }
+
+      it_behaves_like 'verifying wayforpay response'
+
+      it 'transitions order to paid_for state' do
+        expect { process_and_produce_message }.to change { order.reload.status }.from('submitted').to('paid_for')
+      end
+
+      it 'updates the order balance' do
+        expect { process_and_produce_message }.to change { order.reload.balance }.from(payment.amount).to(0)
+      end
+
+      it 'updates the payment status' do
+        expect { process_and_produce_message }.to change { payment.reload.status }.from('initiated').to('succeeded')
+      end
+
+      it 'generates correct message in response' do
+        expect(process_and_produce_message).to include(
+          'orderReference' => params_order_reference,
+          'status' => 'accept',
+          'time' => be_an(Integer),
+          'signature' => be_a(String)
+        )
+      end
+
+      shared_examples_for 'handling non-success response' do
+        before do
+          allow(Rails.logger).to receive(:error)
+        end
+
+        it 'updates the payment failure reason' do
+          expect { process_and_produce_message }.to change { payment.reload.failure_reason&.reason }.from(nil).to(
+            [params_transaction_status, params_reason, params_reason_code].join(';')
+          )
+        end
+
+        it 'transitions payment to failed state' do
+          expect { process_and_produce_message }.to change { payment.reload.status }.from('initiated').to('failed')
+        end
+
+        it 'transitions order to pending state' do
+          expect { process_and_produce_message }.to change { order.reload.status }.from('submitted').to('pending')
+        end
+
+        it 'generates correct message in response' do
+          expect(process_and_produce_message).to include(
+            'orderReference' => params_order_reference,
+            'status' => 'accept',
+            'time' => be_an(Integer),
+            'signature' => be_a(String)
+          )
+        end
+
+        it 'logs an error' do
+          process_and_produce_message
+
+          expect(Rails.logger).to have_received(:error).with(/Non-success wayforpay/)
+        end
+      end
+
+      context 'when transactionStatus is not approved' do
+        let(:params_transaction_status) { 'rejected' }
+
+        it_behaves_like 'handling non-success response'
+      end
+
+      context 'when reason is not Ok' do
+        let(:params_reason) { 'Nok' }
+
+        it_behaves_like 'handling non-success response'
+      end
+    end
   end
 
   describe '.was_payment_successful?' do
@@ -236,6 +314,29 @@ describe Wayforpay do
       let(:params_reason) { 'Nok' }
 
       it { is_expected.to eq false }
+    end
+
+    context 'when the response is for payment' do
+      let(:payment) { create(:payment, order: order, amount: order.total) }
+
+      let(:params_order_reference) { "PAY-#{payment.id}" }
+      let(:params_amount) { payment.amount }
+
+      it_behaves_like 'verifying wayforpay response'
+
+      it { is_expected.to eq true }
+
+      context 'when transactionStatus is not approved' do
+        let(:params_transaction_status) { 'rejected' }
+
+        it { is_expected.to eq false }
+      end
+
+      context 'when reason is not Ok' do
+        let(:params_reason) { 'Nok' }
+
+        it { is_expected.to eq false }
+      end
     end
   end
 end

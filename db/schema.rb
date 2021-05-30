@@ -169,17 +169,18 @@ ActiveRecord::Schema.define(version: 2021_05_29_123607) do
   end
 
   create_table "payment_failure_reasons", force: :cascade do |t|
-    t.bigint "payment_id"
-    t.string "reason", limit: 1000
+    t.bigint "payment_id", null: false
+    t.string "reason", limit: 1000, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["payment_id"], name: "index_payment_failure_reasons_on_payment_id"
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "order_id"
-    t.decimal "amount", precision: 8, scale: 2
-    t.string "status", limit: 30, default: "initiated"
-    t.string "payment_type", limit: 30
+    t.bigint "order_id", null: false
+    t.decimal "amount", precision: 8, scale: 2, null: false
+    t.string "status", limit: 30, default: "initiated", null: false
+    t.string "payment_method", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id", "status"], name: "index_payments_on_order_id_and_status"
