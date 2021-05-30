@@ -10,7 +10,7 @@ module AdminPanel
     end
 
     def index
-      @orders = Order.where.not(aasm_state: %i(pending completed canceled))
+      @orders = Order.where.not(status: %i(pending completed canceled))
                      .rewhere(filter_query).order(submitted_at: :desc).page(params[:page])
     end
 
@@ -32,12 +32,12 @@ module AdminPanel
     private
 
     def filter_query
-      filter_query = {}
-      if params[:aasm_state].present? &&
-         Order.aasm.state_machine.states.map(&:name).include?(params[:aasm_state].to_sym)
-        filter_query[:aasm_state] = params[:aasm_state]
+      if params[:status].present? &&
+         Order.aasm.state_machine.states.map(&:name).include?(params[:status].to_sym)
+        { status: params[:status] }
+      else
+        {}
       end
-      filter_query
     end
   end
 end

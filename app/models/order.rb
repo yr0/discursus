@@ -15,7 +15,7 @@ class Order < ApplicationRecord
 
   include OrdersFunctionality # before_create, state machine callbacks, validations
   before_validation :try_to_fetch_promo_code, :set_default_payment_method
-  after_save :recalculate_total,
+  after_save :recalculate,
              if: -> { raw_promo_code.present? && saved_change_to_raw_promo_code? && promo_code_id.present? }
 
   belongs_to :customer, polymorphic: true
@@ -23,6 +23,7 @@ class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
   has_many :books, through: :line_items
   has_many :tokens_for_digital_books, dependent: :destroy
+  has_many :payments, dependent: :restrict_with_error
 
   def requires_shipping?
     physical?
@@ -40,12 +41,28 @@ class Order < ApplicationRecord
     [city, street].reject(&:blank?).join('. ')
   end
 
+  def recalculate
+    with_lock do
+      recalculate_total
+      recalculate_balance
+    end
+  end
+
+  def recalculate_balance
+    update!(balance: total - payments.succeeded.sum(:amount))
+  end
+
   def recalculate_total
     if line_items.any?
       line_items_total = line_items.pluck(:price, :quantity).map { |pq| pq.reduce(&:*) }.reduce(&:+)
-      update(total_no_promo: line_items_total, total: total_with_promo_discounts(line_items_total), raw_promo_code: nil)
+
+      update!(
+        total_no_promo: line_items_total,
+        total: total_with_promo_discounts(line_items_total),
+        raw_promo_code: nil
+      )
     else
-      update(total_no_promo: 0.0, total: 0.0, raw_promo_code: nil)
+      update!(total_no_promo: 0.0, total: 0.0, raw_promo_code: nil)
     end
   end
 

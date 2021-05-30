@@ -160,7 +160,7 @@ describe Wayforpay do
     it_behaves_like 'verifying wayforpay response'
 
     it 'transitions order to paid_for state' do
-      expect { process_and_produce_message }.to change { order.reload.aasm_state }.from('submitted').to('paid_for')
+      expect { process_and_produce_message }.to change { order.reload.status }.from('submitted').to('paid_for')
     end
 
     it 'generates correct message in response' do
@@ -184,7 +184,7 @@ describe Wayforpay do
       end
 
       it 'transitions order to failed state' do
-        expect { process_and_produce_message }.to change { order.reload.aasm_state }.from('submitted').to('failed')
+        expect { process_and_produce_message }.to change { order.reload.status }.from('submitted').to('failed')
       end
 
       it 'generates correct message in response' do

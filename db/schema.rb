@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_114035) do
+ActiveRecord::Schema.define(version: 2021_05_29_123607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,12 +142,10 @@ ActiveRecord::Schema.define(version: 2021_04_10_114035) do
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
     t.string "customer_type"
-    t.string "aasm_state"
+    t.string "status"
     t.text "failure_comment"
     t.decimal "total", precision: 8, scale: 2
     t.string "payment_method"
-    t.string "external_payment_id"
-    t.decimal "external_commissions", precision: 8, scale: 2
     t.string "phone"
     t.string "email"
     t.string "full_name"
@@ -166,7 +164,25 @@ ActiveRecord::Schema.define(version: 2021_04_10_114035) do
     t.string "raw_promo_code"
     t.integer "promo_code_id"
     t.decimal "total_no_promo", precision: 8, scale: 2
+    t.decimal "balance", precision: 8, scale: 2, default: "0.0"
     t.index ["promo_code_id"], name: "index_orders_on_promo_code_id"
+  end
+
+  create_table "payment_failure_reasons", force: :cascade do |t|
+    t.bigint "payment_id"
+    t.string "reason", limit: 1000
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "order_id"
+    t.decimal "amount", precision: 8, scale: 2
+    t.string "status", limit: 30, default: "initiated"
+    t.string "payment_type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id", "status"], name: "index_payments_on_order_id_and_status"
   end
 
   create_table "promo_codes", force: :cascade do |t|

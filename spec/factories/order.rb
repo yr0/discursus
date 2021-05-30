@@ -23,7 +23,7 @@ FactoryGirl.define do
     trait :with_line_items do
       after(:create) do |order, evaluator|
         create(:line_item, evaluator.book_variant.to_sym, order_id: order.id)
-        order.recalculate_total
+        order.recalculate
       end
     end
 
@@ -31,7 +31,7 @@ FactoryGirl.define do
       after(:create) do |order|
         create(:line_item, :hardcover, order_id: order.id)
         create(:line_item, :ebook, order_id: order.id)
-        order.recalculate_total
+        order.recalculate
       end
     end
 

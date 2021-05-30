@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :line_items, through: :orders
 
   bought_books_scope = lambda do
-    where(orders: { aasm_state: :completed })
+    where(orders: { status: :completed })
       .select('DISTINCT ON (books.id) books.*, array_agg(DISTINCT line_items.variant) AS bought_variants')
       .reorder('books.id ASC')
       .group('orders.updated_at, books.id')
@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :bought_books, bought_books_scope, through: :line_items, source: :book
 
   def last_order
-    orders.where.not(aasm_state: :pending).order(created_at: :desc).first
+    orders.where.not(status: :pending).order(created_at: :desc).first
   end
 
   class << self

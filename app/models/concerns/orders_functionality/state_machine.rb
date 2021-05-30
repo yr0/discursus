@@ -7,7 +7,7 @@ module OrdersFunctionality
     included do
       include AASM
 
-      aasm do
+      aasm(column: :status) do
         state :pending, initial: true
         state :submitted
         state :paid_for
