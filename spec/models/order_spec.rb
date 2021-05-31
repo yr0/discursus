@@ -235,34 +235,33 @@ describe '#apply_promo_code' do
   context 'when the promo code does not exist' do
     let(:code) { 'what' }
 
-    it 'adds an error' do
-      subject
+    it 'raises an error and does not change the order total' do
+      previous_total = order.total
 
-      expect(order.errors.details).to eq(base: [{ error: I18n.t('errors.messages.promo_code.blank') }])
-    end
-
-    it 'does not change the order total' do
-      expect { subject }.not_to(change { order.reload.total })
+      expect { subject }.to raise_error(Order::PromoCodeError, I18n.t('errors.messages.promo_code.blank'))
+      expect(order.reload.total).to eq previous_total
     end
   end
 
   context 'when the promo code is expired' do
     let(:promo_code) { create(:promo_code, expires_at: 1.day.ago) }
 
-    it 'adds an error' do
-      subject
+    it 'raises an error and does not change the order total' do
+      previous_total = order.total
 
-      expect(order.errors.details).to eq(base: [{ error: I18n.t('errors.messages.promo_code.expired') }])
+      expect { subject }.to raise_error(Order::PromoCodeError, I18n.t('errors.messages.promo_code.expired'))
+      expect(order.reload.total).to eq previous_total
     end
   end
 
   context 'when the promo code is exhausted' do
     let(:promo_code) { create(:promo_code, limit: 1, orders_count: 1) }
 
-    it 'adds an error' do
-      subject
+    it 'raises an error and does not change the order total' do
+      previous_total = order.total
 
-      expect(order.errors.details).to eq(base: [{ error: I18n.t('errors.messages.promo_code.exhausted') }])
+      expect { subject }.to raise_error(Order::PromoCodeError, I18n.t('errors.messages.promo_code.exhausted'))
+      expect(order.reload.total).to eq previous_total
     end
   end
 end

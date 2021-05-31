@@ -9,6 +9,14 @@ class OrdersController < ApplicationController
     render 'warning'
   end
 
+  rescue_from Order::PromoCodeError do |e|
+    @errors ||= [e.message]
+    current_order.form_submission_started = false
+    params[:raw_promo_code] = ''
+
+    render 'submit'
+  end
+
   def cart; end
 
   # Called after submitting first/second (presubmit) and after third (submit) steps.
@@ -46,7 +54,7 @@ class OrdersController < ApplicationController
   def apply_attributes_to_order
     current_order.assign_attributes(order_submission_params.merge(form_submission_started: true))
 
-    return unless order_submission_params.key?(:raw_promo_code)
+    return if order_submission_params[:raw_promo_code].blank?
 
     current_order.apply_promo_code(order_submission_params[:raw_promo_code])
   end

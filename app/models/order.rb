@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   # If user passes password and confirmation, they will be validated and stored as digests
   has_secure_password validations: false
 
+  PromoCodeError = Class.new(RuntimeError)
   SHIPPING_METHODS = %w(nova_poshta pickup ukrposhta).freeze
   AVAILABLE_SHIPPING_METHODS = %w(nova_poshta ukrposhta).freeze
   PAYMENT_METHODS = %w(card cash).freeze
@@ -83,9 +84,9 @@ class Order < ApplicationRecord
 
   def apply_promo_code(code)
     self.promo_code = PromoCode.fetch_by_code(code)
-    validate_promo_code
+    validate_promo_code!
 
-    save! && recalculate if errors.blank?
+    save! && recalculate
   end
 
   private
@@ -100,15 +101,9 @@ class Order < ApplicationRecord
     self.payment_method ||= AVAILABLE_PAYMENT_METHODS.first
   end
 
-  # rubocop:disable Metrics/AbcSize
-  def validate_promo_code
-    if promo_code.blank?
-      errors.add(:base, I18n.t('errors.messages.promo_code.blank'))
-    elsif promo_code.expired?
-      errors.add(:base, I18n.t('errors.messages.promo_code.expired'))
-    elsif promo_code.exhausted?
-      errors.add(:base, I18n.t('errors.messages.promo_code.exhausted'))
-    end
+  def validate_promo_code!
+    offense = %w(blank expired exhausted).find { |predicate| promo_code.send("#{predicate}?") }
+
+    raise PromoCodeError, I18n.t("errors.messages.promo_code.#{offense}") if offense.present?
   end
-  # rubocop:enable all
 end
