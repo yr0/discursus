@@ -134,7 +134,7 @@ describe OrdersFunctionality::StateMachine do
       order = create(:order, :paid_for, promo_code: promo)
       expect do
         order.success!
-      end.to change { promo.orders_count }.from(nil).to(1)
+      end.to change { promo.reload.orders_count }.from(nil).to(1)
     end
   end
 end

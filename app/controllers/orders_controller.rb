@@ -9,13 +9,22 @@ class OrdersController < ApplicationController
     render 'warning'
   end
 
+  rescue_from Order::PromoCodeError do |e|
+    @errors ||= [e.message]
+    current_order.form_submission_started = false
+    params[:raw_promo_code] = ''
+
+    render 'submit'
+  end
+
   def cart; end
 
   # Called after submitting first/second (presubmit) and after third (submit) steps.
-  # Presubmission runs all validations but doesn't store the order
+  # Presubmission runs all validations but doesn't submit the order
   def submit
     @presubmit = params[:commit] != I18n.t('orders.submit')
-    current_order.assign_attributes(order_submission_params.merge(form_submission_started: true))
+    apply_attributes_to_order
+
     try_submitting_order unless @presubmit
     process_order_errors
   end
@@ -42,6 +51,14 @@ class OrdersController < ApplicationController
                                   :raw_promo_code)
   end
 
+  def apply_attributes_to_order
+    current_order.assign_attributes(order_submission_params.merge(form_submission_started: true))
+
+    return if order_submission_params[:raw_promo_code].blank?
+
+    current_order.apply_promo_code(order_submission_params[:raw_promo_code])
+  end
+
   def process_order_errors
     return if current_order.valid?
 
@@ -51,19 +68,33 @@ class OrdersController < ApplicationController
 
   def try_submitting_order
     if Rails.configuration.disable_recaptcha || verify_recaptcha(model: current_order)
-      submit_and_redirect!
+      payment = submit_order_with_payment
+      redirect_on_submission(payment)
     else
       @recaptcha_error = true
       @errors = [I18n.t('recaptcha_failed')]
     end
   end
 
-  def submit_and_redirect!
-    current_order.submit!
-    if current_order.card?
+  def submit_order_with_payment
+    payment = nil
+
+    current_order.transaction do
+      current_order.submit!
+      payment = current_order.payments.create!(
+        amount: current_order.total,
+        payment_method: current_order.payment_method
+      )
+    end
+
+    payment
+  end
+
+  def redirect_on_submission(payment)
+    if payment.payment_method == 'card'
       @payment_provider_form_settings = {
         action: Wayforpay::PAYMENT_URL,
-        attributes: Wayforpay.prepare_params_from(current_order)
+        attributes: Wayforpay.prepare_params_from(payment)
       }
     else
       redirect_to action: 'thank_you'

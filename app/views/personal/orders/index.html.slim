@@ -3,7 +3,7 @@
     thead
       tr
         th = t('attributes.description')
-        th = t('attributes.aasm_state')
+        th = t('attributes.status')
         th = t('actions')
     tbody
       - @orders.each do |order|
@@ -13,7 +13,7 @@
           td.dsc-bordered-right
             = personal_order_description(order)
           td.dsc-bordered-right
-            = t("orders.states.#{order.aasm_state}")
+            = t("orders.states.#{order.status}")
           td.text-center
             = link_to t('inspect'), personal_order_path(order)
         tr.spacer.bordered

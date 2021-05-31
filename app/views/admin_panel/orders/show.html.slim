@@ -1,7 +1,7 @@
 - order_has_physical = @order.physical?
 
 h2 = "#{t('orders.order')} ##{@order.id}"
-h4 = t("orders.states.#{@order.aasm_state}")
+h4 = t("orders.states.#{@order.status}")
 - if @order.cash? && @order.submitted?
   | &nbsp;
   = link_to fa_icon(:dollar), [:acknowledge_payment, :admin_panel, @order], remote: true,

@@ -36,7 +36,7 @@ uk:
     street: Вулиця
     comment: Коментар
     payment_method: Спосіб оплати
-    aasm_state: Статус
+    status: Статус
     facebook: Facebook
     twitter: Twitter
     instagram: Instagram

@@ -10,7 +10,7 @@
       |. &nbsp;
       = raw t('orders.order_submission.summary.promo_discount',
               discount: order.promo_code.discount_percent,
-              price: readable_price(order.promo_code.apply_discount(order.total)))
+              price: readable_price(order.total))
     - else
       | &nbsp;
       = t('orders.cart.short_description.total_sum')

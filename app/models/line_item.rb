@@ -13,7 +13,7 @@ class LineItem < ApplicationRecord
   validates :variant, presence: true
 
   # recalculate total order sum after creation, updating, or deletion
-  after_commit -> { order.recalculate_total }
+  after_commit -> { order.recalculate }
 
   scope :digital, -> { where(variant: %w(ebook audio)) }
   scope :physical, -> { where.not(variant: %w(ebook audio)) }

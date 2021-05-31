@@ -4,7 +4,7 @@
 module Wayforpay
   Error = Class.new(RuntimeError)
   SignatureInvalidError = Class.new(Error)
-  ResponseOrderDataMismatchError = Class.new(Error)
+  ResponseDataMismatchError = Class.new(Error)
 
   PAYMENT_URL = 'https://secure.wayforpay.com/pay'
   APPROVED_TRANSACTION_STATUS = 'approved'
@@ -13,6 +13,7 @@ module Wayforpay
                                    transactionStatus reasonCode).freeze
   ACCEPT_RESPONSE_TEXT = 'accept'
   ORDER_REFERENCE_PREFIX = 'DSC-'
+  PAYMENT_REFERENCE_PREFIX = 'PAY-'
 
   class << self
     def configure
@@ -20,21 +21,32 @@ module Wayforpay
       yield @config
     end
 
-    def prepare_params_from(order)
-      base_params = base_params_array_for(order)
+    def prepare_params_from(payment)
+      base_params = base_params_array_for(payment)
       signature = generate_signature_from(base_params.map(&:last).flatten)
-      base_params.to_h.merge('merchantSignature' => signature).merge(additional_payment_params_for(order))
+      base_params.to_h.merge('merchantSignature' => signature).merge(additional_payment_params_for(payment.order))
     end
 
     def process_and_produce_message_for(params)
-      order = validate_and_find_order_from!(params)
+      if params[:orderReference].starts_with?(ORDER_REFERENCE_PREFIX)
+        order = validate_and_find_order_from!(params)
 
-      process_message_for(order, params)
+        process_message_for(order, params)
+      else
+        payment = validate_and_find_payment_from!(params)
+
+        process_message_for_payment(payment, params)
+      end
+
       generate_response_message_for(params[:orderReference])
     end
 
     def was_payment_successful?(params)
-      validate_and_find_order_from!(params)
+      if params[:orderReference].starts_with?(ORDER_REFERENCE_PREFIX)
+        validate_and_find_order_from!(params)
+      else
+        validate_and_find_payment_from!(params)
+      end
 
       params[:transactionStatus]&.downcase == APPROVED_TRANSACTION_STATUS &&
         params[:reason]&.downcase == APPROVED_REASON
@@ -56,17 +68,17 @@ module Wayforpay
       raise SignatureInvalidError
     end
 
-    def base_params_array_for(order)
+    def base_params_array_for(payment)
       base_params = [
         ['merchantAccount', @config.fetch(:merchant_account)],
         ['merchantDomainName', @config.fetch(:merchant_domain)],
-        ['orderReference', "#{ORDER_REFERENCE_PREFIX}#{order.id}"],
-        ['orderDate', order.updated_at.to_i],
-        ['amount', order.total.to_f],
+        ['orderReference', "#{PAYMENT_REFERENCE_PREFIX}#{payment.id}"],
+        ['orderDate', payment.created_at.to_i],
+        ['amount', payment.amount.to_f],
         ['currency', @config.fetch(:acceptable_currency)]
       ]
 
-      base_params + products_spec_per(order)
+      base_params + products_spec_per(payment.order)
     end
 
     def additional_payment_params_for(order)
@@ -107,7 +119,21 @@ module Wayforpay
       return order if
         params[:amount].to_f == order.total.to_f && params[:currency] == @config.fetch(:acceptable_currency)
 
-      raise ResponseOrderDataMismatchError, params.inspect
+      raise ResponseDataMismatchError, params.inspect
+    end
+    # rubocop:enable all
+
+    # rubocop:disable Metrics/AbcSize
+    # The commands in this module can be extracted into separate classes
+    def validate_and_find_payment_from!(params)
+      verify_signature_for!(params[:merchantSignature], params.slice(*CHECKED_RESPONSE_PARAM_KEYS).values)
+
+      payment = Payment.find(params[:orderReference].tr(PAYMENT_REFERENCE_PREFIX, ''))
+
+      return payment if
+        params[:amount].to_f == payment.amount.to_f && params[:currency] == @config.fetch(:acceptable_currency)
+
+      raise ResponseDataMismatchError, params.inspect
     end
     # rubocop:enable all
 
@@ -127,9 +153,21 @@ module Wayforpay
     end
     # rubocop:enable all
 
-    def generate_response_message_for(order_reference)
+    def process_message_for_payment(payment, params)
+      if params[:transactionStatus]&.downcase == APPROVED_TRANSACTION_STATUS &&
+         params[:reason]&.downcase == APPROVED_REASON
+        payment.succeed!
+      else
+        reason = params.slice(:transactionStatus, :reason, :reasonCode).values.join(';')
+        payment.fail!(reason)
+
+        Rails.logger.error "Non-success wayforpay response status for payment #{payment.id}"
+      end
+    end
+
+    def generate_response_message_for(reference)
       base_params = [
-        ['orderReference', order_reference],
+        ['orderReference', reference],
         ['status', ACCEPT_RESPONSE_TEXT],
         ['time', Time.current.to_i]
       ]

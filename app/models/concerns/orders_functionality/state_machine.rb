@@ -7,7 +7,7 @@ module OrdersFunctionality
     included do
       include AASM
 
-      aasm do
+      aasm(column: :status) do
         state :pending, initial: true
         state :submitted
         state :paid_for
@@ -36,6 +36,10 @@ module OrdersFunctionality
 
         event :cancel do
           transitions to: :canceled
+        end
+
+        event :reopen do
+          transitions from: :submitted, to: :pending
         end
       end
     end
